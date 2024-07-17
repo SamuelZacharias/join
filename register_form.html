@@ -22,7 +22,10 @@
   
 }
 
-
+  a{
+    text-decoration: none;
+    color: var(--policy);
+  }
 
     body{
       background-color: var(--background);
@@ -55,9 +58,15 @@
       padding: 0px 88px 48px 88px;
       border-radius: 30px;
       gap: 32px;
-      
-      
     }
+    .register a{
+      color: var(--blue);
+    }
+    .register a:hover{
+      text-decoration: underline var(--blue);
+      font-weight: 600;
+    }
+
     .policy{
       display: flex;
       width: 100%;
@@ -77,12 +86,14 @@
       justify-content: center;
       flex-direction: column;
       text-align: center;
+      align-items: center;
       gap: 16px;
     }
 
     .separator{
       background-color: var(--blue);
-      height: 2px;
+      height: 3px;
+      width: 150px;
     }
 
 
@@ -91,10 +102,14 @@
       height: 32px;
       position: relative;
       left: -200px;
-      bottom: -60px;
+      bottom: -80px;
       margin-top: -32px;
+      border-radius: 50%;
     }
-   
+   .backArrow:hover{
+    background-color: var(--border);
+    cursor: pointer;
+   }
 
   
     .icon{
@@ -125,15 +140,23 @@
     }
 
     .check{
+      width: 60%;
       display: flex;
       justify-content: center;
       gap: 16px;
     }
-
+    .check input:hover{
+      cursor: pointer;
+    }
+    .check span{
+      width: 100%;
+      text-align: center;
+    }
     form{
       display: flex;
       flex-direction: column;
       gap: 16px;
+      align-items: center;
     }
     button{
       background-color: var(--gray);
@@ -141,6 +164,21 @@
       color: white;
       border-radius: 8px;
       font-size: 21px;
+      width: 130px;
+      border: none;
+    }
+    .policy{
+      display: flex;
+      gap: 32px;
+    }
+    .policy a:hover{
+      color: var(--blue);
+      transform: scale(1.1);
+    }
+    button:hover{
+      background-color: var(--blue);
+      cursor: pointer;
+      transition: 200ms;
     }
 
   </style>
@@ -171,15 +209,17 @@
         <img class="icon" src="assets/img/png/lock.png" alt="">
       </div>
       <div class="check">
-        <input type="checkbox" required >
+        <input type="checkbox" required>
         <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
       </div>
+      <button>Sign up</button>
     </form>
-    <button>Sign up</button>
+    
   </section>
   <section class="policy">
     <a href="privacy_policy.html">Privacy policy</a>
     <a href="legal_notice.html">Legal notice</a>
   </section>
+  
 </body>
 </html>
