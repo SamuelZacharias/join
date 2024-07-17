@@ -12,3 +12,165 @@
   --hightlight : #091931;
 }
 
+/* Grundstil für den gesamten Body */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Styling für die obere Sektion mit Logo */
+.logoLogIn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logoLogIn img {
+  width: 100.03px;
+  height: 121.97px;
+}
+
+/* Styling für den Hinweisbereich */
+.signUp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.signUp span {
+  display: flex;
+  align-items: center;
+}
+
+.signUp button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #2A3647;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.signUp button:hover {
+  background-color: #1e2835;
+}
+
+/* Styling für die Log-In Sektion */
+.loginSection {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.loginSection h1 {
+  margin-bottom: 20px;
+}
+
+/* Styling für das Formular */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentrierung der Eingabefelder */
+  gap: 15px;
+  width: 100%;
+}
+
+form .emailInput,
+form .passwordInput {
+  position: relative;
+  width: 100%;
+  max-width: 300px; /* Max-Breite für Eingabefelder */
+  display: flex;
+  align-items: center;
+}
+
+form input[type="email"],
+form input[type="password"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Stellt sicher, dass Padding und Border in die Breite des Elements einbezogen werden */
+}
+
+form .emailInput img,
+form .passwordInput img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+form div {
+  display: flex;
+  align-items: center;
+}
+
+form div input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Styling für die Buttons */
+form .buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+}
+
+form button {
+  padding: 10px;
+  background-color: #2A3647;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  flex: 1;
+}
+
+form button:hover {
+  background-color: #1e2835;
+}
+
+form button:last-of-type {
+  margin-right: 0;
+}
+
+/* Footer Links */
+section:last-of-type {
+  text-align: center;
+  margin-top: auto;
+}
+
+section:last-of-type a {
+  margin: 0 10px;
+}
+
