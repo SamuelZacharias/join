@@ -31,6 +31,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      height: 100vh;
     }
 
     .logo{
@@ -51,8 +52,10 @@
       align-items: center;
       margin-top: -20px;
       background-color: white;
-      padding: 24px 48px;
+      padding: 0px 88px 48px 88px;
       border-radius: 30px;
+      gap: 32px;
+      
       
     }
     .policy{
@@ -63,24 +66,33 @@
 
     input{
       border: none;
-      width: 100%;
+      
     }
     input:focus{
       outline: none;
     }
 
-    .formHeader{
-      width: 100%;
+    .signUp{
       display: flex;
       justify-content: center;
-
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
     }
+
+    .separator{
+      background-color: var(--blue);
+      height: 2px;
+    }
+
+
     .backArrow{
       width: 32px;
       height: 32px;
       position: relative;
       left: -200px;
-      bottom: -50px;
+      bottom: -60px;
+      margin-top: -32px;
     }
    
 
@@ -103,28 +115,42 @@
       border-radius: 10px;
       
     }
+    .input input{
+      width: 100%;
+    }
+
     .input:hover{
       border: 1px solid var(--blue);
       cursor: pointer;
     }
 
-    
+    .check{
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
 
     form{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 16px;
     }
-
+    button{
+      background-color: var(--gray);
+      padding: 15px 24px;
+      color: white;
+      border-radius: 8px;
+      font-size: 21px;
+    }
 
   </style>
 </head>
 <body>
   <section class="logo"><img src="assets/img/png/Capa 2.png" alt=""></section>
   <section class="register">
-    <img class="backArrow" src="assets/img/png/Vector.png" alt="">
-    <div >
-      <h1 class="formHeader">Sign up</h1>
+    <img class="backArrow" src="assets/img/png/arrow-left-line.png" alt="">
+    <div class="signUp">
+      <h1>Sign up</h1>
       <div class="separator"></div>
     </div>
     <form action="">
@@ -144,12 +170,12 @@
         <input type="password" id="repeatPassword" placeholder="Repeat password" required>
         <img class="icon" src="assets/img/png/lock.png" alt="">
       </div>
-      <div>
+      <div class="check">
         <input type="checkbox" required >
         <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
       </div>
-      <button>Sign up</button>
     </form>
+    <button>Sign up</button>
   </section>
   <section class="policy">
     <a href="privacy_policy.html">Privacy policy</a>
