@@ -133,10 +133,12 @@
     .input input{
       width: 100%;
     }
+    .input img:hover{
+      cursor: pointer;
+    }
 
     .input:hover{
       border: 1px solid var(--blue);
-      cursor: pointer;
     }
 
     .check{
@@ -170,6 +172,8 @@
     .policy{
       display: flex;
       gap: 32px;
+      position: fixed;
+      bottom: 5px;
     }
     .policy a:hover{
       color: var(--blue);
@@ -180,13 +184,16 @@
       cursor: pointer;
       transition: 200ms;
     }
+    .d-none{
+      display: none;
+    }
 
   </style>
 </head>
 <body>
   <section class="logo"><img src="assets/img/png/Capa 2.png" alt=""></section>
   <section class="register">
-    <img class="backArrow" src="assets/img/png/arrow-left-line.png" alt="">
+    <a href="index.html"><img class="backArrow" src="assets/img/png/arrow-left-line.png" alt=""></a>
     <div class="signUp">
       <h1>Sign up</h1>
       <div class="separator"></div>
@@ -220,6 +227,6 @@
     <a href="privacy_policy.html">Privacy policy</a>
     <a href="legal_notice.html">Legal notice</a>
   </section>
-  
+  <button style="width: 300px; position: absolute; top: 30px;" class="d-none">You signed up succesfully</button>
 </body>
 </html>
