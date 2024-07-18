@@ -22,7 +22,7 @@
 
 body {
   font-family: 'inter', Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: var(--background);
   max-width: 1440px;
   margin: auto;
   display: flex;
@@ -41,12 +41,13 @@ h1 {
 }
 
 .headSection {
-  width: 1440px;
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 1390px;
   max-width: 1440px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -66,6 +67,7 @@ h1 {
   border-radius: 8px;
   font-size: 21px;
   width: 110px;
+  border: none;
 }
 
 .logoLogIn img {
@@ -87,6 +89,12 @@ h1 {
   font-weight: 700;
 }
 
+.signUpButton:hover {
+  border: none;
+  background-color: var(--blue);
+  transition: 200ms;
+}
+
 .guestLogIn {
   display: flex;
   align-items: center;
@@ -99,13 +107,15 @@ h1 {
   border-radius: 8px;
   font-size: 21px;
   width: 170px;
-}
-
-.guestLogInSpan {
   color: #2A3647;
 }
 
-
+.guestLogIn:hover {
+  border-color: var(--blue);
+  background-color: white;
+  color: var(--blue);
+  transition: 200ms;
+}
 
 .signUp button {
   width: 91px; /* Festgelegte Breite */
@@ -166,6 +176,11 @@ h1 {
   background-color: var(--blue);
   height: 3px;
   width: 150px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--policy);
 }
 
 .flexStart {
