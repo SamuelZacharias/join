@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('rememberedEmail', email);
             localStorage.setItem('rememberedPassword', password);
         } else {
-            // You can choose not to remove items from local storage here
-            // localStorage.removeItem('rememberedEmail');
-            // localStorage.removeItem('rememberedPassword');
+            // Clear email and password from local storage and input fields
+            localStorage.removeItem('rememberedEmail');
+            localStorage.removeItem('rememberedPassword');
+            document.getElementById('email').value = '';
+            document.getElementById('repeatPassword').value = '';
         }
     });
 
@@ -58,6 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('email').value = rememberedEmail;
         document.getElementById('repeatPassword').value = rememberedPassword;
         rememberMeCheckbox.checked = true; // Check the checkbox if email and password are remembered
+    } else {
+        // Clear input fields if not remembered
+        document.getElementById('email').value = '';
+        document.getElementById('repeatPassword').value = '';
     }
 
     // Event listener for the guest login button
