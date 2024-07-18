@@ -9,7 +9,7 @@
   <script src="js/register.js"></script>
  
 </head>
-<body onload="showFireBaseData()">
+<body onload="fetchRegisterInfo()">
   <section class="logo"><img src="assets/img/png/Capa 2.png" alt=""></section>
   <section class="register">
     <a href="index.html"><img class="backArrow" src="assets/img/png/arrow-left-line.png" alt=""></a>
@@ -38,7 +38,7 @@
         <input type="checkbox" required>
         <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
       </div>
-      <button onclick="getRegisterInfo()">Sign up</button>
+      <button onclick="getRegisterInfo (),sendRegisterInfoToFirebase()">Sign up</button>
     </form>
     
   </section>
