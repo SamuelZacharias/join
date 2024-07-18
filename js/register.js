@@ -101,7 +101,7 @@ function showSuccessMessage() {
   successButton.classList.remove('d-none');
   setTimeout(() => {
     window.location.href = 'index.html';
-  }, 2000);
+  }, 800);
 }
 
 // Attach handleFormSubmit to form submission event
