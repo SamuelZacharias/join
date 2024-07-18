@@ -187,6 +187,9 @@
       cursor: pointer;
       transition: 200ms;
     }
+    span{
+      color: var(--policy);
+    }
     .d-none{
       display: none;
     }
