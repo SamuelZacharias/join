@@ -7,7 +7,6 @@
   <title>Register</title>
   <link rel="stylesheet" href="css/register_form.css">
   <script src="js/register.js"></script>
- 
 </head>
 <body onload="fetchRegisterInfo()">
   <section class="logo"><img src="assets/img/png/Capa 2.png" alt=""></section>
@@ -17,7 +16,7 @@
       <h1>Sign up</h1>
       <div class="separator"></div>
     </div>
-    <form action=""  onsubmit="return false" >
+    <form id="registrationForm">
       <div class="input">
         <input type="text" id="name" required placeholder="Name">
         <img class="icon" src="assets/img/png/person.png" alt="">
@@ -31,21 +30,20 @@
         <img class="icon" src="assets/img/png/visibility_off.png" alt="">
       </div>
       <div class="input">
-        <input type="password" id="repeatPassword" placeholder="Repeat password" required>
+        <input type="password"  id="repeatPassword" placeholder="Repeat password" required>
         <img class="icon" src="assets/img/png/lock.png" alt="">
       </div>
       <div class="check">
-        <input type="checkbox" required>
+        <input type="checkbox" required >
         <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
       </div>
-      <button onclick="getRegisterInfo (),sendRegisterInfoToFirebase()">Sign up</button>
+      <button type="submit">Sign up</button>
     </form>
-    
   </section>
   <section class="policy">
     <a href="privacy_policy.html">Privacy policy</a>
     <a href="legal_notice.html">Legal notice</a>
   </section>
-  <button style="width: 300px; position: absolute; top: 30px;" class="d-none">You signed up succesfully</button>
+  <button style="width: 300px; position: absolute; top: 30px;" class="d-none">You signed up successfully</button>
 </body>
 </html>

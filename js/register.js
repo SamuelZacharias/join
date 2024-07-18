@@ -57,11 +57,25 @@ function addRegisterInfo(newRegisterInfo) {
 }
 
 // Function to handle form submission
-function handleFormSubmit() {
+async function handleFormSubmit(event) {
+  event.preventDefault(); // Prevent default form submission
+
   let registerName = document.getElementById('name').value;
   let registerEmail = document.getElementById('email').value;
   let registerPassword = document.getElementById('password').value;
   let registerRepeatPassword = document.getElementById('repeatPassword').value;
+
+  if (registerPassword !== registerRepeatPassword) {
+    alert('Passwords do not match!');
+    return;
+  }
+
+  await fetchRegisterInfo(); // Fetch the latest register info from Firebase
+
+  if (registerInfo.email.includes(registerEmail)) {
+    alert('Email already in use!');
+    return;
+  }
 
   let newRegisterInfo = {
     name: registerName,
@@ -72,18 +86,27 @@ function handleFormSubmit() {
 
   console.log('New Register Info:', newRegisterInfo);
   addRegisterInfo(newRegisterInfo); // Add new registration info to registerInfo object
-  saveRegisterInfoToFirebase(); // Save updated registerInfo to Firebase
+  await saveRegisterInfoToFirebase(); // Save updated registerInfo to Firebase
 
   // Optionally, save to localStorage (if needed)
   saveRegisterData(newRegisterInfo);
+
+  // Show success message and redirect
+  showSuccessMessage();
 }
 
-// Example usage: Attach handleFormSubmit to form submission event
+// Function to show success message and redirect
+function showSuccessMessage() {
+  const successButton = document.querySelector('.d-none');
+  successButton.classList.remove('d-none');
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 2000);
+}
+
+// Attach handleFormSubmit to form submission event
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-    handleFormSubmit();
-  });
+  document.querySelector('form').addEventListener('submit', handleFormSubmit);
 });
 
 // Function to save registerInfo to localStorage (optional)
