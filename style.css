@@ -4,11 +4,27 @@
       url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
 }
 
+:root {
+  --blue:   #29ABE2;
+  --gray:  #2A3647;
+  --high : #FF3D00;
+  --medium: #FFA800;
+  --low:   #7AE229;
+  --technical : #1FD7C1;
+  --story : #0038FF;
+  --noTask : #A8A8A8;
+  --policy : #A8A8A8;
+  --background : #F6F7F8;
+  --hightlight : #091931;
+  --border : #D1D1D1;
+  
+}
+
 body {
   font-family: 'inter', Arial, sans-serif;
   background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+  max-width: 1440px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,29 +37,12 @@ h1 {
   font-weight: 700;
   font-size: 61px;
   line-height: 73.2px;
-}
-
-.frame159 {
-  width: 315px;
-  height: 89px;
-  gap: 16px;
-}
-
-.logInOverInput {
-  display: flex;
-  align-items: center;
-  width: 315px;
-  height: 73px;
-}
-
-.innerLogIn {
-  display: flex;
-  justify-content: center;
-  width: 315px;
+  margin: 0px;
 }
 
 .headSection {
   width: 1440px;
+  max-width: 1440px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -57,20 +56,56 @@ h1 {
   align-items: flex-start;
 }
 
+.logIn {
+  background-color:#2A3647;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 170px;
+}
+
 .logoLogIn img {
   width: 100.03px;
   height: 121.97px;
 }
 
 /* Styling für den Hinweisbereich */
-.signUp {
+.signUp span {
   display: flex;
   align-items: center;
 }
 
-.signUp span {
+.signUpButton {
+  width: 91px;
+  height: 49px;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 700;
+}
+
+.guestLogIn {
   display: flex;
   align-items: center;
+  background-color: white;
+  border-style: solid;
+  border-color: #2A3647;
+  border-width: 1px;
+  height: 48px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 170px;
+}
+
+.guestLogInSpan {
+  color: #2A3647;
+}
+
+.logInSpan {
+  color: white;
 }
 
 .signUp button {
@@ -85,115 +120,151 @@ h1 {
   cursor: pointer;
 }
 
+.loginButton {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-style: solid;
+  border-color: #2A3647;
+  border-width: 1px;
+  height: 48px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 170px;
+}
+
+.logInSpan {
+  color: #2A3647;
+}
+
 .signUp button:hover {
   background-color: #1e2835;
 }
 
-/* Styling für die Log-In Sektion */
-.loginSection {
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 652px;
-  height: 493px;
+/* Styling für die Registrierungssektion */
+.register {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Zentriert den Inhalt vertikal */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+  margin-top: -20px;
+  background-color: white;
+  padding: 0px 88px 48px 88px;
+  border-radius: 30px;
+  gap: 32px;
 }
 
-.loginSection h1 {
-  margin-bottom: 20px;
+.register a {
+  color: var(--blue);
 }
 
-/* Styling für das Formular */
+.register a:hover {
+  text-decoration: underline var(--blue);
+  font-weight: 600;
+}
+
+.separator {
+  background-color: var(--blue);
+  height: 3px;
+  width: 150px;
+}
+
+.backArrow {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  left: -200px;
+  bottom: -80px;
+  margin-top: -32px;
+  border-radius: 50%;
+}
+
+.backArrow:hover {
+  background-color: var(--border);
+  cursor: pointer;
+}
+
+::placeholder {
+  color: var(--border);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.input {
+  width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 21px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.input input {
+  width: 100%;
+  border: none;
+}
+
+.input img:hover {
+  cursor: pointer;
+}
+
+.input:hover {
+  border: 1px solid var(--blue);
+}
+
+.check {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.check input:hover {
+  cursor: pointer;
+}
+
+.check span {
+  width: 100%;
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert den Inhalt horizontal */
-  gap: 15px;
-  width: 100%;
-}
-
-form .emailInput,
-form .passwordInput {
-  position: relative;
-  width: 100%;
-  max-width: 422px; /* Max-Breite für Eingabefelder */
-  display: flex;
+  gap: 16px;
   align-items: center;
 }
 
-form input[type="email"],
-form input[type="password"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  margin-bottom: 10px;
-  box-sizing: border-box; /* Stellt sicher, dass Padding und Border in die Breite des Elements einbezogen werden */
-}
-
-form .emailInput img,
-form .passwordInput img {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-}
-
-form div {
+.buttonContainer {
+  justify-content: center;
   display: flex;
+  gap: 35px; /* Abstand zwischen den Buttons */
+  height: 48px;
   align-items: center;
 }
 
-form div input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-/* Styling für die Buttons */
-form .buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 300px;
-}
-
-form button {
-  padding: 10px;
-  background-color: #2A3647;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+button:hover {
+  background-color: var(--blue);
   cursor: pointer;
-  margin-right: 10px;
-  flex: 1;
+  transition: 200ms;
 }
 
-form button:hover {
-  background-color: #1e2835;
+.policy {
+  display: flex;
+  gap: 32px;
+  position: fixed;
+  bottom: 5px;
 }
 
-form button:last-of-type {
-  margin-right: 0;
+.policy a:hover {
+  color: var(--blue);
+  transform: scale(1.1);
 }
 
-/* Footer Links */
-section:last-of-type {
-  text-align: center;
-  margin-top: auto;
-}
-
-section:last-of-type a {
-  margin: 0 10px;
+.d-none {
+  display: none;
 }

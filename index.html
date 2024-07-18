@@ -13,35 +13,35 @@
     <section>
         <div class="headSection">
             <div class="logoLogIn"><a href="#"><img src="assets/img/png/Capa 2.png" alt=""></a></div>
-            <div class="signUp"><span>Not a Join user?<button>Sign up</button></span></div>
+            <div class="signUp"><span>Not a Join user?<button class="signUpButton">Sign up</button></span></div>
         </div>
     </section>
-    <section class="loginSection">
-        <div class="frame159">
-            <div class="logInOverInput">
-                <div class="innerLogIn"><h1>Log in</h1></div>
-            </div>
+    <section class="register">
+        <a href="index.html"><img class="backArrow d-none" src="assets/img/png/arrow-left-line.png" alt=""></a>
+        <div class="signUp">
+            <h1>Sign in</h1>
+            <div class="separator"></div>
         </div>
-        <form action="">
-            <div class="emailInput">
+        <form action="" onsubmit="return false">
+            <div class="input">
                 <input type="email" id="email" required placeholder="E-mail">
-                <img src="assets/img/png/mail.png" alt="">
+                <img class="icon" src="assets/img/png/mail.png" alt="">
             </div>
-            <div class="passwordInput">
-                <input type="password" id="password" required placeholder="Password">
-                <img src="assets/img/png/lock.png" alt="">
+            <div class="input">
+                <input type="password" id="repeatPassword" required placeholder="Password">
+                <img class="icon" src="assets/img/png/lock.png" alt="">
             </div>
-            <div>
-                <input type="checkbox">
+            <div class="check">
+                <input type="checkbox" required>
                 <span>Remember me</span>
             </div>
             <div class="buttonContainer">
-                <button type="submit">Log in</button>
-                <button type="button">Guest Log in</button>
+                <button class="logIn" onclick="getGuestLogIn()"><p class="logInSpan colorWhite">Log in</p></button>
+                <button class="guestLogIn" onclick="getGuestLogIn()"><p class="guestLogInSpan">Guest Log in</p></button>
             </div>
         </form>
     </section>
-    <section>
+    <section class="policy">
         <a href="privacy_policy.html">Privacy Policy</a>
         <a href="legal_notice.html">Legal notice</a>
     </section>
