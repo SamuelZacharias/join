@@ -234,6 +234,7 @@ a {
 }
 
 .check {
+  align-items: center;
   width: 80%;
   display: flex;
   justify-content: center;
