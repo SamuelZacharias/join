@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "inter";
+  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
+    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
+}
+
+header {
+  font-size: 20px;
+  font-family: "inter", Arial, sans-serif;
+  display: flex;
+  width: 1440px;
+  height: 96px;
+  padding: 20px 40px 20px 348px;
+  gap: 0px;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px 0px #0000001a;
+  align-items: center;
+}
+
+.help {
+  width: 32px;
+  height: 32px;
+}
+
+
+.user-profile-initials-box {
+  font-weight: 600;
+  display: flex;
+  width: 48px;
+  height: 48px;
+  gap: 16px;
+  border: 3px solid #2a3647;
+  border-radius: 559px;
+  align-items: center;
+  justify-content: center;
+  color: #29abe2;
+}
+
+.icon-box {
+  width: 104px;
+  height: 56px;
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
