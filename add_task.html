@@ -1,57 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png">
-  <title>AddTask</title>
-</head>
-<body>
-  <h1>Add Task</h1>
-  <form>
-    <div>
-      <span>Title<b style="color: red;">*</b></span>
-      <input type="text">
-      <span>Description</span>
-      <textarea name="" id=""></textarea>
-      <span>Assigned to</span>
-      <select name="contacts" id="contacts" size="1" multiple>
-        <option value="volvo">TEST1</option>
-        <option value="volvo">TEST2</option>
-        <option value="volvo">TEST3</option>
-        <option value="volvo">TEST4</option>
-      </select>
-    </div>
-    <div class="separator"></div>
-    <div>
-      <span>Due date <b style="color: red;">*</b> </span>
-      <input type="date">
-      <span>Prio</span>
-      <div>
-        <button>Urgent <img src="assets/img/svg/urgent.svg" alt=""></button>
-        <button>Medium <img src="assets/img/svg/medium.svg" alt=""></button>
-        <button>Low <img src="assets/img/svg/low.svg" alt=""></button>
-      </div>
-      <span>Category<b style="color: red;">*</b></span>
-      <select name="category" id="category" size="1" >
-        <option value="volvo">TEST1</option>
-        <option value="volvo">TEST2</option>
-        <option value="volvo">TEST3</option>
-        <option value="volvo">TEST4</option>
-      </select>
-      <span>Subtasks</span>
-      <div>
-        <input type="text" name="" id="" readonly>
-        <img src="assets/img/png/Subtasks icons11.png" alt="">
-      </div>
-    </div>
-  </form>
-  <section>
-    <span><b style="color: red;">*</b> This field is Required</span>
-    <div>
-      <button>Clear <img src="assets/img/png/iconoir_cancel.png" alt=""></button>
-      <button>Create Task <img src="assets/img/png/check.png" alt=""></button>
-    </div>
-  </section>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
+    <title>AddTask</title>
+    <script src="js/include.js"> includeHTML()</script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <style>
+      .addTask{
+        background-color: var(--background);
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="Templates/header.html"></div>
+    <section class="addTask">
+      <h1>Add Task</h1>
+      <form>
+        <div>
+          <span>Title<b style="color: red">*</b></span>
+          <input type="text" />
+          <span>Description</span>
+          <textarea name="" id=""></textarea>
+          <span>Assigned to</span>
+          <select name="contacts" id="contacts" size="1" multiple>
+            <option value="volvo">TEST1</option>
+            <option value="volvo">TEST2</option>
+            <option value="volvo">TEST3</option>
+            <option value="volvo">TEST4</option>
+          </select>
+        </div>
+        <div class="separator"></div>
+        <div>
+          <span>Due date <b style="color: red">*</b> </span>
+          <input type="date" />
+          <span>Prio</span>
+          <div>
+            <button>
+              Urgent <img src="assets/img/svg/urgent.svg" alt="" />
+            </button>
+            <button>
+              Medium <img src="assets/img/svg/medium.svg" alt="" />
+            </button>
+            <button>Low <img src="assets/img/svg/low.svg" alt="" /></button>
+          </div>
+          <span>Category<b style="color: red">*</b></span>
+          <select name="category" id="category" size="1">
+            <option value="volvo">TEST1</option>
+            <option value="volvo">TEST2</option>
+            <option value="volvo">TEST3</option>
+            <option value="volvo">TEST4</option>
+          </select>
+          <span>Subtasks</span>
+          <div>
+            <input type="text" name="" id="" readonly />
+            <img src="assets/img/png/Subtasks icons11.png" alt="" />
+          </div>
+        </div>
+      </form>
+      <section>
+        <span><b style="color: red">*</b> This field is Required</span>
+        <div>
+          <button>
+            Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
+          </button>
+          <button>
+            Create Task <img src="assets/img/png/check.png" alt="" />
+          </button>
+        </div>
+      </section>
+    </section>
+  </body>
 </html>
