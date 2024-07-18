@@ -291,6 +291,9 @@ button:hover {
   color: #fff;
 }
 
+.buttonContainer a:hover{
+  text-decoration: none;
+}
 
 input:focus{
   outline: none;
