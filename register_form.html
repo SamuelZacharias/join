@@ -6,9 +6,10 @@
   <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png">
   <title>Register</title>
   <link rel="stylesheet" href="css/register_form.css">
+  <script src="js/register.js"></script>
  
 </head>
-<body>
+<body onload="showFireBaseData()">
   <section class="logo"><img src="assets/img/png/Capa 2.png" alt=""></section>
   <section class="register">
     <a href="index.html"><img class="backArrow" src="assets/img/png/arrow-left-line.png" alt=""></a>
@@ -16,7 +17,7 @@
       <h1>Sign up</h1>
       <div class="separator"></div>
     </div>
-    <form action="">
+    <form action=""  onsubmit="return false" >
       <div class="input">
         <input type="text" id="name" required placeholder="Name">
         <img class="icon" src="assets/img/png/person.png" alt="">
@@ -37,7 +38,7 @@
         <input type="checkbox" required>
         <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
       </div>
-      <button>Sign up</button>
+      <button onclick="getRegisterInfo()">Sign up</button>
     </form>
     
   </section>
