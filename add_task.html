@@ -1,12 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png">
-  <title>AddTask</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
+    <title>AddTask</title>
+    <script src="js/include.js">
+      includeHTML()
+    </script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <style>
+      .addTask {
+        background-color: var(--background);
+        display: flex;
+        padding-top: 110px;
+        padding-left: 96px;
+        flex-direction: column;
+        font-size: 20px;
+      }
+      h1 {
+        margin: 0px;
+        font-size: 60px;
+        margin-bottom: 48px;
+      }
+      .formLeft {
+        display: flex;
+        flex-direction: column;
+        width: 440px;
+        gap: 16px;
+      }
+      form {
+        display: flex;
+        gap: 48px;
+      }
+      .separator {
+        height: 424px;
+        border: 1px solid var(--blue);
+      }
+      input {
+        font-size: 20px;
+        line-height: 24px;
+        width: 100%;
+        border: none;
+        height: 120%;
+      }
+      input:focus, textarea:focus{
+        outline: none
+      }
+
+      .eachInput{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      p{
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        padding: 12px 21px 12px 21px;
+        background-color: white;
+      }
+      p:hover{
+        border: 1px solid var(--blue);
+      }
+
+      textarea{
+        height: 120px;
+        width: 100%;
+        margin: 0px;
+        border: none;
+        resize: none;
+        font-size: 20px;
+      }
+
+      
+
+    </style>
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="Templates/header.html"></div>
+    <section class="addTask">
+      <h1>Add Task</h1>
+      <form>
+        <div class="formLeft">
+          <div class="eachInput">
+            <span>Title<b style="color: red">*</b></span>
+            <p><input type="text" /></p>
+          </div>
+          <div class="eachInput">
+            <span>Description</span>
+            <p><textarea name="" id=""></textarea>
+          </div>
+          <div class="eachInput">
+            <span>Assigned to</span>
+            <select name="contacts" id="contacts" size="1" multiple>
+              <option value="volvo">TEST1</option>
+              <option value="volvo">TEST2</option>
+              <option value="volvo">TEST3</option>
+              <option value="volvo">TEST4</option>
+            </select>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="formLeft">
+          <div class="eachInput">
+            <span>Due date <b style="color: red">*</b> </span>
+            <p><input type="date" /></p>
+          </div>
+          <div class="eachInput">
+            <span>Prio</span>
+            <div>
+              <button>
+                Urgent <img src="assets/img/svg/urgent.svg" alt="" />
+              </button>
+              <button>
+                Medium <img src="assets/img/svg/medium.svg" alt="" />
+              </button>
+              <button>Low <img src="assets/img/svg/low.svg" alt="" /></button>
+            </div>
+          </div>
+          <div class="eachInput">
+            <span>Category<b style="color: red">*</b></span>
+            <select name="category" id="category" size="1">
+              <option value="volvo">TEST1</option>
+              <option value="volvo">TEST2</option>
+              <option value="volvo">TEST3</option>
+              <option value="volvo">TEST4</option>
+            </select>
+          </div>
+          <div class="eachInput">
+            <span>Subtasks</span>
+            <div>
+              <p><input type="text" name="" id="" readonly /></p>
+              <img src="assets/img/png/Subtasks icons11.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </form>
+      <section>
+        <span><b style="color: red">*</b> This field is Required</span>
+        <div>
+          <button>
+            Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
+          </button>
+          <button>
+            Create Task <img src="assets/img/png/check.png" alt="" />
+          </button>
+        </div>
+      </section>
+    </section>
+  </body>
 </html>

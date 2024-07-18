@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "inter";
-  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
-    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
-}
 
 header {
   font-size: 20px;
