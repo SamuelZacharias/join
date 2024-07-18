@@ -14,6 +14,14 @@
   
 }
 
+@font-face {
+  font-family: 'inter';
+  src: url('./assets/fonts/static/Inter-Black.ttf') format('interBlack'),
+      url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
+}
+
+
+
   a{
     text-decoration: none;
     color: var(--policy);
@@ -27,6 +35,7 @@
       flex-direction: column;
       align-items: center;
       height: 100vh;
+      font-family: 'inter', Arial, sans-serif;
     }
 
     .logo{
