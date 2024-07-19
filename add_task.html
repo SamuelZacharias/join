@@ -6,7 +6,9 @@
     <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
     <title>AddTask</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/add_task.css">
     <script src="js/include.js"></script>
     
     <style>
@@ -90,6 +92,9 @@
             font-size: 20px;
         }
 
+      .d-flex{
+        display: flex;
+      }
         .custom-select {
             position: relative;
             width: 200px;
@@ -133,82 +138,88 @@
          background-color: blue;
         }
     </style>
-</head>
-
-<body onload="includeHTML()">
-    <div w3-include-html="Templates/header.html"></div>
-    <section class="addTask">
+  </head>
+  <body onload="includeHTML()">
+    <div class="d-flex">
+      <div w3-include-html="./Templates/sidebar.html"></div>
+      <div>
+        <div w3-include-html="./Templates/header.html"></div>
+    
+      <section class="addTask">
         <h1>Add Task</h1>
         <form>
-            <div class="formLeft">
-                <div class="eachInput">
-                    <span>Title<b style="color: red">*</b></span>
-                    <p><input type="text" /></p>
-                </div>
-                <div class="eachInput">
-                    <span>Description</span>
-                    <p><textarea name="" id=""></textarea></p>
-                </div>
-                <div class="eachInput">
-                    <div class="custom-select">
-                        <div class="select-selected">Assigned to</div>
-                        <div class="select-items">
-                            <div><input type="checkbox" id="test1" name="test1"><label for="test1">TEST1</label></div>
-                            <div><input type="checkbox" id="test2" name="test2"><label for="test2">TEST2</label></div>
-                            <div><input type="checkbox" id="test3" name="test3"><label for="test3">TEST3</label></div>
-                            <div><input type="checkbox" id="test4" name="test4"><label for="test4">TEST4</label></div>
-                        </div>
-                    </div>
-                </div>
+          <div class="formLeft">
+            <div class="eachInput">
+              <span>Title<b style="color: red">*</b></span>
+              <p><input type="text" /></p>
             </div>
-            <div class="separator"></div>
-            <div class="formLeft">
-                <div class="eachInput">
-                    <span>Due date <b style="color: red">*</b> </span>
-                    <p><input type="date" /></p>
-                </div>
-                <div class="eachInput">
-                    <span>Prio</span>
-                    <div>
-                        <button>
-                            Urgent <img class="urgent" src="assets/img/svg/urgent.svg" alt="" />
-                        </button>
-                        <button>
-                            Medium <img src="assets/img/svg/medium.svg" alt="" />
-                        </button>
-                        <button>Low <img src="assets/img/svg/low.svg" alt="" /></button>
-                    </div>
-                </div>
-                <div class="eachInput">
-                    <span>Category<b style="color: red">*</b></span>
-                    <select name="category" id="category" size="1">
-                        <option value="volvo">TEST1</option>
-                        <option value="volvo">TEST2</option>
-                        <option value="volvo">TEST3</option>
-                        <option value="volvo">TEST4</option>
-                    </select>
-                </div>
-                <div class="eachInput">
-                    <span>Subtasks</span>
-                    <div>
-                        <p><input type="text" name="" id="" readonly />
-                            <img src="assets/img/png/Subtasks icons11.png" alt="" /></p>
-                    </div>
-                </div>
+            <div class="eachInput">
+              <span>Description</span>
+              <p><textarea name="" id=""></textarea>
             </div>
+            <div class="eachInput">
+              <span>Assigned to</span>
+              <select name="contacts" id="contacts" size="1" multiple>
+                <option value="volvo">TEST1</option>
+                <option value="volvo">TEST2</option>
+                <option value="volvo">TEST3</option>
+                <option value="volvo">TEST4</option>
+              </select>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="formLeft">
+            <div class="eachInput">
+              <span>Due date <b style="color: red">*</b> </span>
+              <p><input type="date" /></p>
+            </div>
+            <div class="eachInput">
+              <span>Prio</span>
+              <div>
+                <button>
+                  Urgent <img src="assets/img/svg/urgent.svg" alt="" />
+                </button>
+                <button>
+                  Medium <img src="assets/img/svg/medium.svg" alt="" />
+                </button>
+                <button>Low <img src="assets/img/svg/low.svg" alt="" /></button>
+              </div>
+            </div>
+            <div class="eachInput">
+              <span>Category<b style="color: red">*</b></span>
+              <select name="category" id="category" size="1">
+                <option value="volvo">TEST1</option>
+                <option value="volvo">TEST2</option>
+                <option value="volvo">TEST3</option>
+                <option value="volvo">TEST4</option>
+              </select>
+            </div>
+            <div class="eachInput">
+              <span>Subtasks</span>
+              <div>
+                <p><input type="text" name="" id="" readonly /></p>
+                <img src="assets/img/png/Subtasks icons11.png" alt="" />
+              </div>
+            </div>
+          </div>
         </form>
         <section>
-            <span><b style="color: red">*</b> This field is Required</span>
-            <div>
-                <button>
-                    Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
-                </button>
-                <button>
-                    Create Task <img src="assets/img/png/check.png" alt="" />
-                </button>
-            </div>
+          <span><b style="color: red">*</b> This field is Required</span>
+          <div>
+            <button>
+              Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
+            </button>
+            <button>
+              Create Task <img src="assets/img/png/check.png" alt="" />
+            </button>
+          </div>
         </section>
-    </section>
-  </body>
-  <script src="js/add_task.js"></script>
-</html>
+      </section>
+    </div>
+    </body>
+  </html>
+  </div>
+   
+    
+    
+    

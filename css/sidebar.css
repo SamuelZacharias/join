@@ -34,12 +34,12 @@ aside {
   display: flex;
   gap: 15px;
   flex-direction: column;
-  color: #CDCDCD;
+  color: #cdcdcd;
 }
 
 .icon-bar a {
   text-decoration: none;
-  color: #CDCDCD;
+  color: #cdcdcd;
 }
 
 .box-icons {
@@ -52,42 +52,48 @@ aside {
   box-sizing: border-box;
 }
 
-.box-icons:hover {
+.link-sidebar:hover {
   cursor: pointer;
   background-color: #2a3d59;
 }
 
-.box-icons:active {
+.link-sidebar:active {
   cursor: pointer;
   background-color: #091931;
   color: white;
 }
 
-.icons-sidebar {
-  width: 30px;
-  height: 30px;
-  color: white;
-}
 .credit-box {
   display: flex;
   height: 317px;
   flex-direction: column;
   justify-content: flex-end;
-}
-.credit-box a {
-  text-decoration: none;
-  color: white;
-}
-.credit-box a:hover {
-  text-decoration: underline;
-}
-.credits {
-  opacity: 0.4;
-  display: flex;
-  padding: 8px;
+  padding: 243px 0px 0px 0px;
+  box-sizing: border-box;
   gap: 8px;
+  
 }
 
-.credits:hover {
+.link-credits {
+  text-decoration: none;
+  color: #a8a8a8;
+}
+
+.link-credits:hover {
+  font-weight: 700;
   cursor: pointer;
+  color: #29abe2;
+}
+
+.link-credits:active{
+    background-color: #091931;
+}
+
+.credit{
+    display: flex;
+    padding-left: 52px;
+    box-sizing: border-box;
+    width: 232px;
+    height: 35px;
+    align-items: center;
 }
