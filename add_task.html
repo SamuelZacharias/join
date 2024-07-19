@@ -7,16 +7,11 @@
     <title>AddTask</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/sidebar.css" />
-    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/add_task.css">
     <script src="js/include.js"></script>
     <style>
-      body {
-        background-color: var(--background);
-      }
-      body {
-        visibility: hidden;
-      }
+      
       .addTask {
         background-color: var(--background);
         display: flex;
@@ -148,11 +143,17 @@
       }
 
       .createButton{
-        background-color: var(--gray);
-        border-radius: 10px;
+        background-color: var(gray);
       }
-
-
+      .select-items div label {
+        margin-left: 10px;
+      }
+      .select-items div:hover, .same-as-selected {
+        background-color: #ccc;
+      }
+      .urgent {
+        background-color: blue;
+      }
 
       option *{
         padding: 10px;
