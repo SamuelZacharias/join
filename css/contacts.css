@@ -60,7 +60,7 @@ body {
   box-sizing: border-box;
   width: 352px;
   padding: 17px 36px 17px 36px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  
 }
 
 .contacts {
@@ -71,6 +71,11 @@ body {
   padding: 15px 24px 15px 24px;
   gap: 35px;
   align-items: center;
+  border-radius: 10px;
+}
+
+.contacts:hover{
+  background-color: lightgrey;
 }
 
 .letter-circle {
@@ -93,6 +98,34 @@ body {
 }
 
 .contact-email{
-  text-decoration: none;
   color: #007CEE;
+}
+
+.contact-seperator{
+  margin: 8px 0px 8px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.text-box{
+  padding-top: 110px;
+  padding-left: 55px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  height: 110px;
+}
+
+h1{
+  font-size: 61px;
+  font-weight: 700;
+}
+
+.text-seperator{
+  height: 59px;
+  width: 3px;
+  background-color: #29ABE2;
+}
+
+.info-text{
+  font-size: 27px;
 }
