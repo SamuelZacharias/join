@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
     <title>AddTask</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/sidebar.css">
-    <link rel="stylesheet" href="./css/add_task.css">
+    <link rel="stylesheet" href="./css/sidebar.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
     <script src="js/include.js"></script>
     <style>
       body {
         height: 100vh;
         background-color: var(--background);
+      }
+      body {
+        visibility: hidden;
       }
       .addTask {
         background-color: var(--background);
@@ -43,14 +46,16 @@
         height: 424px;
         border: 1px solid var(--blue);
       }
-      input, select {
+      input,
+      select {
         font-size: 20px;
         line-height: 24px;
         width: 100%;
         border: none;
         height: 120%;
       }
-      input:focus, textarea:focus {
+      input:focus,
+      textarea:focus {
         outline: none;
       }
       select {
@@ -103,7 +108,7 @@
         position: relative;
         overflow: hidden;
       }
-      .prioArea{
+      .prioArea {
         display: flex;
         justify-content: space-between;
       }
@@ -137,7 +142,7 @@
         color: var(--blue);
       }
       .clear:hover img {
-        content: url('assets/img/png/iconoir_cancel_hover.png'); /* Hover image URL */
+        content: url("assets/img/png/iconoir_cancel_hover.png"); /* Hover image URL */
       }
       .d-flex {
         display: flex;
@@ -172,23 +177,27 @@
       .select-items div label {
         margin-left: 10px;
       }
-      .select-items div:hover, .same-as-selected {
+      .select-items div:hover,
+      .same-as-selected {
         background-color: #ccc;
       }
       .urgent {
         background-color: blue;
       }
 
-      option *{
+      option * {
         padding: 10px;
       }
     </style>
   </head>
-  <body onload="includeHTML()">
+  <body>
     <div class="d-flex">
       <div w3-include-html="./Templates/sidebar.html"></div>
       <div>
-        <div w3-include-html="./Templates/header.html" style="background-color: white; position: absolute;"></div>
+        <div
+          w3-include-html="./Templates/header.html"
+          style="background-color: white; position: absolute"
+        ></div>
         <section class="addTask">
           <h1>Add Task</h1>
           <form>
@@ -220,22 +229,31 @@
               <div class="eachInput">
                 <span>Prio</span>
                 <div class="d-flex prioArea">
-                  <button type="button" class="buttonCenter prioButton">Urgent <img src="assets/img/svg/urgent.svg" alt="" /></button>
-                  <button type="button" class="buttonCenter prioButton medium">Medium <img src="assets/img/svg/medium.svg" alt="" /></button>
-                  <button type="button" class="buttonCenter prioButton">Low <img src="assets/img/svg/low.svg" alt="" /></button>
+                  <button type="button" class="buttonCenter prioButton">
+                    Urgent <img src="assets/img/svg/urgent.svg" alt="" />
+                  </button>
+                  <button type="button" class="buttonCenter prioButton medium">
+                    Medium <img src="assets/img/svg/medium.svg" alt="" />
+                  </button>
+                  <button type="button" class="buttonCenter prioButton">
+                    Low <img src="assets/img/svg/low.svg" alt="" />
+                  </button>
                 </div>
               </div>
               <div class="eachInput">
                 <span>Category<b style="color: red">*</b></span>
                 <select name="category" id="category" size="1">
-                  <option style="padding: 20px;" >Technical Task</option>
+                  <option style="padding: 20px">Technical Task</option>
                   <option>User Story</option>
                 </select>
               </div>
               <div class="eachInput">
                 <span>Subtasks</span>
                 <div>
-                  <p><input type="text" name="" id="" readonly /> <img src="assets/img/png/Subtasks icons11.png" alt="" /></p>
+                  <p>
+                    <input type="text" name="" id="" readonly />
+                    <img src="assets/img/png/Subtasks icons11.png" alt="" />
+                  </p>
                 </div>
               </div>
             </div>
@@ -257,16 +275,3 @@
     </div>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-   
-    
-    
-    
