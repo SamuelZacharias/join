@@ -1,6 +1,9 @@
 body{
     margin: 0px;
 }
+body {
+    visibility: hidden;
+  }
 
 .d-flex{
     display: flex;

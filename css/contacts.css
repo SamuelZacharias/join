@@ -8,6 +8,9 @@ body {
   font-family: "inter";
   margin: 0px;
 }
+body {
+  visibility: hidden;
+}
 
 .d-flex {
   display: flex;
