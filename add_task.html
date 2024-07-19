@@ -10,243 +10,253 @@
     <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/add_task.css">
     <script src="js/include.js"></script>
-    
     <style>
-        .addTask {
-            background-color: var(--background);
-            display: flex;
-            padding-top: 110px;
-            padding-left: 96px;
-            flex-direction: column;
-            font-size: 20px;
-        }
-
-        h1 {
-            margin: 0px;
-            font-size: 60px;
-            margin-bottom: 48px;
-        }
-
-        .formLeft {
-            display: flex;
-            flex-direction: column;
-            width: 440px;
-            gap: 16px;
-        }
-
-        form {
-            display: flex;
-            gap: 48px;
-        }
-
-        .separator {
-            height: 424px;
-            border: 1px solid var(--blue);
-        }
-
-        input,
-        select {
-            font-size: 20px;
-            line-height: 24px;
-            width: 100%;
-            border: none;
-            height: 120%;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-        }
-
-        select {
-            padding: 12px 16px 12px 16px;
-            border-radius: 10px;
-        }
-
-        .eachInput {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        p {
-            display: flex;
-            align-items: center;
-            margin: 0px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            padding: 12px 21px 12px 21px;
-            background-color: white;
-        }
-
-        p:hover {
-            border: 1px solid var(--blue);
-        }
-
-        textarea {
-            height: 120px;
-            width: 100%;
-            margin: 0px;
-            border: none;
-            resize: none;
-            font-size: 20px;
-        }
-
-        .buttonsSection{
-          margin-top: 146px;
-          justify-content: space-between;
-        }
-        .buttonArea{
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-      .buttonCenter{
+      body {
+        height: 100vh;
+        background-color: var(--background);
+      }
+      .addTask {
+        background-color: var(--background);
+        display: flex;
+        padding-top: 206px;
+        padding-left: 96px;
+        flex-direction: column;
+        font-size: 20px;
+        height: calc(100vh - 206px);
+      }
+      h1 {
+        margin: 0px;
+        font-size: 60px;
+        margin-bottom: 48px;
+      }
+      .formLeft {
+        display: flex;
+        flex-direction: column;
+        width: 440px;
+        gap: 16px;
+      }
+      form {
+        display: flex;
+        gap: 48px;
+      }
+      .separator {
+        height: 424px;
+        border: 1px solid var(--blue);
+      }
+      input, select {
+        font-size: 20px;
+        line-height: 24px;
+        width: 100%;
+        border: none;
+        height: 120%;
+      }
+      input:focus, textarea:focus {
+        outline: none;
+      }
+      select {
+        padding: 12px 16px;
+        border-radius: 10px;
+      }
+      .eachInput {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      p {
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        padding: 12px 21px;
+        background-color: white;
+      }
+      p:hover {
+        border: 1px solid var(--blue);
+      }
+      textarea {
+        height: 120px;
+        width: 100%;
+        margin: 0px;
+        border: none;
+        resize: none;
+        font-size: 20px;
+      }
+      .buttonsSection {
+        margin-top: 90px;
+        justify-content: space-between;
+      }
+      .buttonArea {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .buttonCenter {
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-      .prioArea{
-        display: flex;
-        justify-content: space-between;
-      }
-      .prioButton{
-        width:136px;
-        border-radius: 10px;
-        padding: 16px 10px;
-        gap: 8px;
+        border: none;
+        padding: 16px;
         font-size: 20px;
-        border: 1px solid var(--border);
-        background-color: white;
+        background-color: transparent;
+        cursor: pointer;
+        position: relative;
       }
-      .medium{
-        background-color: var(--medium);
+      .clear {
+        border: 1px solid black;
+        color: black;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
       }
-
-      .d-flex{
+      .clear img {
+        display: block;
+        transition: opacity 0.3s ease;
+      }
+      .clear:hover {
+        border: 1px solid var(--blue);
+        color: var(--blue);
+      }
+      .clear:hover img {
+        content: url('assets/img/png/iconoir_cancel_hover.png'); /* Hover image URL */
+      }
+      .d-flex {
         display: flex;
       }
-        .custom-select {
-            position: relative;
-            width: 200px;
-        }
-
-        .select-selected {
-            background-color: white;
-            padding: 12px 16px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .select-items {
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            display: none;
-            max-height: 200px;
-            overflow-y: auto;
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .select-items div {
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .select-items div label {
-            margin-left: 10px;
-        }
-
-        .select-items div:hover,
-        .same-as-selected {
-            background-color: #ccc;
-        }
-        .urgent{
-         background-color: blue;
-        }
+      .custom-select {
+        position: relative;
+        width: 200px;
+      }
+      .select-selected {
+        background-color: white;
+        padding: 12px 16px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .select-items {
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        display: none;
+        max-height: 200px;
+        overflow-y: auto;
+        width: 100%;
+        border-radius: 10px;
+      }
+      .select-items div {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .select-items div label {
+        margin-left: 10px;
+      }
+      .select-items div:hover, .same-as-selected {
+        background-color: #ccc;
+      }
+      .urgent {
+        background-color: blue;
+      }
     </style>
   </head>
   <body onload="includeHTML()">
     <div class="d-flex">
       <div w3-include-html="./Templates/sidebar.html"></div>
       <div>
-        <div w3-include-html="./Templates/header.html"></div>
-    
-      <section class="addTask">
-        <h1>Add Task</h1>
-        <form>
-          <div class="formLeft">
-            <div class="eachInput">
-              <span>Title<b style="color: red">*</b></span>
-              <p><input type="text" /></p>
-            </div>
-            <div class="eachInput">
-              <span>Description</span>
-              <p><textarea name="" id=""></textarea>
-            </div>
-            <div class="eachInput">
-              <span>Assigned to</span>
-              <select name="contacts" id="contacts" size="1" multiple>
-                <option value="volvo">TEST1</option>
-                <option value="volvo">TEST2</option>
-                <option value="volvo">TEST3</option>
-                <option value="volvo">TEST4</option>
-              </select>
-            </div>
-          </div>
-          <div class="separator"></div>
-          <div class="formLeft">
-            <div class="eachInput">
-              <span>Due date <b style="color: red">*</b> </span>
-              <p><input type="date" /></p>
-            </div>
-            <div class="eachInput ">
-              <span>Prio</span>
-              <div class="d-flex prioArea">
-                <button class="buttonCenter prioButton">Urgent <img src="assets/img/svg/urgent.svg" alt="" /></button>
-                <button class="buttonCenter prioButton medium">Medium <img src="assets/img/svg/medium.svg" alt="" /></button>
-                <button class="buttonCenter prioButton">Low <img src="assets/img/svg/low.svg" alt="" /></button>
+        <div w3-include-html="./Templates/header.html" style="background-color: white; position: absolute;"></div>
+        <section class="addTask">
+          <h1>Add Task</h1>
+          <form>
+            <div class="formLeft">
+              <div class="eachInput">
+                <span>Title<b style="color: red">*</b></span>
+                <p><input type="text" /></p>
+              </div>
+              <div class="eachInput">
+                <span>Description</span>
+                <p><textarea name="" id=""></textarea></p>
+              </div>
+              <div class="eachInput">
+                <span>Assigned to</span>
+                <select name="contacts" id="contacts" size="1" multiple>
+                  <option value="volvo">TEST1</option>
+                  <option value="volvo">TEST2</option>
+                  <option value="volvo">TEST3</option>
+                  <option value="volvo">TEST4</option>
+                </select>
               </div>
             </div>
-            <div class="eachInput">
-              <span>Category<b style="color: red">*</b></span>
-              <select name="category" id="category" size="1">
-                <option value="volvo">TEST1</option>
-                <option value="volvo">TEST2</option>
-                <option value="volvo">TEST3</option>
-                <option value="volvo">TEST4</option>
-              </select>
-            </div>
-            <div class="eachInput">
-              <span>Subtasks</span>
-              <div>
-                <p><input type="text" name="" id="" readonly /></p>
-                <img src="assets/img/png/Subtasks icons11.png" alt="" />
+            <div class="separator"></div>
+            <div class="formLeft">
+              <div class="eachInput">
+                <span>Due date <b style="color: red">*</b> </span>
+                <p><input type="date" /></p>
+              </div>
+              <div class="eachInput">
+                <span>Prio</span>
+                <div class="d-flex prioArea">
+                  <button type="button" class="buttonCenter prioButton">Urgent <img src="assets/img/svg/urgent.svg" alt="" /></button>
+                  <button type="button" class="buttonCenter prioButton medium">Medium <img src="assets/img/svg/medium.svg" alt="" /></button>
+                  <button type="button" class="buttonCenter prioButton">Low <img src="assets/img/svg/low.svg" alt="" /></button>
+                </div>
+              </div>
+              <div class="eachInput">
+                <span>Category<b style="color: red">*</b></span>
+                <select name="category" id="category" size="1">
+                  <option value="volvo">TEST1</option>
+                  <option value="volvo">TEST2</option>
+                  <option value="volvo">TEST3</option>
+                  <option value="volvo">TEST4</option>
+                </select>
+              </div>
+              <div class="eachInput">
+                <span>Subtasks</span>
+                <div>
+                  <p><input type="text" name="" id="" readonly /> <img src="assets/img/png/Subtasks icons11.png" alt="" /></p>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-        <section class="buttonsSection d-flex">
-          <span><b style="color: red">*</b> This field is Required</span>
-          <div class="buttonArea">
-            <button class="buttonCenter">
-              Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
-            </button>
-            <button class="buttonCenter">
-              Create Task <img src="assets/img/png/check.png" alt="" />
-            </button>
-          </div>
+          </form>
+          <section class="buttonsSection d-flex">
+            <span><b style="color: red">*</b> This field is Required</span>
+            <div class="buttonArea">
+              <button class="buttonCenter clear">
+                Clear
+                <img src="assets/img/png/iconoir_cancel.png" alt="" />
+              </button>
+              <button class="buttonCenter">
+                Create Task <img src="assets/img/png/check.png" alt="" />
+              </button>
+            </div>
+          </section>
         </section>
-      </section>
+      </div>
     </div>
-    </body>
-  </html>
-  </div>
+  </body>
+</html>
+Explanation
+Image Management:
+
+The image is placed inside the button directly with img tag.
+img is styled to adjust visibility and apply transitions.
+Hover Effect:
+
+The clear button has a default border and color.
+On hover, the border and text color change.
+The img tag is targeted for hover effects. content property in pseudo-elements is replaced with the image itself.
+Notes
+Image Paths: Ensure the paths to the images (iconoir_cancel.png and iconoir_cancel_hover.png) are correct.
+Positioning: The image will be positioned based on the button's padding
+
+
+
+
+
+
+
+
    
     
     
