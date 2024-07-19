@@ -249,7 +249,7 @@ body {
 
 .taskFontSize {
     font-size: 64px;
-    weight: 600;
+    font-weight: 600;
     line-height: 76.8px;
     display: flex;
     align-items: center;
