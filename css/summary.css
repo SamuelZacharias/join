@@ -325,3 +325,8 @@ body {
     line-height: 19.2px;
     color: #2A3647;
 }
+
+.linkNone {
+    color: inherit;
+    text-decoration: none;
+}
