@@ -18,6 +18,7 @@ body{
   max-width: 1440px;
   margin: auto;
   margin: 0px;
+  font-family: "inter", Arial, sans-serif;
 }
 
 @font-face {

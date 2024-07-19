@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png">
-  <title>My Board</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/sidebar.css" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <script src="js/include.js">
+      includeHTML()
+    </script>
+    <title>My Board</title>
+  </head>
+  <body onload="includeHTML()">
+    <div class="d-flex">
+      <div w3-include-html="Templates/sidebar.html"></div>
+
+      <div w3-include-html="Templates/header.html"></div>
+    </div>
+  </body>
 </html>

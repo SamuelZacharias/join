@@ -5,11 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png">
-  <link rel="stylesheet" href="/css/summary.css">
+  <link rel="stylesheet" href="./css/summary.css">
+  <link rel="stylesheet" href="./css/header.css">
+  <link rel="stylesheet" href="./css/sidebar.css">
+  <script src="./js/include.js"></script>
   <title>Summary</title>
 </head>
 
-<body onload="">
+<body onload="includeHTML()">
+  <div w3-include-html="Templates/sidebar.html"></div>
+  <div w3-include-html="Templates/header.html"></div>
   <div id="content">
     <div class="seperatorBox">
       <div class="sepLeft">Join 360</div>
