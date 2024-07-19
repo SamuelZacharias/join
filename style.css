@@ -11,13 +11,11 @@
   --background : #F6F7F8;
   --hightlight : #091931;
   --border : #D1D1D1;
-  
 }
 
 body{
   max-width: 1440px;
   margin: auto;
-  margin: 0px;
   font-family: "inter", Arial, sans-serif;
 }
 

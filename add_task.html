@@ -92,6 +92,38 @@
             font-size: 20px;
         }
 
+        .buttonsSection{
+          margin-top: 146px;
+          justify-content: space-between;
+        }
+        .buttonArea{
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+      .buttonCenter{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .prioArea{
+        display: flex;
+        justify-content: space-between;
+      }
+      .prioButton{
+        width:136px;
+        border-radius: 10px;
+        padding: 16px 10px;
+        gap: 8px;
+        font-size: 20px;
+        border: 1px solid var(--border);
+        background-color: white;
+      }
+      .medium{
+        background-color: var(--medium);
+      }
+
       .d-flex{
         display: flex;
       }
@@ -173,16 +205,12 @@
               <span>Due date <b style="color: red">*</b> </span>
               <p><input type="date" /></p>
             </div>
-            <div class="eachInput">
+            <div class="eachInput ">
               <span>Prio</span>
-              <div>
-                <button>
-                  Urgent <img src="assets/img/svg/urgent.svg" alt="" />
-                </button>
-                <button>
-                  Medium <img src="assets/img/svg/medium.svg" alt="" />
-                </button>
-                <button>Low <img src="assets/img/svg/low.svg" alt="" /></button>
+              <div class="d-flex prioArea">
+                <button class="buttonCenter prioButton">Urgent <img src="assets/img/svg/urgent.svg" alt="" /></button>
+                <button class="buttonCenter prioButton medium">Medium <img src="assets/img/svg/medium.svg" alt="" /></button>
+                <button class="buttonCenter prioButton">Low <img src="assets/img/svg/low.svg" alt="" /></button>
               </div>
             </div>
             <div class="eachInput">
@@ -203,13 +231,13 @@
             </div>
           </div>
         </form>
-        <section>
+        <section class="buttonsSection d-flex">
           <span><b style="color: red">*</b> This field is Required</span>
-          <div>
-            <button>
+          <div class="buttonArea">
+            <button class="buttonCenter">
               Clear <img src="assets/img/png/iconoir_cancel.png" alt="" />
             </button>
-            <button>
+            <button class="buttonCenter">
               Create Task <img src="assets/img/png/check.png" alt="" />
             </button>
           </div>
