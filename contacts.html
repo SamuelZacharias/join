@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
     <link rel="stylesheet" href="./css/contacts.css" />
-    <link rel="stylesheet" href="./css/dialog-contacts.css">
+    <link rel="stylesheet" href="./css/dialog-contacts.css" />
     <link rel="stylesheet" href="/style.css" />
     <script src="js/include.js"></script>
     <script src="./js/contacts.js"></script>
@@ -60,18 +60,43 @@
             </div>
           </div>
           <div class="text-box">
-            
-              <h1>Contacts</h1>
-              <div class="text-seperator"></div>
-              <span class="info-text">Better with a Team</span>
-            
+            <h1>Contacts</h1>
+            <div class="text-seperator"></div>
+            <span class="info-text">Better with a Team</span>
           </div>
         </div>
       </div>
     </div>
     <dialog id="dialog-contacts">
-      <div class="dialog-left"></div>
-      <div class="dialog-right"></div>  
+      <div class="dialog-left">
+        <img
+          class="logo-dialog"
+          src="./assets/img/png/Join logo vector.png"
+          alt=""
+        />
+        <h2>Add contact</h2>
+        <span class="dialog-text">Tasks are better with a team !</span>
+        <div class="dialo-text-seperator"></div>
+      </div>
+      <div class="dialog-right">
+        <img
+          class="unknown-user"
+          src="./assets/img/png/unknown-user.png"
+          alt=""
+        />
+        <div class="dialog-content-right">
+          <img onclick="closeDialog()" class="close-cross" src="./assets/img/png/close.png" alt="" />
+
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <div>
+            <button></button>
+            <button></button>
+          </div>
+        </div>
+      </div>
     </dialog>
+    <div id="grey-background" class="grey-background hidden"></div>
   </body>
 </html>

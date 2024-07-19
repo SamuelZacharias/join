@@ -1,12 +1,86 @@
-dialog{
-    width: 1212px;
-    height: 592;
+dialog {
+  z-index: 99;
+  position: absolute;
+  width: 1212px;
+  height: 592px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 33px;
+  padding: 0;
+  border: 0px;
 }
 
-.dialog-left{
-
+.dialog-left {
+  display: flex;
+  width: 467px;
+  height: 594px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: #2a3647;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 66px 48px 66px 48px;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
-.dialog-right{
+.dialog-right {
+    width: 745px;
+    display: flex;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+}
 
+.logo-dialog {
+  width: 55.6px;
+  height: 66.48px;
+}
+
+h2 {
+  font-size: 61px;
+  color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.dialog-text {
+  font-size: 27px;
+  font-weight: 400;
+  color: white;
+}
+
+.dialo-text-seperator {
+  width: 90px;
+  border: 1px solid #29abe2;
+  border-radius: 9px;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.unknown-user{
+    width: 120px;
+    height: 120px;
+}
+
+.close-cross{
+    position: absolute;
+    top: 45px;
+    right: 45px;
+    width: 13.15px;
+    height: 13.15px;
+}
+
+.close-cross:hover{
+    cursor: pointer;
+}
+
+.dialog-content-right{
+    display: flex;
+    flex-direction: column;
 }
