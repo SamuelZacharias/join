@@ -24,10 +24,7 @@ body {
     margin: auto;
     max-width: 1440px;
     background-color: var(--background);
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; Ensures the body takes up the full viewport height */
+    visibility: hidden;
 }
 
 header {

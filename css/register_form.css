@@ -1,200 +1,197 @@
 :root {
-  --blue:   #29ABE2;
-  --gray:  #2A3647;
-  --high : #FF3D00;
-  --medium: #FFA800;
-  --low:   #7AE229;
-  --technical : #1FD7C1;
-  --story : #0038FF;
-  --noTask : #A8A8A8;
-  --policy : #A8A8A8;
-  --background : #F6F7F8;
-  --hightlight : #091931;
-  --border : #D1D1D1;
-  
+  --blue: #29abe2;
+  --gray: #2a3647;
+  --high: #ff3d00;
+  --medium: #ffa800;
+  --low: #7ae229;
+  --technical: #1fd7c1;
+  --story: #0038ff;
+  --noTask: #a8a8a8;
+  --policy: #a8a8a8;
+  --background: #f6f7f8;
+  --hightlight: #091931;
+  --border: #d1d1d1;
 }
 
 @font-face {
-  font-family: 'inter';
-  src: url('./assets/fonts/static/Inter-Black.ttf') format('interBlack'),
-      url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
+  font-family: "inter";
+  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
+    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
 }
 
+a {
+  text-decoration: none;
+  color: var(--policy);
+}
 
+body {
+  background-color: var(--background);
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font-family: "inter", Arial, sans-serif;
+}
+body {
+  visibility: hidden;
+}
 
-  a{
-    text-decoration: none;
-    color: var(--policy);
-  }
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.logo img {
+  width: 100px;
+  height: 120px;
+  margin-top: 50px;
+  margin-left: 50px;
+}
 
-    body{
-      background-color: var(--background);
-      max-width: 1440px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-      font-family: 'inter', Arial, sans-serif;
-    }
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px;
+  background-color: white;
+  padding: 0px 88px 48px 88px;
+  border-radius: 30px;
+  gap: 32px;
+}
+.register a {
+  color: var(--blue);
+}
+.register a:hover {
+  text-decoration: underline var(--blue);
+  font-weight: 600;
+}
 
-    .logo{
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-    }
-    .logo img{
-      width: 100px;
-      height: 120px;
-      margin-top: 50px;
-      margin-left: 50px;
-    }
+.policy {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
-    .register{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: -20px;
-      background-color: white;
-      padding: 0px 88px 48px 88px;
-      border-radius: 30px;
-      gap: 32px;
-    }
-    .register a{
-      color: var(--blue);
-    }
-    .register a:hover{
-      text-decoration: underline var(--blue);
-      font-weight: 600;
-    }
+input {
+  border: none;
+}
+input:focus {
+  outline: none;
+}
 
-    .policy{
-      display: flex;
-      width: 100%;
-      justify-content: center;
-    }
+.signUp {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 16px;
+}
 
-    input{
-      border: none;
-      
-    }
-    input:focus{
-      outline: none;
-    }
+.separator {
+  background-color: var(--blue);
+  height: 3px;
+  width: 150px;
+}
 
-    .signUp{
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-      gap: 16px;
-    }
+.backArrow {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  left: -200px;
+  bottom: -80px;
+  margin-top: -32px;
+  border-radius: 50%;
+}
+.backArrow:hover {
+  background-color: var(--border);
+  cursor: pointer;
+}
 
-    .separator{
-      background-color: var(--blue);
-      height: 3px;
-      width: 150px;
-    }
+::placeholder {
+  color: var(--border);
+}
+.icon {
+  width: 24px;
+  height: 24px;
+}
+h1 {
+  font-size: 61px;
+  margin: 0px;
+}
+.input {
+  width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 21px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.input input {
+  width: 100%;
+  height: 150%;
+}
+.input img:hover {
+  cursor: pointer;
+}
 
+.input:hover {
+  border: 1px solid var(--blue);
+}
 
-    .backArrow{
-      width: 32px;
-      height: 32px;
-      position: relative;
-      left: -200px;
-      bottom: -80px;
-      margin-top: -32px;
-      border-radius: 50%;
-    }
-   .backArrow:hover{
-    background-color: var(--border);
-    cursor: pointer;
-   }
-
-   ::placeholder{
-    color: var(--border);
-   }
-    .icon{
-      width: 24px;
-      height: 24px;
-    }
-    h1{
-      font-size: 61px;
-      margin: 0px;
-    }
-    .input{
-      width: 320px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 21px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      
-    }
-    .input input{
-      width: 100%;
-      height: 150%;
-    }
-    .input img:hover{
-      cursor: pointer;
-    }
-
-    .input:hover{
-      border: 1px solid var(--blue);
-    }
-
-    .check{
-      width: 80%;
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-    }
-    .check input:hover{
-      cursor: pointer;
-    }
-    .check span{
-      width: 100%;
-      text-align: center;
-    }
-    form{
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-    }
-    button{
-      background-color: var(--gray);
-      padding: 15px 24px;
-      color: white;
-      border-radius: 8px;
-      font-size: 21px;
-      width: 130px;
-      border: none;
-    }
-    .policy{
-      display: flex;
-      gap: 32px;
-      position: fixed;
-      bottom: 5px;
-    }
-    .policy a:hover{
-      color: var(--blue);
-      transform: scale(1.1);
-    }
-    button:hover{
-      background-color: var(--blue);
-      cursor: pointer;
-      transition: 200ms;
-    }
-    span{
-      color: var(--policy);
-    }
-    .d-none{
-      display: none;
-    }
-    input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px white inset !important; 
-      -webkit-text-fill-color: #000 !important; 
-  }
+.check {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.check input:hover {
+  cursor: pointer;
+}
+.check span {
+  width: 100%;
+  text-align: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+button {
+  background-color: var(--gray);
+  padding: 15px 24px;
+  color: white;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 130px;
+  border: none;
+}
+.policy {
+  display: flex;
+  gap: 32px;
+  position: fixed;
+  bottom: 5px;
+}
+.policy a:hover {
+  color: var(--blue);
+  transform: scale(1.1);
+}
+button:hover {
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: 200ms;
+}
+span {
+  color: var(--policy);
+}
+.d-none {
+  display: none;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
