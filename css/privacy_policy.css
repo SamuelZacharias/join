@@ -1,6 +1,6 @@
 body{
     margin: 0px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .d-flex{
@@ -50,7 +50,11 @@ body{
   }
 
   .maxHeight {
+    overflow-y:scroll;
     padding-top: 96px;
-    height: calc(100vh - 206px);
-    overflow: scroll;
+    height: calc(100vh - 211px);
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+}
