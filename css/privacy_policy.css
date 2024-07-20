@@ -1,9 +1,7 @@
 body{
     margin: 0px;
+    overflow: scroll;
 }
-body {
-    visibility: hidden;
-  }
 
 .d-flex{
     display: flex;
@@ -47,6 +45,12 @@ body {
   }
 
   .maxWidth {
-    max-width: 1200px;
-    margin-left: 22px;
+    max-width: 1208px;
+    height: 100vh;
+  }
+
+  .maxHeight {
+    padding-top: 96px;
+    height: calc(100vh - 206px);
+    overflow: scroll;
   }
