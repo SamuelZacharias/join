@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/sidebar.css">
     <link rel="stylesheet" href="./css/add_task.css">
     <script src="js/include.js"></script>
+    <script src="js/add_task.js"></script>
     <style>
       
       .addTask {
@@ -173,9 +174,51 @@
         background-color: blue;
       }
 
-      option *{
-        padding: 10px;
+      .multiselect {
+      width: 100%
       }
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+  
+}
+#checkboxes input{
+  width: 20%;
+}
+
+#checkboxes label {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  font-size: 20px;
+  background-color: white;
+  
+}
+label{
+  width: 100%;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
     </style>
   </head>
   <body>
@@ -230,10 +273,20 @@
               </div>
               <div class="eachInput">
                 <span>Category<b style="color: red">*</b></span>
-                <select name="category" id="category" size="1">
-                  <option style="padding: 20px;" >Technical Task</option>
-                  <option>User Story</option>
-                </select>
+                <div class="multiselect">
+                  <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                      <option>Select task category</option>
+                    </select>
+                    <div class="overSelect"></div>
+                  </div>
+                  <div id="checkboxes">
+                    <label for="one">
+                      <input type="checkbox" id="one" />Technical Task</label>
+                    <label for="two">
+                      <input type="checkbox" id="two" />User Story</label>
+                  </div>
+                </div>
               </div>
               <div class="eachInput">
                 <span>Subtasks</span>
