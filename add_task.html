@@ -1,97 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
-    <title>AddTask</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/sidebar.css">
-    <link rel="stylesheet" href="./css/add_task.css">
-    <script src="js/include.js"></script>
-    <script src="js/add_task.js "></script>
-  </head>
-  <body>
-    <div class="d-flex">
-      <div w3-include-html="./Templates/sidebar.html"></div>
-      <div>
-        <div
-          w3-include-html="./Templates/header.html"
-          style="background-color: white; position: absolute"
-        ></div>
-        <section class="addTask">
-          <h1>Add Task</h1>
-          <form>
-            <div class="formLeft">
-              <div class="eachInput">
-                <span>Title<b style="color: red">*</b></span>
-                <p><input type="text" /></p>
-              </div>
-              <div class="eachInput">
-                <span>Description</span>
-                <p><textarea name="" id=""></textarea></p>
-              </div>
-              <div class="eachInput">
-                <span>Assigned to</span>
-                <select name="contacts" id="contacts"  class="form-select form-select-lg">
-                  <option value="volvo">TEST1</option>
-                  <option value="volvo">TEST2</option>
-                  <option value="volvo">TEST3</option>
-                  <option value="volvo">TEST4</option>
-                </select>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
+  <title>AddTask</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/header.css" />
+  <link rel="stylesheet" href="./css/sidebar.css">
+  <link rel="stylesheet" href="./css/add_task.css">
+  <script src="js/include.js"></script>
+  <style>
+    /* Add a border to the <p> element when validation fails */
+    .inputContainer.invalid {
+      border: 2px solid red;
+      padding: 5px; /* Adjust padding if necessary */
+      border-radius: 4px; /* Optional: Add rounded corners */
+    }
+  </style>
+</head>
+<body onload="handleClick(2)">
+  <div class="d-flex">
+    <div w3-include-html="./Templates/sidebar.html"></div>
+    <div>
+      <div
+        w3-include-html="./Templates/header.html"
+        style="background-color: white; position: absolute"
+      ></div>
+      <section class="addTask">
+        <h1>Add Task</h1>
+        <form id="taskForm" action="board.html">
+          <div class="formLeft">
+            <div class="eachInput">
+              <span>Title<b style="color: red">*</b></span>
+              <p class="inputContainer"><input required type="text" /></p>
+            </div>
+            <div class="eachInput">
+              <span>Description</span>
+              <p><textarea name="" id=""></textarea></p>
+            </div>
+            <div class="eachInput">
+              <span>Assigned to</span>
+              <select name="contacts" id="contacts" class="form-select form-select-lg">
+                <option value="volvo">TEST1</option>
+                <option value="volvo">TEST2</option>
+                <option value="volvo">TEST3</option>
+                <option value="volvo">TEST4</option>
+              </select>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="formLeft">
+            <div class="eachInput">
+              <span>Due date <b style="color: red">*</b></span>
+              <p class="inputContainer"><input required type="date" /></p>
+            </div>
+            <div class="eachInput">
+              <span>Prio</span>
+              <div class="d-flex prioArea">
+                <button type="button" id="button1" onclick="handleClick(1)" class="buttonCenter prioButton">
+                  Urgent <img id="prioImg1" src="assets/img/svg/urgent.svg" alt="" />
+                </button>
+                <button type="button" id="button2" onclick="handleClick(2)" class="buttonCenter prioButton">
+                  Medium <img id="prioImg2" src="assets/img/png/mediumColor.png" alt="" />
+                </button>
+                <button type="button" id="button3" onclick="handleClick(3)" class="buttonCenter prioButton">
+                  Low <img id="prioImg3" src="assets/img/svg/low.svg" alt="" />
+                </button>
               </div>
             </div>
-            <div class="separator"></div>
-            <div class="formLeft">
-              <div class="eachInput">
-                <span>Due date <b style="color: red">*</b> </span>
-                <p><input type="date" /></p>
-              </div>
-              <div class="eachInput">
-                <span>Prio</span>
-                <div class="d-flex prioArea">
-                  <button type="button" class="buttonCenter prioButton">
-                    Urgent <img src="assets/img/svg/urgent.svg" alt="" />
-                  </button>
-                  <button type="button" class="buttonCenter prioButton medium">
-                    Medium <img src="assets/img/svg/medium.svg" alt="" />
-                  </button>
-                  <button type="button" class="buttonCenter prioButton">
-                    Low <img src="assets/img/svg/low.svg" alt="" />
-                  </button>
-                </div>
-              </div>
-              <span style="margin-bottom: -6px; margin-top: -8px;">Category <b style="color: red">*</b></span>
-              <div class="categoryDropDown" id="dropdown" onclick="openDropDown()">
-                <span>Select task category</span>
-                <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-              </div>
-              <div class="eachInput">
-                <span>Subtasks</span>
-                <div>
-                  <p>
-                    <input type="text" name="" id="" readonly />
-                    <img  src="assets/img/png/Subtasks icons11.png" alt="" />
-                  </p>
-                </div>
+            <span style="margin-bottom: -6px; margin-top: -8px;">Category <b style="color: red">*</b></span>
+            <div class="categoryDropDown" id="dropdown">
+              <span class="spanCategory" onclick="openDropDown()">Select task category</span>
+              <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="" onclick="openDropDown()">
+            </div>
+            <div class="eachInput">
+              <span>Subtasks</span>
+              <div>
+                <p>
+                  <input type="text" name="" id="" readonly />
+                  <img src="assets/img/png/Subtasks icons11.png" alt="" />
+                </p>
               </div>
             </div>
-          </form>
-          <section class="buttonsSection d-flex">
-            <span><b style="color: red">*</b> This field is Required</span>
-            <div class="buttonArea">
-              <button class="buttonCenter clear">
-                Clear
-                <img src="assets/img/png/iconoir_cancel.png" alt="" />
-              </button>
-              <button class="buttonCenter createButton">
-                Create Task <img src="assets/img/png/check.png" alt="" />
-              </button>
-            </div>
-          </section>
+          </div>
+        </form>
+        <section class="buttonsSection d-flex">
+          <span><b style="color: red">*</b> This field is Required</span>
+          <div class="buttonArea">
+            <button class="buttonCenter clear">
+              Clear
+              <img src="assets/img/png/iconoir_cancel.png" alt="" />
+            </button>
+            <button type="submit" onclick="submitForm(event)" class="buttonCenter createButton">
+              Create Task <img src="assets/img/png/check.png" alt="" />
+            </button>
+          </div>
         </section>
-      </div>
+      </section>
     </div>
-  </body>
+  </div>
+</body>
+<script src="js/add_task.js"></script>
 </html>
