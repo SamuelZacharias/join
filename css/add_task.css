@@ -28,8 +28,7 @@ form {
   height: 424px;
   border: 1px solid var(--blue);
 }
-input,
-select {
+input {
   font-size: 20px;
   line-height: 24px;
   width: 100%;
@@ -218,10 +217,55 @@ select:hover{
 .inputContainer.invalid {
   border: 2px solid red;
   padding: 12px 21px; /* Adjust padding if necessary */
-  border-radius: 4px; /* Optional: Add rounded corners */
+  border-radius: 10px; /* Optional: Add rounded corners */
 }
+
 .categoryDropDown.invalid {
   border: 2px solid red;
-  
-  border-radius: 4px; /* Optional: Add rounded corners */
+  border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+.contactOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid white; /* Solid white border */
+  background-color: transparent; /* Default background color */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.contactOption.selected {
+  background-color: var(--gray); /* Gray background when selected */
+  color: white; /* White text color when selected */
+}
+
+.contactOption .spanHover {
+  background-color: transparent; /* Default background color for text */
+  color: black; /* Default text color */
+  padding: 2px 4px; /* Padding for better appearance */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.contactOption.selected .spanHover {
+  background-color: var(--gray); /* Black background when selected */
+  color: white; /* White text color when selected */
+}
+
+.contactOption input {
+  margin-left: auto;
+  accent-color: white; /* White color for the checkbox checkmark */
+  border: 1px solid white; /* Border color of checkbox */
+  border-radius: 5px; /* Rounded corners for the checkbox */
+  background-color: gray; /* Gray background for the checkbox */
+  transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.contactOption input:checked {
+  background-color: gray; /* Gray background when checked */
+  accent-color: white; /* White color for the checkmark */
+  border-color: white; /* White border color when checked */
 }

@@ -10,14 +10,6 @@
   <link rel="stylesheet" href="./css/sidebar.css">
   <link rel="stylesheet" href="./css/add_task.css">
   <script src="js/include.js"></script>
-  <style>
-    /* Add a border to the <p> element when validation fails */
-    .inputContainer.invalid {
-      border: 2px solid red;
-      padding: 5px; /* Adjust padding if necessary */
-      border-radius: 4px; /* Optional: Add rounded corners */
-    }
-  </style>
 </head>
 <body onload="handleClick(2)">
   <div class="d-flex">
@@ -41,12 +33,10 @@
             </div>
             <div class="eachInput">
               <span>Assigned to</span>
-              <select name="contacts" id="contacts" class="form-select form-select-lg">
-                <option value="volvo">TEST1</option>
-                <option value="volvo">TEST2</option>
-                <option value="volvo">TEST3</option>
-                <option value="volvo">TEST4</option>
-              </select>
+              <div class="categoryDropDown" id="dropdownContacts">
+                <span class="spanCategory" onclick="openDropDownContacts()">Select Contacts to assign</span>
+                <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="" onclick="openDropDownContacts()">
+              </div>
             </div>
           </div>
           <div class="separator"></div>
