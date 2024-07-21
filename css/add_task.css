@@ -186,14 +186,7 @@ select:hover{
 .hover-shadow:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.spanHover{
-  background-color: white;
-  padding-top: 10px;
-  border-radius: 10px;
-}
-.spanHover:hover{
-  background-color: var(--background);
-}
+
 .urgent{
   background-color: var(--urgent);
 }
@@ -212,74 +205,26 @@ select:hover{
   border: 2px solid red;
   border-radius: 10px; /* Optional: Add rounded corners */
 }
-.contactOption {
+
+
+.spanHover{
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+}
+.spanHover:hover{
+  background-color: var(--background);
+  cursor: pointer;
+}
+
+.openedDropDown{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 10px; /* Rounded corners */
-  border: 1px solid white; /* Solid white border */
-  background-color: transparent; /* Default background color */
-  transition: background-color 0.125s ease, color 0.125s ease; /* Smooth transition */
-}
-.contactOption.selected {
-  background-color: var(--gray); /* Gray background when selected */
-  color: white; /* White text color when selected */
-}
-.contactOption .spanHover {
-  background-color: transparent; /* Default background color for text */
-  color: black; /* Default text color */
-  padding: 2px 4px; /* Padding for better appearance */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.125s ease, color 0.125s ease; /* Smooth transition */
-}
-.contactOption.selected .spanHover {
-  background-color: var(--gray); /* Black background when selected */
-  color: white; /* White text color when selected */
-}
-.contactOption input {
-  margin-left: auto;
-  accent-color: white; /* White color for the checkbox checkmark */
-  border: 1px solid white; /* Border color of checkbox */
-  border-radius: 5px; /* Rounded corners for the checkbox */
-  background-color: var(--gray); /* Gray background for the checkbox */
-  transition: border-color 0.125s ease, background-color 0.125s ease; /* Smooth transition */
-}
-.contactOption input:checked {
-  background-color: var(--gray); /* Gray background when checked */
-  accent-color: white; /* White color for the checkmark */
-  border-color: white; /* White border color when checked */
-}
-.prioButton.selected {
-  color: white; /* White text color when selected */
-  font-weight: 600; /* Font weight 600 when selected */
-}
-.contactOption input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--gray);
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  margin-right: 8px;
-  
+  flex-direction: column;
+  font-size: 20px;
 }
 
-.contactOption input[type="checkbox"]:checked {
-  background-color: var(--gray);
-  border-color: white;
-}
 
-.contactOption input[type="checkbox"]:checked::after {
-  content: '✔';
-  color: white;
-  font-size: 12px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.d-none{
+  display: none;
 }

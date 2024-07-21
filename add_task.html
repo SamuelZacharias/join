@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./css/header.css" />
   <link rel="stylesheet" href="./css/sidebar.css">
   <link rel="stylesheet" href="./css/add_task.css">
-  <script src="js/add_task.js"></script>
+
   <script src="js/include.js"></script>
 </head>
 <body onload="handleClick(2)">
@@ -35,8 +35,8 @@
             <div class="eachInput">
               <span>Assigned to</span>
               <div class="categoryDropDown" id="dropdownContacts">
-                <span class="spanCategory" onclick="openDropDownContacts()">Select Contacts to assign</span>
-                <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="" onclick="openDropDownContacts()">
+                <span class="spanCategory" onclick="showContacts()">Select Contacts to assign</span>
+                <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
               </div>
             </div>
           </div>
@@ -61,10 +61,11 @@
               </div>
             </div>
             <span style="margin-bottom: -6px; margin-top: -8px;">Category <b style="color: red">*</b></span>
-            <div class="categoryDropDown" id="dropdown">
-              <span class="spanCategory" onclick="openDropDown()">Select task category</span>
-              <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="" onclick="openDropDown()">
+            <div class="categoryDropDown" id="dropdownCategory" onclick="showCategory()">
+              <span class="spanCategory" >Select task category</span>
+              <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
             </div>
+            <div id="categories"></div>
             <div class="eachInput">
               <span>Subtasks</span>
               <div>
@@ -91,7 +92,7 @@
       </section>
     </div>
   </div>
-  
+  <script src="js/add_task.js"></script>
 </body>
 
 </html>

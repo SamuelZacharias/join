@@ -1,145 +1,7 @@
-let selectedCategory = '';
 let selectedPriority = 'Medium';
 let selectedContacts = [];
 let activeButton = 2;
-let isContactsDropdownOpen = false;
-let isCategoryDropdownOpen = false;
 
-function openDropDownContacts() {
-  const dropdown = document.getElementById('dropdownContacts');
-  dropdown.innerHTML = `
-    <div id="openedDropDownContacts" style="display:flex; flex-direction:column; width:100%;">
-      <div class="categoryOption" id="contactsDropdownHeader" onclick="event.stopPropagation(); toggleDropDownContacts()">
-        <span class="spanCategory">${selectedContacts.length > 0 ? selectedContacts.join(', ') : 'Select Contacts to assign'}</span>
-        <img class="dropUpImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-      </div>
-      ${createContactOption('TEST1')}
-      ${createContactOption('TEST2')}
-      ${createContactOption('TEST3')}
-      ${createContactOption('TEST4')}
-    </div>
-  `;
-  isContactsDropdownOpen = true;
-  document.addEventListener('click', handleOutsideClickContacts);
-}
-
-function createContactOption(contact) {
-  const isSelected = selectedContacts.includes(contact);
-  return `
-    <div class="contactOption ${isSelected ? 'selected' : ''}" onclick="event.stopPropagation(); toggleContact('${contact}')">
-      <span class="spanHover">${contact}</span>
-      <input type="checkbox" ${isSelected ? 'checked' : ''} onclick="event.stopPropagation(); toggleContact('${contact}')" />
-    </div>
-  `;
-}
-
-function toggleContact(contact) {
-  if (selectedContacts.includes(contact)) {
-    selectedContacts = selectedContacts.filter(c => c !== contact);
-  } else {
-    selectedContacts.push(contact);
-  }
-  updateContactsDropdownContent();
-}
-
-function updateContactsDropdownContent() {
-  const dropdown = document.getElementById('dropdownContacts');
-  if (dropdown) {
-    dropdown.innerHTML = `
-      <div id="openedDropDownContacts" style="display:flex; flex-direction:column; width:100%;">
-        <div class="categoryOption" id="contactsDropdownHeader" onclick="event.stopPropagation(); toggleDropDownContacts()">
-          <span class="spanCategory">${selectedContacts.length > 0 ? selectedContacts.join(', ') : 'Select Contacts to assign'}</span>
-          <img class="dropUpImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-        </div>
-        ${createContactOption('TEST1')}
-        ${createContactOption('TEST2')}
-        ${createContactOption('TEST3')}
-        ${createContactOption('TEST4')}
-      </div>
-    `;
-  }
-}
-
-function closeDropDownContacts() {
-  const dropdown = document.getElementById('dropdownContacts');
-  if (dropdown) {
-    dropdown.innerHTML = `
-      <div class="categoryOption" id="contactsDropdownHeader" onclick="event.stopPropagation(); toggleDropDownContacts()">
-        <span class="spanCategory">${selectedContacts.length > 0 ? selectedContacts.join(', ') : 'Select Contacts to assign'}</span>
-        <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-      </div>
-    `;
-  }
-  isContactsDropdownOpen = false;
-  document.removeEventListener('click', handleOutsideClickContacts);
-}
-
-function toggleDropDownContacts() {
-  if (isContactsDropdownOpen) {
-    closeDropDownContacts();
-  } else {
-    openDropDownContacts();
-  }
-}
-
-function handleOutsideClickContacts(event) {
-  const dropdown = document.getElementById('dropdownContacts');
-  const dropdownHeader = document.getElementById('contactsDropdownHeader');
-  if (dropdown && !dropdown.contains(event.target) && !dropdownHeader.contains(event.target)) {
-    closeDropDownContacts();
-  }
-}
-
-function openDropDown() {
-  const dropdown = document.getElementById('dropdown');
-  dropdown.innerHTML = `
-    <div id="openedDropDown" style="display:flex; flex-direction:column; width:100%;">
-      <div class="categoryOption" id="categoryDropdownHeader" onclick="event.stopPropagation(); toggleDropDown()">
-        <span class="spanCategory">${selectedCategory || 'Select task category'}</span>
-        <img class="dropUpImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-      </div>
-      <span class="spanHover" onclick="selectCategory('Technical Task')">Technical Task</span>
-      <span class="spanHover" onclick="selectCategory('User Story')">User Story</span>
-    </div>
-  `;
-  isCategoryDropdownOpen = true;
-  document.addEventListener('click', handleOutsideClickCategory);
-}
-
-function selectCategory(category) {
-  selectedCategory = category;
-  closeDropDown();
-}
-
-function closeDropDown() {
-  const dropdown = document.getElementById('dropdown');
-  if (dropdown) {
-    dropdown.innerHTML = `
-      <div class="categoryOption" id="categoryDropdownHeader" onclick="event.stopPropagation(); toggleDropDown()">
-        <span class="spanCategory">${selectedCategory || 'Select task category'}</span>
-        <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-      </div>
-    `;
-  }
-  isCategoryDropdownOpen = false;
-  document.removeEventListener('click', handleOutsideClickCategory);
-}
-
-function toggleDropDown() {
-  if (isCategoryDropdownOpen) {
-    closeDropDown();
-  } else {
-    openDropDown();
-  }
-}
-
-function handleOutsideClickCategory(event) {
-  const dropdown = document.getElementById('dropdown');
-  const dropdownHeader = document.getElementById('categoryDropdownHeader');
-  if (dropdown && !dropdown.contains(event.target) && !dropdownHeader.contains(event.target)) {
-    closeDropDown();
-  }
-}
 
 function handleClick(buttonNumber) {
   if (activeButton !== null) {
@@ -204,7 +66,7 @@ function validateForm() {
   document.querySelectorAll('.inputContainer').forEach(p => {
     p.classList.remove('invalid');
   });
-  document.getElementById('dropdown').classList.remove('invalid');
+  document.getElementById('dropdownCategory').classList.remove('invalid');
 
   inputs.forEach(input => {
     const parentP = input.closest('.inputContainer');
@@ -216,10 +78,78 @@ function validateForm() {
     }
   });
 
-  if (!selectedCategory) {
-    valid = false;
-    document.getElementById('dropdown').classList.add('invalid');
+  if (!choosenCategory) {
+    choosenCategory = false;
+    document.getElementById('dropdownCategory').classList.add('invalid');
   }
-
   return valid;
 }
+
+function showCategory(){
+  let categories = document.getElementById('categories')
+  categories.innerHTML =`
+      <div class="openedDropDown">
+        <span class="spanHover" onclick="chooseUserStory()">${category[0]}</span>
+        <span onclick="chooseTechnical()"> ${category[1]}</span>
+      </div>
+    `; 
+    document.getElementById('categories').classList.remove('d-none')
+    document.getElementById('dropDownImg').classList.remove('dropDownImg')
+    document.getElementById('dropDownImg').classList.add('dropUpImg')
+    choosenCategory = false
+}
+
+function chooseUserStory(){
+  let chooseCategory = document.getElementById('dropdownCategory')
+  chooseCategory.innerHTML = `
+  <span onclick="showCategory()" class="spanCategory">${category[0]}</span>
+  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+   document.getElementById('categories').classList.add('d-none')
+   choosenCategory = true
+   clickCount = 0
+   document.getElementById('dropDownImg').classList.add('dropDownImg')
+}
+
+function chooseTechnical(){
+  let chooseCategory = document.getElementById('dropdownCategory')
+  chooseCategory.innerHTML = `
+  <span onclick="showCategory()" class="spanCategory">${category[1]}</span>
+  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+   document.getElementById('categories').classList.add('d-none')
+   choosenCategory = true
+   clickCount = 0
+   document.getElementById('dropDownImg').classList.add('dropDownImg')
+}
+
+
+
+
+function hideCategory(){
+  document.getElementById('categories').classList.add('d-none')
+  clickCount = 0
+}
+
+let clickCount = 0
+document.getElementById("dropdownCategory").addEventListener("click", function() {
+  clickCount++;
+  if (clickCount % 2 === 1) {
+      showCategory();
+  } else {
+      hideCategory();
+  }
+});
+
+
+choosenCategory = false
+let category = ["User Task", "Technical task"]
+let contacts = ["Biene Maya", "Vladimir Putin", "Ella Bella"]
+
+
+function handleClickOutside(event) {
+  const container = document.getElementById('dropdownCategory');
+  if (!container.contains(event.target)) {
+      console.log("Clicked outside the container");
+      hideCategory()
+  }
+}
+document.addEventListener('click', handleClickOutside)
