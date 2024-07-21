@@ -209,7 +209,9 @@ select:hover{
 
 .spanHover{
   background-color: white;
-  padding: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  padding-left: 10px;
   border-radius: 10px;
   width: 100%;
 }
@@ -222,7 +224,70 @@ select:hover{
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  background-color: white;
+  margin-top: -20px;
+ 
+  
+ 
 }
+#categories{
+  position: absolute;
+  z-index: 44;
+  top: 620px;
+  width: 440px;
+  background-color: white;
+  
+}
+
+#contacts{
+  height: 150px;
+  overflow-y: scroll;
+}
+
+
+.contactsOpen{
+  display: flex;
+  gap:20px;
+  padding: 4px 10px;
+  background-color: white;
+  border-radius: 10px;
+  border: 0.5px solid white
+}
+
+.contactsOpen:hover{
+  background-color: var(--gray);
+}
+
+.contactsOpen:hover img{
+  content: url('/assets/img/png/whiteBox.png');
+}
+.contactName{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
+}
+.contactName input{
+  width: 30px;
+  justify-self: flex-end;
+}
+
+.contactInitials{
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  display: flex;
+    border-radius: 100%;
+    background-color: gray;
+    align-items: center;
+    justify-content: center;
+    border: 1px white solid;
+}
+
+
+
+
 
 
 .d-none{

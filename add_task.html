@@ -12,7 +12,7 @@
 
   <script src="js/include.js"></script>
 </head>
-<body onload="handleClick(2)">
+<body onload="handleClick(2);  assignColors()">
   <div class="d-flex">
     <div w3-include-html="./Templates/sidebar.html"></div>
     <div>
@@ -38,6 +38,7 @@
                 <span class="spanCategory" onclick="showContacts()">Select Contacts to assign</span>
                 <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
               </div>
+              <div id="contacts"></div>
             </div>
           </div>
           <div class="separator"></div>
