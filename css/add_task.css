@@ -319,3 +319,18 @@ select:hover{
   border-radius: 10px;
   border: 0.5px solid var(--border);
 }
+
+.error-placeholder::placeholder {
+  color: red;
+}
+
+
+#newSubtasks{
+  width: 440px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 80px;
+  max-height: 80px;
+  overflow-y: scroll;
+}
