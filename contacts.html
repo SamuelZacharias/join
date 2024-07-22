@@ -93,14 +93,37 @@
           />
           <div class="input-fields-contacts">
             <input class="input-name" type="text" placeholder="Name" />
-            <input class="input-email" type="text" placeholder="Email"/>
-            <input class="input-phone" type="text" placeholder="Phone"/>
+            <input class="input-email" type="text" placeholder="Email" />
+            <input class="input-phone" type="text" placeholder="Phone" />
             <div class="button-contacts">
-              <button class="button-delete">Delete</button>
-              <button class="button-save">Save <img class="check-icon-buton" src="./assets/img/png/check.png" alt="check"></button>
+              <button onclick="closeDialog()" class="button-cancel">
+                Cancel
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    class="close-icon-button"
+                    d="M7.06917 7.00008L12.3122 12.2431M1.82617 12.2431L7.06917 7.00008L1.82617 12.2431ZM12.3122 1.75708L7.06817 7.00008L12.3122 1.75708ZM7.06817 7.00008L1.82617 1.75708L7.06817 7.00008Z"
+                    stroke="#2A3647"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button class="button-create">
+                Create contact
+                <img
+                  class="check-icon-button"
+                  src="./assets/img/png/check.png"
+                  alt="check"
+                />
+              </button>
             </div>
           </div>
-          
         </div>
       </div>
     </dialog>
