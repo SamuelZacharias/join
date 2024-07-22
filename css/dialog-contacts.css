@@ -28,11 +28,11 @@ dialog {
 }
 
 .dialog-right {
-    width: 745px;
-    display: flex;
-    border-radius: 30px;
-    align-items: center;
-    justify-content: center;
+  width: 745px;
+  display: flex;
+  border-radius: 30px;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .logo-dialog {
@@ -59,28 +59,104 @@ h2 {
   border-radius: 9px;
 }
 
-.d-flex{
-    display: flex;
+.d-flex {
+  display: flex;
 }
 
-.unknown-user{
-    width: 120px;
-    height: 120px;
+.unknown-user {
+  width: 120px;
+  height: 120px;
 }
 
-.close-cross{
-    position: absolute;
-    top: 45px;
-    right: 45px;
-    width: 13.15px;
-    height: 13.15px;
+.close-cross {
+  position: absolute;
+  top: 45px;
+  right: 45px;
+  width: 13.15px;
+  height: 13.15px;
 }
 
-.close-cross:hover{
-    cursor: pointer;
+.close-cross:hover {
+  cursor: pointer;
 }
 
-.dialog-content-right{
-    display: flex;
-    flex-direction: column;
+.dialog-content-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-fields-contacts {
+  height: 215px;
+  width: 422px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.input-name {
+  background-size: 24px;
+  background-position: 387px 12px;
+  background-repeat: no-repeat;
+  background-image: url(../assets/img/png/person.png);
+}
+
+.input-email {
+  background-size: 24px;
+  background-position: 387px 12px;
+  background-repeat: no-repeat;
+  background-image: url(../assets/img/png/mail.png);
+}
+
+.input-phone {
+  background-size: 24px;
+  background-position: 387px 12px;
+  background-repeat: no-repeat;
+  background-image: url(../assets/img/png/call.png);
+}
+
+::placeholder {
+  color: #d1d1d1;
+}
+
+input[type="text"] {
+  font-size: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding: 13px 21px 13px 21px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border: 2px solid #29abe2;
+}
+
+.button-contacts{
+  display: flex;
+  width: 249px;
+  height: 57px;
+  gap: 10px;
+}
+
+button{
+  font-size: 21px;
+  width: 113px;
+  height: 55px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 15px 24px 15px 24px;
+  
+}
+
+.check-icon-buton{
+  width: 24px;
+  height: 24px;
+}
+
+.button-delete{
+  background-color: white;
+}
+
+.button-save{
+  display: flex;
 }

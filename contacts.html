@@ -85,18 +85,29 @@
           alt=""
         />
         <div class="dialog-content-right">
-          <img onclick="closeDialog()" class="close-cross" src="./assets/img/png/close.png" alt="" />
-
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <div>
-            <button></button>
-            <button></button>
+          <img
+            onclick="closeDialog()"
+            class="close-cross"
+            src="./assets/img/png/close.png"
+            alt=""
+          />
+          <div class="input-fields-contacts">
+            <input class="input-name" type="text" placeholder="Name" />
+            <input class="input-email" type="text" placeholder="Email"/>
+            <input class="input-phone" type="text" placeholder="Phone"/>
+            <div class="button-contacts">
+              <button class="button-delete">Delete</button>
+              <button class="button-save">Save <img class="check-icon-buton" src="./assets/img/png/check.png" alt="check"></button>
+            </div>
           </div>
+          
         </div>
       </div>
     </dialog>
-    <div id="grey-background" class="grey-background hidden"></div>
+    <div
+      onclick="closeDialog()"
+      id="grey-background"
+      class="grey-background hidden"
+    ></div>
   </body>
 </html>
