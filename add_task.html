@@ -12,7 +12,7 @@
 
   <script src="js/include.js"></script>
 </head>
-<body onload="handleClick(2);  assignColors();">
+<body onload="handleClick(2);assignColors(); setMinDate()">
   <div class="d-flex">
     <div w3-include-html="./Templates/sidebar.html"></div>
     <div>
@@ -46,7 +46,7 @@
           <div class="formLeft">
             <div class="eachInput">
               <span>Due date <b style="color: red">*</b></span>
-              <p class="inputContainer"><input required type="date" /></p>
+              <p class="inputContainer"><input required type="date" id="dateInput"/></p>
             </div>
             <div class="eachInput">
               <span>Prio</span>

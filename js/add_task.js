@@ -84,6 +84,20 @@ function validateForm() {
         parentP.classList.add('invalid');
       }
     }
+
+    // Validate date input
+    if (input.type === 'date') {
+      const selectedDate = new Date(input.value);
+      const today = new Date();
+      // Clear time part of today
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        valid = false;
+        if (parentP) {
+          parentP.classList.add('invalid');
+        }
+      }
+    }
   });
 
   // Validate category
@@ -418,3 +432,17 @@ function deleteSubtask(index) {
   showSubtasks();
 }
 
+
+
+
+
+function setMinDate() {
+  const dateInput = document.getElementById('dateInput');
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const dd = String(today.getDate()).padStart(2, '0');
+  const todayDate = `${yyyy}-${mm}-${dd}`;
+
+  dateInput.min = todayDate;
+}
