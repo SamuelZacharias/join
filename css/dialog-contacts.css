@@ -1,16 +1,21 @@
-dialog {
+#dialog-contacts {
   font-family: "inter", Arial, sans-serif;
   z-index: 99;
-  position: absolute;
+  position: fixed;
   width: 1212px;
   height: 592px;
   text-align: center;
-  transform: translate(-50%, -50%);
   top: 50%;
-  left: 50%;
+  left: 150%; /* Start off-screen */
+  transform: translate(-50%, -50%);
   border-radius: 33px;
   padding: 0;
   border: 0px;
+  transition: left 0.4s ease-out; /* Transition for the sliding effect */
+}
+
+#dialog-contacts.dialog-open {
+  left: 50%;
 }
 
 .dialog-left {
