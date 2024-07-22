@@ -198,12 +198,12 @@ select:hover{
 }
 .inputContainer.invalid {
   border: 2px solid red;
-  padding: 12px 21px; /* Adjust padding if necessary */
-  border-radius: 10px; /* Optional: Add rounded corners */
+  padding: 12px 21px;
+  border-radius: 10px; 
 }
 .categoryDropDown.invalid {
   border: 2px solid red;
-  border-radius: 10px; /* Optional: Add rounded corners */
+  border-radius: 10px; 
 }
 
 
@@ -286,14 +286,14 @@ select:hover{
     justify-content: center;
     border: 1px white solid;
     margin-left: -8px;
+    font-size: 16px;
 }
 
 
 
 .selected {
-  border: 0.5px solid white; /* Change to your preferred highlight style */
-  background-color: var(--gray); /* Optional: lighter background */
-  color: white;
+  border: 0.5px solid white; 
+  background-color: var(--gray); 
 }
 .selected:hover{
   background-color: #091931;
@@ -310,4 +310,12 @@ select:hover{
 #assignedContacts{
   display: flex;
   
+}
+
+.addSubtask{
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
 }

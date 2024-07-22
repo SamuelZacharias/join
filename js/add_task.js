@@ -305,3 +305,18 @@ document.addEventListener('click', function(event) {
     contactsContainer.classList.add('d-none');
   }
 });
+
+
+function writeSubtask(){
+  let subtaskArea = document.getElementById('subtaskContainer')
+  subtaskArea.innerHTML = `
+    <div class="addSubtask">
+      <input type="text" name="" id="subtask" />
+      <div class="d-flex">
+      <img src="assets/img/png/subtaskX.png" onclick="writeSubtask()" alt="" />
+      <img src="assets/img/png/subtaskDone.png" alt="" />
+      </div>
+    </div>
+  
+  `;
+}
