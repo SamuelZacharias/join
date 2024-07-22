@@ -446,3 +446,85 @@ function setMinDate() {
 
   dateInput.min = todayDate;
 }
+
+
+function collectData() {
+  console.log("Collect Data Function Called"); // Debugging line
+
+  const form = document.getElementById('taskForm');
+  if (!form) {
+    console.error("Form not found");
+    return;
+  }
+
+  const title = form.querySelector('input[type="text"]').value;
+  const description = form.querySelector('textarea').value;
+  const dueDate = form.querySelector('input[type="date"]').value;
+  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
+
+  const assignedContacts = selectedContacts.map(contact => `${contact.firstname} ${contact.lastname}`);
+  const subtasks = subtaskInfos;
+
+  let priority = '';
+  switch (activeButton) {
+    case 1:
+      priority = 'Urgent';
+      break;
+    case 2:
+      priority = 'Medium';
+      break;
+    case 3:
+      priority = 'Low';
+      break;
+    default:
+      console.error("Invalid activeButton value");
+      return;
+  }
+
+  const taskData = {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    category: categoryElement,
+    assignedContacts: assignedContacts,
+    subtasks: subtasks
+  };
+
+  console.log("Task Data:", taskData); // Debugging line
+
+  // Assuming you have Firebase set up, you can now send taskData to Firebase
+  // Example:
+  // firebase.firestore().collection('tasks').add(taskData)
+  //   .then(() => {
+  //     console.log('Task added successfully');
+  //   })
+  //   .catch(error => {
+  //     console.error('Error adding task: ', error);
+  //   });
+}
+
+document.querySelector('.createButton').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent the form from immediately submitting
+  
+  console.log("Create Button Clicked"); // Debugging line
+
+  // Validate the form
+  if (validateForm()) {
+    // If the form is valid, collect data
+    collectData(); 
+
+    // Delay form submission by 10 seconds (10000 milliseconds)
+    setTimeout(() => {
+      // Check if form is still valid before submitting
+      if (validateForm()) {
+        document.getElementById('taskForm').submit(); // Submit the form 
+        console.log('validationOkay');
+      } else {
+        console.log("Form validation failed during delay");
+      }
+    }, 4000); // 10 seconds delay
+  } else {
+    console.log("Form validation failed");
+  }
+});
