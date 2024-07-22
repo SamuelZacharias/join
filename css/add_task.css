@@ -242,6 +242,9 @@ select:hover{
 #contacts{
   height: 150px;
   overflow-y: scroll;
+  position: absolute;
+  width: 440px;
+  margin-top: 80px;
 }
 
 
@@ -255,12 +258,12 @@ select:hover{
 }
 
 .contactsOpen:hover{
-  background-color: var(--gray);
+  background-color: var(--background);
+  cursor: pointer;
+  border: 1px solid var(--border);
 }
 
-.contactsOpen:hover img{
-  content: url('/assets/img/png/whiteBox.png');
-}
+
 .contactName{
   display: flex;
   justify-content: space-between;
@@ -279,17 +282,32 @@ select:hover{
   padding: 6px;
   display: flex;
     border-radius: 100%;
-    background-color: gray;
     align-items: center;
     justify-content: center;
     border: 1px white solid;
+    margin-left: -8px;
 }
 
 
 
-
-
+.selected {
+  border: 0.5px solid white; /* Change to your preferred highlight style */
+  background-color: var(--gray); /* Optional: lighter background */
+  color: white;
+}
+.selected:hover{
+  background-color: #091931;
+}
 
 .d-none{
   display: none;
+}
+
+.selected img{
+  content: url('/assets/img/png/whiteBox.png');
+}
+
+#assignedContacts{
+  display: flex;
+  
 }

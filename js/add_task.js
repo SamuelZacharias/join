@@ -208,14 +208,21 @@ function assignColors() {
   }
 }
 
+let selectedContacts = [];
+
 function showContacts() {
   let contactsContainer = document.getElementById('contacts');
   contactsContainer.innerHTML = ``;
   for (let x = 0; x < contacts.firstname.length; x++) {
     let fullName = contacts.firstname[x] + " " + contacts.lastname[x];
     let color = contactInitialColors[fullName];
+
+    // Check if the contact is already selected
+    let isSelected = selectedContacts.some(c => c.firstname === contacts.firstname[x] && c.lastname === contacts.lastname[x]);
+    let selectedClass = isSelected ? 'selected' : '';
+
     contactsContainer.innerHTML += `
-      <div class="contactsOpen">
+      <div class="contactsOpen ${selectedClass}" data-index="${x}">
         <div class="contactInitials" style="background-color: ${color};">
           ${contacts.firstname[x].charAt(0)}${contacts.lastname[x].charAt(0)}
         </div>
@@ -226,4 +233,75 @@ function showContacts() {
       </div>
     `;
   }
+
+  // Add event listeners for selecting/unselecting contacts
+  let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
+  for (let contactElement of contactElements) {
+    contactElement.addEventListener('click', function() {
+      let index = this.getAttribute('data-index');
+      let contact = {
+        firstname: contacts.firstname[index],
+        lastname: contacts.lastname[index]
+      };
+
+      // Check if the contact is already selected
+      let selectedIndex = selectedContacts.findIndex(c => c.firstname === contact.firstname && c.lastname === contact.lastname);
+      if (selectedIndex === -1) {
+        // If not selected, add to selectedContacts
+        selectedContacts.push(contact);
+      } else {
+        // If already selected, remove from selectedContacts
+        selectedContacts.splice(selectedIndex, 1);
+      }
+
+      // Toggle the "selected" class for visual feedback
+      this.classList.toggle('selected');
+      showAssignedContacts();
+    });
+  }
 }
+
+function toggleContacts() {
+  let contactsContainer = document.getElementById('contacts');
+  if (contactsContainer.classList.contains('d-none')) {
+    contactsContainer.classList.remove('d-none');
+    showContacts();
+  } else {
+    contactsContainer.classList.add('d-none');
+  }
+}
+
+function showAssignedContacts() {
+  let assignedContactsContainer = document.getElementById('assignedContacts');
+  assignedContactsContainer.innerHTML = ``;
+  let maxContactsToShow = 5;
+
+  for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
+    let fullName = selectedContacts[a].firstname + " " + selectedContacts[a].lastname;
+    let color = contactInitialColors[fullName];
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials" style="background-color: ${color};">
+        ${selectedContacts[a].firstname.charAt(0)}${selectedContacts[a].lastname.charAt(0)}
+      </div>
+    `;
+  }
+
+  if (selectedContacts.length > maxContactsToShow) {
+    let moreCount = selectedContacts.length - maxContactsToShow;
+    // Set a specific color for the "+X more" indicator
+    let moreContactsColor = "#999999"; // Choose a suitable color
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
+        +${moreCount} 
+      </div>
+    `;
+  }
+}
+
+document.addEventListener('click', function(event) {
+  let contactsContainer = document.getElementById('contacts');
+  let dropdownContacts = document.getElementById('dropdownContacts');
+  if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
+    contactsContainer.classList.add('d-none');
+  }
+});
