@@ -138,6 +138,8 @@ function chooseTechnical() {
 }
 
 function hideCategory() {
+  document.getElementById('dropDownImg').classList.add('dropDownImg');
+  document.getElementById('dropDownImg').classList.remove('dropUpImg')
   document.getElementById('categories').classList.add('d-none');
   clickCount = 0;
 }
@@ -223,7 +225,7 @@ function showContacts() {
 
     contactsContainer.innerHTML += `
       <div class="contactsOpen ${selectedClass}" data-index="${x}">
-        <div class="contactInitials" style="background-color: ${color};">
+        <div class="contactInitials" style="background-color: ${color}; ">
           ${contacts.firstname[x].charAt(0)}${contacts.lastname[x].charAt(0)}
         </div>
         <div class="contactName">
@@ -280,7 +282,7 @@ function showAssignedContacts() {
     let fullName = selectedContacts[a].firstname + " " + selectedContacts[a].lastname;
     let color = contactInitialColors[fullName];
     assignedContactsContainer.innerHTML += `
-      <div class="contactInitials" style="background-color: ${color};">
+      <div class="contactInitials" style="background-color: ${color}; color:white;">
         ${selectedContacts[a].firstname.charAt(0)}${selectedContacts[a].lastname.charAt(0)}
       </div>
     `;
@@ -340,6 +342,7 @@ function addSubtask(){
 
   subtaskInfos.push(subtaskInfo);
   showSubtasks();
+  subtaskInput.value= ``;
 }
 
 function showSubtasks(){
