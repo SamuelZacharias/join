@@ -10,7 +10,6 @@ body {
   visibility: hidden;
 }
 
-
 .d-flex {
   display: flex;
 }
@@ -48,9 +47,9 @@ body {
   border: 0px;
 }
 
-.add-contact:hover{
+.add-contact:hover {
   cursor: pointer;
-  background-color: #29ABE2;
+  background-color: #29abe2;
   box-shadow: 0px 4px 4px 0px #0000001a;
 }
 
@@ -59,7 +58,6 @@ body {
   box-sizing: border-box;
   width: 352px;
   padding: 17px 36px 17px 36px;
-  
 }
 
 .contacts {
@@ -73,8 +71,13 @@ body {
   border-radius: 10px;
 }
 
-.contacts:hover{
-  background-color: lightgrey;
+.contacts:hover {
+  cursor: pointer;
+  background-color: #f4f4f4a6;
+}
+
+.contact:active {
+  background-color: #2a3647;
 }
 
 .letter-circle {
@@ -96,16 +99,16 @@ body {
   flex-direction: column;
 }
 
-.contact-email{
-  color: #007CEE;
+.contact-email {
+  color: #007cee;
 }
 
-.contact-seperator{
+.contact-seperator {
   margin: 8px 0px 8px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.text-box{
+.text-box {
   padding-top: 110px;
   padding-left: 55px;
   display: flex;
@@ -114,18 +117,18 @@ body {
   height: 110px;
 }
 
-h1{
+h1 {
   font-size: 61px;
   font-weight: 700;
 }
 
-.text-seperator{
+.text-seperator {
   height: 59px;
   width: 3px;
-  background-color: #29ABE2;
+  background-color: #29abe2;
 }
 
-.info-text{
+.info-text {
   font-size: 27px;
 }
 
@@ -141,4 +144,70 @@ h1{
 
 .hidden {
   display: none;
+}
+
+.contacts-info {
+  display: flex;
+  padding-left: 55px;
+  gap: 54px;
+  align-items: center;
+}
+
+.big-letter-circle {
+  color: white;
+  background-color: #ff7a00;
+  font-size: 47px;
+  font-weight: 500;
+  display: flex;
+  border: 3px solid;
+  border-radius: 90px;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-size: 47px;
+  font-weight: 500;
+  line-height: 56.4px;
+  text-align: left;
+  color: black;
+  margin: 0px;
+}
+
+.contact-box-name {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 287px;
+  height: 88px;
+}
+
+.contact-box-edit-delete{
+  display: flex;
+  width: 159px;
+  height: 24px;
+  justify-content: space-between;
+}
+
+.edit-link{
+  display: flex;
+  width: 62px;
+  height: 24px;
+  gap: 13px;
+  font-size: 16px;
+}
+
+.delete-link{
+  display: flex;
+  width: 81px;
+  height: 24px;
+  gap: 13px;
+  font-size: 16px;
+}
+
+.edit-link:hover{
+  cursor: pointer;
+  color: #29ABE2;
 }
