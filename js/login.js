@@ -65,10 +65,5 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('email').value = '';
         document.getElementById('repeatPassword').value = '';
     }
-
-    // Event listener for the guest login button
-    document.querySelector('.guestLogIn').addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent form submission
-        alert('Guest login not implemented.');
-    });
+    
 });

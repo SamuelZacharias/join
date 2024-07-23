@@ -98,17 +98,20 @@ h1 {
 .guestLogIn {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: white;
   border-style: solid;
   border-color: #2A3647;
   border-width: 1px;
   height: 48px;
-  padding: 15px 24px;
+  text-align: center;
   border-radius: 8px;
   font-size: 21px;
-  width: 170px;
   color: #2A3647;
+  box-sizing: border-box;
+  width: 190px;
 }
+
 
 .guestLogIn:hover {
   border-color: var(--blue);
@@ -238,7 +241,7 @@ a {
   width: 80%;
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .check input:hover {
@@ -300,4 +303,9 @@ input:focus{
 }
 input{
   height: 140%;
+}
+
+
+.buttonContainer a{
+  color: black;
 }
