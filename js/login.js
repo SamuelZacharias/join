@@ -19,7 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Email exists, proceed with login
                         if (data.password[emailIndex] === password) {
                             alert('Successfully logged in.');
+
+                            // Store the logged-in user's name in localStorage
+                            localStorage.setItem('loggedInUserName', data.name[emailIndex]);
+
                             // Redirect to another page or perform other actions
+                            window.location.href = 'summary.html'; // Example redirection
                         } else {
                             alert('Incorrect password.');
                         }
@@ -65,5 +70,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('email').value = '';
         document.getElementById('repeatPassword').value = '';
     }
-    
 });
