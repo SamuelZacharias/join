@@ -146,7 +146,7 @@ h1 {
   display: none;
 }
 
-.contacts-info{
+.contacts-info {
   display: flex;
   width: 461px;
   height: 364px;
@@ -245,7 +245,7 @@ h3 {
   fill: #29abe2;
 }
 
-.contacts-information{
+.contacts-information {
   font-size: 20px;
   display: flex;
   width: 207px;
@@ -254,10 +254,26 @@ h3 {
   align-items: center;
 }
 
-.contacts-info-email-phone{
+.contacts-info-email-phone {
   display: flex;
   width: 140px;
   height: 128px;
   gap: 22px;
+  flex-direction: column;
+}
+
+.contacts-info-email {
+  display: flex;
+  width: 140px;
+  height: 53px;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.contacts-info-phone {
+  display: flex;
+  width: 140px;
+  height: 53px;
+  gap: 15px;
   flex-direction: column;
 }

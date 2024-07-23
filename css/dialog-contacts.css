@@ -18,6 +18,26 @@
   left: 50%;
 }
 
+#dialog-edit{
+  font-family: "inter", Arial, sans-serif;
+  z-index: 99;
+  position: fixed;
+  width: 1212px;
+  height: 592px;
+  text-align: center;
+  top: 50%;
+  left: 150%; /* Start off-screen */
+  transform: translate(-50%, -50%);
+  border-radius: 33px;
+  padding: 0;
+  border: 0px;
+  transition: left 0.4s ease-out; /* Transition for the sliding effect */
+}
+
+#dialog-edit.dialog-open {
+  left: 50%;
+}
+
 .dialog-left {
   display: flex;
   width: 467px;
@@ -193,10 +213,54 @@ button {
   display: flex;
   gap: 4px;
   justify-content: space-between;
+  align-items: center;
 }
 
-.button-create:hover{
+.button-create:hover {
   cursor: pointer;
   background-color: #29abe2;
   box-shadow: 0px 8px 5px 0px #0000001a;
+}
+
+.button-save {
+  font-size: 21px;
+  font-weight: 700;
+  width: 111px;
+  color: white;
+  background-color: #2a3647;
+  display: flex;
+  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-save:hover {
+  cursor: pointer;
+  background-color: #29abe2;
+  box-shadow: 0px 8px 5px 0px #0000001a;
+}
+
+.button-delete-save {
+  display: flex;
+  width: 249px;
+  height: 57px;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.button-delete {
+  font-size: 20px;
+  font-weight: 400;
+  width: 113px;
+  gap: 4px;
+  display: flex;
+  color: #2a3647;
+  background-color: white;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button-delete:hover{
+  cursor: pointer;
+  color: #29abe2;
 }

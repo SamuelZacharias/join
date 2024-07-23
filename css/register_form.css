@@ -34,9 +34,7 @@ body {
   height: 100vh;
   font-family: "inter", Arial, sans-serif;
 }
-body {
-  visibility: hidden;
-}
+
 
 .logo {
   width: 100%;
