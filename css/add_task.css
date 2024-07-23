@@ -1,4 +1,8 @@
-/* General Styles */
+body{
+  visibility: hidden;
+}
+
+
 .addTask {
   background-color: var(--background);
   display: flex;
