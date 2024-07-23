@@ -22,7 +22,7 @@
       ></div>
       <section class="addTask">
         <h1>Add Task</h1>
-        <form id="taskForm" >
+        <form id="taskForm" action="board.html" >
           <div class="formLeft">
             <div class="eachInput">
               <span>Title<b style="color: red">*</b></span>
@@ -83,11 +83,11 @@
         <section class="buttonsSection d-flex">
           <span><b style="color: red">*</b> This field is Required</span>
           <div class="buttonArea">
-            <button class="buttonCenter clear">
+            <button id="clearButton" class="buttonCenter clear">
               Clear
               <img src="assets/img/png/iconoir_cancel.png" alt="" />
             </button>
-            <button type="submit" onclick="submitForm(event); collectData()" class="buttonCenter createButton">
+            <button type="submit" class="buttonCenter createButton">
               Create Task <img src="assets/img/png/check.png" alt="" />
             </button>
           </div>
