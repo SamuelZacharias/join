@@ -69,13 +69,13 @@ function validateForm() {
   const inputs = form.querySelectorAll('input, textarea, select');
   let valid = true;
 
-  // Reset invalid class
+  
   document.querySelectorAll('.inputContainer').forEach(p => {
     p.classList.remove('invalid');
   });
   document.getElementById('dropdownCategory').classList.remove('invalid');
 
-  // Validate required inputs
+  
   inputs.forEach(input => {
     const parentP = input.closest('.inputContainer');
     if (input.required && !input.value.trim()) {
@@ -85,11 +85,11 @@ function validateForm() {
       }
     }
 
-    // Validate date input
+    
     if (input.type === 'date') {
       const selectedDate = new Date(input.value);
       const today = new Date();
-      // Clear time part of today
+      
       today.setHours(0, 0, 0, 0);
       if (selectedDate < today) {
         valid = false;
@@ -100,13 +100,14 @@ function validateForm() {
     }
   });
 
-  // Validate category
+ 
   if (!choosenCategory) {
     valid = false;
     document.getElementById('dropdownCategory').classList.add('invalid');
   }
-
+  
   return valid;
+  
 }
 
 function showCategory() {
@@ -133,7 +134,7 @@ function chooseUserStory() {
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
 
-  // Remove invalid class when a category is chosen
+  
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
 
@@ -147,7 +148,7 @@ function chooseTechnical() {
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
 
-  // Remove invalid class when a category is chosen
+  
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
 
@@ -175,7 +176,7 @@ function handleClickOutside(event) {
 }
 document.addEventListener('click', handleClickOutside);
 
-// Add event listeners to inputs for removing 'invalid' class on input change
+
 document.querySelectorAll('input, textarea').forEach(input => {
   input.addEventListener('input', function() {
     const parentP = input.closest('.inputContainer');
@@ -185,7 +186,7 @@ document.querySelectorAll('input, textarea').forEach(input => {
   });
 });
 
-// Add event listener for category dropdown to remove invalid class when a valid category is chosen
+
 document.getElementById('dropdownCategory').addEventListener('click', function() {
   if (choosenCategory) {
     document.getElementById('dropdownCategory').classList.remove('invalid');
@@ -213,10 +214,10 @@ let contactColors = [
   "#FF7A00"
 ];
 
-// Create an object to store the colors for each contact
+
 let contactInitialColors = {};
 
-// Precompute and store the colors for each contact
+
 function assignColors() {
   for (let i = 0; i < contacts.firstname.length; i++) {
     let fullName = contacts.firstname[i] + " " + contacts.lastname[i];
@@ -233,7 +234,7 @@ function showContacts() {
     let fullName = contacts.firstname[x] + " " + contacts.lastname[x];
     let color = contactInitialColors[fullName];
 
-    // Check if the contact is already selected
+   
     let isSelected = selectedContacts.some(c => c.firstname === contacts.firstname[x] && c.lastname === contacts.lastname[x]);
     let selectedClass = isSelected ? 'selected' : '';
 
@@ -250,7 +251,7 @@ function showContacts() {
     `;
   }
 
-  // Add event listeners for selecting/unselecting contacts
+  
   let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
   for (let contactElement of contactElements) {
     contactElement.addEventListener('click', function() {
@@ -260,17 +261,17 @@ function showContacts() {
         lastname: contacts.lastname[index]
       };
 
-      // Check if the contact is already selected
+      
       let selectedIndex = selectedContacts.findIndex(c => c.firstname === contact.firstname && c.lastname === contact.lastname);
       if (selectedIndex === -1) {
-        // If not selected, add to selectedContacts
+        
         selectedContacts.push(contact);
       } else {
-        // If already selected, remove from selectedContacts
+        
         selectedContacts.splice(selectedIndex, 1);
       }
 
-      // Toggle the "selected" class for visual feedback
+      
       this.classList.toggle('selected');
       showAssignedContacts();
     });
@@ -304,8 +305,8 @@ function showAssignedContacts() {
 
   if (selectedContacts.length > maxContactsToShow) {
     let moreCount = selectedContacts.length - maxContactsToShow;
-    // Set a specific color for the "+X more" indicator
-    let moreContactsColor = "#999999"; // Choose a suitable color
+    
+    let moreContactsColor = "#999999"; 
     assignedContactsContainer.innerHTML += `
       <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
         +${moreCount} 
@@ -332,7 +333,7 @@ function writeSubtask(){
       <input type="text" name="" id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
       <div class="d-flex">
         <img src="assets/img/png/subtaskX.png" onclick="writeSubtask()" alt="" />
-        <img src="assets/img/png/subtaskDone.png" onclick="addSubtask()" alt="" />
+        <img src="assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
       </div>
     </div>
   `;
@@ -343,20 +344,25 @@ function addSubtask(){
   let subtaskInfo = subtaskInput.value;
 
   if (subtaskInfo.length < 3) {
-    subtaskInput.value = ''; // Clear the input
-    subtaskInput.placeholder = 'Min 3 characters needed'; // Set the error message as placeholder
-    subtaskInput.style.borderColor = 'red'; // Change border color to red
-    subtaskInput.classList.add('error-placeholder'); // Add a class to change placeholder text color
-    return; // Exit the function if validation fails
+    subtaskInput.value = ''; 
+    subtaskInput.placeholder = 'Min 3 characters needed'; 
+    subtaskInput.style.borderColor = 'red'; 
+    subtaskInput.classList.add('error-placeholder'); 
+    return; 
   } else {
-    subtaskInput.placeholder = 'Enter subtask'; // Reset the placeholder
-    subtaskInput.style.borderColor = ''; // Reset border color
-    subtaskInput.classList.remove('error-placeholder'); // Remove the error placeholder class
+    subtaskInput.placeholder = 'Enter subtask'; 
+    subtaskInput.style.borderColor = ''; 
+    subtaskInput.classList.remove('error-placeholder'); 
   }
 
   subtaskInfos.push(subtaskInfo);
   showSubtasks();
-  subtaskInput.value= ``;
+  document.getElementById('subtaskContainer').innerHTML = `
+    <p>
+                  <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
+                  <img src="assets/img/png/Subtasks icons11.png" alt="" />
+                </p>
+  `;
 }
 
 function showSubtasks(){
@@ -412,15 +418,15 @@ function saveSubtask(index) {
   let editedSubtask = editInput.value;
 
   if (editedSubtask.length < 3) {
-    editInput.value = ''; // Clear the input
-    editInput.placeholder = 'Min 3 characters needed'; // Set the error message as placeholder
-    editInput.style.borderColor = 'red'; // Change border color to red
-    editInput.classList.add('error-placeholder'); // Add a class to change placeholder text color
-    return; // Exit the function if validation fails
+    editInput.value = ''; 
+    editInput.placeholder = 'Min 3 characters needed'; 
+    editInput.style.borderColor = 'red'; 
+    editInput.classList.add('error-placeholder'); 
+    return; 
   } else {
-    editInput.placeholder = ''; // Reset the placeholder
-    editInput.style.borderColor = ''; // Reset border color
-    editInput.classList.remove('error-placeholder'); // Remove the error placeholder class
+    editInput.placeholder = ''; 
+    editInput.style.borderColor = ''; 
+    editInput.classList.remove('error-placeholder'); 
   }
 
   subtaskInfos[index] = editedSubtask;
@@ -440,7 +446,7 @@ function setMinDate() {
   const dateInput = document.getElementById('dateInput');
   const today = new Date();
   const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
   const todayDate = `${yyyy}-${mm}-${dd}`;
 
@@ -449,11 +455,8 @@ function setMinDate() {
 
 
 function collectData() {
-  console.log("Collect Data Function Called"); // Debugging line
-
   const form = document.getElementById('taskForm');
   if (!form) {
-    console.error("Form not found");
     return;
   }
 
@@ -491,40 +494,82 @@ function collectData() {
     subtasks: subtasks
   };
 
-  console.log("Task Data:", taskData); // Debugging line
-
-  // Assuming you have Firebase set up, you can now send taskData to Firebase
-  // Example:
-  // firebase.firestore().collection('tasks').add(taskData)
-  //   .then(() => {
-  //     console.log('Task added successfully');
-  //   })
-  //   .catch(error => {
-  //     console.error('Error adding task: ', error);
-  //   });
+  tasksArray.push(taskData)
+  
 }
 
-document.querySelector('.createButton').addEventListener('click', function(event) {
-  event.preventDefault(); // Prevent the form from immediately submitting
-  
-  console.log("Create Button Clicked"); // Debugging line
 
-  // Validate the form
+document.querySelector('.createButton').addEventListener('click', async function(event) {
+  event.preventDefault(); 
+
   if (validateForm()) {
-    // If the form is valid, collect data
     collectData(); 
 
-    // Delay form submission by 10 seconds (10000 milliseconds)
-    setTimeout(() => {
-      // Check if form is still valid before submitting
-      if (validateForm()) {
-        document.getElementById('taskForm').submit(); // Submit the form 
-        console.log('validationOkay');
-      } else {
-        console.log("Form validation failed during delay");
-      }
-    }, 4000); // 10 seconds delay
-  } else {
-    console.log("Form validation failed");
-  }
+    try {
+      await sendTaskDataToFirebase(); 
+
+     
+      setTimeout(() => {
+        document.getElementById('taskForm').submit();
+        window.location.href = 'board.html'; 
+      }, 3000); 
+
+    } catch (error) {
+      console.error('Failed to send task data to Firebase:', error); 
+    }
+  } 
 });
+
+
+
+document.getElementById('clearButton').addEventListener('click', function(event) {
+  event.preventDefault();
+  const form = document.getElementById('taskForm');
+  form.reset();
+  document.getElementById('dropdownCategory').innerHTML = `
+    <span class="spanCategory">Select task category</span>
+    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+  `;
+  document.getElementById('assignedContacts').innerHTML = ``;
+  document.getElementById('newSubtasks').innerHTML = ``;
+  choosenCategory = false;
+  clickCount = 0;
+  selectedContacts = [];
+  subtaskInfos = [];
+  handleClick(2); 
+  document.querySelectorAll('.inputContainer').forEach(p => {
+    p.classList.remove('invalid');
+  });
+  document.getElementById('dropdownCategory').classList.remove('invalid');
+});
+
+
+const BASE_TASKS_URL = ('https://jointasks-default-rtdb.europe-west1.firebasedatabase.app/')
+
+
+let tasksArray = [];
+
+async function sendTaskDataToFirebase() {
+  try {
+    console.log('Saving data to Firebase:', tasksArray);
+
+    
+    let response = await fetch(`${BASE_TASKS_URL}.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tasksArray)
+    });
+
+    console.log('Firebase response status:', response.status);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    let responseAsJson = await response.json();
+    console.log('Data saved to Firebase:', responseAsJson);
+  } catch (error) {
+    console.error('Error saving data to Firebase:', error);
+  }
+}
