@@ -6,3 +6,51 @@ body{
 .d-flex{
     display: flex;
 }
+.padding-r{
+    padding-right: 21px;
+}
+
+h1{
+    margin: 0px;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+h2{
+    margin: 0px;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+h3{
+    margin: 0px;
+}
+
+tr{
+    display: flex;
+}
+
+span{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.content-help{
+    width: 1014px;
+    padding: 110px 0px 0px 94px;
+}
+
+.help-text{
+    display: flex;
+    margin-top: 32px;
+    gap: 24px;
+    flex-direction: column;
+}
+
+.what-is-join{
+    height: 238px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    justify-content: space-between;
+}

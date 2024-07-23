@@ -1,8 +1,21 @@
 body {
   margin: 0px;
-  overflow-y: scroll;
   visibility: hidden;
 }
+
+.content-legal-notice {
+  color:black;
+  width: 1014px;
+  height: 83vh;
+  padding-left: 96px;
+  overflow-y: scroll;
+  padding-top: 96px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 .d-flex {
   display: flex;
@@ -25,7 +38,7 @@ body {
 h1,
 h2,
 h3 {
-  color: #007bff;
+  color: black;
 }
 p,
 li {
@@ -46,16 +59,4 @@ ul li::before {
 }
 .section-title {
   margin-top: 20px;
-}
-
-
-
-.content-legal-notice {
-  overflow-y: scroll;
-  padding-top: 96px;
-  height: calc(100vh - 211px);
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
