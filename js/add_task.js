@@ -357,13 +357,18 @@ function addSubtask(){
 
   subtaskInfos.push(subtaskInfo);
   showSubtasks();
-  document.getElementById('subtaskContainer').innerHTML = `
-    <p>
-                  <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
-                  <img src="assets/img/png/Subtasks icons11.png" alt="" />
-                </p>
-  `;
+  resetSubtask()
 }
+
+function resetSubtask(){
+  document.getElementById('subtaskContainer').innerHTML = `
+  <p>
+                <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
+                <img src="assets/img/png/Subtasks icons11.png" alt="" />
+              </p>
+`;
+}
+
 
 function showSubtasks(){
   let newSubtask = document.getElementById('newSubtasks');
@@ -454,49 +459,7 @@ function setMinDate() {
 }
 
 
-function collectData() {
-  const form = document.getElementById('taskForm');
-  if (!form) {
-    return;
-  }
 
-  const title = form.querySelector('input[type="text"]').value;
-  const description = form.querySelector('textarea').value;
-  const dueDate = form.querySelector('input[type="date"]').value;
-  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
-
-  const assignedContacts = selectedContacts.map(contact => `${contact.firstname} ${contact.lastname}`);
-  const subtasks = subtaskInfos;
-
-  let priority = '';
-  switch (activeButton) {
-    case 1:
-      priority = 'Urgent';
-      break;
-    case 2:
-      priority = 'Medium';
-      break;
-    case 3:
-      priority = 'Low';
-      break;
-    default:
-      console.error("Invalid activeButton value");
-      return;
-  }
-
-  const taskData = {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    category: categoryElement,
-    assignedContacts: assignedContacts,
-    subtasks: subtasks
-  };
-
-  tasksArray.push(taskData)
-  
-}
 
 
 document.querySelector('.createButton').addEventListener('click', async function(event) {
@@ -544,30 +507,109 @@ document.getElementById('clearButton').addEventListener('click', function(event)
 });
 
 
-const BASE_TASKS_URL = ('https://jointasks-default-rtdb.europe-west1.firebasedatabase.app/')
+const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
+// Collect task data
+function collectData() {
+  const form = document.getElementById('taskForm');
+  if (!form) {
+    return;
+  }
 
-let tasksArray = [];
+  const title = form.querySelector('input[type="text"]').value;
+  const description = form.querySelector('textarea').value;
+  const dueDate = form.querySelector('input[type="date"]').value;
+  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
 
-async function sendTaskDataToFirebase() {
+  const assignedContacts = selectedContacts.map(contact => `${contact.firstname} ${contact.lastname}`);
+  const subtasks = subtaskInfos;
+
+  let priority = '';
+  switch (activeButton) {
+    case 1:
+      priority = 'Urgent';
+      break;
+    case 2:
+      priority = 'Medium';
+      break;
+    case 3:
+      priority = 'Low';
+      break;
+    default:
+      console.error("Invalid activeButton value");
+      return;
+  }
+
+  return {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    category: categoryElement,
+    assignedContacts: assignedContacts,
+    subtasks: subtasks
+  };
+}
+
+// Initialize tasks node if it doesn't exist
+async function initializeTasksNode() {
   try {
-    console.log('Saving data to Firebase:', tasksArray);
-
-    
-    let response = await fetch(`${BASE_TASKS_URL}.json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(tasksArray)
-    });
-
-    console.log('Firebase response status:', response.status);
+    const response = await fetch(`${BASE_TASKS_URL}.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    let responseAsJson = await response.json();
+    const existingTasks = await response.json();
+    if (existingTasks === null) {
+      // Initialize the 'tasks' node if it doesn't exist
+      await fetch(BASE_TASKS_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      });
+    }
+  } catch (error) {
+    console.error('Error initializing tasks node:', error);
+  }
+}
+
+// Send task data to Firebase
+async function sendTaskDataToFirebase() {
+  try {
+    await initializeTasksNode(); // Ensure the 'tasks' node exists
+
+    // Fetch existing tasks to determine the next index
+    const response = await fetch(`${BASE_TASKS_URL}.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const existingTasks = await response.json();
+    const nextIndex = existingTasks ? Object.keys(existingTasks).length : 0; // Determine the next index
+
+    // Collect new task data
+    const taskData = collectData();
+    if (!taskData) {
+      console.error("No task data to send");
+      return;
+    }
+
+    // Send the new task with the determined index
+    const taskResponse = await fetch(`${BASE_TASKS_URL}/${nextIndex}.json`, {
+      method: 'PUT', // Use PUT to create a new task at the specific index
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(taskData)
+    });
+
+    if (!taskResponse.ok) {
+      throw new Error(`HTTP error! Status: ${taskResponse.status}`);
+    }
+
+    let responseAsJson = await taskResponse.json();
     console.log('Data saved to Firebase:', responseAsJson);
   } catch (error) {
     console.error('Error saving data to Firebase:', error);
