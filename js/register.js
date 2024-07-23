@@ -56,6 +56,18 @@ function addRegisterInfo(newRegisterInfo) {
   registerInfo.repeatPassword.push(newRegisterInfo.repeatPassword);
 }
 
+// Function to validate the name input
+function validateName(name) {
+  let words = name.trim().split(/\s+/); // Split name into words and trim extra spaces
+  if (words.length !== 2) {
+    document.getElementById('invalidName').classList.add('invalid'); // Add invalid class
+    return false;
+  } else {
+    document.getElementById('invalidName').classList.remove('invalid'); // Remove invalid class
+    return true;
+  }
+}
+
 // Function to handle form submission
 async function handleFormSubmit(event) {
   event.preventDefault(); // Prevent default form submission
@@ -64,6 +76,12 @@ async function handleFormSubmit(event) {
   let registerEmail = document.getElementById('email').value;
   let registerPassword = document.getElementById('password').value;
   let registerRepeatPassword = document.getElementById('repeatPassword').value;
+
+  // Validate name
+  if (!validateName(registerName)) {
+    document.getElementById('wrongRepeat').innerHTML = `Name must contain exactly two words`;
+    return;
+  }
 
   if (registerPassword !== registerRepeatPassword) {
     document.getElementById('wrongRepeat').innerHTML = `The passwords don't match`;
@@ -91,7 +109,6 @@ async function handleFormSubmit(event) {
   await saveRegisterInfoToFirebase(); // Save updated registerInfo to Firebase
 
   // Optionally, save to localStorage (if needed)
-  
 
   // Show success message and redirect
   showSuccessMessage();
@@ -111,17 +128,11 @@ function showSuccessMessage() {
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('form').addEventListener('submit', handleFormSubmit);
 
-  
   document.getElementById('email').addEventListener('input', resetErrorState);
   document.getElementById('password').addEventListener('input', resetErrorState);
   document.getElementById('repeatPassword').addEventListener('input', resetErrorState);
+  document.getElementById('name').addEventListener('input', resetErrorState); // Reset error state on name input
 });
-
-
-
-
-
-
 
 
 function showPassword() {
@@ -135,9 +146,9 @@ function showPassword() {
   }
 }
 
-
 function resetErrorState() {
   document.getElementById('wrongRepeat').innerHTML = ''; 
   document.getElementById('invalid').classList.remove('invalid');
   document.getElementById('invalidEmail').classList.remove('invalid');  
+  document.getElementById('invalidName').classList.remove('invalid'); // Remove invalid class for name input
 }
