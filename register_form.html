@@ -21,7 +21,7 @@
         <input type="text" id="name" required placeholder="Name">
         <img class="icon" src="assets/img/png/person.png" alt="">
       </div>
-      <div class="input">
+      <div class="input" id="invalidEmail">
         <input type="email" id="email" required placeholder="E-mail">
         <img class="icon" src="assets/img/png/mail.png" alt="">
       </div>
@@ -29,13 +29,14 @@
         <input type="password" id="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
         <img class="icon" id="visibility" onclick="showPassword()" src="assets/img/png/visibility_off.png" alt="">
       </div>
-      <div class="input">
+      <div class="input" id="invalid">
         <input type="password"  id="repeatPassword" placeholder="Repeat password" required>
         <img class="icon"  src="assets/img/png/lock.png" alt="">
       </div>
+      <div id="wrongRepeat"></div>
       <div class="check">
         <input type="checkbox" required >
-        <span>I accept the <a href="privacy_policy.html">Privacy policy</a></span>
+        <span> I accept the<a href="privacy_policy.html">Privacy policy</a></span>
       </div>
       <button type="submit">Sign up</button>
     </form>
@@ -44,6 +45,9 @@
     <a href="privacy_policy.html">Privacy policy</a>
     <a href="legal_notice.html">Legal notice</a>
   </section>
-  <button style="width: 300px; position: absolute; top: 30px;" class="d-none">You signed up successfully</button>
+
+  <div class="signedUp d-none" id="signedUpCont">
+    <div id="signedUp">You signed up successfully</div>
+  </div>
 </body>
 </html>

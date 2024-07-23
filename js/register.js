@@ -66,14 +66,16 @@ async function handleFormSubmit(event) {
   let registerRepeatPassword = document.getElementById('repeatPassword').value;
 
   if (registerPassword !== registerRepeatPassword) {
-    alert('Passwords do not match!');
+    document.getElementById('wrongRepeat').innerHTML = `The passwords don't match`;
+    document.getElementById('invalid').classList.add(`invalid`);
     return;
   }
 
   await fetchRegisterInfo(); // Fetch the latest register info from Firebase
 
   if (registerInfo.email.includes(registerEmail)) {
-    alert('Email already in use!');
+    document.getElementById('wrongRepeat').innerHTML = `Email already in use!`;
+    document.getElementById('invalidEmail').classList.add(`invalid`);
     return;
   }
 
@@ -89,7 +91,7 @@ async function handleFormSubmit(event) {
   await saveRegisterInfoToFirebase(); // Save updated registerInfo to Firebase
 
   // Optionally, save to localStorage (if needed)
-  saveRegisterData(newRegisterInfo);
+  
 
   // Show success message and redirect
   showSuccessMessage();
@@ -97,41 +99,45 @@ async function handleFormSubmit(event) {
 
 // Function to show success message and redirect
 function showSuccessMessage() {
-  const successButton = document.querySelector('.d-none');
+  let successButton = document.getElementById('signedUpCont');
   successButton.classList.remove('d-none');
+  document.getElementById('signedUp').classList.add('animation')
   setTimeout(() => {
     window.location.href = 'index.html';
-  }, 800);
+  }, 3000);
 }
 
-// Attach handleFormSubmit to form submission event
+
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('form').addEventListener('submit', handleFormSubmit);
+
+  
+  document.getElementById('email').addEventListener('input', resetErrorState);
+  document.getElementById('password').addEventListener('input', resetErrorState);
+  document.getElementById('repeatPassword').addEventListener('input', resetErrorState);
 });
 
-// Function to save registerInfo to localStorage (optional)
-function saveRegisterData(newRegisterInfo) {
-  let registerData = JSON.parse(localStorage.getItem('registerData')) || [];
-  registerData.push(newRegisterInfo);
-  localStorage.setItem('registerData', JSON.stringify(registerData));
-}
 
-// Function to load registerInfo from localStorage (optional)
-function loadRegisterData() {
-  let registerDataAsText = localStorage.getItem('registerData');
-  if (registerDataAsText) {
-    return JSON.parse(registerDataAsText);
-  }
-  return [];
-}
+
+
+
+
+
 
 function showPassword() {
   var x = document.getElementById("password");
   if (x.type === "password") {
     x.type = "text";
-    document.getElementById('visibility').src="assets/img/png/visibility.png"
+    document.getElementById('visibility').src = "assets/img/png/visibility.png";
   } else {
     x.type = "password";
-    document.getElementById('visibility').src="assets/img/png/visibility_off.png"
+    document.getElementById('visibility').src = "assets/img/png/visibility_off.png";
   }
+}
+
+
+function resetErrorState() {
+  document.getElementById('wrongRepeat').innerHTML = ''; 
+  document.getElementById('invalid').classList.remove('invalid');
+  document.getElementById('invalidEmail').classList.remove('invalid');  
 }

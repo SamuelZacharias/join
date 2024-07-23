@@ -58,13 +58,7 @@ body {
   border-radius: 30px;
   gap: 32px;
 }
-.register a {
-  color: var(--blue);
-}
-.register a:hover {
-  text-decoration: underline var(--blue);
-  font-weight: 600;
-}
+
 
 .policy {
   display: flex;
@@ -141,17 +135,34 @@ h1 {
 }
 
 .check {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 16px;
+  padding: 4px;
 }
 .check input:hover {
   cursor: pointer;
 }
 .check span {
-  width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.check a {
+  color: var(--blue);
+  padding: 4px;
+  box-sizing: border-box;
+  width: 150px;
+  display: flex;
+  justify-content: flex-start;
+}
+.check a:hover {
+  text-decoration: underline var(--blue);
+  font-weight: 600;
+}
+.check:hover input{
+  box-shadow: 0px 0px 6px 0px var(--gray);
 }
 form {
   display: flex;
@@ -186,10 +197,63 @@ button:hover {
 span {
   color: var(--policy);
 }
-.d-none {
-  display: none;
-}
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: #000 !important;
+}
+
+
+#wrongRepeat{
+  display: flex;
+  width: 100%;
+  height: 5px;
+  font-size: 14px;
+  color: red;
+}
+
+.invalid{
+  border: 2px solid red;
+}
+
+.signedUp{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.signedUp button{
+  width: 400px;
+}
+.animation{
+  animation: slideUp 1.2s ease-out;
+}
+
+@keyframes slideUp{
+  from {
+    transform: translateY(100vh); /* Start from below the viewport */
+    
+  }
+  to {
+    transform: translateY(0); /* End at the normal position */
+  }
+}
+
+
+#signedUp{
+  background-color: var(--gray);
+  padding: 15px 24px;
+  color: white;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 400px;
+  text-align: center;
+}
+
+.d-none {
+  display: none;
 }
