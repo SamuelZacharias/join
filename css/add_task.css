@@ -380,3 +380,25 @@ select:hover{
   width: 400px;
   text-align: center;
 }
+
+.logOut{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray);
+  padding: 10px;
+  border-radius: 20px 0px 20px 20px;
+  position: absolute;
+  top: 70px;
+  left: 946px;
+}
+
+
+#logOut a{
+  text-decoration: none;
+  padding: 8px 16px;
+  color: #cdcdcd
+}
+
+.d-none{
+  display: none;
+}

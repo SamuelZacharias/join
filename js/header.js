@@ -1,18 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('includesLoaded', () => {
-    let loggedInUserName = localStorage.getItem('loggedInUserName');
+  let includesLoadedHandled = false;
 
+  document.addEventListener('includesLoaded', handleIncludesLoaded);
+  
+  function handleIncludesLoaded() {
+    if (!includesLoadedHandled) {
+      includesLoadedHandled = true;
+      handleUserProfile();
+    }
+  }
+
+  function handleUserProfile() {
+    let loggedInUserName = localStorage.getItem('loggedInUserName');
     if (loggedInUserName) {
       console.log('Logged-in user name:', loggedInUserName);
-      let nameParts = loggedInUserName.split(' ');
-      let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-      let initialsElement = document.getElementById('user-profile-initials');
-      if (initialsElement) {
-        initialsElement.innerHTML = `${initials}`;
-      }
-      console.log(initials);
+      let initials = getInitials(loggedInUserName);
+      updateInitialsElement(initials);
     } else {
       console.log('No logged-in user name found');
     }
-  });
+  }
+
+  function getInitials(userName) {
+    let nameParts = userName.split(' ');
+    return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+  }
+
+  function updateInitialsElement(initials) {
+    let initialsElement = document.getElementById('user-profile-initials');
+    if (initialsElement) {
+      initialsElement.innerHTML = `${initials}`;
+      initialsElement.addEventListener('click', toggleLogOutVisibility);
+    }
+    console.log(initials);
+  }
+
+  function toggleLogOutVisibility() {
+    let logOutElement = document.getElementById('logOut');
+    if (logOutElement) {
+      logOutElement.classList.toggle('d-none');
+    }
+  }
+
+  document.addEventListener('click', handleDocumentClick);
+
+  function handleDocumentClick(event) {
+    let logOutElement = document.getElementById('logOut');
+    let initialsElement = document.getElementById('user-profile-initials');
+
+    if (logOutElement && !logOutElement.contains(event.target) &&
+        !initialsElement.contains(event.target) &&
+        !event.target.closest('#logOut')) {
+      logOutElement.classList.add('d-none');
+    }
+  }
 });
