@@ -88,9 +88,6 @@ aside {
   color: #29abe2;
 }
 
-.link-credits:active {
-  background-color: #091931;
-}
 
 .credit {
   display: flex;
