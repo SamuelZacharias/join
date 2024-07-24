@@ -39,7 +39,6 @@ function handleLoginResponse(data, email, password) {
 
 function validatePasswordAndLogin(data, emailIndex, password) {
     if (data.password[emailIndex] === password) {
-        alert('Successfully logged in.');
         localStorage.setItem('loggedInUserName', data.name[emailIndex]);
         window.location.href = 'summary.html';
     } else {
