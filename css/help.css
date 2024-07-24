@@ -43,6 +43,12 @@ tr{
 .content-help{
     width: 1014px;
     padding: 110px 0px 0px 94px;
+    overflow: scroll;
+     height: 82vh;
+}
+
+.content-help::-webkit-scrollbar{
+    display: none;
 }
 
 .help-text{

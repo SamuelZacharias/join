@@ -32,6 +32,10 @@ span{
   padding-top: 96px;
 }
 
+.content-legal-notice::-webkit-scrollbar{
+  display: none;
+}
+
 
 .d-flex {
   display: flex;
