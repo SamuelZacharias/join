@@ -402,3 +402,8 @@ select:hover{
 .d-none{
   display: none;
 }
+
+.addTaskLink{
+  background-color: #091931;
+  color: white !important;
+}

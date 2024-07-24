@@ -277,3 +277,8 @@ h3 {
   gap: 15px;
   flex-direction: column;
 }
+
+.contactsLink{
+  background-color: #091931;
+  color: white !important;
+}

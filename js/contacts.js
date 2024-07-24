@@ -38,3 +38,29 @@ async function closeDialogEdit() {
   dialogContainer.classList.remove("d-flex");
   dialogContainer.open = false;
 }
+
+let contacts = [];
+
+function addContact() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    if (name && email && phone) {
+        const newContact = {
+            name: name,
+            email: email,
+            phone: phone
+        };
+
+        contacts.push(newContact);
+
+        // Zum Testen in der Konsole ausgeben
+        console.log(contacts);
+
+        // Formular zurücksetzen
+        document.getElementById('contactForm').reset();
+    } else {
+        alert('Bitte füllen Sie alle Felder aus.');
+    }
+}

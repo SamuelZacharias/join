@@ -58,7 +58,11 @@ aside {
 }
 
 .link-sidebar:active {
-  cursor: pointer;
+  background-color: #091931;
+  color: white;
+}
+
+.link-sidebar.active {
   background-color: #091931;
   color: white;
 }
@@ -71,7 +75,6 @@ aside {
   padding: 243px 0px 0px 0px;
   box-sizing: border-box;
   gap: 8px;
-  
 }
 
 .link-credits {
@@ -85,15 +88,16 @@ aside {
   color: #29abe2;
 }
 
-.link-credits:active{
-    background-color: #091931;
+.link-credits:active {
+  background-color: #091931;
 }
 
-.credit{
-    display: flex;
-    padding-left: 52px;
-    box-sizing: border-box;
-    width: 232px;
-    height: 35px;
-    align-items: center;
+.credit {
+  display: flex;
+
+  box-sizing: border-box;
+  width: 232px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
 }

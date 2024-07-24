@@ -1,8 +1,13 @@
-body{
-    margin: 0px;
-    visibility: hidden;
+body {
+  margin: 0px;
+  visibility: hidden;
 }
 
-.d-flex{
-    display: flex;
+.d-flex {
+  display: flex;
+}
+
+.boardLink {
+  background-color: #091931;
+  color: white !important;
 }
