@@ -376,7 +376,7 @@ function showSubtasks(){
   for (let s = 0; s < subtaskInfos.length; s++) {
     newSubtask.innerHTML += `
       <div class="addSubtask" style="justify-content:space-between;">
-        <div style="width:100%" onclick="editSubtask(${s})" >
+        <div  onclick="editSubtask(${s})" >
           ${subtaskInfos[s]}
         </div>
         <div class="d-flex">
@@ -472,10 +472,7 @@ document.querySelector('.createButton').addEventListener('click', async function
       await sendTaskDataToFirebase(); 
 
      
-      setTimeout(() => {
-        document.getElementById('taskForm').submit();
-        window.location.href = 'board.html'; 
-      }, 3000); 
+      showSuccessMessage() 
 
     } catch (error) {
       console.error('Failed to send task data to Firebase:', error); 
@@ -614,4 +611,14 @@ async function sendTaskDataToFirebase() {
   } catch (error) {
     console.error('Error saving data to Firebase:', error);
   }
+}
+
+
+function showSuccessMessage() {
+  let successButton = document.getElementById('signedUpCont');
+  successButton.classList.remove('d-none');
+  document.getElementById('signedUp').classList.add('animation')
+  setTimeout(() => {
+    window.location.href = 'board.html';
+  }, 3000);
 }
