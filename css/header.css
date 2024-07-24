@@ -73,3 +73,7 @@ header {
 .d-none{
   display: none;
 }
+
+#logOut a:hover{
+  background-color: #2a3d59;
+}

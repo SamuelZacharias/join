@@ -390,6 +390,7 @@ select:hover{
   position: absolute;
   top: 70px;
   left: 946px;
+  background-color: var(--gray);
 }
 
 
