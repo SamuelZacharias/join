@@ -94,7 +94,6 @@ body {
 
 .contact-info {
   display: flex;
-  width: 140px;
   gap: 5px;
   flex-direction: column;
 }
