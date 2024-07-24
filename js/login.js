@@ -1,79 +1,118 @@
 const BASE_URL = "https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/";
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Event listener for the login button
+    addLoginButtonListener();
+    addGuestLoginListener();
+    addRememberMeCheckboxListener();
+    loadRememberedCredentials();
+    addInputListeners(); 
+});
+
+function addLoginButtonListener() {
     document.querySelector('.logIn').addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent form submission
+        event.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('repeatPassword').value;
-
-        // Check if the email exists in the Firebase Realtime Database
-        fetch(`${BASE_URL}/registerInfo.json`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.email) {
-                    const emailIndex = data.email.indexOf(email);
-                    if (emailIndex === -1) {
-                        alert('Email does not exist.');
-                    } else {
-                        // Email exists, proceed with login
-                        if (data.password[emailIndex] === password) {
-                            alert('Successfully logged in.');
-
-                            // Store the logged-in user's name in localStorage
-                            localStorage.setItem('loggedInUserName', data.name[emailIndex]);
-
-                            // Redirect to another page or perform other actions
-                            window.location.href = 'summary.html'; // Example redirection
-                        } else {
-                            alert('Incorrect password.');
-                        }
-                    }
-                } else {
-                    alert('No users found in the database.');
-                }
-            })
-            .catch(error => {
-                // Handle errors in checking email
-                alert(`Error: ${error.message}`);
-            });
+        checkEmailAndLogin(email, password);
     });
+}
 
-    // Event listener for the "Guest Log in" link
+function checkEmailAndLogin(email, password) {
+    fetch(`${BASE_URL}/registerInfo.json`)
+        .then(response => response.json())
+        .then(data => handleLoginResponse(data, email, password))
+        .catch(error => handleLoginError(error));
+}
+
+function handleLoginResponse(data, email, password) {
+    if (data && data.email) {
+        const emailIndex = data.email.indexOf(email);
+        if (emailIndex === -1) {
+            showInvalidMessage('invalid', 'Email does not exist.', 'invalidEmail');
+        } else {
+            validatePasswordAndLogin(data, emailIndex, password);
+        }
+    } else {
+        alert('No users found in the database.');
+    }
+}
+
+function validatePasswordAndLogin(data, emailIndex, password) {
+    if (data.password[emailIndex] === password) {
+        alert('Successfully logged in.');
+        localStorage.setItem('loggedInUserName', data.name[emailIndex]);
+        window.location.href = 'summary.html';
+    } else {
+        showInvalidMessage('invalid', 'Incorrect password', 'invalidPassword');
+    }
+}
+
+function showInvalidMessage(containerId, message, className) {
+    document.getElementById(containerId).innerHTML = message;
+    document.getElementById(className).classList.add('invalid');
+}
+
+function handleLoginError(error) {
+    alert(`Error: ${error.message}`);
+}
+
+function addGuestLoginListener() {
     document.querySelector('.guestLogIn').addEventListener('click', function(event) {
-        // Set the logged-in user's name to "guest" in localStorage
         localStorage.setItem('loggedInUserName', 'Guest');
     });
+}
 
-    // Event listener for the "Remember me" checkbox
+function addRememberMeCheckboxListener() {
     const rememberMeCheckbox = document.querySelector('.check input[type="checkbox"]');
     rememberMeCheckbox.addEventListener('change', function() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('repeatPassword').value;
-
-        if (this.checked) {
-            // Store email and password in local storage
-            localStorage.setItem('rememberedEmail', email);
-            localStorage.setItem('rememberedPassword', password);
-        } else {
-            // Clear email and password from local storage and input fields
-            localStorage.removeItem('rememberedEmail');
-            localStorage.removeItem('rememberedPassword');
-            document.getElementById('email').value = '';
-            document.getElementById('repeatPassword').value = '';
-        }
+        handleRememberMeChange(this.checked, email, password);
     });
+}
 
-    // Check local storage on page load and fill email and password if remembered
+function handleRememberMeChange(isChecked, email, password) {
+    if (isChecked) {
+        localStorage.setItem('rememberedEmail', email);
+        localStorage.setItem('rememberedPassword', password);
+    } else {
+        localStorage.removeItem('rememberedEmail');
+        localStorage.removeItem('rememberedPassword');
+        document.getElementById('email').value = '';
+        document.getElementById('repeatPassword').value = '';
+    }
+}
+
+function loadRememberedCredentials() {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
     const rememberedPassword = localStorage.getItem('rememberedPassword');
     if (rememberedEmail && rememberedPassword) {
         document.getElementById('email').value = rememberedEmail;
         document.getElementById('repeatPassword').value = rememberedPassword;
-        rememberMeCheckbox.checked = true; // Check the checkbox if email and password are remembered
+        document.querySelector('.check input[type="checkbox"]').checked = true;
     } else {
-        // Clear input fields if not remembered
         document.getElementById('email').value = '';
         document.getElementById('repeatPassword').value = '';
     }
-})
+}
+
+
+function addInputListeners() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('repeatPassword');
+
+    emailInput.addEventListener('input', function() {
+        clearInvalidMessages();
+    });
+
+    passwordInput.addEventListener('input', function() {
+        clearInvalidMessages();
+    });
+}
+
+
+function clearInvalidMessages() {
+    document.getElementById('invalid').innerHTML = '';
+    document.getElementById('invalidEmail').classList.remove('invalid');
+    document.getElementById('invalidPassword').classList.remove('invalid');
+}

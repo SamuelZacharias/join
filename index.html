@@ -24,14 +24,15 @@
             <div class="separator"></div>
         </div>
         <form action="" onsubmit="return false">
-            <div class="input">
+            <div class="input" id="invalidEmail">
                 <input type="email" id="email" required placeholder="E-mail">
                 <img class="icon" src="assets/img/png/mail.png" alt="">
             </div>
-            <div class="input">
+            <div class="input" id="invalidPassword">
                 <input type="password" id="repeatPassword" required placeholder="Password">
                 <img class="icon" src="assets/img/png/lock.png" alt="">
             </div>
+            <div id="invalid"></div>
             <div class="check">
                 <input type="checkbox" required>
                 <span class="flexStart">Remember me</span>

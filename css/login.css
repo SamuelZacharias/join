@@ -309,3 +309,15 @@ input{
 .buttonContainer a{
   color: black;
 }
+
+#invalid{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  color: red;
+  height: 12px;
+}
+
+.invalid{
+  border-color:Red
+}
