@@ -39,6 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
+    // Event listener for the "Guest Log in" link
+    document.querySelector('.guestLogIn').addEventListener('click', function(event) {
+        // Set the logged-in user's name to "guest" in localStorage
+        localStorage.setItem('loggedInUserName', 'Guest');
+    });
+
     // Event listener for the "Remember me" checkbox
     const rememberMeCheckbox = document.querySelector('.check input[type="checkbox"]');
     rememberMeCheckbox.addEventListener('change', function() {
@@ -70,4 +76,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('email').value = '';
         document.getElementById('repeatPassword').value = '';
     }
-});
+})

@@ -1,26 +1,18 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  // Await the DOM content loaded
-  await new Promise(resolve => {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', resolve);
-    } else {
-      resolve();
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('includesLoaded', () => {
+    let loggedInUserName = localStorage.getItem('loggedInUserName');
 
-  let loggedInUserName = localStorage.getItem('loggedInUserName');
-  
-  if (loggedInUserName) {
+    if (loggedInUserName) {
       console.log('Logged-in user name:', loggedInUserName);
       let nameParts = loggedInUserName.split(' ');
-      let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join(' ');
+      let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
       let initialsElement = document.getElementById('user-profile-initials');
       if (initialsElement) {
-          initialsElement.innerHTML = `${initials}`;
+        initialsElement.innerHTML = `${initials}`;
       }
-
       console.log(initials);
-  } else {
+    } else {
       console.log('No logged-in user name found');
-  }
+    }
+  });
 });
