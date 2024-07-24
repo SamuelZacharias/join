@@ -90,7 +90,7 @@
                   />
                 </svg>
               </button>
-              <button onclick="addContact(), closeDialog()" class="button-create">
+              <button onclick="addContact(), closeDialog(), openDialogSuccesfully()" class="button-create">
                 Create contact
                 <img
                   class="check-icon-button"
@@ -149,6 +149,12 @@
       </div>
     </dialog>
     
+    <dialog id="succesfullyCreated" >
+      
+        <Span>Contacts succesfully created</Span>
+      
+    </dialog>
+
     <div
       onclick="closeDialog(), closeDialogEdit()"
       id="grey-background"

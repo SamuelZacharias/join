@@ -55,7 +55,6 @@ function sleep(ms) {
 }
 
 async function openDialog() {
-  // event.stopPropagation();
   const dialogContainer = document.getElementById("dialog-contacts");
   dialogContainer.open = true;
   dialogContainer.classList.add("d-flex");
@@ -76,7 +75,6 @@ async function closeDialog() {
 
 async function openDialogEdit(index) {
   const contact = contacts[index];
-  
   const dialogContainer = document.getElementById("dialog-edit");
   dialogContainer.open = true;
   dialogContainer.classList.add("d-flex");
@@ -103,6 +101,28 @@ async function closeDialogEdit() {
   await sleep(300);
   dialogContainer.classList.remove("d-flex");
   dialogContainer.open = false;
+}
+
+async function openDialogSuccesfully() {
+  const dialogContainer = document.getElementById("succesfullyCreated");
+  
+  // Verzögerung von 1 Sekunde, bevor der Dialog angezeigt wird
+  setTimeout(async () => {
+      // Dialog anzeigen
+      dialogContainer.open = true;
+      await sleep(300);
+      dialogContainer.classList.add("dialog-open");
+      dialogContainer.classList.add("d-flex");
+
+      // Verzögerung von 2 Sekunden, bevor der Dialog ausgeblendet wird
+      await sleep(1000); // 2000 Millisekunden = 2 Sekunden
+
+      // Dialog wieder ausblenden
+      dialogContainer.classList.remove("dialog-open");
+      await sleep(300); // Kleine Verzögerung für die Animation
+      dialogContainer.classList.remove("d-flex");
+      dialogContainer.open = false;
+  }, 300); // 1000 Millisekunden = 1 Sekunde
 }
 
 function addContact() {

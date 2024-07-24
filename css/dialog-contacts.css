@@ -18,7 +18,7 @@
   left: 50%;
 }
 
-#dialog-edit{
+#dialog-edit {
   font-family: "inter", Arial, sans-serif;
   z-index: 99;
   position: fixed;
@@ -260,7 +260,29 @@ button {
   align-items: center;
 }
 
-.button-delete:hover{
+.button-delete:hover {
   cursor: pointer;
   color: #29abe2;
+}
+
+#succesfullyCreated {
+  padding: 0px;
+  font-size: 20px;
+  width: 326px;
+  height: 74px;
+  background-color: #2a3647;
+  color: white;
+  position: absolute;
+  top: 73%;
+  left: 111%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+  transition: left 0.4s ease-out;
+  margin: 0;
+}
+
+#succesfullyCreated.dialog-open {
+  left: 60%;
 }
