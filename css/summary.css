@@ -1,8 +1,4 @@
-@font-face {
-    font-family: 'inter';
-    src: url('./assets/fonts/static/Inter-Black.ttf') format('truetype'),
-        url('./assets/fonts/static/Inter-Bold.ttf') format('truetype');
-}
+
 
 :root {
     --blue: #29ABE2;
