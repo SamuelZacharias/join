@@ -242,6 +242,7 @@ function highlightContact(index) {
   const contacts = document.getElementsByClassName('contacts');
   for (let i = 0; i < contacts.length; i++) {
       contacts[i].style.backgroundColor = '';
+      contacts[i].style.color = 'black';
   }
   document.getElementById(`contact${index}`).style.backgroundColor = 'var(--gray)';
   document.getElementById(`contact${index}`).style.color = 'white';
@@ -286,7 +287,7 @@ function validateForm() {
   // Telefonnummer Validierung
   const phoneInput = document.getElementById('phone');
   if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Invalid phone number');
+      setError(phoneInput, 'Invalid phone number 0176 123 123');
       isValid = false;
       phoneInput.value = '';
   } else {
@@ -326,7 +327,7 @@ function validateEditForm() {
   // Telefonnummer Validierung
   const phoneInput = document.getElementById('inputEditPhone');
   if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Invalid phone number  +176 123 123');
+      setError(phoneInput, 'Invalid phone number  0176 123 123');
       isValid = false;
       phoneInput.value = '';
   } else {
