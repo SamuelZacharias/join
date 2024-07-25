@@ -133,6 +133,24 @@ input:focus{
 }
 
 
-.taskCard{
-  
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-bar {
+  width: 100px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  display: none; /* Initially hide the progress bar */
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #4285f4;
+  width: 0;
+  transition: width 0.52s;
 }
