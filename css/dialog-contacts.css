@@ -286,3 +286,21 @@ button {
 #succesfullyCreated.dialog-open {
   left: 60%;
 }
+
+.bigLetterCircle {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  background-color: blueviolet;
+  border-radius: 70px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 47px;
+  font-weight: 500;
+}
+
+.backgroundColor{
+  background-color: #2A3647 !important;
+  color: white;
+}
