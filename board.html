@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
     <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="style.css">
     <script src="./js/header.js"></script>
     <script src="js/include.js"></script>
     <title>My Board</title>
@@ -15,6 +16,37 @@
     <div class="d-flex">
       <div w3-include-html="Templates/sidebar.html"></div>
       <div w3-include-html="Templates/header.html"></div>
+      
+    </div>
+    <div class="boardContent">
+      <section >
+        <div class="contentHeader">
+          <h1>Board</h1>
+          <div class="inputarea">
+            <div class="input">
+              <input type="text" id="search">
+              <img src="assets/img/png/search (1).png" alt="">
+            </div>
+            <button>Add task  <img src="assets/img/png/add.png" alt=""></button>
+          </div>
+        </div>
+        <div class="listsHeaders">
+            <div class="listheader">
+              <span>To do</span>
+              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+            </div>
+            <div class="listheader">
+              <span>In progress</span>
+              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+            </div>
+            <div class="listheader">
+              <span>Await feedback</span>
+              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+            </div class="listheader"> 
+            <div class="listheader">Done</div>
+        </div>
+        
+      </section>
     </div>
   </body>
 </html>
