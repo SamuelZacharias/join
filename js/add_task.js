@@ -519,7 +519,9 @@ function collectData() {
   const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
 
   const assignedContacts = selectedContacts.map(contact => `${contact.firstname} ${contact.lastname}`);
-  const subtasks = subtaskInfos;
+  
+  // Set 'completed' to false for each subtask
+  const subtasks = subtaskInfos.map(subtask => ({ title: subtask, completed: false }));
 
   let priority = '';
   switch (activeButton) {

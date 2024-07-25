@@ -113,7 +113,6 @@ input:focus{
   justify-content: space-between;
   padding: 0px 64px;
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 
 .taskColumn{
@@ -131,4 +130,9 @@ input:focus{
   border-radius: 10px;
   background-color: #e7e7e7;
   border: dashed var(--border)  ;
+}
+
+
+.taskCard{
+  
 }
