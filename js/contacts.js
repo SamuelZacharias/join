@@ -266,8 +266,9 @@ function validateForm() {
   // Name Validierung
   const nameInput = document.getElementById('name');
   if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
-      setError(nameInput, 'Invalid name');
+      setError(nameInput, 'Invalid name (Max Mustermann)');
       isValid = false;
+      nameInput.value = '';
   } else {
       clearError(nameInput);
   }
@@ -275,8 +276,9 @@ function validateForm() {
   // Email Validierung
   const emailInput = document.getElementById('email');
   if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setError(emailInput, 'Invalid email');
+      setError(emailInput, 'Invalid email (test@test.de)');
       isValid = false;
+      emailInput.value = '';
   } else {
       clearError(emailInput);
   }
@@ -286,6 +288,7 @@ function validateForm() {
   if (!phoneInput.value.match(/^\d+$/)) {
       setError(phoneInput, 'Invalid phone number');
       isValid = false;
+      phoneInput.value = '';
   } else {
       clearError(phoneInput);
   }
@@ -305,6 +308,7 @@ function validateEditForm() {
   if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
       setError(nameInput, 'Invalid name');
       isValid = false;
+      nameInput.value = '';
   } else {
       clearError(nameInput);
   }
@@ -314,6 +318,7 @@ function validateEditForm() {
   if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       setError(emailInput, 'Invalid email');
       isValid = false;
+      emailInput.value = '';
   } else {
       clearError(emailInput);
   }
@@ -321,8 +326,9 @@ function validateEditForm() {
   // Telefonnummer Validierung
   const phoneInput = document.getElementById('inputEditPhone');
   if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Invalid phone number');
+      setError(phoneInput, 'Invalid phone number  +176 123 123');
       isValid = false;
+      phoneInput.value = '';
   } else {
       clearError(phoneInput);
   }
