@@ -288,3 +288,18 @@ h3 {
   background-color: #091931;
   color: white !important;
 }
+
+@keyframes slideInFromRight {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+.contacts-info {
+  animation: slideInFromRight 0.3s ease-in;
+}

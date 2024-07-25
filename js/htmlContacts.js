@@ -17,6 +17,9 @@ function generateLetterBox(letter) {
 
 function generateContactInfo(contact, initials, index) {
   return `
+  <div class="contacts-info">
+             
+            
       <div class="contacts-info-name">
         <div class="big-letter-circle" style="background-color: ${contact.color};">${initials}</div>
         <div class="contact-box-name">
@@ -50,10 +53,11 @@ function generateContactInfo(contact, initials, index) {
           <span>${contact.phone}</span>
         </div>
       </div>
+      </div>
     `;
 }
 
-function generateBigLetterCircle(contact,initials) {
+function generateBigLetterCircle(contact, initials) {
   return `
     <div class="bigLetterCircle" style="background-color: ${contact.color}";>${initials}
     </div>
