@@ -76,16 +76,22 @@ body {
   background-color: #f4f4f4a6;
 }
 
-.contact:active {
+.contacts:active {
   background-color: #2a3647;
+  color: white;
 }
 
+.contacts:target{
+  background-color: #2a3647;
+  color: white;
+} 
+
 .letter-circle {
+  border: 2px solid white;
   display: flex;
   width: 40px;
   height: 40px;
   border-radius: 27px;
-  background-color: #ff7b00;
   align-items: center;
   justify-content: center;
   font-size: 12px;
@@ -99,6 +105,7 @@ body {
 }
 
 .contact-email {
+  text-decoration: none;
   color: #007cee;
 }
 
@@ -277,7 +284,7 @@ h3 {
   flex-direction: column;
 }
 
-.contactsLink{
+.contactsLink {
   background-color: #091931;
   color: white !important;
 }

@@ -33,8 +33,7 @@ function renderContacts() {
           contactList.innerHTML += generateContact(contact, initials, index);
       });
 
-      // Kontakttrenner hinzufügen
-      contactList.innerHTML += '<div class="contact-separator"></div>';
+      
   });
 }
 
@@ -73,12 +72,16 @@ async function closeDialog() {
 }
 
 
-async function openDialogEdit(index) {
+async function openDialogEdit(index,) {
   const contact = contacts[index];
+  let nameParts = contact.name.split(' ');
+  let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+  currentContactIndex = index;
+  
   const dialogContainer = document.getElementById("dialog-edit");
   dialogContainer.open = true;
   dialogContainer.classList.add("d-flex");
-
+  
   // Eingabefelder mit den Kontaktinformationen füllen
   document.getElementById('inputEditName').value = contact.name;
   document.getElementById('inputEditEmail').value = contact.email;
@@ -88,10 +91,11 @@ async function openDialogEdit(index) {
   document.getElementById('inputEditName').dataset.index = index;
   document.getElementById('inputEditEmail').dataset.index = index;
   document.getElementById('inputEditPhone').dataset.index = index;
-
+  
   await sleep(10);
   dialogContainer.classList.add("dialog-open");
   document.getElementById("grey-background").classList.remove("hidden");
+  document.getElementById('bigLetterCircle').innerHTML = generateBigLetterCircle(contact,initials);
 }
 
 async function closeDialogEdit() {
@@ -168,20 +172,14 @@ function getRandomColor() {
 
 function displayContactInfo(index) {
   const contact = contacts[index];
-  if (!contact) {
-      console.error('Contact not found at index:', index);
-      return;
-  }
-
   let nameParts = contact.name.split(' ');
   let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-
   const contactInfoDiv = document.querySelector('.contacts-info');
   contactInfoDiv.innerHTML = generateContactInfo(contact, initials, index);
 }
 
 function deleteContact(index) {
-  contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
+  contacts.splice(currentContactIndex, 1); // Entfernt den Kontakt aus dem Array
   renderContacts(); // Aktualisiert die Anzeige
   saveData();
   document.querySelector('.contacts-info').innerHTML = '';
@@ -245,4 +243,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadData(); // Stellen sicher, dass Daten geladen sind
   renderContacts(); // Kontaktliste rendern
 });
+
 

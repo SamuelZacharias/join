@@ -1,7 +1,6 @@
-
 function generateContact(contact, initials, index) {
-    return `
-        <div class="contacts" onclick="displayContactInfo(${index})">
+  return `
+        <div id="contact${index}" class="contacts" onclick="displayContactInfo(${index})">
             <div class="letter-circle" style="background-color: ${contact.color};">${initials}</div>
             <div class="contact-info">
                 <span>${contact.name}</span>
@@ -12,11 +11,12 @@ function generateContact(contact, initials, index) {
 }
 
 function generateLetterBox(letter) {
-    return `<div class="letter-box">${letter}</div>`;
+  return `<div class="letter-box">${letter}</div>
+            <div class="contact-seperator"></div>`;
 }
 
 function generateContactInfo(contact, initials, index) {
-    return `
+  return `
       <div class="contacts-info-name">
         <div class="big-letter-circle" style="background-color: ${contact.color};">${initials}</div>
         <div class="contact-box-name">
@@ -51,5 +51,11 @@ function generateContactInfo(contact, initials, index) {
         </div>
       </div>
     `;
-  }
+}
 
+function generateBigLetterCircle(contact,initials) {
+  return `
+    <div class="bigLetterCircle" style="background-color: ${contact.color}";>${initials}
+    </div>
+    `;
+}

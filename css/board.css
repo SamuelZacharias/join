@@ -16,12 +16,7 @@ body {
 .boardContent{
   height: 40px;
   background-color: var(--background);
-  position: absolute;
-  top: 96px;
   width: calc(1440px - 232px);
-  left:232px;
-  z-index: 50;
-  visibility: visible;
   height: calc(100% - 96px);
 }
 h1{
