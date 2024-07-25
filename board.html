@@ -16,40 +16,54 @@
     <div class="d-flex">
       <div w3-include-html="Templates/sidebar.html"></div>
       <div>
-      <div w3-include-html="Templates/header.html"></div>
+        <div w3-include-html="Templates/header.html"></div>
       
     
-    <div class="boardContent">
-      <section >
-        <div class="contentHeader">
-          <h1>Board</h1>
-          <div class="inputarea">
-            <div class="input">
-              <input type="text" id="search">
-              <img src="assets/img/png/search (1).png" alt="">
+        <div class="boardContent">
+          <section name="boardHeader">
+            <div class="contentHeader">
+              <h1>Board</h1>
+              <div class="inputarea">
+                <div class="input">
+                  <input type="text" id="search">
+                  <img src="assets/img/png/search (1).png" alt="">
+                </div>
+                <button>Add task  <img src="assets/img/png/add.png" alt=""></button>
+              </div>
             </div>
-            <button>Add task  <img src="assets/img/png/add.png" alt=""></button>
-          </div>
+            <div class="listsHeaders">
+                <div class="listheader">
+                  <span>To do</span>
+                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                </div>
+                <div class="listheader">
+                  <span>In progress</span>
+                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                </div>
+                <div class="listheader">
+                  <span>Await feedback</span>
+                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                </div class="listheader"> 
+                <div class="listheader">Done</div>
+            </div>
+          </section >
+          <section class="taskArea">
+              <div class="taskColumn" id="toDo">
+                  <div class="noTask">No tasks To do</div>
+              </div>
+              <div class="taskColumn" id="inProgress">
+                <div class="noTask">No tasks in progress</div>
+              </div>
+                
+              <div class="taskColumn" id="awaitFeedback">
+                <div class="noTask">No tasks awaiting feedback</div>
+              </div>
+              <div class="taskColumn" id="done">
+                <div class="noTask">No tasks done</div>
+              </div>
+          </section>
         </div>
-        <div class="listsHeaders">
-            <div class="listheader">
-              <span>To do</span>
-              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
-            </div>
-            <div class="listheader">
-              <span>In progress</span>
-              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
-            </div>
-            <div class="listheader">
-              <span>Await feedback</span>
-              <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
-            </div class="listheader"> 
-            <div class="listheader">Done</div>
-        </div>
-        
-      </section>
+      </div>
     </div>
-  </div>
-  </div>
   </body>
 </html>
