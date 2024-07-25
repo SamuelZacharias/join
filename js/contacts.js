@@ -173,12 +173,12 @@ function displayContactInfo(index) {
   const contactInfoDiv = document.querySelector('.contacts-info-box');
   contactInfoDiv.innerHTML = "";
   contactInfoDiv.innerHTML = generateContactInfo(contact, initials, index);
+  document.getElementById('button-edit-dialog').innerHTML = generateDeleteButtonDialog(index);
   highlightContact(index);
 }
 
 function deleteContact(index) {
-  let currentContactIndex = index;
-  contacts.splice(currentContactIndex, 1); // Entfernt den Kontakt aus dem Array
+  contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
   renderContacts(); // Aktualisiert die Anzeige
   saveData();
   document.querySelector('.contacts-info-box').innerHTML = '';
