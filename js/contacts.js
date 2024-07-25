@@ -82,12 +82,17 @@ async function openDialogEdit(index) {
   const dialogContainer = document.getElementById("dialog-edit");
   dialogContainer.open = true;
   dialogContainer.classList.add("d-flex");
+  
+  // Eingabefelder mit den Kontaktinformationen füllen
   document.getElementById('inputEditName').value = contact.name;
   document.getElementById('inputEditEmail').value = contact.email;
   document.getElementById('inputEditPhone').value = contact.phone;
+
+  // Index für den Speichern-Button speichern
   document.getElementById('inputEditName').dataset.index = index;
   document.getElementById('inputEditEmail').dataset.index = index;
   document.getElementById('inputEditPhone').dataset.index = index;
+  
   await sleep(10);
   dialogContainer.classList.add("dialog-open");
   document.getElementById("grey-background").classList.remove("hidden");
@@ -170,10 +175,8 @@ function displayContactInfo(index) {
   const contact = contacts[index];
   let nameParts = contact.name.split(' ');
   let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-  const contactInfoDiv = document.querySelector('.contacts-info-box');
-  contactInfoDiv.innerHTML = "";
+  const contactInfoDiv = document.querySelector('.contacts-info');
   contactInfoDiv.innerHTML = generateContactInfo(contact, initials, index);
-  highlightContact(index);
 }
 
 function deleteContact(index) {
@@ -243,12 +246,4 @@ document.addEventListener('DOMContentLoaded', () => {
   renderContacts(); // Kontaktliste rendern
 });
 
-function highlightContact(index) {
-  const contacts = document.getElementsByClassName('contacts');
-  for (let i = 0; i < contacts.length; i++) {
-      contacts[i].style.backgroundColor = '';
-  }
-  document.getElementById(`contact${index}`).style.backgroundColor = 'var(--gray)';
-  document.getElementById(`contact${index}`).style.color = 'white';
-}
 
