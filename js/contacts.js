@@ -72,7 +72,8 @@ async function closeDialog() {
 }
 
 
-async function openDialogEdit(index,) {
+async function openDialogEdit(index) {
+  
   const contact = contacts[index];
   let nameParts = contact.name.split(' ');
   let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
@@ -176,10 +177,11 @@ function displayContactInfo(index) {
 }
 
 function deleteContact(index) {
+  let currentContactIndex = index;
   contacts.splice(currentContactIndex, 1); // Entfernt den Kontakt aus dem Array
   renderContacts(); // Aktualisiert die Anzeige
   saveData();
-  document.querySelector('.contacts-info').innerHTML = '';
+  document.querySelector('.contacts-info-box').innerHTML = '';
 }
 
 

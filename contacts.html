@@ -68,8 +68,8 @@
           />
           <div class="input-fields-contacts">
             <input id="name" class="input-name" type="text" placeholder="Name" />
-            <input id="email" class="input-email" type="text" placeholder="Email" />
-            <input id="phone" class="input-phone" type="text" placeholder="Phone" />
+            <input id="email" class="input-email" type="email" placeholder="Email" />
+            <input id="phone" class="input-phone" type="phone" placeholder="Phone" />
             <div class="button-contacts">
               <button onclick="closeDialog()" class="button-cancel">
                 Cancel
@@ -126,13 +126,13 @@
           />
           <div class="input-fields-contacts">
             <input id="inputEditName" class="input-name" type="text" placeholder="Name" />
-            <input id="inputEditEmail" class="input-email" type="text" placeholder="Email" />
-            <input id="inputEditPhone" class="input-phone" type="text" placeholder="Phone" />
+            <input id="inputEditEmail" class="input-email" type="email" placeholder="Email" />
+            <input id="inputEditPhone" class="input-phone" type="number" placeholder="Phone" />
             <div class="button-delete-save">
-              <button onclick="deleteContact(), closeDialogEdit()" class="button-delete">
+              <button onclick="deleteContact(index), closeDialogEdit()" class="button-delete">
                 Delete
               </button>
-              <button onclick="editContact()" class="button-save">
+              <button onclick="editContact(index)" class="button-save">
                 Save
                 <img
                   class="check-icon-button"
