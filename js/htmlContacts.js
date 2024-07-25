@@ -69,7 +69,7 @@ function generateDeleteButtonDialog(index){
   <button onclick="deleteContact(${index}), closeDialogEdit()" class="button-delete">
   Delete
 </button>
-<button onclick="editContact(${index})" class="button-save">
+<button onclick="validateEditForm(${index})" class="button-save">
   Save
   <img
     class="check-icon-button"

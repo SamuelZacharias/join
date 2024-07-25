@@ -247,3 +247,87 @@ function highlightContact(index) {
   document.getElementById(`contact${index}`).style.color = 'white';
 }
 
+function setError(inputElement, message) {
+  inputElement.dataset.originalPlaceholder = inputElement.placeholder;
+  inputElement.placeholder = message;
+  inputElement.classList.add('error');
+}
+
+function clearError(inputElement) {
+  if (inputElement.dataset.originalPlaceholder) {
+      inputElement.placeholder = inputElement.dataset.originalPlaceholder;
+  }
+  inputElement.classList.remove('error');
+}
+
+function validateForm() {
+  let isValid = true;
+
+  // Name Validierung
+  const nameInput = document.getElementById('name');
+  if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
+      setError(nameInput, 'Invalid name');
+      isValid = false;
+  } else {
+      clearError(nameInput);
+  }
+
+  // Email Validierung
+  const emailInput = document.getElementById('email');
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      setError(emailInput, 'Invalid email');
+      isValid = false;
+  } else {
+      clearError(emailInput);
+  }
+
+  // Telefonnummer Validierung
+  const phoneInput = document.getElementById('phone');
+  if (!phoneInput.value.match(/^\d+$/)) {
+      setError(phoneInput, 'Invalid phone number');
+      isValid = false;
+  } else {
+      clearError(phoneInput);
+  }
+
+  if (isValid) {
+    addContact();
+    closeDialog(); 
+    openDialogSuccesfully();
+  }
+}
+
+function validateEditForm() {
+  let isValid = true;
+
+  // Name Validierung
+  const nameInput = document.getElementById('inputEditName');
+  if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
+      setError(nameInput, 'Invalid name');
+      isValid = false;
+  } else {
+      clearError(nameInput);
+  }
+
+  // Email Validierung
+  const emailInput = document.getElementById('inputEditEmail');
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      setError(emailInput, 'Invalid email');
+      isValid = false;
+  } else {
+      clearError(emailInput);
+  }
+
+  // Telefonnummer Validierung
+  const phoneInput = document.getElementById('inputEditPhone');
+  if (!phoneInput.value.match(/^\d+$/)) {
+      setError(phoneInput, 'Invalid phone number');
+      isValid = false;
+  } else {
+      clearError(phoneInput);
+  }
+
+  if (isValid) {
+    editContact();
+  }
+}

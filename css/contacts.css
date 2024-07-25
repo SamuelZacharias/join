@@ -303,3 +303,7 @@ h3 {
 .contacts-info {
   animation: slideInFromRight 0.3s ease-in;
 }
+
+.error {
+  border-color: red;
+}

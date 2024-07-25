@@ -69,7 +69,7 @@
           <div class="input-fields-contacts">
             <input id="name" class="input-name" type="text" placeholder="Name" />
             <input id="email" class="input-email" type="email" placeholder="Email" />
-            <input id="phone" class="input-phone" type="phone" placeholder="Phone" />
+            <input id="phone" class="input-phone" type="text" placeholder="Phone" />
             <div class="button-contacts">
               <button onclick="closeDialog()" class="button-cancel">
                 Cancel
@@ -89,7 +89,7 @@
                   />
                 </svg>
               </button>
-              <button onclick="addContact(), closeDialog(), openDialogSuccesfully()" class="button-create">
+              <button onclick=" validateForm()" class="button-create">
                 Create contact
                 <img
                   class="check-icon-button"
@@ -127,9 +127,8 @@
           <div class="input-fields-contacts">
             <input id="inputEditName" class="input-name" type="text" placeholder="Name" />
             <input id="inputEditEmail" class="input-email" type="email" placeholder="Email" />
-            <input id="inputEditPhone" class="input-phone" type="number" placeholder="Phone" />
+            <input id="inputEditPhone" class="input-phone" type="text" placeholder="Phone" />
             <div id="button-edit-dialog" class="button-delete-save">
-              
             </div>
           </div>
         </div>
