@@ -221,3 +221,21 @@ input:focus{
   color: white;
   margin-right: -10px;
 }
+
+.contactsPrioArea{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskCard:hover{
+  cursor: pointer;
+}
+.taskCardClickHold{
+  transform: rotate(5deg);
+}
+
+
+.dragging {
+  opacity: 0.5;
+}

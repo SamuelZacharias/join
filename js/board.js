@@ -1,10 +1,10 @@
-let allTasks = []
-let tasksToDo = []
-let tasksInProgress = []
-let tasksFeedback = []
-let tasksDone = []
+let allTasks = [];
+let tasksToDo = [];
+let tasksInProgress = [];
+let tasksFeedback = [];
+let tasksDone = [];
 
-const BASE_URL = ('https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/')
+const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
 async function getTasksFromDataBase() {
   try {
@@ -14,26 +14,23 @@ async function getTasksFromDataBase() {
     }
     let responseAsJson = await response.json();
     console.log(responseAsJson);
-    allTasks = responseAsJson
+    allTasks = responseAsJson;
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
   renderTasks();
 }
 
-
-
-
 function renderTasks() {
   let toDoArea = document.getElementById('toDo');
   toDoArea.innerHTML = ``;
   for (let i = 0; i < allTasks.length; i++) {
     toDoArea.innerHTML += `
-      <div class="taskCard">
+      <div draggable="true" class="taskCard"  id="taskCard${i}" >
         <span id="taskCategory${i}" class="taskCategory">${allTasks[i].category}</span>
         <div class="taskInfo">
           <div class="taskTitle">${allTasks[i].title}</div>
-          <div id="taskDescription" class="taskDescription">lorejsfdjfsfjsdjf ernwfow wnfwfnwfo  wnfwonfsf ofnsdnfdsfnw nwfnonf ofwrnfnofowf sdfsd dfsf rwrw dfrrwr wwrtwfsd ${allTasks[i].description}</div>
+          <div id="taskDescription${i}" class="taskDescription">${allTasks[i].description}</div>
         </div>
         <div id="taskContainer${i}">
           <div class="task">
@@ -43,18 +40,25 @@ function renderTasks() {
             <span id="subtaskStatus${i}"></span>
           </div>
         </div>
-        <div>
+        <div class="contactsPrioArea">
           <div class="taskContacts" id="contacts${i}"></div>
           <div id="priority${i}"></div>
         </div>
       </div>
     `;
     renderSubtasks(i);
-    categoryColor(i)
-    taskDescriptionLength()
-    renderContacts(i)
-    renderPriority(i)
+    categoryColor(i);
+    taskDescriptionLength(i);
+    renderContacts(i);
+    renderPriority(i);
   }
+
+  // Initialize drag-and-drop for all task cards after rendering
+  setTimeout(() => {
+    for (let i = 0; i < allTasks.length; i++) {
+      initializeDragAndDrop(i);
+    }
+  }, 0);
 }
 
 function renderSubtasks(i) {
@@ -75,25 +79,24 @@ function renderSubtasks(i) {
   }
 }
 
-
 let contactInitialColors = {};
 let contactColors = ["#FF4646", "#FFE62B", "#FFBB2B", "#C3FF2B", "#0038FF", "#FFC701", "#FC71FF",
   "#FFA35E", "#FF745E", "#9327FF", "#00BEE8", "#1FD7C1", "#6E52FF", "#FF5EB3", "#FF7A00"];
 let availableColors = [...contactColors]; // Create a copy of the contactColors array
 
-function categoryColor(i){
-  if(allTasks[i].category === 'User Task'){
-    document.getElementById(`taskCategory${i}`).classList.add('userTask')
+function categoryColor(i) {
+  if (allTasks[i].category === 'User Task') {
+    document.getElementById(`taskCategory${i}`).classList.add('userTask');
   }
-  if(allTasks[i].category === 'Technical task'){
-    document.getElementById(`taskCategory${i}`).classList.add('technicalTask')
+  if (allTasks[i].category === 'Technical task') {
+    document.getElementById(`taskCategory${i}`).classList.add('technicalTask');
   }
 }
 
-function taskDescriptionLength() {
-  let taskDescription = document.getElementById('taskDescription');
+function taskDescriptionLength(i) {
+  let taskDescription = document.getElementById(`taskDescription${i}`);
   let text = taskDescription.innerText;
-  
+
   if (text.length > 100) {
     taskDescription.innerText = text.substring(0, 100) + '...';
   }
@@ -138,21 +141,69 @@ function assignColors() {
   }
 }
 
-function renderPriority(i){
+function renderPriority(i) {
   let priority = document.getElementById(`priority${i}`);
-  if(allTasks[i].priority === 'Low'){
+  if (allTasks[i].priority === 'Low') {
     priority.innerHTML = `
       <img src="assets/img/svg/low.svg" alt="">
     `;
   }
-  if(allTasks[i].priority === 'Medium'){
+  if (allTasks[i].priority === 'Medium') {
     priority.innerHTML = `
       <img src="assets/img/png/mediumColor.png" alt="">
     `;
   }
-  if(allTasks[i].priority === 'Urgent'){
+  if (allTasks[i].priority === 'Urgent') {
     priority.innerHTML = `
       <img src="assets/img/svg/urgent.svg" alt="">
     `;
+  }
+}
+
+function tiltTaskCard(i) {
+  let taskcard = document.getElementById(`taskCard${i}`);
+  taskcard.classList.add('taskCardClickHold');
+}
+
+function tiltTaskCardBack(i) {
+  let taskcard = document.getElementById(`taskCard${i}`);
+  taskcard.classList.remove('taskCardClickHold');
+}
+
+function initializeDragAndDrop(i) {
+  const source = document.getElementById(`taskCard${i}`);
+
+  source.addEventListener("dragstart", (event) => {
+    // Store a reference to the dragged element
+    dragged = event.target;
+    // Add the class to show the card is being dragged
+    event.target.classList.add("dragging");
+    event.target.classList.add('taskCardClickHold');
+    // Use event.dataTransfer to store some data
+    event.dataTransfer.setData("text/plain", event.target.id);
+  });
+
+  source.addEventListener("dragend", (event) => {
+    // Remove the class when dragging is done
+    event.target.classList.remove("dragging");
+    event.target.classList.remove('taskCardClickHold');
+  });
+
+  // Add event listeners for each drop target
+  const dropTargets = document.getElementsByClassName("dragTarget");
+  for (let target of dropTargets) {
+    target.addEventListener("dragover", (event) => {
+      // Prevent default to allow drop
+      event.preventDefault();
+    });
+
+    target.addEventListener("drop", (event) => {
+      // Prevent default action (open as link for some elements)
+      event.preventDefault();
+      // Move dragged element to the drop target
+      if (dragged) {
+        target.appendChild(dragged);
+      }
+    });
   }
 }
