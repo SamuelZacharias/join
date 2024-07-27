@@ -239,3 +239,7 @@ input:focus{
 .dragging {
   opacity: 0.5;
 }
+
+.d-none {
+  display: none;
+}

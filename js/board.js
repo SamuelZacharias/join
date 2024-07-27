@@ -33,69 +33,104 @@ async function getTasksFromDataBase() {
 
 // Function to load tasks from localStorage
 function loadTasksFromLocalStorage() {
-    const tasks = JSON.parse(localStorage.getItem('tasks'));
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (savedTasks) {
+        tasks.length = 0;  // Clear the current tasks
+        tasks.push(...savedTasks);
+    }
     console.log('Loaded tasks:', tasks);
-    renderToDoTasks();
+    renderTasks();  // Render all tasks
 }
 
+// Function to render tasks based on their column
+function renderTasks() {
+    // Clear existing columns
+    document.getElementById('toDo').innerHTML = '';
+    document.getElementById('inProgress').innerHTML = '';
+    document.getElementById('awaitFeedback').innerHTML = '';
+    document.getElementById('done').innerHTML = '';
 
-
-
-
-function renderToDoTasks() {
-    let toDoColumn = document.getElementById('toDo');
-    const tasksWithToDo = tasks.filter(task => task.column === 'toDo');
-    toDoColumn.innerHTML = '';
-    tasksWithToDo.forEach((task, i) => {
-        toDoColumn.innerHTML += `
-            <div draggable="true" class="taskCard" id="taskCard${i}">
-                <span id="taskCategory${i}" class="taskCategory">${task.category || 'No Category'}</span>
-                <div class="taskInfo">
-                    <div class="taskTitle">${task.title || 'No Title'}</div>
-                    <div id="taskDescription${i}" class="taskDescription">${task.description || 'No Description'}</div>
-                </div>
-                <div class="contactsPrioArea">
-                    <div class="taskContacts" id="contacts${i}">
-                    </div>
-                    <div id="priority${i}"></div>
-                </div>
-            </div>
-        `;
-        categoryColor(i, task)
-        renderPriority(i)
+    // Render tasks into respective columns
+    tasks.forEach((task, i) => {
+        let columnElement = document.getElementById(task.column);
+        if (columnElement) {
+            const taskHtml = returnRenderHtml(i, task);
+            columnElement.innerHTML += taskHtml;
+            categoryColor(i, task);
+            renderPriority(i);
+        }
     });
-    
 }
 
+// Function to generate HTML for a task
+function returnRenderHtml(i, task) {
+    return `
+    <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)">
+        <span id="taskCategory${i}" class="taskCategory">${task.category}</span>
+        <div class="taskInfo">
+            <div class="taskTitle">${task.title || 'No Title'}</div>
+            <div id="taskDescription${i}" class="taskDescription">${task.description || 'No Description'}</div>
+        </div>
+        <div class="contactsPrioArea">
+            <div class="taskContacts" id="contacts${i}"></div>
+            <div id="priority${i}"></div>
+        </div>
+    </div>
+    `;
+}
 
-
+// Function to set category color
 function categoryColor(i, task) {
     const categoryElement = document.getElementById(`taskCategory${i}`);
-    if (task.category === 'User Task') {
-        categoryElement.classList.add('userTask');
-    } else if (task.category === 'Technical task') {
-        categoryElement.classList.add('technicalTask');
+    if (categoryElement) {
+        if (task.category === 'User Task') {
+            categoryElement.classList.add('userTask');
+        } else if (task.category === 'Technical task') {
+            categoryElement.classList.add('technicalTask');
+        }
     }
 }
 
-function taskDescriptionLength(i) {
-    const descriptionElement = document.getElementById(`taskDescription${i}`);
-    if (descriptionElement.textContent.length > 100) {
-        descriptionElement.textContent = `${descriptionElement.textContent.slice(0, 100)}...`;
-    }
-}
-
+// Function to set task priority
 function renderPriority(i) {
     const priorityElement = document.getElementById(`priority${i}`);
-    
-    if (tasks[i].priority === 'Low') {
-        priorityElement.innerHTML = `<img src="./assets/img/svg/low.svg" alt="Low Priority">`;
+    if (priorityElement) {
+        if (tasks[i].priority === 'Low') {
+            priorityElement.innerHTML = `<img src="./assets/img/svg/low.svg" alt="Low Priority">`;
+        }
+        if (tasks[i].priority === 'Medium') {
+            priorityElement.innerHTML = `<img src="./assets/img/png/mediumColor.png" alt="Medium Priority">`;
+        }
+        if (tasks[i].priority === 'Urgent') {
+            priorityElement.innerHTML = `<img src="./assets/img/svg/urgent.svg" alt="Urgent Priority">`;
+        }
     }
-    if (tasks[i].priority === 'Medium') {
-        priorityElement.innerHTML = `<img src="./assets/img/png/mediumColor.png" alt="Low Priority">`;
-    } 
-    if (tasks[i].priority === 'Urgent') {
-        priorityElement.innerHTML = `<img src="./assets/img/svg/urgent.svg" alt="Low Priority">`;
-    } 
-     
+}
+
+// Function to handle drag start
+function drag(event) {
+    event.dataTransfer.setData('text/plain', event.target.id);
+}
+
+// Function to handle drop event
+function drop(event) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData('text/plain');
+    const taskElement = document.getElementById(taskId);
+    const targetColumnId = event.target.closest('.taskColumn').id;
+
+    if (taskElement && targetColumnId) {
+        const taskIndex = parseInt(taskId.replace('taskCard', ''));
+        const task = tasks[taskIndex];
+        if (task) {
+            task.column = targetColumnId;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderTasks();
+        }
+    }
+}
+
+// Allow drop operation
+function allowDrop(event) {
+    event.preventDefault();
 }

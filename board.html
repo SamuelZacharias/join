@@ -49,17 +49,17 @@
             </div>
           </section >
           <section class="taskArea">
-              <div class="taskColumn dragTarget" id="toDo">
+              <div class="taskColumn dragTarget" id="toDo" ondrop="drop(event)" ondragover="allowDrop(event)">
                   <div class="noTask">No tasks To do</div>
               </div>
-              <div class="taskColumn dragTarget" id="inProgress">
+              <div class="taskColumn dragTarget" id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="noTask">No tasks in progress</div>
               </div>
                 
-              <div class="taskColumn dragTarget" id="awaitFeedback">
+              <div class="taskColumn dragTarget" id="awaitFeedback" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="noTask">No tasks awaiting feedback</div>
               </div>
-              <div class="taskColumn dragTarget" id="done">
+              <div class="taskColumn dragTarget" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="noTask">No tasks done</div>
               </div>
           </section>
