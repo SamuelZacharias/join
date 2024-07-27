@@ -101,7 +101,7 @@ header {
 }
 
 .greetBox1 {
-    width: 338px;
+    width: auto;
     height: 56px;
     color: var(--highlight);
     font-size: 47px;
