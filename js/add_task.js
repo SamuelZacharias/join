@@ -546,7 +546,8 @@ function collectData() {
     priority: priority,
     category: categoryElement,
     assignedContacts: assignedContacts,
-    subtasks: subtasks
+    subtasks: subtasks,
+    column : 'toDo',
   };
 }
 
