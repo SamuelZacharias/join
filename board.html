@@ -13,7 +13,7 @@
     <script src="js/board.js"></script>
     <title>My Board</title>
   </head>
-  <body onload="getTasksFromDataBase()">
+  <body onload="getTasksFromDataBase(), assignContactColors()">
     <div class="d-flex">
       <div w3-include-html="Templates/sidebar.html"></div>
       <div>
@@ -49,20 +49,35 @@
             </div>
           </section >
           <section class="taskArea">
-              <div class="taskColumn dragTarget" id="toDo" ondrop="drop(event)" ondragover="allowDrop(event)">
-                  <div class="noTask">No tasks To do</div>
-              </div>
-              <div class="taskColumn dragTarget" id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="taskColumn dragTarget" id="toDo" 
+                 ondrop="drop(event)" 
+                 ondragover="allowDrop(event)"
+                 ondragenter="dragEnter(event)"
+                 ondragleave="dragLeave(event)">
+                <div class="noTask">No tasks To do</div>
+            </div>
+            <div class="taskColumn dragTarget" id="inProgress" 
+                 ondrop="drop(event)" 
+                 ondragover="allowDrop(event)"
+                 ondragenter="dragEnter(event)"
+                 ondragleave="dragLeave(event)">
                 <div class="noTask">No tasks in progress</div>
-              </div>
-                
-              <div class="taskColumn dragTarget" id="awaitFeedback" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div class="taskColumn dragTarget" id="awaitFeedback" 
+                 ondrop="drop(event)" 
+                 ondragover="allowDrop(event)"
+                 ondragenter="dragEnter(event)"
+                 ondragleave="dragLeave(event)">
                 <div class="noTask">No tasks awaiting feedback</div>
-              </div>
-              <div class="taskColumn dragTarget" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div class="taskColumn dragTarget" id="done" 
+                 ondrop="drop(event)" 
+                 ondragover="allowDrop(event)"
+                 ondragenter="dragEnter(event)"
+                 ondragleave="dragLeave(event)">
                 <div class="noTask">No tasks done</div>
-              </div>
-          </section>
+            </div>
+        </section>
         </div>
       </div>
     </div>

@@ -116,6 +116,7 @@ input:focus{
 }
 
 .taskColumn{
+  min-height: 500px;
   width: 252px;
 }
 
@@ -233,8 +234,14 @@ input:focus{
 }
 .taskCardClickHold{
   transform: rotate(5deg);
+  box-shadow: 2px 2px 12px 2px gray;
 }
 
+
+.columnDragTo{
+  border: 2px solid var(--border)
+
+}
 
 .dragging {
   opacity: 0.5;
