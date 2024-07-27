@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let loggedInUserName = localStorage.getItem('loggedInUserName');
+    let loggedInUserName = localStorage.getItem('loggedInUserName');
 
-  if (loggedInUserName) {
-      console.log('Logged-in user name:', loggedInUserName);
-      let greetNameElement = document.getElementById('greetName');
-      if (greetNameElement) {
-          greetNameElement.innerHTML = `${loggedInUserName}`;
-      }
-  } else {
-      console.log('No logged-in user name found');
-  }
+    if (loggedInUserName) {
+        console.log('Logged-in user name:', loggedInUserName);
+        let greetNameElement = document.getElementById('greetName');
+        if (greetNameElement) {
+            greetNameElement.innerHTML = `${loggedInUserName}`;
+        }
+    } else {
+        console.log('No logged-in user name found');
+    }
 });
 
 function getGreeting() {
@@ -47,3 +47,20 @@ function updateGreeting() {
 
 // Aktualisieren der Begrüßung, sobald die Seite geladen ist
 window.onload = updateGreeting;
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function setFutureDate() {
+    const futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + 14);
+    const formattedDate = formatDate(futureDate);
+    document.querySelector('.date').textContent = formattedDate;
+}
+
+window.onload = function () {
+    updateGreeting();
+    setFutureDate();
+};
