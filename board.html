@@ -14,13 +14,15 @@
     <title>My Board</title>
   </head>
   <body onload="getTasksFromDataBase(), assignContactColors()">
+    <div id="openedTaskContainer" class="openedTaskContainer d-none"></div>
     <div class="d-flex">
       <div w3-include-html="Templates/sidebar.html"></div>
       <div>
         <div w3-include-html="Templates/header.html"></div>
       
-    
+        
         <div class="boardContent" >
+          
           <section name="boardHeader">
             <div class="contentHeader">
               <h1>Board</h1>

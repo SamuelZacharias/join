@@ -89,7 +89,7 @@ function renderTasks(tasksToRender = tasks) {
 
 function returnRenderHtml(i, task) {
     return `
-    <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)">
+    <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)" onclick="openTask(${i}, tasks[${i}])">
         <span id="taskCategory${i}" class="taskCategory">${task.category}</span>
         <div class="taskInfo">
             <div class="taskTitle">${task.title || 'No Title'}</div>
@@ -386,3 +386,89 @@ async function updateTaskInFirebase(task) {
 
 
 
+function openTask(i, task) {
+    let openedTaskContainer = document.getElementById('openedTaskContainer');
+    openedTaskContainer.classList.remove('d-none');
+    openedTaskContainer.innerHTML = `
+        <div class="openedTask" id="openedTask"></div>
+    `;
+    document.getElementById('openedTask').innerHTML = `
+        <div class="taskDetails">
+            <div class="openedTaskCategory">
+                <span>${task.category}</span>
+                <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
+            </div>
+            <h1>${task.title}</h1>
+            <p>${task.description}</p>
+            <div>Due date: ${task.dueDate}</div>
+            <div>Priority: ${task.priority}</div>
+            <div class="openedAssigendContactsArea">
+             <div>Assigned To:</div>
+             <div id="openedAssignedContacts"> </div>
+            </div>
+            <div>   
+                <div>Subtasks:</div>
+                <div id="openedSubtasks"></div> 
+            </div>
+            <div class="deleteEditArea">
+                <div class="delete"><img src="/assets/img/png/delete.png"> Delete</div>
+                <div class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
+            </div>
+        </div>
+    `;
+    renderOpenTaskAssignedContacts(task)
+    renderOpenTaskSubtasks(task)
+}
+
+function renderOpenTaskAssignedContacts(task) {
+    let openedAssignedContacts = document.getElementById('openedAssignedContacts');
+    openedAssignedContacts.innerHTML = '';
+
+    if (!task.assignedContacts || task.assignedContacts.length === 0) {
+        openedAssignedContacts.innerHTML = 'No contacts assigned';
+    } else {
+        const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+        
+        for (let x = 0; x < task.assignedContacts.length; x++) {
+            let contactName = task.assignedContacts[x];
+            const initials = getInitials(contactName);
+            const color = contactColorsAssignment[contactName] || '#000';
+
+            openedAssignedContacts.innerHTML += `
+            <div class="openedAssigendContacts">
+                <div class="openedAssigendContactsInitials" style="background-color: ${color}; ">
+                    ${initials}
+                </div>
+                <div>${contactName}</div>
+            </div>
+            `;
+        }
+    }
+}
+function renderOpenTaskSubtasks(task) {
+    let openedSubtasksArea = document.getElementById('openedSubtasks');
+    openedSubtasksArea.innerHTML = ''; // Clear existing subtasks
+
+    if (!task.subtasks || task.subtasks.length === 0) {
+        openedSubtasksArea.innerHTML = 'No Subtasks';
+    } else {
+        for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
+            let subtask = task.subtasks[subtaskIndex];
+            let isChecked = subtask.completed ? 'checked' : '';
+            openedSubtasksArea.innerHTML += `
+                <div class="openedSubtaskTitle">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" ${isChecked}
+                            onclick="setSubtaskCompleted(${tasks.indexOf(task)}, ${subtaskIndex}, this.checked)">
+                        <span class="checkmark"></span>
+                        ${subtask.title}
+                    </label>
+                </div>
+            `;
+        }
+    }
+}
+
+function closeOpenedTask(){
+    document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
+}

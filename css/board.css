@@ -257,6 +257,159 @@ input:focus{
   opacity: 0.5;
 }
 
+
+
+
+.openedTaskContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1440px;
+  height: 100%;
+  position: fixed;
+  z-index: 99;
+  background-color: rgba(151, 149, 149, 0.37);
+}
+
+.openedTask{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  background-color: white;
+  width: 525px;
+  box-sizing: border-box;
+  max-height: 80vh;
+  height: fit-content;
+  border-radius: 30px;
+  padding: 48px 40px;
+  scrollbar-width: none;
+}
+
+.openedTaskCategory{
+  display: flex;
+  justify-content: space-between;
+}
+.openedTaskClose:hover{
+  background-color: var(--background);
+  border-radius: 16px;
+  cursor: pointer;
+
+}
+
+.taskDetails{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.deleteEditArea{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 24px;
+}
+.edit, .delete{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.openedAssigendContactsArea{
+  max-height: 162px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.openedAssigendContacts{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px;
+ 
+}
+
+.openedAssigendContactsInitials{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+}
+
+#openedSubtasks{
+  max-height: 110px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.openedSubtaskTitle{
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+  gap: 16px;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hide the native checkbox */
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+/* When the checkbox is checked */
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #fff;
+}
+
+/* Checkmark indicator */
+.custom-checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Checkmark/indicator style */
+.custom-checkbox .checkmark:after {
+  left: 1px;
+  top: 0px;
+  width: 6px;
+  height: 6px;
+  border: solid black;
+  border-width: 0 2px 1px 0;
+  transform: rotate(45deg);
+}
+
 .d-none {
   display: none;
 }
+
+
+
+
