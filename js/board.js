@@ -46,7 +46,7 @@ function loadTasksFromLocalStorage() {
 }
 
 
-function renderTasks() {
+function renderTasks(tasksToRender = tasks) {
     const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
         const columnElement = document.getElementById(columnId);
@@ -55,7 +55,7 @@ function renderTasks() {
         }
     });
 
-    tasks.forEach((task, i) => {
+    tasksToRender.forEach((task, i) => {
         const columnElement = document.getElementById(task.column);
         if (columnElement) {
             const taskHtml = returnRenderHtml(i, task);
@@ -63,7 +63,7 @@ function renderTasks() {
             categoryColor(i, task);
             renderPriority(i);
             renderContacts(i);
-            renderSubtasks(i);  
+            renderSubtasks(i);
         }
     });
 
@@ -262,9 +262,17 @@ async function setSubtaskCompleted(taskIndex, subtaskIndex, completed) {
 }
 
 
+function filterTasks() {
+    const searchInput = document.getElementById('search').value.toLowerCase();
+    const filteredTasks = tasks.filter(task => {
+        return task.title.toLowerCase().includes(searchInput) || task.description.toLowerCase().includes(searchInput);
+    });
+    renderFilteredTasks(filteredTasks);
+}
 
-
-
+function renderFilteredTasks(filteredTasks) {
+    renderTasks(filteredTasks);
+}
 
 
 
