@@ -1,9 +1,9 @@
 const tasks = [];
 
-// Base URL for fetching tasks
+
 const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
-// Function to fetch tasks from the database
+
 async function getTasksFromDataBase() {
     try {
         const response = await fetch(BASE_URL + '.json');
@@ -14,16 +14,16 @@ async function getTasksFromDataBase() {
         const responseAsJson = await response.json();
         console.log('Tasks fetched from database:', responseAsJson);
 
-        // Clear global array before populating
+       
         tasks.length = 0;
 
-        // Transform the object into an array
+        
         const tasksArray = Object.keys(responseAsJson).map(key => ({ id: key, ...responseAsJson[key] }));
         tasks.push(...tasksArray);
 
         console.log('Tasks array:', tasks);
 
-        // Assign colors to contacts
+        
         assignContactColors();
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -34,18 +34,18 @@ async function getTasksFromDataBase() {
     }
 }
 
-// Function to load tasks from localStorage
+
 function loadTasksFromLocalStorage() {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (savedTasks) {
-        tasks.length = 0;  // Clear the current tasks
+        tasks.length = 0;  
         tasks.push(...savedTasks);
     }
     console.log('Loaded tasks:', tasks);
-    renderTasks();  // Render all tasks
+    renderTasks();  
 }
 
-// Function to render tasks based on their column
+
 function renderTasks() {
     const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
@@ -63,7 +63,7 @@ function renderTasks() {
             categoryColor(i, task);
             renderPriority(i);
             renderContacts(i);
-            renderSubtasks(i);  // Add this line to render subtasks
+            renderSubtasks(i);  
         }
     });
 
@@ -86,7 +86,7 @@ function renderTasks() {
 }
 
 
-// Function to generate HTML for a task
+
 function returnRenderHtml(i, task) {
     return `
     <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)">
@@ -109,7 +109,7 @@ function returnRenderHtml(i, task) {
     `;
 }
 
-// Function to set category color
+
 function categoryColor(i, task) {
     const categoryElement = document.getElementById(`taskCategory${i}`);
     if (categoryElement) {
@@ -121,7 +121,7 @@ function categoryColor(i, task) {
     }
 }
 
-// Function to set task priority
+
 function renderPriority(i) {
     const priorityElement = document.getElementById(`priority${i}`);
     if (priorityElement) {
@@ -141,7 +141,7 @@ function renderPriority(i) {
 function renderContacts(i) {
     let renderedContacts = document.getElementById(`contacts${i}`);
     if (renderedContacts) {
-        renderedContacts.innerHTML = ''; // Clear any existing contacts
+        renderedContacts.innerHTML = ''; 
         const contacts = tasks[i].assignedContacts;
         const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
 
@@ -149,7 +149,7 @@ function renderContacts(i) {
             const maxContactsToShow = 5;
             for (let c = 0; c < Math.min(contacts.length, maxContactsToShow); c++) {
                 const initials = getInitials(contacts[c]);
-                const color = contactColorsAssignment[contacts[c]] || '#000'; // Default to black if no color assigned
+                const color = contactColorsAssignment[contacts[c]] || '#000'; 
                 renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: ${color};">${initials}</div>`;
             }
             if (contacts.length > maxContactsToShow) {
@@ -202,7 +202,7 @@ function getInitials(name) {
     const nameParts = name.split(' ');
     let initials = '';
     for (let part of nameParts) {
-        if (part.length > 0 && initials.length < 2) { // Limit initials to 2 characters
+        if (part.length > 0 && initials.length < 2) { 
             initials += part[0].toUpperCase();
         }
     }
@@ -241,31 +241,22 @@ function renderSubtasks(i) {
         subtaskArea.style.display = 'none';
         return;
     }
-
     const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
     const totalSubtasks = subtasks.length;
     const progress = (completedSubtasks / totalSubtasks) * 100;
-
     console.log(`Task ${i}: ${completedSubtasks}/${totalSubtasks} subtasks completed`);
     console.log(`Progress: ${progress}%`);
-
-    // Update progress bar and text
     progressBarFill.style.width = `${progress}%`;
-    progressBar.style.display = totalSubtasks > 0 ? 'block' : 'none';
-    subtaskProgressText.textContent = `${completedSubtasks}/${totalSubtasks}`;
-    subtaskProgressText.style.display = totalSubtasks > 0 ? 'block' : 'none';
-    subtaskArea.style.display = totalSubtasks > 0 ? 'block' : 'none';
+    progressBar.style.display = totalSubtasks > 0 ? 'flex' : 'none';
+    subtaskProgressText.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+    subtaskProgressText.style.display = totalSubtasks > 0 ? 'flex' : 'none';
+    subtaskArea.style.display = totalSubtasks > 0 ? 'flex' : 'none';
 }
 
 
 async function setSubtaskCompleted(taskIndex, subtaskIndex, completed) {
-    // Update the subtask's completed status
     tasks[taskIndex].subtasks[subtaskIndex].completed = completed;
-
-    // Update the task in Firebase
     await updateTaskInFirebase(tasks[taskIndex]);
-
-    // Save to localStorage and re-render tasks
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
 }
@@ -276,7 +267,7 @@ async function setSubtaskCompleted(taskIndex, subtaskIndex, completed) {
 
 
 
-// Function to handle drag start
+
 function drag(event) {
     const taskId = event.target.id;
     const taskElement = document.getElementById(taskId);
@@ -284,7 +275,7 @@ function drag(event) {
     event.dataTransfer.setData('text/plain', taskId);
 }
 
-// Function to handle drop event
+
 async function drop(event) {
     event.preventDefault();
     const taskId = event.dataTransfer.getData('text/plain');
@@ -310,11 +301,16 @@ async function drop(event) {
         console.error('Task element or target column not found:', { taskElement, targetColumnId });
     }
 
-    // Remove the class after dropping
+    
     if (taskElement) {
         taskElement.classList.remove('taskCardClickHold');
     }
 }
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
 function drag(event) {
     const taskId = event.target.id;
     const taskElement = document.getElementById(taskId);
@@ -327,7 +323,7 @@ function dragEnd(event) {
     const taskElement = document.getElementById(taskId);
     taskElement.classList.remove('taskCardClickHold');
 
-    // Remove the columnDragTo class from all columns
+    
     document.querySelectorAll('.taskColumn').forEach(column => {
         column.classList.remove('columnDragTo');
     });
@@ -337,13 +333,13 @@ function mouseHold(event) {
     taskCard.classList.add('taskCardClickHold');
 }
 
-// Function to handle mouse release
+
 function mouseRelease(event) {
     const taskCard = event.currentTarget;
     taskCard.classList.remove('taskCardClickHold');
 }
 
-// Function to handle mouse leave
+
 function mouseLeave(event) {
     const taskCard = event.currentTarget;
     taskCard.classList.remove('taskCardClickHold');
@@ -360,7 +356,7 @@ function dragLeave(event) {
 
 async function updateTaskInFirebase(task) {
     try {
-        const taskId = task.id;  // Assuming each task has a unique `id` property
+        const taskId = task.id;  
         const response = await fetch(`${BASE_URL}${taskId}.json`, {
             method: 'PUT',
             headers: {
@@ -378,9 +374,7 @@ async function updateTaskInFirebase(task) {
     }
 }
 
-// Allow drop operation
-function allowDrop(event) {
-    event.preventDefault();
-}
+
+
 
 
