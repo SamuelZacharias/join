@@ -156,6 +156,10 @@ input:focus{
   transition: width 0.52s;
 }
 
+.subtaskProgressText {
+  display: none; /* Initially hide the progress text */
+}
+
 
 .taskCard{
   display: flex;
@@ -239,8 +243,8 @@ input:focus{
 
 
 .columnDragTo{
-  border: 2px solid var(--border)
-
+  border: 2px solid var(--border);
+  box-shadow: 2px 2px 12px 2px gray;
 }
 
 .dragging {

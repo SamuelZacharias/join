@@ -46,7 +46,6 @@ function loadTasksFromLocalStorage() {
 }
 
 // Function to render tasks based on their column
-// Function to render tasks based on their column
 function renderTasks() {
     const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
@@ -64,6 +63,7 @@ function renderTasks() {
             categoryColor(i, task);
             renderPriority(i);
             renderContacts(i);
+            renderSubtasks(i);  // Add this line to render subtasks
         }
     });
 
@@ -85,14 +85,21 @@ function renderTasks() {
     });
 }
 
+
 // Function to generate HTML for a task
 function returnRenderHtml(i, task) {
     return `
-    <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)"onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)">
+    <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)">
         <span id="taskCategory${i}" class="taskCategory">${task.category}</span>
         <div class="taskInfo">
             <div class="taskTitle">${task.title || 'No Title'}</div>
             <div id="taskDescription${i}" class="taskDescription">${task.description || 'No Description'}</div>
+        </div>
+        <div id="subtaskArea${i}" class="subtaskArea">
+            <div class="progress-bar" style="display: none;">
+                <div id="progressBarFill${i}" class="progress-bar-fill"></div>
+            </div>
+            <div id="subtaskProgressText${i}" class="subtaskProgressText" style="display: none;"></div>
         </div>
         <div class="contactsPrioArea">
             <div class="taskContacts" id="contacts${i}"></div>
@@ -203,9 +210,65 @@ function getInitials(name) {
 }
 
 
+function renderSubtasks(i) {
+    const subtaskArea = document.getElementById(`subtaskArea${i}`);
+    if (!subtaskArea) {
+        console.error(`Subtask area not found for task index ${i}`);
+        return;
+    }
+
+    let progressBar = subtaskArea.querySelector('.progress-bar');
+    let progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
+    let subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
+
+    if (!progressBar) {
+        progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        subtaskArea.appendChild(progressBar);
+
+        progressBarFill = document.createElement('div');
+        progressBarFill.className = 'progress-bar-fill';
+        progressBar.appendChild(progressBarFill);
+
+        subtaskProgressText = document.createElement('div');
+        subtaskProgressText.className = 'subtaskProgressText';
+        subtaskArea.appendChild(subtaskProgressText);
+    }
+
+    const subtasks = tasks[i].subtasks;
+
+    if (!subtasks || subtasks.length === 0) {
+        subtaskArea.style.display = 'none';
+        return;
+    }
+
+    const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
+    const totalSubtasks = subtasks.length;
+    const progress = (completedSubtasks / totalSubtasks) * 100;
+
+    console.log(`Task ${i}: ${completedSubtasks}/${totalSubtasks} subtasks completed`);
+    console.log(`Progress: ${progress}%`);
+
+    // Update progress bar and text
+    progressBarFill.style.width = `${progress}%`;
+    progressBar.style.display = totalSubtasks > 0 ? 'block' : 'none';
+    subtaskProgressText.textContent = `${completedSubtasks}/${totalSubtasks}`;
+    subtaskProgressText.style.display = totalSubtasks > 0 ? 'block' : 'none';
+    subtaskArea.style.display = totalSubtasks > 0 ? 'block' : 'none';
+}
 
 
+async function setSubtaskCompleted(taskIndex, subtaskIndex, completed) {
+    // Update the subtask's completed status
+    tasks[taskIndex].subtasks[subtaskIndex].completed = completed;
 
+    // Update the task in Firebase
+    await updateTaskInFirebase(tasks[taskIndex]);
+
+    // Save to localStorage and re-render tasks
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+}
 
 
 
