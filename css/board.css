@@ -158,7 +158,7 @@ input:focus{
 
 .subtaskProgressText {
   display: none; 
-  width: 170px;
+  width: 200px;
 }
 
 .subtaskArea{
@@ -314,15 +314,18 @@ input:focus{
 }
 
 .openedAssigendContactsArea{
-  max-height: 162px;
   overflow-y: scroll;
   scrollbar-width: none;
+  max-height: 162px;
+  
 }
 .openedAssigendContacts{
+  
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 4px 16px;
+  
  
 }
 

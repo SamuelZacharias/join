@@ -402,9 +402,9 @@ function openTask(i, task) {
             <p>${task.description}</p>
             <div>Due date: ${task.dueDate}</div>
             <div>Priority: ${task.priority}</div>
-            <div class="openedAssigendContactsArea">
-             <div>Assigned To:</div>
-             <div id="openedAssignedContacts"> </div>
+            <div>
+             <div style="margin-bottom:10px;">Assigned To:</div>
+             <div id="openedAssignedContacts" class="openedAssigendContactsArea"> </div>
             </div>
             <div>   
                 <div>Subtasks:</div>
