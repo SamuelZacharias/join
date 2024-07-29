@@ -411,7 +411,7 @@ function openTask(i, task) {
                 <div id="openedSubtasks"></div> 
             </div>
             <div class="deleteEditArea">
-                <div class="delete"><img src="/assets/img/png/delete.png" onclick="deleteTask(${i})"> Delete</div>
+                <div onclick="deleteTask(${i})"  class="delete"><img src="/assets/img/png/delete.png" > Delete</div>
                 <div class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
             </div>
         </div>
@@ -500,6 +500,7 @@ async function deleteTask(taskIndex) {
         renderTasks();
 
         console.log('Task deleted successfully:', task);
+        closeOpenedTask()
     } catch (error) {
         console.error('There was a problem with the delete operation:', error);
     }

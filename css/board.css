@@ -113,10 +113,10 @@ input:focus{
   justify-content: space-between;
   padding: 0px 64px;
   box-sizing: border-box;
+  height: 60vh;
 }
 
 .taskColumn{
-  min-height: 500px;
   width: 252px;
 }
 
@@ -311,6 +311,7 @@ input:focus{
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .openedAssigendContactsArea{
@@ -359,9 +360,7 @@ input:focus{
   cursor: pointer;
 }
 
-input[type="checkbox"]{
-  
-}
+
 
 .custom-checkbox {
   width: 80%;
