@@ -184,7 +184,7 @@ let contactColors = [
     "#FF7A00"
   ];
   function assignContactColors() {
-    let contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+    let contactColorsAssignment = JSON.parse(localStorage.getItem('contactsToAssign')) || {};
     let assignedColors = Object.values(contactColorsAssignment);
     let colorIndex = 0;
 
@@ -416,7 +416,7 @@ function openTask(i, task) {
             </div>
             <div class="deleteEditArea">
                 <div onclick="deleteTask(${i})"  class="delete"><img src="/assets/img/png/delete.png" > Delete</div>
-                <div class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
+                <div onclick="editTask(${i})" class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
             </div>
         </div>
     `;
@@ -475,6 +475,7 @@ function renderOpenTaskSubtasks(task) {
 
 function closeOpenedTask(){
     document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
+    document.getElementById(`editTaskContainer`).classList.add(`d-none`)
 }
 
 
@@ -514,6 +515,162 @@ async function deleteTask(taskIndex) {
 
 
 
-function editTask(){
+function editTask(taskIndex) {
+    document.getElementById('openedTaskContainer').classList.add('d-none');
+    let editTaskContainer = document.getElementById('editTaskContainer');
+    editTaskContainer.classList.remove('d-none');
+    editTaskContainer.innerHTML = `
+        <div class="openedTask" style="gap:24px;" id="editTask"></div>
+    `;
+    let task = tasks[taskIndex];
+    if (!task.assignedContacts) {
+        task.assignedContacts = []; // Initialize if not present
+    }
+    currentTaskBeingEdited = task; // Set currentTaskBeingEdited here
+    renderEditHTML(task);
+}
+
+function renderEditHTML(task){
+    let openedEdit = document.getElementById('editTask');
+    openedEdit.innerHTML = `
+        <div class="closeEditTask">
+            <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
+        </div>
+        <div class="editTaskInfo">
+            <div class="editTitle">
+                <div>Title</div>
+                <div class="titleInput"><input type="text" value="${task.title}"></div>
+            </div>
+            <div class="editTitle">
+                <div>Description</div>
+                <textarea id="taskDescriptionTextarea"></textarea>
+            </div>
+            <div class="editTitle">
+                <div>Due date</div>
+                <div class="titleInput"><input  type="date"></div>
+            </div>
+            <div class="editPriorityArea editTitle">
+                <div>Priority: </div>
+                <div id="editPriorityButtons">
+                </div>
+            </div>
+            <div class="editTitle">
+                <div>Assigned to:</div>
+                <div class="editAssignContacts" onclick="showContactsToChoose()">
+                    <div>Select contacts to assign</div>
+                    <img id="dropDownImg" src="/assets/img/png/arrow_drop_down (1).png">
+                </div>
+                <div id="contactsToChoose"></div>
+            </div>
+        </div>
+    `;
+    checkForDescription(task)
+    renderEditPriorityButtons(task)
+}
+
+
+function checkForDescription(task){
+    let textarea = document.getElementById('taskDescriptionTextarea');
+    if (!task.description) { 
+      textarea.value = 'No description';
+    } else {
+      textarea.value = task.description; 
+    }
+  }
+
+
+  function renderEditPriorityButtons(task) {
+    let buttonsArea = document.getElementById('editPriorityButtons');
+    buttonsArea.innerHTML = `
+        <button class="prioButton buttonhover" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg"></button>
+        <button class="prioButton buttonhover" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.png"></button>
+        <button class="prioButton buttonhover" id="button3" onclick="switchButton('Low')">Low   <img src="assets/img/svg/low.svg"></button>
+    `;
+
+    switchButton(task.priority);
+}
+
+function switchButton(priority) {
+    const buttons = [
+        { id: 'button1', priority: 'Urgent', class: 'urgent' },
+        { id: 'button2', priority: 'Medium', class: 'medium' },
+        { id: 'button3', priority: 'Low', class: 'low' },
+    ];
+
+    buttons.forEach(button => {
+        const element = document.getElementById(button.id);
+        if (button.priority === priority) {
+            element.classList.add(button.class);
+            element.classList.remove('buttonhover');
+        } else {
+            element.classList.remove(button.class);
+            element.classList.add('buttonhover');
+        }
+    });
+
+}
+
+
+function showContactsToChoose() {
+    document.getElementById('dropDownImg').classList.add('dropUpImg');
+    if (!currentTaskBeingEdited) {
+        console.error('No task is currently being edited.');
+        return;
+    }
+
+    const contactsToChooseElement = document.getElementById('contactsToChoose');
+    contactsToChooseElement.innerHTML = ''; // Clear existing content
+
+    // Access global contacts array
+    const contactData = contacts[0]; // Assuming there's only one contact object in the array
+
+    // Combine firstnames and lastnames to form full contact names
+    const contactsList = contactData.firstname.map((firstname, index) => `${firstname} ${contactData.lastname[index]}`);
+
+    // Retrieve the assigned contacts for the current task
+    const task = currentTaskBeingEdited;
+    const assignedContacts = task.assignedContacts || [];
     
+    // Get contact colors assignment
+    const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+
+    // Render the contacts list with the option to assign/unassign
+    contactsList.forEach(contact => {
+        const isAssigned = assignedContacts.includes(contact);
+        const contactClass = isAssigned ? 'editAssignedTo' : '';
+        const initials = getInitials(contact);
+        const color = contactColorsAssignment[contact] || '#000';
+
+        contactsToChooseElement.innerHTML += `
+            <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contact}')">
+                <div class="contactInitials" style="background-color: ${color};">
+                    ${initials}
+                </div>
+                <div>${contact}</div>
+            </div>
+        `;
+    });
+}
+
+// Toggle contact assignment status
+function toggleContactAssignment(contact) {
+    if (!currentTaskBeingEdited) {
+        console.error('No task is currently being edited.');
+        return;
+    }
+
+    const task = currentTaskBeingEdited;
+    const assignedContacts = task.assignedContacts || [];
+    const contactIndex = assignedContacts.indexOf(contact);
+
+    if (contactIndex > -1) {
+        // Contact is assigned, so unassign it
+        assignedContacts.splice(contactIndex, 1);
+    } else {
+        // Contact is not assigned, so assign it
+        assignedContacts.push(contact);
+    }
+
+    task.assignedContacts = assignedContacts;
+    showContactsToChoose(); // Re-render the contacts list
 }
