@@ -411,7 +411,7 @@ function openTask(i, task) {
                 <div id="openedSubtasks"></div> 
             </div>
             <div class="deleteEditArea">
-                <div class="delete"><img src="/assets/img/png/delete.png"> Delete</div>
+                <div class="delete"><img src="/assets/img/png/delete.png" onclick="deleteTask(${i})"> Delete</div>
                 <div class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
             </div>
         </div>
@@ -471,4 +471,44 @@ function renderOpenTaskSubtasks(task) {
 
 function closeOpenedTask(){
     document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
+}
+
+
+async function deleteTask(taskIndex) {
+    try {
+        const task = tasks[taskIndex];
+        if (!task || !task.id) {
+            throw new Error('Task not found or invalid task ID');
+        }
+
+        // Remove the task from Firebase
+        const response = await fetch(`${BASE_URL}${task.id}.json`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }
+
+        // Remove the task from the local tasks array
+        tasks.splice(taskIndex, 1);
+
+        // Update localStorage with the modified tasks array
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        // Re-render the tasks
+        renderTasks();
+
+        console.log('Task deleted successfully:', task);
+    } catch (error) {
+        console.error('There was a problem with the delete operation:', error);
+    }
+}
+
+
+
+
+
+function editTask(){
+    
 }

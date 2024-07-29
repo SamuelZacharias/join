@@ -348,9 +348,20 @@ input:focus{
   align-items: center;
   padding: 6px 16px;
   gap: 16px;
+  border-radius: 10px;
+  width: 100%;
+}
+.openedSubtaskTitle:hover{
+  background-color: var(--background);
+  cursor: pointer;
+}
+
+input[type="checkbox"]{
+  
 }
 
 .custom-checkbox {
+  width: 80%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -405,6 +416,9 @@ input:focus{
   border-width: 0 2px 1px 0;
   transform: rotate(45deg);
 }
+
+
+
 
 .d-none {
   display: none;
