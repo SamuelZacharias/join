@@ -1,5 +1,5 @@
 const tasks = [];
-
+const contacts = []
 
 const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
@@ -36,8 +36,12 @@ async function getTasksFromDataBase() {
 
 
 function loadTasksFromLocalStorage() {
+    const savedContacts = JSON.parse(localStorage.getItem('contactsCanBeAssigned'))
+
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (savedTasks) {
+    if (savedTasks || contacts) {
+        contacts.length = 0;
+        contacts.push(savedContacts);
         tasks.length = 0;  
         tasks.push(...savedTasks);
     }

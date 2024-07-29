@@ -3,11 +3,7 @@ let choosenCategory = false;
 let category = ["User Task", "Technical task"];
 let activeButton = 2;
 
-let contacts = {
-  'firstname' : ["Biene", "Vladimir", "Ella","Peter", "Paul", "Albert","Walter"],
-  'lastname' : ["Maya","Putin", "Bella", "Pan","Ivan", "Meyer", "White"]
-}
-
+let contacts = JSON.parse(localStorage.getItem('contactsCanBeAssigned'))
 
 function handleClick(buttonNumber) {
   if (activeButton !== null) {
