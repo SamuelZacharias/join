@@ -60,55 +60,43 @@ function setFutureDate() {
     document.querySelector('.date').textContent = formattedDate;
 }
 
+
+const tasks = [];
+
 function loadTasksFromLocalStorage() {
-    // Standardmäßig leere Arrays, falls nichts im localStorage gefunden wird
-    let toDo = [];
-    let inProgress = [];
-    let awaitFeedback = [];
-    let done = [];
+    // Retrieve the tasks JSON string from localStorage
+    let tasksFromStorage = localStorage.getItem('tasks');
 
-    // Versuchen, die Daten aus dem localStorage zu laden
-    const tasksJSON = localStorage.getItem('tasks');
-    if (tasksJSON) {
-        const tasks = JSON.parse(tasksJSON);
+    // Check if tasks data exists in localStorage
+    if (tasksFromStorage) {
+        // Parse the JSON string into an array
+        const parsedTasks = JSON.parse(tasksFromStorage);
 
-        // Die Informationen in den Arrays aufteilen
-        tasks.forEach(task => {
-            if (task.column === 'toDo') {
-                toDo.push(task);
-            } else if (task.column === 'inProgress') {
-                inProgress.push(task);
-            } else if (task.column === 'awaitFeedback') {
-                awaitFeedback.push(task);
-            } else if (task.column === 'done') {
-                done.push(task);
-            }
-        });
+        // Clear the current tasks array
+        tasks.length = 0;
+
+        // Push the parsed tasks into the tasks array
+        tasks.push(...parsedTasks);
     }
-
-    return { toDo, inProgress, awaitFeedback, done };
 }
 
-function displayTasks() {
-    const tasks = loadTasksFromLocalStorage();
+function countCompletedTasks() {
+    // Use the filter method to count tasks where the 'column' is 'done'
+    const completedTasksCount = tasks.filter(task => task.column === 'done').length;
 
-    // Funktion zum Erstellen von Listenelementen
-    const createListItems = (tasks) => {
-        return tasks.map(task => `<li>${task.title}</li>`).join('');
-    };
+    // Log the count of completed tasks
+    console.log(`Number of completed tasks: ${completedTasksCount}`);
 
-    // Zuordnen der Aufgaben zu den entsprechenden HTML-Elementen
-    document.getElementById('toDoCount').innerHTML = createListItems(tasks.toDo);
-    document.getElementById('inProgressCount').innerHTML = createListItems(tasks.inProgress);
-    document.getElementById('awaitFeedbackCount').innerHTML = createListItems(tasks.awaitFeedback);
-    document.getElementById('doneCount').innerHTML = createListItems(tasks.done);
+    return completedTasksCount;
 }
 
-// Aufruf der Funktion zum Laden und Darstellen der Aufgaben
-displayTasks();
+
+
+
 
 window.onload = function () {
     updateGreeting();
     setFutureDate();
     loadTasksFromLocalStorage();
+    document.getElementById('toDoCount').innerHTML = countCompletedTasks()
 };
