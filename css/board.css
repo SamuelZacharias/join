@@ -319,32 +319,7 @@ input:focus{
   cursor: pointer;
 }
 
-.openedAssigendContactsArea{
-  overflow-y: scroll;
-  scrollbar-width: none;
-  max-height: 162px;
-  
-}
-.openedAssigendContacts{
-  
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 4px 16px;
-  
- 
-}
 
-.openedAssigendContactsInitials{
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 12px;
-}
 
 #openedSubtasks{
   max-height: 110px;
@@ -525,6 +500,35 @@ textarea{
   content: url('/assets/img/png/lowWhite.png')
 }
 
+.openedAssigendContactsArea{
+  overflow-y: scroll;
+  scrollbar-width: none;
+  max-height: 162px;
+  
+}
+.openedAssigendContacts{
+  
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px;
+  
+ 
+}
+
+.openedAssigendContactsInitials{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  border: 1px white solid;
+}
+
+
 .editAssignContacts{
   box-sizing: border-box;
   height: 48px;
@@ -549,16 +553,34 @@ textarea{
 .dropUpImg{
   transform: rotate(180deg);
 }
-#contactsToChoose{
+.contactsToChoose{
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 4px
+  gap: 4px;
+  height: 150px;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .contactToChoose{
+  box-sizing: border-box;
   display: flex;
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+.contactToChoose:hover{
+  background-color: var(--background);
+  cursor: pointer;
+}
+
+.contactIsAssigned:hover{
+  background-color: #091931;
+  cursor: pointer;
 }
 
 .d-none {
