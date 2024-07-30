@@ -237,7 +237,7 @@ function showContacts() {
     contactsContainer.innerHTML += `
       <div class="contactsOpen ${selectedClass}" data-index="${x}">
         <div class="contactInitials" style="background-color: ${color}; ">
-          ${contacts.firstname[x].charAt(0)}${contacts.lastname[x].charAt(0)}
+          ${contacts.firstname[x].toUpperCase(0).charAt(0)}${contacts.lastname[x].toUpperCase(0).charAt(0)}
         </div>
         <div class="contactName">
           <span style="width:100%;">${contacts.firstname[x]} ${contacts.lastname[x]}</span>

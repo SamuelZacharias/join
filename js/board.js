@@ -24,7 +24,7 @@ async function getTasksFromDataBase() {
         console.log('Tasks array:', tasks);
 
         
-        assignContactColors();
+        
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
         
@@ -46,7 +46,8 @@ function loadTasksFromLocalStorage() {
         tasks.push(...savedTasks);
     }
     console.log('Loaded tasks:', tasks);
-    renderTasks();  
+    renderTasks(); 
+     
 }
 
 
@@ -183,24 +184,19 @@ let contactColors = [
     "#FF5EB3",
     "#FF7A00"
   ];
-  function assignContactColors() {
-    let contactColorsAssignment = JSON.parse(localStorage.getItem('contactsToAssign')) || {};
-    let assignedColors = Object.values(contactColorsAssignment);
-    let colorIndex = 0;
-
-    tasks.forEach(task => {
-        if (task.assignedContacts && task.assignedContacts.length > 0) {
-            task.assignedContacts.forEach(contact => {
-                if (!contactColorsAssignment[contact]) {
-                    contactColorsAssignment[contact] = contactColors[colorIndex];
-                    colorIndex = (colorIndex + 1) % contactColors.length;
-                }
-            });
-        }
-    });
-
-    localStorage.setItem('contactColorsAssignment', JSON.stringify(contactColorsAssignment));
-}
+  function assignColors() {
+    // Access the first object in the contacts array
+    let contactsArray = contacts[0];
+  
+    // Loop through the firstname array
+    for (let i = 0; i < contactsArray.firstname.length; i++) {
+      // Construct the full name from the firstname and lastname arrays
+      let fullName = contactsArray.firstname[i] + " " + contactsArray.lastname[i];
+      
+      // Assign a random color from contactColors to the full name
+      contactInitialColors[fullName] = contactColors[Math.floor(Math.random() * contactColors.length)];
+    }
+  }
 
 function getInitials(name) {
     const nameParts = name.split(' ');
@@ -427,7 +423,7 @@ function openTask(i, task) {
 function renderOpenTaskAssignedContacts(task) {
     let openedAssignedContacts = document.getElementById('openedAssignedContacts');
     openedAssignedContacts.innerHTML = '';
-
+   
     if (!task.assignedContacts || task.assignedContacts.length === 0) {
         openedAssignedContacts.innerHTML = 'No contacts assigned';
     } else {
@@ -632,14 +628,25 @@ function showContactsToChoose() {
     const assignedContacts = task.assignedContacts || [];
     
     // Get contact colors assignment
-    const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+    let contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+
+    // Assign colors to contacts if they don't already have one
+    contactsList.forEach(contact => {
+        if (!contactColorsAssignment[contact]) {
+            const randomColor = contactColors[Math.floor(Math.random() * contactColors.length)];
+            contactColorsAssignment[contact] = randomColor;
+        }
+    });
+
+    // Save the updated colors assignment to localStorage
+    localStorage.setItem('contactColorsAssignment', JSON.stringify(contactColorsAssignment));
 
     // Render the contacts list with the option to assign/unassign
     contactsList.forEach(contact => {
         const isAssigned = assignedContacts.includes(contact);
         const contactClass = isAssigned ? 'editAssignedTo' : '';
         const initials = getInitials(contact);
-        const color = contactColorsAssignment[contact] || '#000';
+        const color = contactColorsAssignment[contact];
 
         contactsToChooseElement.innerHTML += `
             <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contact}')">
@@ -652,7 +659,6 @@ function showContactsToChoose() {
     });
 }
 
-// Toggle contact assignment status
 function toggleContactAssignment(contact) {
     if (!currentTaskBeingEdited) {
         console.error('No task is currently being edited.');
