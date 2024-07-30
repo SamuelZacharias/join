@@ -115,3 +115,14 @@ function clearInvalidMessages() {
     document.getElementById('invalidEmail').classList.remove('invalid');
     document.getElementById('invalidPassword').classList.remove('invalid');
 }
+
+window.onload = function() {
+    document.querySelector('.animated-icon').classList.add('move');
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Add the 'visible' class to the overlay after the page has loaded
+    setTimeout(function() {
+      document.querySelector('.overlay').classList.add('visible');
+    }, 500); // Adjust the delay as needed (500 milliseconds in this example)
+  });
