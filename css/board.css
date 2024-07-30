@@ -583,10 +583,49 @@ textarea{
   cursor: pointer;
 }
 
-.d-none {
-  display: none;
+.subtaskAdd{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.subtaskAdd img{
+  width: 24px;
+  height: 24px;
+}
+.subtaskAdd img:hover{
+ background-color: var(--background);
+ border-radius: 50%;
 }
 
 
+
+.addSubtask{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.addSubtask input{
+  border: none;
+  font-size: 20px;
+}
+
+.addSubtask img{
+  cursor: pointer; 
+}
+.error-placeholder::placeholder {
+  color: red;
+}
+
+
+
+
+.d-none {
+  display: none;
+}
 
 
