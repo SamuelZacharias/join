@@ -168,21 +168,7 @@ function renderContacts(i) {
 }
 
 let contactColors = [
-    "#FF4646",
-    "#FFE62B",
-    "#FFBB2B",
-    "#C3FF2B",
-    "#0038FF",
-    "#FFC701",
-    "#FC71FF",
-    "#FFA35E",
-    "#FF745E",
-    "#9327FF",
-    "#00BEE8",
-    "#1FD7C1",
-    "#6E52FF",
-    "#FF5EB3",
-    "#FF7A00"
+    "#FF4646","#FFE62B","#FFBB2B","#C3FF2B","#0038FF","#FFC701","#FC71FF","#FFA35E","#FF745E","#9327FF","#00BEE8","#1FD7C1","#6E52FF","#FF5EB3","#FF7A00"
   ];
   function assignColors() {
     // Access the first object in the contacts array
@@ -265,7 +251,7 @@ async function setSubtaskCompleted(taskIndex, subtaskIndex, completed) {
 function filterTasks() {
     const searchInput = document.getElementById('search').value.toLowerCase();
     const filteredTasks = tasks.filter(task => {
-        return task.title.toLowerCase().includes(searchInput) || task.description.toLowerCase().includes(searchInput);
+        return task.title.includes(searchInput) || task.description.toLowerCase().includes(searchInput);
     });
     renderFilteredTasks(filteredTasks);
 }
@@ -526,7 +512,7 @@ function editTask(taskIndex) {
     renderEditHTML(task);
 }
 
-function renderEditHTML(task){
+function renderEditHTML(task, taskIndex) {
     let openedEdit = document.getElementById('editTask');
     openedEdit.innerHTML = `
         <div class="closeEditTask">
@@ -535,20 +521,19 @@ function renderEditHTML(task){
         <div class="editTaskInfo">
             <div class="editTitle">
                 <div>Title</div>
-                <div class="titleInput"><input type="text" value="${task.title}"></div>
+                <div id="editTitle" class="titleInput"><input type="text" value="${task.title}"></div>
             </div>
             <div class="editTitle">
                 <div>Description</div>
-                <textarea id="taskDescriptionTextarea"></textarea>
+                <textarea id="taskDescriptionTextarea">${task.description || ''}</textarea>
             </div>
             <div class="editTitle">
                 <div>Due date</div>
-                <div class="titleInput"><input  type="date"></div>
+                <div class="titleInput"><input id="dateValue" type="date" value="${task.dueDate || ''}"></div>
             </div>
             <div class="editPriorityArea editTitle">
                 <div>Priority: </div>
-                <div id="editPriorityButtons">
-                </div>
+                <div id="editPriorityButtons"></div>
             </div>
             <div class="editTitle">
                 <div>Assigned to:</div>
@@ -564,10 +549,11 @@ function renderEditHTML(task){
                 <div id="newSubtasks"></div>
             </div>
         </div>
+        <div class="editOkay" id="editOkay" onclick="collectData()">Ok</div>
     `;
-    checkForDescription(task)
-    renderEditPriorityButtons(task)
-    renderEditSubtasks(task)
+    checkForDescription(task);
+    renderEditPriorityButtons(task);
+    renderEditSubtasks(task);
 }
 
 
@@ -701,7 +687,8 @@ function closeContactsDropdown(){
 
 
 
-let subtaskInfos = [];  // Ensure this array is declared to store subtask information
+let subtaskInfos = [];
+let isSubtaskEditMode = false; // Flag to check if we're in edit mode
 
 function renderEditSubtasks(task) {
     // Initialize subtaskInfos with existing subtasks of the selected task
@@ -709,20 +696,30 @@ function renderEditSubtasks(task) {
 
     let editSubtaskArea = document.getElementById('editSubtasks');
     editSubtaskArea.innerHTML = `
-        <div id="editAreaSubtask" onclick="writeSubtask()" class="subtaskAdd">
+        <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
             <span>Add new subtask</span>
             <img src="/assets/img/png/Subtasks icons11.png">
         </div>
-       
     `;
     showSubtasks();  // Call to display existing subtasks when rendering the edit area
+}
+
+function startWritingSubtask() {
+    if (!isSubtaskEditMode) {
+        writeSubtask();
+        
+        isSubtaskEditMode = true; // Set flag to prevent redundant calls
+    }else{
+        isSubtaskEditMode = false
+        
+    }
 }
 
 function writeSubtask() {
     let subtaskArea = document.getElementById('editAreaSubtask');
     subtaskArea.innerHTML = `
-        <div class="addSubtask">
-            <input type="text" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
+        <div class="addSubtask" id="editSubtask">
+            <input type="text"  id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
             <div class="d-flex">
                 <img src="/assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
                 <img src="/assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
@@ -730,34 +727,39 @@ function writeSubtask() {
         </div>
     `;
   
-    // Add event listener for focusout event
-    document.getElementById('subtaskInput').addEventListener('focusout', function() {
-        if (!this.value.trim()) {
-            renderEditSubtasks({ subtasks: subtaskInfos });
-        }
-    });
-
-    // Ensure the input gets focus again if clicked
-    document.getElementById('subtaskInput').focus();
 }
 
 function addSubtask() {
-    let subtaskInput = document.getElementById('subtaskInput');
+    let subtaskInput = document.getElementById('subtaskInput2');
     let subtaskInfo = subtaskInput.value.trim();
-  
+    let editSubtask = document.getElementById('editSubtasks');
+
+    // Add input event listener to remove error styling
+    subtaskInput.addEventListener('input', function() {
+        if (subtaskInput.value.trim().length >= 3) {
+            subtaskInput.placeholder = 'Enter subtask'; 
+            editSubtask.classList.remove('error-container');  // Reset parent container border
+            subtaskInput.classList.remove('error-placeholder');  // Remove error class from input
+        }
+    });
+
     if (subtaskInfo.length < 3) {
-        subtaskInput.value = ''; 
+        // Display error message and styling for invalid input
+        subtaskInput.value = '';
         subtaskInput.placeholder = 'Min 3 characters needed'; 
-        subtaskInput.style.borderColor = 'red'; 
-        subtaskInput.classList.add('error-placeholder'); 
+        editSubtask.classList.add('error-container');  // Apply red border to parent container
+        subtaskInput.classList.add('error-placeholder');  // Apply error class to input
         return; 
     } else {
+        // Clear error styling
         subtaskInput.placeholder = 'Enter subtask'; 
-        subtaskInput.style.borderColor = ''; 
-        subtaskInput.classList.remove('error-placeholder'); 
+        editSubtask.classList.remove('error-container');  // Reset parent container border
+        subtaskInput.classList.remove('error-placeholder');  // Remove error class from input
     }
-  
+
+    // Clear input value only after valid input
     subtaskInfos.push({ completed: false, title: subtaskInfo });
+    subtaskInput.value = ''; // Clear the input after pushing the valid subtask
     showSubtasks();
     renderEditSubtasks({ subtasks: subtaskInfos });  // Reset the subtask area after adding a new subtask
 }
@@ -767,66 +769,67 @@ function showSubtasks() {
     newSubtask.innerHTML = '';
     for (let s = 0; s < subtaskInfos.length; s++) {
         newSubtask.innerHTML += `
-            <div class="addSubtask" style="justify-content:space-between;">
-                <div onclick="editSubtask(${s})">
+            <div class="addSubtask editSubtask  showedSubtask">
+                <div style="width:100%"  onclick="editSubtask(${s})">
                     ${subtaskInfos[s].title}
                 </div>
                 <div class="d-flex">
-                    <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${s})" alt="" />
+                    <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${s})" alt="" />
                     <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
                 </div>
             </div>
         `;
     }
+   
 }
-
 function editSubtask(index) {
-    let newSubtask = document.getElementById('newSubtasks');
-    newSubtask.innerHTML = '';
-    for (let s = 0; s < subtaskInfos.length; s++) {
-        if (s === index) {
-            newSubtask.innerHTML += `
-                <div class="addSubtask" style="justify-content:space-between;">
-                    <input type="text" id="editSubtaskInput" value="${subtaskInfos[s].title}" minlength="3" required />
-                    <div class="d-flex">
-                        <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${s})" alt="" />
-                        <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
-                    </div>
-                </div>
-            `;
-        } else {
-            newSubtask.innerHTML += `
-                <div class="addSubtask" style="justify-content:space-between;">
-                    <div style="width:100%" onclick="editSubtask(${s})">
-                        ${subtaskInfos[s].title}
-                    </div>
-                    <div class="d-flex">
-                        <img src="assets/img/png/subtaskDone.png" onclick="showSubtasks()" alt="" />
-                        <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
-                    </div>
-                </div>
-            `;
-        }
-    }
+    // Get the subtask container by index
+    let subtaskContainers = document.querySelectorAll('#newSubtasks .addSubtask');
+    let subtaskContainer = subtaskContainers[index];
+
+    // Create the editable input field
+    subtaskContainer.innerHTML = `
+        <div class="addSubtask editSubtask">
+            <input type="text" id="editSubtaskInput" value="${subtaskInfos[index].title}" minlength="3" required />
+            <div class="d-flex">
+                <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
+                <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+            </div>
+        </div>
+    `;
+
 }
 
 function saveSubtask(index) {
     let editInput = document.getElementById('editSubtaskInput');
-    let editedSubtask = editInput.value;
-  
+    let editedSubtask = editInput.value.trim();
+
     if (editedSubtask.length < 3) {
+        // Display error message and styling for invalid input
         editInput.value = ''; 
         editInput.placeholder = 'Min 3 characters needed'; 
         editInput.style.borderColor = 'red'; 
         editInput.classList.add('error-placeholder'); 
+
+        // Add focus event listener to remove error styling
+        editInput.addEventListener('focus', function() {
+            editInput.placeholder = 'Enter subtask'; 
+            editInput.style.borderColor = ''; 
+            editInput.classList.remove('error-placeholder'); 
+        }, { once: true }); // Ensure the listener is called only once
+
         return; 
     } else {
-        editInput.placeholder = ''; 
+        // Clear error styling
+        editInput.placeholder = 'Enter subtask'; 
         editInput.style.borderColor = ''; 
         editInput.classList.remove('error-placeholder'); 
     }
-  
+
+    // Update the subtask in the array
     subtaskInfos[index].title = editedSubtask;
+
+    // Re-render the subtasks
     showSubtasks();
 }
 
@@ -834,3 +837,68 @@ function deleteSubtask(index) {
     subtaskInfos.splice(index, 1);
     showSubtasks();
 }
+
+
+
+
+function collectData() {
+    // Retrieve the current task being edited
+    const task = currentTaskBeingEdited;
+
+    if (!task) {
+        console.error('No task is currently being edited.');
+        return null; // Or handle this case appropriately
+    }
+
+    // Get the updated data from the form inputs
+    const title = document.getElementById('editTitle').querySelector('input').value;
+    const description = document.getElementById('taskDescriptionTextarea').value;
+    const dueDate = document.getElementById('dateValue').value;
+
+    // Determine the priority
+    const priorityButtons = document.querySelectorAll('#editPriorityButtons .prioButton');
+    let priority = '';
+    priorityButtons.forEach(button => {
+        if (button.classList.contains('urgent')) {
+            priority = 'Urgent';
+        } else if (button.classList.contains('medium')) {
+            priority = 'Medium';
+        } else if (button.classList.contains('low')) {
+            priority = 'Low';
+        }
+    });
+
+    // Get the category
+    const categoryElement = document.querySelector('.openedTaskCategory span').textContent;
+
+    // Get assigned contacts
+    const assignedContacts = [];
+    document.querySelectorAll('#contactsToChoose .contactToChoose.editAssignedTo').forEach(contact => {
+        const contactName = contact.querySelector('div:last-child').textContent;
+        assignedContacts.push(contactName);
+    });
+
+    // Get subtasks
+    const subtasks = subtaskInfos.map(subtask => ({
+        title: subtask.title,
+        completed: subtask.completed
+    }));
+
+    const collectedData = {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        priority: priority,
+        category: categoryElement,
+        assignedContacts: assignedContacts,
+        subtasks: subtasks,
+        column: task.column || 'toDo',  // Keep existing column value if present, otherwise default to 'toDo'
+    };
+
+    // Log the collected data
+    console.log('Collected Data:', collectedData);
+
+    // Return the collected data
+    return collectedData;
+}
+

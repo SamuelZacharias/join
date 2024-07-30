@@ -621,8 +621,38 @@ textarea{
   color: red;
 }
 
+.error-container {
+  border: 2px solid red;
+}
 
+.error-placeholder {
+  color: red;
+}
 
+#newSubtasks{
+  background-color: var(--background);
+  border-radius: 10px;
+}
+
+.editSubtask{
+  box-sizing: border-box;
+  background-color: var(white);
+}
+.editSubtask input{
+  background-color: var(white);
+  padding-left: 10px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.showedSubtask{
+  box-sizing: border-box;
+  width:100%;
+  cursor:pointer;
+  padding: 10px;
+  background-color: var(--background);
+  display: flex;
+  justify-content: space-between;
+}
 
 .d-none {
   display: none;
