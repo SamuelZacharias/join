@@ -1,15 +1,15 @@
 const BASE_URL = "https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     addLoginButtonListener();
     addGuestLoginListener();
     addRememberMeCheckboxListener();
     loadRememberedCredentials();
-    addInputListeners(); 
+    addInputListeners();
 });
 
 function addLoginButtonListener() {
-    document.querySelector('.logIn').addEventListener('click', function(event) {
+    document.querySelector('.logIn').addEventListener('click', function (event) {
         event.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('repeatPassword').value;
@@ -56,14 +56,14 @@ function handleLoginError(error) {
 }
 
 function addGuestLoginListener() {
-    document.querySelector('.guestLogIn').addEventListener('click', function(event) {
+    document.querySelector('.guestLogIn').addEventListener('click', function (event) {
         localStorage.setItem('loggedInUserName', 'Guest');
     });
 }
 
 function addRememberMeCheckboxListener() {
     const rememberMeCheckbox = document.querySelector('.check input[type="checkbox"]');
-    rememberMeCheckbox.addEventListener('change', function() {
+    rememberMeCheckbox.addEventListener('change', function () {
         const email = document.getElementById('email').value;
         const password = document.getElementById('repeatPassword').value;
         handleRememberMeChange(this.checked, email, password);
@@ -100,11 +100,11 @@ function addInputListeners() {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('repeatPassword');
 
-    emailInput.addEventListener('input', function() {
+    emailInput.addEventListener('input', function () {
         clearInvalidMessages();
     });
 
-    passwordInput.addEventListener('input', function() {
+    passwordInput.addEventListener('input', function () {
         clearInvalidMessages();
     });
 }
@@ -116,13 +116,17 @@ function clearInvalidMessages() {
     document.getElementById('invalidPassword').classList.remove('invalid');
 }
 
-window.onload = function() {
-    document.querySelector('.animated-icon').classList.add('move');
-};
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Add the 'visible' class to the overlay after the page has loaded
-    setTimeout(function() {
-      document.querySelector('.overlay').classList.add('visible');
-    }, 500); // Adjust the delay as needed (500 milliseconds in this example)
-  });
+    setTimeout(function () {
+        document.querySelector('.overlay').classList.add('visible');
+    }, 400); // Adjust the delay as needed (500 milliseconds in this example)
+});
+
+
+
+window.onload = function () {
+    setTimeout(function () {
+        document.querySelector('.animated-icon').classList.add('move');
+    }, 400);
+};

@@ -1,23 +1,23 @@
 @font-face {
   font-family: 'inter';
   src: url('./assets/fonts/static/Inter-Black.ttf') format('interBlack'),
-      url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
+    url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
 }
 
 :root {
-  --blue:   #29ABE2;
-  --gray:  #2A3647;
-  --high : #FF3D00;
+  --blue: #29ABE2;
+  --gray: #2A3647;
+  --high: #FF3D00;
   --medium: #FFA800;
-  --low:   #7AE229;
-  --technical : #1FD7C1;
-  --story : #0038FF;
-  --noTask : #A8A8A8;
-  --policy : #A8A8A8;
-  --background : #F6F7F8;
-  --hightlight : #091931;
-  --border : #D1D1D1;
-  
+  --low: #7AE229;
+  --technical: #1FD7C1;
+  --story: #0038FF;
+  --noTask: #A8A8A8;
+  --policy: #A8A8A8;
+  --background: #F6F7F8;
+  --hightlight: #091931;
+  --border: #D1D1D1;
+
 }
 
 body {
@@ -58,7 +58,7 @@ h1 {
 }
 
 .logIn {
-  background-color:#2A3647;
+  background-color: #2A3647;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,11 +121,16 @@ h1 {
 }
 
 .signUp button {
-  width: 91px; /* Festgelegte Breite */
-  height: 49px; /* Festgelegte Höhe */
-  border-radius: 8px; /* Radius */
-  padding: 15px 16px; /* Padding: 15px oben und unten, 16px links und rechts */
-  margin-left: 10px; /* Gap zum Text */
+  width: 91px;
+  /* Festgelegte Breite */
+  height: 49px;
+  /* Festgelegte Höhe */
+  border-radius: 8px;
+  /* Radius */
+  padding: 15px 16px;
+  /* Padding: 15px oben und unten, 16px links und rechts */
+  margin-left: 10px;
+  /* Gap zum Text */
   background-color: #2A3647;
   color: #fff;
   border: none;
@@ -263,7 +268,8 @@ form {
 .buttonContainer {
   justify-content: center;
   display: flex;
-  gap: 35px; /* Abstand zwischen den Buttons */
+  gap: 35px;
+  /* Abstand zwischen den Buttons */
   height: 48px;
   align-items: center;
 }
@@ -294,23 +300,24 @@ button:hover {
   color: #fff;
 }
 
-.buttonContainer a:hover{
+.buttonContainer a:hover {
   text-decoration: none;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
-input{
+
+input {
   height: 140%;
 }
 
 
-.buttonContainer a{
+.buttonContainer a {
   color: black;
 }
 
-#invalid{
+#invalid {
   display: flex;
   width: 100%;
   justify-content: flex-start;
@@ -318,8 +325,8 @@ input{
   height: 12px;
 }
 
-.invalid{
-  border-color:Red
+.invalid {
+  border-color: Red
 }
 
 /* Standard-Styling */
@@ -334,49 +341,79 @@ input{
   box-sizing: border-box;
 }
 
-/* Absolute positioning for the animation */
 .animated-icon {
   position: absolute;
   left: 50%;
+  /* Center horizontally */
   top: 50%;
-  width: 274px; /* Set width */
-  height: 334.07px; /* Set height */
+  /* Center vertically */
+  width: 274px;
+  /* Initial width */
+  height: 334.07px;
+  /* Initial height */
   transform: translate(50%, 50%);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  /* Center the icon */
+  opacity: 1;
+  /* Initially visible */
+  transition: width 2s ease-in-out, height 2s ease-in-out, left 2s ease-in-out, top 2s ease-in-out;
+  /* Transition effects */
+  z-index: 2;
 }
 
 /* Animation keyframes */
 @keyframes moveToOriginalPosition {
+  from {
+    left: 50%;
+    top: calc(50% + 120px);
+    /* Starting position adjusted 50px down */
+    width: 274px;
+    height: 334.07px;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
   to {
     left: 0;
+    /* Final horizontal position */
     top: 50px;
-    transform: translate(0, 0);
-    opacity: 1;
+    /* Final vertical position */
     width: 100.03px;
-  height: 121.97px;
+    /* Final width */
+    height: 121.97px;
+    /* Final height */
+    transform: translate(0, 0);
+    /* Final position */
+    opacity: 1;
+    /* Ensure icon remains visible */
   }
 }
 
 .animated-icon.move {
   animation: moveToOriginalPosition 2s forwards ease-in-out;
-  opacity: 1; /* Ensure icon becomes visible */
+  opacity: 1;
+  /* Ensure icon becomes visible */
 }
 
 /* Full-screen overlay with initial opacity set to 0 */
 .overlay {
-  position: relative; /* Covers the entire screen */
+  position: relative;
+  /* Covers the entire screen */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #F6F7F8; /* Background color */
-  z-index: 9999; /* High z-index to cover all content */
-  transition: opacity 2s ease-out; /* Transition effect for fading in */
-  opacity: 0; /* Initial opacity (hidden) */
+  background-color: #F6F7F8;
+  /* Background color */
+  z-index: 1;
+  /* High z-index to cover all content */
+  transition: opacity 2s ease-out;
+  /* Transition effect for fading in */
+  opacity: 0;
+  /* Initial opacity (hidden) */
 }
 
 /* Class to make the overlay visible */
 .overlay.visible {
-  opacity: 1; /* Final opacity (visible) */
+  opacity: 1;
+  /* Final opacity (visible) */
 }
