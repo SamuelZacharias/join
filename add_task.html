@@ -40,7 +40,7 @@
               <span>Assigned to</span>
               <div class="categoryDropDown" id="dropdownContacts" onclick="toggleContacts()">
                 <span class="spanCategory" >Select Contacts to assign</span>
-                <img class="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+                <img class="dropDownImg" id="dropDownContactsImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
               </div>
               <div id="contacts" class="d-none"></div>
               <div id="assignedContacts"></div>
@@ -77,7 +77,7 @@
               <div id="subtaskContainer">
                 <p>
                   <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
-                  <img src="assets/img/png/Subtasks icons11.png" alt="" />
+                  <img src="assets/img/png/Subtasks icons11.png"  onclick="writeSubtask()"alt="" />
                 </p>
               </div>
               <div id="newSubtasks"></div>

@@ -52,6 +52,9 @@ select {
   flex-direction: column;
   gap: 8px;
 }
+.eachInput img{
+  cursor: pointer;
+}
 p {
   display: flex;
   align-items: center;
@@ -317,13 +320,16 @@ select:hover{
 }
 
 .addSubtask{
+  
   display: flex;
   background-color: white;
   padding: 10px;
   border-radius: 10px;
   border: 0.5px solid var(--border);
 }
-
+.addSubtask img{
+  cursor: pointer; 
+}
 .error-placeholder::placeholder {
   color: red;
 }

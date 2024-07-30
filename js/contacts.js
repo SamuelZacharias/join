@@ -145,7 +145,7 @@ function addContact() {
 
       contacts.push(newContact);
       saveData(); // Kontakte speichern
-
+      storeFirstAndLastNames()
       // Formular zurücksetzen
       document.getElementById('name').value = '';
       document.getElementById('email').value = '';
@@ -181,6 +181,7 @@ function deleteContact(index) {
   contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
   renderContacts(); // Aktualisiert die Anzeige
   saveData();
+  storeFirstAndLastNames()
   document.querySelector('.contacts-info-box').innerHTML = '';
 }
 
@@ -202,6 +203,7 @@ function loadData() {
   if (storedInitials) {
       initials = JSON.parse(storedInitials);
   }
+  storeFirstAndLastNames()
 }
 
 
@@ -227,7 +229,7 @@ function editContact() {
 
   // Speichere die aktualisierten Daten in localStorage
   localStorage.setItem('contacts', JSON.stringify(contacts));
-
+  storeFirstAndLastNames()
   renderContacts();
   closeDialogEdit();
   displayContactInfo(index);
@@ -337,4 +339,32 @@ function validateEditForm() {
   if (isValid) {
     editContact();
   }
+}
+
+
+let contactsCanBeAssigned = {
+  'firstname': [],
+  'lastname': []
+};
+
+// Function to extract and store first and last names separately
+function storeFirstAndLastNames() {
+  // Reset the storage arrays
+  contactsCanBeAssigned.firstname = [];
+  contactsCanBeAssigned.lastname = [];
+
+  // Process each contact
+  contacts.forEach(contact => {
+    let nameParts = contact.name.split(' ');
+    if (nameParts.length > 1) {
+      contactsCanBeAssigned.firstname.push(nameParts[0]);
+      contactsCanBeAssigned.lastname.push(nameParts.slice(1).join(' '));
+    } else {
+      contactsCanBeAssigned.firstname.push(nameParts[0]);
+      contactsCanBeAssigned.lastname.push('');
+    }
+  });
+
+  // Save the separated names to local storage
+  localStorage.setItem('contactsCanBeAssigned', JSON.stringify(contactsCanBeAssigned));
 }

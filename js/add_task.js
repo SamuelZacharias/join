@@ -3,11 +3,7 @@ let choosenCategory = false;
 let category = ["User Task", "Technical task"];
 let activeButton = 2;
 
-let contacts = {
-  'firstname' : ["Biene", "Vladimir", "Ella","Peter", "Paul", "Albert","Walter"],
-  'lastname' : ["Maya","Putin", "Bella", "Pan","Ivan", "Meyer", "White"]
-}
-
+let contacts = JSON.parse(localStorage.getItem('contactsCanBeAssigned'))
 
 function handleClick(buttonNumber) {
   if (activeButton !== null) {
@@ -241,7 +237,7 @@ function showContacts() {
     contactsContainer.innerHTML += `
       <div class="contactsOpen ${selectedClass}" data-index="${x}">
         <div class="contactInitials" style="background-color: ${color}; ">
-          ${contacts.firstname[x].charAt(0)}${contacts.lastname[x].charAt(0)}
+          ${contacts.firstname[x].toUpperCase(0).charAt(0)}${contacts.lastname[x].toUpperCase(0).charAt(0)}
         </div>
         <div class="contactName">
           <span style="width:100%;">${contacts.firstname[x]} ${contacts.lastname[x]}</span>
@@ -279,12 +275,15 @@ function showContacts() {
 }
 
 function toggleContacts() {
+  document.getElementById('dropDownContactsImg').classList = ('dropUpImg')
   let contactsContainer = document.getElementById('contacts');
   if (contactsContainer.classList.contains('d-none')) {
     contactsContainer.classList.remove('d-none');
+
     showContacts();
   } else {
     contactsContainer.classList.add('d-none');
+    document.getElementById('dropDownContactsImg').classList = ('dropDownImg')
   }
 }
 
@@ -326,17 +325,27 @@ document.addEventListener('click', function(event) {
 
 let subtaskInfos = [];
 
-function writeSubtask(){
+function writeSubtask() {
   let subtaskArea = document.getElementById('subtaskContainer');
   subtaskArea.innerHTML = `
     <div class="addSubtask">
-      <input type="text" name="" id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
+      <input type="text" name="" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
       <div class="d-flex">
-        <img src="assets/img/png/subtaskX.png" onclick="writeSubtask()" alt="" />
+        <img src="assets/img/png/subtaskX.png" onclick="resetSubtask()" alt="" />
         <img src="assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
       </div>
     </div>
   `;
+
+  // Add event listener for focusout event
+  document.getElementById('subtaskInput').addEventListener('focusout', function() {
+    if (!this.value.trim()) {
+      resetSubtask();
+    }
+  });
+
+  // Ensure the input gets focus again if clicked
+  document.getElementById('subtaskInput').focus();
 }
 
 function addSubtask(){
@@ -357,18 +366,17 @@ function addSubtask(){
 
   subtaskInfos.push(subtaskInfo);
   showSubtasks();
-  resetSubtask()
+  resetSubtask();
 }
 
-function resetSubtask(){
+function resetSubtask() {
   document.getElementById('subtaskContainer').innerHTML = `
-  <p>
-                <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
-                <img src="assets/img/png/Subtasks icons11.png" alt="" />
-              </p>
-`;
+    <p>
+      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
+      <img src="assets/img/png/Subtasks icons11.png" alt="" />
+    </p>
+  `;
 }
-
 
 function showSubtasks(){
   let newSubtask = document.getElementById('newSubtasks');
