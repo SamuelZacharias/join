@@ -60,7 +60,55 @@ function setFutureDate() {
     document.querySelector('.date').textContent = formattedDate;
 }
 
+function loadTasksFromLocalStorage() {
+    // Standardmäßig leere Arrays, falls nichts im localStorage gefunden wird
+    let toDo = [];
+    let inProgress = [];
+    let awaitFeedback = [];
+    let done = [];
+
+    // Versuchen, die Daten aus dem localStorage zu laden
+    const tasksJSON = localStorage.getItem('tasks');
+    if (tasksJSON) {
+        const tasks = JSON.parse(tasksJSON);
+
+        // Die Informationen in den Arrays aufteilen
+        tasks.forEach(task => {
+            if (task.column === 'toDo') {
+                toDo.push(task);
+            } else if (task.column === 'inProgress') {
+                inProgress.push(task);
+            } else if (task.column === 'awaitFeedback') {
+                awaitFeedback.push(task);
+            } else if (task.column === 'done') {
+                done.push(task);
+            }
+        });
+    }
+
+    return { toDo, inProgress, awaitFeedback, done };
+}
+
+function displayTasks() {
+    const tasks = loadTasksFromLocalStorage();
+
+    // Funktion zum Erstellen von Listenelementen
+    const createListItems = (tasks) => {
+        return tasks.map(task => `<li>${task.title}</li>`).join('');
+    };
+
+    // Zuordnen der Aufgaben zu den entsprechenden HTML-Elementen
+    document.getElementById('toDoCount').innerHTML = createListItems(tasks.toDo);
+    document.getElementById('inProgressCount').innerHTML = createListItems(tasks.inProgress);
+    document.getElementById('awaitFeedbackCount').innerHTML = createListItems(tasks.awaitFeedback);
+    document.getElementById('doneCount').innerHTML = createListItems(tasks.done);
+}
+
+// Aufruf der Funktion zum Laden und Darstellen der Aufgaben
+displayTasks();
+
 window.onload = function () {
     updateGreeting();
     setFutureDate();
+    loadTasksFromLocalStorage();
 };
