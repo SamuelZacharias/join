@@ -552,11 +552,11 @@ function renderEditHTML(task){
             </div>
             <div class="editTitle">
                 <div>Assigned to:</div>
-                <div class="editAssignContacts" onclick="showContactsToChoose()">
+                <div class="editAssignContacts" onclick="closeContactsDropdown()">
                     <div>Select contacts to assign</div>
                     <img id="dropDownImg" src="/assets/img/png/arrow_drop_down (1).png">
                 </div>
-                <div id="contactsToChoose"></div>
+                <div id="contactsToChoose" class="d-none contactsToChoose "></div>
             </div>
         </div>
     `;
@@ -616,7 +616,7 @@ function showContactsToChoose() {
 
     const contactsToChooseElement = document.getElementById('contactsToChoose');
     contactsToChooseElement.innerHTML = ''; // Clear existing content
-
+    contactsToChooseElement.classList.remove('d-none')
     // Access global contacts array
     const contactData = contacts[0]; // Assuming there's only one contact object in the array
 
@@ -644,13 +644,13 @@ function showContactsToChoose() {
     // Render the contacts list with the option to assign/unassign
     contactsList.forEach(contact => {
         const isAssigned = assignedContacts.includes(contact);
-        const contactClass = isAssigned ? 'editAssignedTo' : '';
+        const contactClass = isAssigned ? 'editAssignedTo contactIsAssigned' : '';
         const initials = getInitials(contact);
         const color = contactColorsAssignment[contact];
 
         contactsToChooseElement.innerHTML += `
             <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contact}')">
-                <div class="contactInitials" style="background-color: ${color};">
+                <div class="openedAssigendContactsInitials" style="background-color: ${color};">
                     ${initials}
                 </div>
                 <div>${contact}</div>
@@ -680,3 +680,17 @@ function toggleContactAssignment(contact) {
     task.assignedContacts = assignedContacts;
     showContactsToChoose(); // Re-render the contacts list
 }
+
+
+function closeContactsDropdown(){
+ let  contactsTochoose =  document.getElementById('contactsToChoose')
+ if(contactsTochoose.classList.contains('d-none')){
+    showContactsToChoose()
+    document.getElementById('dropDownImg').classList.add('dropUpImg')
+ }else{
+    contactsTochoose.classList.add('d-none')
+    document.getElementById('dropDownImg').classList.remove('dropUpImg')
+ }
+}
+
+
