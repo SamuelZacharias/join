@@ -595,7 +595,27 @@ async function sendTaskDataToFirebase() {
     }
 
     const existingTasks = await response.json();
-    const nextIndex = existingTasks ? Object.keys(existingTasks).length : 0; // Determine the next index
+    let tasksArray = existingTasks ? Object.keys(existingTasks).map(key => ({ ...existingTasks[key], id: parseInt(key) })) : [];
+
+    // Sort tasks by their ids
+    tasksArray.sort((a, b) => a.id - b.id);
+
+    // Ensure task ids are sequential starting from 0
+    tasksArray.forEach((task, index) => {
+      if (task.id !== index) {
+        task.id = index;
+        fetch(`${BASE_TASKS_URL}/${index}.json`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(task)
+        });
+      }
+    });
+
+    // Determine the next index
+    const nextIndex = tasksArray.length;
 
     // Collect new task data
     const taskData = collectData();
@@ -606,7 +626,7 @@ async function sendTaskDataToFirebase() {
 
     // Send the new task with the determined index
     const taskResponse = await fetch(`${BASE_TASKS_URL}/${nextIndex}.json`, {
-      method: 'PUT', // Use PUT to create a new task at the specific index
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
