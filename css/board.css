@@ -660,6 +660,26 @@ textarea{
   display: flex;
   justify-content: flex-end;
 }
+.editOkay span{
+  display: flex;
+  padding: 16px;
+  background-color: var(--gray);
+  margin-top: 24px;
+  border-radius: 10px;
+  color: white;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.editOkay span:hover{
+ background-color: var(--blue);
+ cursor: pointer;
+ box-shadow: 0px 0px 4px 0px gray ;
+
+}
+
 
 .d-none {
   display: none;

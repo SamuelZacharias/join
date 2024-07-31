@@ -386,8 +386,8 @@ function openTask(task) {
                 <span>${task.category}</span>
                 <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
             </div>
-            <h1>${task.title}</h1>
-            <p>${task.description}</p>
+            <h1 id="openedTaskTitle">${task.title}</h1>
+            <p id="openedTaskDescription">${task.description}</p>
             <div>Due date: ${task.dueDate}</div>
             <div>Priority: ${task.priority}</div>
             <div>
@@ -404,8 +404,27 @@ function openTask(task) {
             </div>
         </div>
     `;
+    checkforOpenedDecsripiton(task)
     renderOpenTaskAssignedContacts(task);
     renderOpenTaskSubtasks(task);
+    checkforOpenedTitle(task)
+}
+
+function checkforOpenedDecsripiton(task){
+    let openedTaskDescription = document.getElementById('openedTaskDescription')
+    if(task.description === ""){
+        openedTaskDescription.innerHTML= `No Description`;
+    }else{
+        openedTaskDescription.innerHTML = `${task.description}`;
+    }
+}
+function checkforOpenedTitle(task){
+    let openedTaskTitle = document.getElementById('openedTaskTitle')
+    if(task.title === ""){
+        openedTaskTitle.innerHTML= `No Title`;
+    }else{
+        openedTaskTitle.innerHTML = `${task.title}`;
+    }
 }
 
 function renderOpenTaskAssignedContacts(task) {
@@ -549,7 +568,7 @@ function renderEditHTML(task) {
                 <div id="newSubtasks"></div>
             </div>
         </div>
-        <div class="editOkay" id="editOkay" onclick="collectData('${task.id}')">Ok</div>
+        <div class="editOkay" id="editOkay" onclick="collectData('${task.id}')"><span>Ok<img src="assets/img/png/check.png" alt=""></span></div>
     `;
     checkForDescription(task);
     renderEditPriorityButtons(task);
@@ -564,6 +583,7 @@ function checkForDescription(task){
       textarea.value = task.description; 
     }
   }
+
 
 
   function renderEditPriorityButtons(task) {
