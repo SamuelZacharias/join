@@ -870,12 +870,7 @@ function collectData(i) {
     const categoryElement = document.querySelector('.openedTaskCategory span').textContent;
 
     // Get assigned contacts
-    const assignedContacts = [];
-    document.querySelectorAll('#contactsToChoose .contactToChoose.editAssignedTo').forEach(contact => {
-        const contactName = contact.querySelector('div:last-child').textContent;
-        assignedContacts.push(contactName);
-    });
-
+    const assignedContacts = task.assignedContacts
     // Get subtasks
     const subtasks = subtaskInfos.map(subtask => ({
         title: subtask.title,
