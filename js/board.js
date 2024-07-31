@@ -369,10 +369,11 @@ async function updateTaskInFirebase(task) {
 }
 
 
-
-
+let currentTaskId = null;
 
 function openTask(i, task) {
+    currentTaskId = task.id; // Set the current task ID
+
     let openedTaskContainer = document.getElementById('openedTaskContainer');
     openedTaskContainer.classList.remove('d-none');
     openedTaskContainer.innerHTML = `
@@ -397,13 +398,13 @@ function openTask(i, task) {
                 <div id="openedSubtasks"></div> 
             </div>
             <div class="deleteEditArea">
-                <div onclick="deleteTask(${i})"  class="delete"><img src="/assets/img/png/delete.png" > Delete</div>
-                <div onclick="editTask(${i})" class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
+                <div onclick="deleteTask('${task.id}')" class="delete"><img src="/assets/img/png/delete.png"> Delete</div>
+                <div onclick="editTask('${task.id}')" class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
             </div>
         </div>
     `;
-    renderOpenTaskAssignedContacts(task)
-    renderOpenTaskSubtasks(task)
+    renderOpenTaskAssignedContacts(task);
+    renderOpenTaskSubtasks(task);
 }
 
 function renderOpenTaskAssignedContacts(task) {
@@ -498,16 +499,13 @@ async function deleteTask(taskIndex) {
 
 
 function editTask(taskIndex) {
-    document.getElementById('openedTaskContainer').classList.add('d-none');
     let editTaskContainer = document.getElementById('editTaskContainer');
     editTaskContainer.classList.remove('d-none');
     editTaskContainer.innerHTML = `
         <div class="openedTask" style="gap:24px;" id="editTask"></div>
     `;
     let task = tasks[taskIndex];
-    if (!task.assignedContacts) {
-        task.assignedContacts = []; // Initialize if not present
-    }
+    task.assignedContacts = task.assignedContacts || [];  // Ensure assignedContacts is defined
     currentTaskBeingEdited = task; // Set currentTaskBeingEdited here
     renderEditHTML(task);
 }
@@ -841,13 +839,13 @@ function deleteSubtask(index) {
 
 
 
-function collectData() {
+function collectData(i) {
     // Retrieve the current task being edited
     const task = currentTaskBeingEdited;
 
     if (!task) {
         console.error('No task is currently being edited.');
-        return null; // Or handle this case appropriately
+        return null;
     }
 
     // Get the updated data from the form inputs
@@ -884,6 +882,7 @@ function collectData() {
         completed: subtask.completed
     }));
 
+    // Create an object with the collected data
     const collectedData = {
         title: title,
         description: description,
@@ -895,10 +894,33 @@ function collectData() {
         column: task.column || 'toDo',  // Keep existing column value if present, otherwise default to 'toDo'
     };
 
-    // Log the collected data
-    console.log('Collected Data:', collectedData);
+    // Update the task with the collected data
+    Object.assign(task, collectedData);
 
-    // Return the collected data
-    return collectedData;
+    // Update the tasks array in local storage
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskIndex = tasks.findIndex(t => t.id === task.id);
+    if (taskIndex !== -1) {
+        tasks[taskIndex] = task;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    } else {
+        console.warn('Task not found in localStorage.');
+    }
+
+    // Send the updated task to Firebase
+    updateTaskInFirebase(task);
+
+    // Re-render tasks
+    renderTasks();
+    closeEdit();
+
+    // Open the updated task after closing the edit form
+    openTask(i, task);
+
+    // Return the updated task
+    return task;
 }
 
+function closeEdit(){
+    document.getElementById('editTaskContainer').classList.add('d-none')
+}
