@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./js/header.js"></script>
     <script src="./js/include.js"></script>
-    
+    <script src="./js/goBackArrow.js"></script>
     <title>Legal Notice</title>
   </head>
   <body >
@@ -19,7 +19,11 @@
       <div>
         <div w3-include-html="Templates/header.html"></div>
         <div class="content-legal-notice">
-          <h1>Legal Notice</h1>
+          <div class="headline">
+            <h1>Legal Notice</h1>
+            <img id="showLastPage" onclick="goBack()" class="arrowBack" src="./assets/img/png/arrow-left-line.png" alt="">
+          </div>
+          
           <div>
             <div class="imprint">
               <h2>Imprint</h3> 

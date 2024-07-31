@@ -78,3 +78,19 @@ tr{
     font-size: 27px;
     font-weight: 700;
 }
+
+.arrowBack {
+    width: 37px;
+    height: 37px;
+  }
+  
+  .headline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .arrowBack:hover {
+    cursor: pointer;
+  }
+  

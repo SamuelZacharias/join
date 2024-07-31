@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="js/include.js"></script>
     <script src="js/header.js"></script>
+    <script src="./js/goBackArrow.js"></script>
     <title>Help</title>
   </head>
   <body>
@@ -18,7 +19,11 @@
       <div >
         <div w3-include-html="Templates/header.html"></div>
         <div class="content-help">
-          <h1>Help</h1>
+          <div class="headline">
+            <h1>Help</h1>
+            <img id="showLastPage" onclick="goBack()" class="arrowBack" src="./assets/img/png/arrow-left-line.png" alt="">
+          </div>
+          
           <div class="help-text">
             <span
               >Welcome to the help page for Join, your guide to using our kanban
