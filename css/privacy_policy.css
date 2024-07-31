@@ -7,26 +7,32 @@ body {
   display: flex;
 }
 
-.content-policy{
-  overflow: hidden;
+.content-policy {
+  display: flex;
   width: 1016px;
   height: 82vh;
   overflow: scroll;
   margin-top: 110px;
   margin-left: 96px;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.content-policy::-webkit-scrollbar{
+.content-policy::-webkit-scrollbar {
   display: none;
 }
 
-h1{
+h1 {
+  margin-bottom: 0pc;
+  margin-top: 0;
+  font-size: 61px;
+  font-weight: 700;
   margin-top: 0;
   font-size: 61px;
   font-weight: 700;
 }
 
-.policeLink{
+.policeLink {
   height: 46px;
   display: flex;
   width: 100%;
@@ -35,6 +41,21 @@ h1{
   align-items: center;
 }
 
+.arrowBack {
+  width: 37px;
+  height: 37px;
+}
 
+.headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.arrowBack:hover {
+  cursor: pointer;
+}
 
+.icon-box{
+  display: none !important;
+}
