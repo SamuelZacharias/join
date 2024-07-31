@@ -266,30 +266,30 @@ function clearError(inputElement) {
 function validateForm() {
   let isValid = true;
 
-  // Name Validierung
+  // Vor- und Nachname Validierung (erlaubt Umlaute und Leerzeichen, erfordert mindestens zwei Wörter)
   const nameInput = document.getElementById('name');
-  if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
-      setError(nameInput, 'Invalid name (Max Mustermann)');
+  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/)) {
+      setError(nameInput, 'Ungültiger Name (Max Mustermann)');
       isValid = false;
       nameInput.value = '';
   } else {
       clearError(nameInput);
   }
 
-  // Email Validierung
+  // Email Validierung (überprüft auf gängige Endungen)
   const emailInput = document.getElementById('email');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setError(emailInput, 'Invalid email (test@test.de)');
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.(de|com|net|org|edu|gov|mil|int)$/)) {
+      setError(emailInput, 'Ungültige E-Mail (test@test.de)');
       isValid = false;
       emailInput.value = '';
   } else {
       clearError(emailInput);
   }
 
-  // Telefonnummer Validierung
+  // Telefonnummer Validierung (nur Zahlen erlaubt)
   const phoneInput = document.getElementById('phone');
   if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Invalid phone number 0176 123 123');
+      setError(phoneInput, 'Ungültige Telefonnummer 0176 123 123');
       isValid = false;
       phoneInput.value = '';
   } else {
@@ -306,30 +306,30 @@ function validateForm() {
 function validateEditForm() {
   let isValid = true;
 
-  // Name Validierung
+  // Vor- und Nachname Validierung (erlaubt Umlaute und Leerzeichen, erfordert mindestens zwei Wörter)
   const nameInput = document.getElementById('inputEditName');
-  if (!nameInput.value.match(/^[A-Za-z\s]+$/)) {
-      setError(nameInput, 'Invalid name');
+  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/)) {
+      setError(nameInput, 'Ungültiger Name');
       isValid = false;
       nameInput.value = '';
   } else {
       clearError(nameInput);
   }
 
-  // Email Validierung
+  // Email Validierung (überprüft auf gängige Endungen)
   const emailInput = document.getElementById('inputEditEmail');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setError(emailInput, 'Invalid email');
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.(de|com|net|org|edu|gov|mil|int)$/)) {
+      setError(emailInput, 'Ungültige E-Mail');
       isValid = false;
       emailInput.value = '';
   } else {
       clearError(emailInput);
   }
 
-  // Telefonnummer Validierung
+  // Telefonnummer Validierung (nur Zahlen erlaubt)
   const phoneInput = document.getElementById('inputEditPhone');
   if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Invalid phone number  0176 123 123');
+      setError(phoneInput, 'Ungültige Telefonnummer 0176 123 123');
       isValid = false;
       phoneInput.value = '';
   } else {
@@ -340,6 +340,8 @@ function validateEditForm() {
     editContact();
   }
 }
+
+
 
 
 let contactsCanBeAssigned = {
