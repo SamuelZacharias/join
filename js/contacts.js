@@ -1,40 +1,60 @@
 let contacts = [];
 let initials = [];
 
+const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
 
 // Funktion zum Rendern der gesamten Kontaktliste
 function renderContacts() {
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = ''; // Vorherige Inhalte löschen
 
-  // Kontakte nach Initialen gruppieren
-  const groupedContacts = contacts.reduce((acc, contact, index) => {
-      let nameParts = contact.name.split(' ');
-      let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-      let firstInitial = initials.charAt(0);
+  // Kontakte aus Firebase laden
+  fetch(BASE_TASKS_URL + '.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        // Kontakte in das Array umwandeln
+        contacts = Object.values(data);
 
-      if (!acc[firstInitial]) {
-          acc[firstInitial] = [];
+        // Initialen-Array aktualisieren
+        initials = contacts.map(contact => {
+          let nameParts = contact.name.split(' ');
+          return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+        });
+
+        // Kontakte nach Initialen gruppieren
+        const groupedContacts = contacts.reduce((acc, contact, index) => {
+          let nameParts = contact.name.split(' ');
+          let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+          let firstInitial = initials.charAt(0);
+
+          if (!acc[firstInitial]) {
+            acc[firstInitial] = [];
+          }
+          acc[firstInitial].push({ contact, initials, index });
+          return acc;
+        }, {});
+
+        // Alphabetische Reihenfolge der Initialen
+        const sortedInitials = Object.keys(groupedContacts).sort();
+
+        // HTML für jede Gruppe von Initialen generieren
+        sortedInitials.forEach(initial => {
+          // letter-box für die Initialen hinzufügen
+          contactList.innerHTML += generateLetterBox(initial);
+
+          // Kontakte für diese Initialen hinzufügen
+          groupedContacts[initial].forEach(({ contact, initials, index }) => {
+            contactList.innerHTML += generateContact(contact, initials, index);
+          });
+        });
+      } else {
+        console.log('Keine Kontakte gefunden.');
       }
-      acc[firstInitial].push({ contact, initials, index });
-      return acc;
-  }, {});
-
-  // Alphabetische Reihenfolge der Initialen
-  const sortedInitials = Object.keys(groupedContacts).sort();
-
-  // HTML für jede Gruppe von Initialen generieren
-  sortedInitials.forEach(initial => {
-      // letter-box für die Initialen hinzufügen
-      contactList.innerHTML += generateLetterBox(initial);
-
-      // Kontakte für diese Initialen hinzufügen
-      groupedContacts[initial].forEach(({ contact, initials, index }) => {
-          contactList.innerHTML += generateContact(contact, initials, index);
-      });
-
-      
-  });
+    })
+    .catch(error => {
+      console.error('Fehler beim Laden der Daten:', error);
+    });
 }
 
 
@@ -125,37 +145,40 @@ async function openDialogSuccesfully() {
   }, 300); // 1000 Millisekunden = 1 Sekunde
 }
 
+// Funktion zum Hinzufügen eines Kontakts
 function addContact() {
   let name = document.getElementById('name').value;
   let email = document.getElementById('email').value;
   let phone = document.getElementById('phone').value;
 
   if (name && email && phone) {
-      // Generiere eine neue ID für den Kontakt
-      let newId = Date.now(); // Zeitstempel als eindeutige ID
+    let newId = Date.now(); // Zeitstempel als eindeutige ID
 
-      let newContact = {
-          id: newId,
-          name: name,
-          email: email,
-          phone: phone,
-          color: getRandomColor(), // Zufällige Farbe zuweisen
-          initials: name.split(' ').map(part => part.charAt(0).toUpperCase()).join('') // Initialen berechnen
-      };
+    let newContact = {
+      id: newId,
+      name: name,
+      email: email,
+      phone: phone,
+      color: getRandomColor(), // Zufällige Farbe zuweisen
+      initials: name.split(' ').map(part => part.charAt(0).toUpperCase()).join('') // Initialen berechnen
+    };
 
-      contacts.push(newContact);
-      saveData(); // Kontakte speichern
-      storeFirstAndLastNames()
-      // Formular zurücksetzen
-      document.getElementById('name').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('phone').value = '';
+    contacts.push(newContact);
+    saveData(); // Kontakte speichern
+    storeFirstAndLastNames();
 
-      renderContacts(); // Kontaktliste neu rendern
+    // Formular zurücksetzen
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    renderContacts();
+     // Kontaktliste neu rendern
   } else {
-      alert('Bitte füllen Sie alle Felder aus.');
+    alert('Bitte füllen Sie alle Felder aus.');
   }
+  
 }
+
 
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
@@ -177,33 +200,70 @@ function displayContactInfo(index) {
   highlightContact(index);
 }
 
+// Funktion zum Löschen eines Kontakts
 function deleteContact(index) {
-  contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
-  renderContacts(); // Aktualisiert die Anzeige
-  saveData();
-  storeFirstAndLastNames()
-  document.querySelector('.contacts-info-box').innerHTML = '';
+  let contactToDelete = contacts[index];
+  if (!contactToDelete) return; // Sicherstellen, dass der Kontakt existiert
+
+  let contactId = contactToDelete.id; // ID des zu löschenden Kontakts
+
+  console.log(`Versuche, Kontakt mit ID ${contactId} zu löschen`);
+
+  fetch(`${BASE_TASKS_URL}/${contactId}.json`, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('Kontakt erfolgreich gelöscht');
+      contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
+      renderContacts(); // Aktualisiert die Anzeige
+      storeFirstAndLastNames();
+      document.querySelector('.contacts-info-box').innerHTML = '';
+    } else {
+      console.error('Fehler beim Löschen des Kontakts:', response.statusText);
+    }
+  })
+  .catch(error => {
+    console.error('Fehler beim Löschen des Kontakts:', error);
+  });
 }
 
 
 
 function saveData() {
-  localStorage.setItem('contacts', JSON.stringify(contacts));
-  localStorage.setItem('initials', JSON.stringify(initials));
+  fetch(BASE_TASKS_URL + '.json', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(contacts)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Daten erfolgreich gespeichert:', data);
+  })
+  .catch(error => {
+    console.error('Fehler beim Speichern der Daten:', error);
+  });
 }
 
 // Funktion zum Laden von Kontakten und Initialen aus dem localStorage
 function loadData() {
-  const storedContacts = localStorage.getItem('contacts');
-  const storedInitials = localStorage.getItem('initials');
-
-  if (storedContacts) {
-      contacts = JSON.parse(storedContacts);
-  }
-  if (storedInitials) {
-      initials = JSON.parse(storedInitials);
-  }
-  storeFirstAndLastNames()
+  fetch(BASE_TASKS_URL + '.json')
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        contacts = Object.values(data);
+        initials = contacts.map(contact => contact.initials);
+        storeFirstAndLastNames();
+        renderContacts(); // Kontakte nach dem Laden rendern
+      } else {
+        console.log('Keine Kontakte gefunden.');
+      }
+    })
+    .catch(error => {
+      console.error('Fehler beim Laden der Daten:', error);
+    });
 }
 
 
@@ -237,7 +297,6 @@ function editContact() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadData(); // Stellen sicher, dass Daten geladen sind
-  renderContacts(); // Kontaktliste rendern
 });
 
 function highlightContact(index) {
@@ -375,3 +434,4 @@ function truncate(text, maxLength = 20) {
   }
   return text;
 }
+
