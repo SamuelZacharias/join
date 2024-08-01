@@ -89,3 +89,7 @@ span{
 .not-logged-in .icon-box {
   display: none !important;
 }
+
+.not-logged-in .box-icons {
+  display: none !important;
+}

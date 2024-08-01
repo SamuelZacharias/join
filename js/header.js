@@ -55,3 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+function logout() {
+  // Wert aus dem lokalen Speicher löschen
+  localStorage.removeItem('loggedInUserName');
+  
+}
+
