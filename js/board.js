@@ -242,12 +242,7 @@ function renderSubtasks(i) {
 }
 
 
-async function setSubtaskCompleted(taskID, subtaskIndex, completed) {
-    tasks[taskID].subtasks[subtaskIndex].completed = completed;
-    await updateTaskInFirebase(tasks[taskID]);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    renderTasks();
-}
+
 
 
 function filterTasks() {
@@ -466,7 +461,7 @@ function renderOpenTaskSubtasks(task) {
                 <div class="openedSubtaskTitle">
                     <label class="custom-checkbox">
                         <input type="checkbox" ${isChecked}
-                            onclick="setSubtaskCompleted(${task.id}, ${subtaskIndex}, this.checked)">
+                            onclick="setSubtaskCompleted('${task.id}', ${subtaskIndex}, this.checked)">
                         <span class="checkmark"></span>
                         ${subtask.title}
                     </label>
@@ -475,6 +470,19 @@ function renderOpenTaskSubtasks(task) {
         }
     }
 }
+
+async function setSubtaskCompleted(taskId, subtaskIndex, completed) {
+    let task = tasks.find(t => t.id === taskId);
+    if (task) {
+        task.subtasks[subtaskIndex].completed = completed;
+        await updateTaskInFirebase(task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        renderTasks();
+    } else {
+        console.error(`Task with id ${taskId} not found`);
+    }
+}
+
 
 function closeOpenedTask(){
     document.getElementById(`openedTaskContainer`).classList.add(`d-none`)

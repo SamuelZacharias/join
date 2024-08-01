@@ -297,7 +297,7 @@ function showAssignedContacts() {
     let color = contactInitialColors[fullName];
     assignedContactsContainer.innerHTML += `
       <div class="contactInitials" style="background-color: ${color}; color:white;">
-        ${selectedContacts[a].firstname.charAt(0)}${selectedContacts[a].lastname.charAt(0)}
+        ${selectedContacts[a].firstname.toUpperCase().charAt(0)}${selectedContacts[a].lastname.toUpperCase().charAt(0)}
       </div>
     `;
   }
