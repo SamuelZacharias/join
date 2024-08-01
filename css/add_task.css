@@ -244,8 +244,10 @@ select:hover{
   
 }
 
+
 #contacts{
-  height: 150px;
+  background-color: white;
+  height: 280px;
   overflow-y: scroll;
   position: absolute;
   width: 440px;
@@ -336,14 +338,14 @@ select:hover{
 
 
 #newSubtasks{
-  width: 440px;
+  width: 400px;
   position: absolute;
   display: flex;
   flex-direction: column;
   max-height: 80px;
   overflow-y: scroll;
   z-index: 33;
-  margin-top: 80px;
+  margin-top: 90px;
 }
 
 .signedUp{
