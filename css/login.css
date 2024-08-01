@@ -388,7 +388,7 @@ input {
   }
 }
 
-.animated-icon.move {
+.move {
   animation: moveToOriginalPosition 2s forwards ease-in-out;
   opacity: 1;
   /* Ensure icon becomes visible */

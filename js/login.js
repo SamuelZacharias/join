@@ -123,10 +123,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 400); // Adjust the delay as needed (500 milliseconds in this example)
 });
 
-
-
 window.onload = function () {
+    animationCheck();
+    // Setze den Wert nicht hier auf 'false', da dies die Information überschreiben würde.
     setTimeout(function () {
         document.querySelector('.animated-icon').classList.add('move');
     }, 400);
 };
+
+function animationCheck() {
+    // Überprüfen, ob die Animation bereits durchgeführt wurde
+    if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
+        // Entfernen der Klasse 'move', wenn die Animation bereits durchgeführt wurde
+        document.querySelector('.animated-icon').classList.remove('animated-icon');
+        document.querySelector('body').classList.remove('overlay');
+    } else {
+        // Setze den Wert in sessionStorage, um anzuzeigen, dass die Animation durchgeführt wurde
+        sessionStorage.setItem('sessionStorageAnimation', 'true');
+        // Fügen Sie die Klasse 'move' hinzu, um die Animation auszulösen
+        document.querySelector('.animated-icon').classList.add('move');
+    }
+}
