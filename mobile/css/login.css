@@ -1,0 +1,419 @@
+@font-face {
+  font-family: 'inter';
+  src: url('./assets/fonts/static/Inter-Black.ttf') format('interBlack'),
+    url('./assets/fonts/static/Inter-Bold.ttf') format('interBold'),
+}
+
+:root {
+  --blue: #29ABE2;
+  --gray: #2A3647;
+  --high: #FF3D00;
+  --medium: #FFA800;
+  --low: #7AE229;
+  --technical: #1FD7C1;
+  --story: #0038FF;
+  --noTask: #A8A8A8;
+  --policy: #A8A8A8;
+  --background: #F6F7F8;
+  --hightlight: #091931;
+  --border: #D1D1D1;
+
+}
+
+body {
+  font-family: 'inter', Arial, sans-serif;
+  background-color: var(--background);
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+h1 {
+  font-family: 'inter', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 73.2px;
+  margin: 0px;
+}
+
+.headSection {
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 1390px;
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* Styling für die obere Sektion mit Logo */
+.logoLogIn {
+  display: flex;
+  align-items: flex-start;
+}
+
+.logIn {
+  background-color: #2A3647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 110px;
+  border: none;
+}
+
+.logoLogIn img {
+  width: 100.03px;
+  height: 121.97px;
+}
+
+/* Styling für den Hinweisbereich */
+.signUp span {
+  display: flex;
+  align-items: center;
+}
+
+.signUpButton {
+  width: 91px;
+  height: 49px;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 700;
+}
+
+.signUpButton:hover {
+  border: none;
+  background-color: var(--blue);
+  transition: 200ms;
+}
+
+.guestLogIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: solid;
+  border-color: #2A3647;
+  border-width: 1px;
+  height: 48px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 21px;
+  color: #2A3647;
+  box-sizing: border-box;
+  width: 190px;
+}
+
+
+.guestLogIn:hover {
+  border-color: var(--blue);
+  background-color: white;
+  color: var(--blue);
+  transition: 200ms;
+}
+
+.signUp button {
+  width: 91px;
+  /* Festgelegte Breite */
+  height: 49px;
+  /* Festgelegte Höhe */
+  border-radius: 8px;
+  /* Radius */
+  padding: 15px 16px;
+  /* Padding: 15px oben und unten, 16px links und rechts */
+  margin-left: 10px;
+  /* Gap zum Text */
+  background-color: #2A3647;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-style: solid;
+  border-color: #2A3647;
+  border-width: 1px;
+  height: 48px;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 21px;
+  width: 170px;
+}
+
+
+
+/* Styling für die Registrierungssektion */
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  background-color: white;
+  padding: 0px 88px 48px 88px;
+  border-radius: 30px;
+  gap: 32px;
+}
+
+.register a {
+  color: var(--blue);
+}
+
+.register a:hover {
+  text-decoration: underline var(--blue);
+  font-weight: 600;
+}
+
+.separator {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-left: 18px;
+  background-color: var(--blue);
+  height: 3px;
+  width: 150px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--policy);
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.backArrow {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  left: -200px;
+  bottom: -80px;
+  margin-top: -32px;
+  border-radius: 50%;
+}
+
+.backArrow:hover {
+  background-color: var(--border);
+  cursor: pointer;
+}
+
+::placeholder {
+  color: var(--border);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.input {
+  width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 21px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.input input {
+  width: 100%;
+  border: none;
+}
+
+.input img:hover {
+  cursor: pointer;
+}
+
+.input:hover {
+  border: 1px solid var(--blue);
+}
+
+.check {
+  align-items: center;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.check input:hover {
+  cursor: pointer;
+}
+
+.check span {
+  width: 100%;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.buttonContainer {
+  justify-content: center;
+  display: flex;
+  gap: 35px;
+  /* Abstand zwischen den Buttons */
+  height: 48px;
+  align-items: center;
+}
+
+button:hover {
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.policy {
+  display: flex;
+  gap: 32px;
+  position: fixed;
+  bottom: 5px;
+}
+
+.policy a:hover {
+  color: var(--blue);
+  transform: scale(1.1);
+}
+
+.d-none {
+  display: none;
+}
+
+.logInSpan {
+  color: #fff;
+}
+
+.buttonContainer a:hover {
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+input {
+  height: 140%;
+}
+
+
+.buttonContainer a {
+  color: black;
+}
+
+#invalid {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  color: red;
+  height: 12px;
+}
+
+.invalid {
+  border-color: Red
+}
+
+/* Standard-Styling */
+.headSection {
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 1390px;
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.animated-icon {
+  position: absolute;
+  left: 50%;
+  /* Center horizontally */
+  top: 50%;
+  /* Center vertically */
+  width: 274px;
+  /* Initial width */
+  height: 334.07px;
+  /* Initial height */
+  transform: translate(50%, 50%);
+  /* Center the icon */
+  opacity: 1;
+  /* Initially visible */
+  transition: width 2s ease-in-out, height 2s ease-in-out, left 2s ease-in-out, top 2s ease-in-out;
+  /* Transition effects */
+  z-index: 2;
+}
+
+/* Animation keyframes */
+@keyframes moveToOriginalPosition {
+  from {
+    left: 50%;
+    top: calc(50% + 120px);
+    /* Starting position adjusted 50px down */
+    width: 274px;
+    height: 334.07px;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  to {
+    left: 0;
+    /* Final horizontal position */
+    top: 50px;
+    /* Final vertical position */
+    width: 100.03px;
+    /* Final width */
+    height: 121.97px;
+    /* Final height */
+    transform: translate(0, 0);
+    /* Final position */
+    opacity: 1;
+    /* Ensure icon remains visible */
+  }
+}
+
+.move {
+  animation: moveToOriginalPosition 2s forwards ease-in-out;
+  opacity: 1;
+  /* Ensure icon becomes visible */
+}
+
+/* Full-screen overlay with initial opacity set to 0 */
+.overlay {
+  position: relative;
+  /* Covers the entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #F6F7F8;
+  /* Background color */
+  z-index: 1;
+  /* High z-index to cover all content */
+  transition: opacity 2s ease-out;
+  /* Transition effect for fading in */
+  opacity: 0;
+  /* Initial opacity (hidden) */
+}
+
+/* Class to make the overlay visible */
+.overlay.visible {
+  opacity: 1;
+  /* Final opacity (visible) */
+}

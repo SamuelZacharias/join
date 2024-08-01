@@ -1,0 +1,25 @@
+:root {
+  --blue:   #29ABE2;
+  --gray:  #2A3647;
+  --high : #FF3D00;
+  --medium: #FFA800;
+  --low:   #7AE229;
+  --technical : #1FD7C1;
+  --story : #0038FF;
+  --noTask : #A8A8A8;
+  --policy : #A8A8A8;
+  --background : #F6F7F8;
+  --hightlight : #091931;
+  --border : #D1D1D1;
+}
+
+body{
+  margin: 0px;
+  font-family: "inter", Arial, sans-serif;
+}
+
+@font-face {
+  font-family: "inter";
+  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
+    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
+}
