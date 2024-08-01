@@ -1,10 +1,13 @@
 function generateContact(contact, initials, index) {
+  const truncatedName = truncate(contact.name);
+  const truncatedEmail = truncate(contact.email);
+
   return `
         <div id="contact${index}" class="contacts" onclick="displayContactInfo(${index})">
             <div class="letter-circle" style="background-color: ${contact.color};">${initials}</div>
             <div class="contact-info">
-                <span>${contact.name}</span>
-                <a class="contact-email" href="#">${contact.email}</a>
+            <span>${truncatedName}</span>
+                <a class="contact-email" href="#">${truncatedEmail}</a>
             </div>
         </div>
     `;

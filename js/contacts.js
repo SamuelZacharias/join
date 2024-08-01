@@ -268,17 +268,17 @@ function validateForm() {
 
   // Vor- und Nachname Validierung (erlaubt Umlaute und Leerzeichen, erfordert mindestens zwei Wörter)
   const nameInput = document.getElementById('name');
-  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/)) {
-      setError(nameInput, 'Ungültiger Name (Max Mustermann)');
+  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 23) {
+      setError(nameInput, 'Ungültiger Name oder zu lang (Max Mustermann, max. 23 Zeichen)');
       isValid = false;
       nameInput.value = '';
   } else {
       clearError(nameInput);
   }
 
-  // Email Validierung (überprüft auf gängige Endungen)
+  // Email Validierung (überprüft auf gültiges E-Mail-Format, keine Einschränkung auf bestimmte Endungen)
   const emailInput = document.getElementById('email');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.(de|com|net|org|edu|gov|mil|int)$/)) {
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       setError(emailInput, 'Ungültige E-Mail (test@test.de)');
       isValid = false;
       emailInput.value = '';
@@ -308,17 +308,17 @@ function validateEditForm() {
 
   // Vor- und Nachname Validierung (erlaubt Umlaute und Leerzeichen, erfordert mindestens zwei Wörter)
   const nameInput = document.getElementById('inputEditName');
-  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/)) {
-      setError(nameInput, 'Ungültiger Name');
+  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 23) {
+      setError(nameInput, 'Ungültiger Name oder zu lang (Max Mustermann, max. 23 Zeichen)');
       isValid = false;
       nameInput.value = '';
   } else {
       clearError(nameInput);
   }
 
-  // Email Validierung (überprüft auf gängige Endungen)
+  // Email Validierung (überprüft auf gültiges E-Mail-Format, keine Einschränkung auf bestimmte Endungen)
   const emailInput = document.getElementById('inputEditEmail');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.(de|com|net|org|edu|gov|mil|int)$/)) {
+  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       setError(emailInput, 'Ungültige E-Mail');
       isValid = false;
       emailInput.value = '';
@@ -340,8 +340,6 @@ function validateEditForm() {
     editContact();
   }
 }
-
-
 
 
 let contactsCanBeAssigned = {
@@ -369,4 +367,11 @@ function storeFirstAndLastNames() {
 
   // Save the separated names to local storage
   localStorage.setItem('contactsCanBeAssigned', JSON.stringify(contactsCanBeAssigned));
+}
+
+function truncate(text, maxLength = 20) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + '...';
+  }
+  return text;
 }
