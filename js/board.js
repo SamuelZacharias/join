@@ -30,7 +30,7 @@ async function getTasksFromDataBase() {
         // Load tasks from local storage to ensure consistency
         renderTasks()
     } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
+        console.warn('There was a problem with the fetch operation:', error);
     }
 }
 
@@ -369,16 +369,16 @@ let currentTaskId = null;
 
 function openTask(task) {
     currentTaskId = task.id;
-
+    document.getElementById('openedTaskContainer').classList.add('openedTaskContainer')
     let openedTaskContainer = document.getElementById('openedTaskContainer');
     openedTaskContainer.classList.remove('d-none');
     openedTaskContainer.innerHTML = `
-        <div class="openedTask" id="openedTask"></div>
+        <div class="openedTask" id="openedTask" onclick="event.stopPropagation()" ></div>
     `;
     document.getElementById('openedTask').innerHTML = `
         <div class="taskDetails">
             <div class="openedTaskCategory">
-                <span>${task.category}</span>
+                <span id="openedTaskCategory" class="taskCategory">${task.category}</span>
                 <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
             </div>
             <h1 id="openedTaskTitle">${task.title}</h1>
@@ -399,10 +399,54 @@ function openTask(task) {
             </div>
         </div>
     `;
+
     checkforOpenedDecsripiton(task)
     renderOpenTaskAssignedContacts(task);
     renderOpenTaskSubtasks(task);
     checkforOpenedTitle(task)
+    openedCategoryColor(task)
+   
+   
+}
+
+function handleClickOutside(event) {
+    const container = document.getElementById('openedTaskContainer');
+        if(container.contains(event.target)){
+        document.getElementById('openedTaskContainer').classList.add('d-none')
+        
+        container.classList.remove('openedTaskContainer')
+        }
+
+        const containerEdit = document.getElementById('editTaskContainer');
+        if(containerEdit.contains(event.target)){
+        document.getElementById('editTaskContainer').classList.add('d-none')
+        
+        containerEdit.classList.remove('openedTaskContainer')
+        }
+
+}
+  
+  document.addEventListener('click', handleClickOutside);
+
+
+
+function closeOpenedTask(){
+    document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
+    document.getElementById('openedTaskContainer').classList.remove('openedTaskContainer')
+    document.getElementById(`editTaskContainer`).classList.add(`d-none`)
+    document.getElementById('editTaskContainer').classList.remove('openedTaskContainer')
+}
+
+
+function openedCategoryColor(task) {
+    const categoryElement = document.getElementById(`openedTaskCategory`);
+    if (categoryElement) {
+        if (task.category === 'User Task') {
+            categoryElement.classList.add('userTask');
+        } else if (task.category === 'Technical task') {
+            categoryElement.classList.add('technicalTask');
+        }
+    }
 }
 
 function checkforOpenedDecsripiton(task){
@@ -484,10 +528,7 @@ async function setSubtaskCompleted(taskId, subtaskIndex, completed) {
 }
 
 
-function closeOpenedTask(){
-    document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
-    document.getElementById(`editTaskContainer`).classList.add(`d-none`)
-}
+
 
 
 async function deleteTask(taskId) {
@@ -529,7 +570,7 @@ function editTask(taskId) {
         console.error('Task not found.');
         return;
     }
-    document.getElementById('editTaskContainer').innerHTML= `<div class="openedTask" id="editTask"></div>`
+    document.getElementById('editTaskContainer').innerHTML= `<div class="openedTask" id="editTask" onclick="event.stopPropagation()" ></div>`
     // Set the current task being edited
     currentTaskBeingEdited = task;
 
@@ -541,8 +582,9 @@ function renderEditHTML(task) {
     console.log('Rendering edit form for task:', task); // Debugging line
     let openedEdit = document.getElementById('editTask');
     document.getElementById('editTaskContainer').classList.remove('d-none')
+    document.getElementById('editTaskContainer').classList.add('openedTaskContainer')
     openedEdit.innerHTML = `
-        <div class="closeEditTask">
+        <div class="closeEditTask" >
             <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeEdit()">
         </div>
         <div class="editTaskInfo">
@@ -960,3 +1002,4 @@ function getTaskById(taskId) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     return tasks.find(task => task.id === taskId);
 }
+

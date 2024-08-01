@@ -194,11 +194,15 @@ input:focus{
 
 .userTask{
   background-color: #0038FF;
+  display: flex;
+  align-items: center;
   
 }
 
 .technicalTask{
   background-color: #1FD7C1 ;
+  display: flex;
+  align-items: center;
 }
 
 .taskInfo{
