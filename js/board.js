@@ -87,54 +87,15 @@ async function updateTaskInFirebase(task) {
     }
 }
 
+document.addEventListener('click', handleClickOutside);
 
 
 
-
-
-
-let currentTaskId = null;
-
-function openTask(task) {
-    currentTaskId = task.id;
-    document.getElementById('openedTaskContainer').classList.add('openedTaskContainer')
-    let openedTaskContainer = document.getElementById('openedTaskContainer');
-    openedTaskContainer.classList.remove('d-none');
-    openedTaskContainer.innerHTML = `
-        <div class="openedTask" id="openedTask" onclick="event.stopPropagation()" ></div>
-    `;
-    document.getElementById('openedTask').innerHTML = `
-        <div class="taskDetails">
-            <div class="openedTaskCategory">
-                <span id="openedTaskCategory" class="taskCategory">${task.category}</span>
-                <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
-            </div>
-            <h1 id="openedTaskTitle">${task.title}</h1>
-            <p id="openedTaskDescription">${task.description}</p>
-            <div>Due date: ${task.dueDate}</div>
-            <div>Priority: ${task.priority}</div>
-            <div>
-             <div style="margin-bottom:10px;">Assigned To:</div>
-             <div id="openedAssignedContacts" class="openedAssigendContactsArea"> </div>
-            </div>
-            <div>   
-                <div>Subtasks:</div>
-                <div id="openedSubtasks"></div> 
-            </div>
-            <div class="deleteEditArea">
-                <div onclick="deleteTask('${task.id}')" class="delete"><img src="/assets/img/png/delete.png"> Delete</div>
-                <div onclick="editTask('${task.id}')" class="edit"><img src="/assets/img/png/editOpen.png"> Edit</div>
-            </div>
-        </div>
-    `;
-
-    checkforOpenedDecsripiton(task)
-    renderOpenTaskAssignedContacts(task);
-    renderOpenTaskSubtasks(task);
-    checkforOpenedTitle(task)
-    openedCategoryColor(task)
-   
-   
+function closeOpenedTask(){
+    document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
+    document.getElementById('openedTaskContainer').classList.remove('openedTaskContainer')
+    document.getElementById(`editTaskContainer`).classList.add(`d-none`)
+    document.getElementById('editTaskContainer').classList.remove('openedTaskContainer')
 }
 
 function handleClickOutside(event) {
@@ -154,137 +115,9 @@ function handleClickOutside(event) {
 
 }
   
-  document.addEventListener('click', handleClickOutside);
 
 
 
-function closeOpenedTask(){
-    document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
-    document.getElementById('openedTaskContainer').classList.remove('openedTaskContainer')
-    document.getElementById(`editTaskContainer`).classList.add(`d-none`)
-    document.getElementById('editTaskContainer').classList.remove('openedTaskContainer')
-}
-
-
-function openedCategoryColor(task) {
-    const categoryElement = document.getElementById(`openedTaskCategory`);
-    if (categoryElement) {
-        if (task.category === 'User Task') {
-            categoryElement.classList.add('userTask');
-        } else if (task.category === 'Technical task') {
-            categoryElement.classList.add('technicalTask');
-        }
-    }
-}
-
-function checkforOpenedDecsripiton(task){
-    let openedTaskDescription = document.getElementById('openedTaskDescription')
-    if(task.description === ""){
-        openedTaskDescription.innerHTML= `No Description`;
-    }else{
-        openedTaskDescription.innerHTML = `${task.description}`;
-    }
-}
-function checkforOpenedTitle(task){
-    let openedTaskTitle = document.getElementById('openedTaskTitle')
-    if(task.title === ""){
-        openedTaskTitle.innerHTML= `No Title`;
-    }else{
-        openedTaskTitle.innerHTML = `${task.title}`;
-    }
-}
-
-function renderOpenTaskAssignedContacts(task) {
-    let openedAssignedContacts = document.getElementById('openedAssignedContacts');
-    openedAssignedContacts.innerHTML = '';
-   
-    if (!task.assignedContacts || task.assignedContacts.length === 0) {
-        openedAssignedContacts.innerHTML = 'No contacts assigned';
-    } else {
-        const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
-        
-        for (let x = 0; x < task.assignedContacts.length; x++) {
-            let contactName = task.assignedContacts[x];
-            const initials = getInitials(contactName);
-            const color = contactColorsAssignment[contactName] || '#000';
-
-            openedAssignedContacts.innerHTML += `
-            <div class="openedAssigendContacts">
-                <div class="openedAssigendContactsInitials" style="background-color: ${color}; ">
-                    ${initials}
-                </div>
-                <div>${contactName}</div>
-            </div>
-            `;
-        }
-    }
-}
-function renderOpenTaskSubtasks(task) {
-    let openedSubtasksArea = document.getElementById('openedSubtasks');
-    openedSubtasksArea.innerHTML = ''; // Clear existing subtasks
-
-    if (!task.subtasks || task.subtasks.length === 0) {
-        openedSubtasksArea.innerHTML = 'No Subtasks';
-    } else {
-        for (let subtaskIndex = 0; subtaskIndex < task.subtasks.length; subtaskIndex++) {
-            let subtask = task.subtasks[subtaskIndex];
-            let isChecked = subtask.completed ? 'checked' : '';
-            openedSubtasksArea.innerHTML += `
-                <div class="openedSubtaskTitle">
-                    <label class="custom-checkbox">
-                        <input type="checkbox" ${isChecked}
-                            onclick="setSubtaskCompleted('${task.id}', ${subtaskIndex}, this.checked)">
-                        <span class="checkmark"></span>
-                        ${subtask.title}
-                    </label>
-                </div>
-            `;
-        }
-    }
-}
-
-async function setSubtaskCompleted(taskId, subtaskIndex, completed) {
-    let task = tasks.find(t => t.id === taskId);
-    if (task) {
-        task.subtasks[subtaskIndex].completed = completed;
-        await updateTaskInFirebase(task);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        renderTasks();
-    } else {
-        console.error(`Task with id ${taskId} not found`);
-    }
-}
-
-
-
-
-
-async function deleteTask(taskId) {
-    try {
-        const response = await fetch(`${BASE_URL}${taskId}.json`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-        }
-
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
-        if (taskIndex === -1) {
-            throw new Error('Task not found');
-        }
-
-        tasks.splice(taskIndex, 1);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-
-        renderTasks();
-
-        console.log('Task deleted successfully:', taskId);
-        closeOpenedTask();
-    } catch (error) {
-        console.error('There was a problem with the delete operation:', error);
-    }
-}
 
 
 
