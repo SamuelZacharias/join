@@ -86,6 +86,6 @@ span{
   cursor: pointer;
 }
 
-.icon-box{
+.not-logged-in .icon-box {
   display: none !important;
 }
