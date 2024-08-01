@@ -319,6 +319,8 @@ document.addEventListener('click', function(event) {
   let dropdownContacts = document.getElementById('dropdownContacts');
   if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
     contactsContainer.classList.add('d-none');
+    document.getElementById('dropDownContactsImg').classList.add('dropDownImg');
+  document.getElementById('dropDownContactsImg').classList.remove('dropUpImg')
   }
 });
 
@@ -383,25 +385,25 @@ function showSubtasks(){
   newSubtask.innerHTML = '';
   for (let s = 0; s < subtaskInfos.length; s++) {
     newSubtask.innerHTML += `
-      <div class="addSubtask" style="justify-content:space-between;">
-        <div  onclick="editSubtask(${s})" >
-          ${subtaskInfos[s]}
+      <li onclick="editSubtask(${s})" >
+        <div style="display:flex; justify-content:space-between;">
+         ${subtaskInfos[s]}
+          <div>
+            <img src="assets/img/png/editSubtask.png" onclick="editSubtask()" alt="" />
+            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
+          </div>
         </div>
-        <div class="d-flex">
-          <img src="assets/img/png/subtaskDone.png" onclick="showSubtasks()" alt="" />
-          <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
-        </div>
-      </div>
+      </li>
     `;
   }
 }
 
 function editSubtask(index) {
   let newSubtask = document.getElementById('newSubtasks');
-  newSubtask.innerHTML = '';
+  
   for (let s = 0; s < subtaskInfos.length; s++) {
     if (s === index) {
-      newSubtask.innerHTML += `
+      newSubtask.innerHTML = `
         <div class="addSubtask" ; justify-content:space-between;">
           <input type="text" id="editSubtaskInput" value="${subtaskInfos[s]}" minlength="3" required />
           <div class="d-flex">
@@ -411,7 +413,7 @@ function editSubtask(index) {
         </div>
       `;
     } else {
-      newSubtask.innerHTML += `
+      newSubtask.innerHTML = `
         <div class="addSubtask" ; justify-content:space-between;">
           <div style="width:100%" onclick="editSubtask(${s})"  >
             ${subtaskInfos[s]}
