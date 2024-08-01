@@ -76,10 +76,7 @@ body {
   background-color: #f4f4f4a6;
 }
 
-.contacts:active {
-  background-color: #2a3647;
-  color: white;
-}
+
 
 .contacts:target{
   background-color: #2a3647;
