@@ -364,6 +364,10 @@ select:hover{
   display: none;
 }
 
+li:hover .d-none {
+  display: block;
+}
+
 .animation{
   animation: slideUp 1.2s ease-out;
 }
