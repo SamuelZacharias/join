@@ -401,31 +401,11 @@ function validateEditForm() {
 }
 
 
-let contactsCanBeAssigned = {
-  'firstname': [],
-  'lastname': []
-};
+
 
 // Function to extract and store first and last names separately
 function storeFirstAndLastNames() {
-  // Reset the storage arrays
-  contactsCanBeAssigned.firstname = [];
-  contactsCanBeAssigned.lastname = [];
-
-  // Process each contact
-  contacts.forEach(contact => {
-    let nameParts = contact.name.split(' ');
-    if (nameParts.length > 1) {
-      contactsCanBeAssigned.firstname.push(nameParts[0]);
-      contactsCanBeAssigned.lastname.push(nameParts.slice(1).join(' '));
-    } else {
-      contactsCanBeAssigned.firstname.push(nameParts[0]);
-      contactsCanBeAssigned.lastname.push('');
-    }
-  });
-
-  // Save the separated names to local storage
-  localStorage.setItem('contactsCanBeAssigned', JSON.stringify(contactsCanBeAssigned));
+  localStorage.setItem('contacts', JSON.stringify(contacts));
 }
 
 function truncate(text, maxLength = 20) {
