@@ -40,6 +40,7 @@ function handleLoginResponse(data, email, password) {
 function validatePasswordAndLogin(data, emailIndex, password) {
     if (data.password[emailIndex] === password) {
         localStorage.setItem('loggedInUserName', data.name[emailIndex]);
+        localStorage.setItem('loggedInUserEmail', data.email[emailIndex]);
         window.location.href = 'summary.html';
     } else {
         showInvalidMessage('invalid', 'Incorrect password', 'invalidPassword');
