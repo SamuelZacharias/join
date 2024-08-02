@@ -419,7 +419,7 @@ function editSubtask(index) {
   for (let s = 0; s < subtaskInfos.length; s++) {
     if (s === index) {
       newSubtask.innerHTML = `
-        <div class="addSubtask" ; justify-content:space-between;">
+        <div class="addSubtask"  style="margin-left:-40px" >
           <input type="text" id="editSubtaskInput" value="${subtaskInfos[s]}" minlength="3" required />
           <div class="d-flex">
             <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${s})" alt="" />
@@ -429,7 +429,7 @@ function editSubtask(index) {
       `;
     } else {
       newSubtask.innerHTML = `
-        <div class="addSubtask" ; justify-content:space-between;">
+        <div class="addSubtask" style="margin-left:-40px";>
           <div style="width:100%" onclick="editSubtask(${s})"  >
             ${subtaskInfos[s]}
           </div>
