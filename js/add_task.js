@@ -330,24 +330,35 @@ let subtaskInfos = [];
 function writeSubtask() {
   let subtaskArea = document.getElementById('subtaskContainer');
   subtaskArea.innerHTML = `
-    <div class="addSubtask">
-      <input type="text" name="" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
-      <div class="d-flex">
-        <img src="assets/img/png/subtaskX.png" onclick="resetSubtask()" alt="" />
-        <img src="assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
+      <div class="addSubtask">
+          <input type="text" name="" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
+          <div class="d-flex">
+              <img src="assets/img/png/subtaskX.png" onclick="resetSubtask()" alt="" />
+              <img src="assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
+          </div>
       </div>
-    </div>
   `;
 
+  // Get the newly created input field
+  let inputField = document.getElementById('subtaskInput');
+
   // Add event listener for focusout event
-  document.getElementById('subtaskInput').addEventListener('focusout', function() {
-    if (!this.value.trim()) {
-      resetSubtask();
-    }
+  inputField.addEventListener('focusout', function() {
+      if (!this.value.trim()) {
+          resetSubtask();
+      }
   });
 
-  // Ensure the input gets focus again if clicked
-  document.getElementById('subtaskInput').focus();
+  // Add event listener for keydown event to detect Enter key
+  inputField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent the default action if necessary
+          addSubtask(); // Call the addSubtask function
+      }
+  });
+
+  // Ensure the input gets focus
+  inputField.focus();
 }
 
 function addSubtask(){
@@ -436,6 +447,13 @@ function editSubtask(index) {
       `;
     }
   }
+  let inputField = document.getElementById('editSubtaskInput');
+  inputField.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent the default action if necessary
+        saveSubtask(index); // Call the addSubtask function
+    }
+});
 }
 
 function saveSubtask(index) {
@@ -665,3 +683,4 @@ function showSuccessMessage() {
     window.location.href = 'board.html';
   }, 3000);
 }
+
