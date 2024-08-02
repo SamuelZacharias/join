@@ -73,3 +73,111 @@ function returnOpenTaskSubtaskHTML(taskId, subtaskIndex, subtask) {
         </div>
     `;
 }
+
+function returnOpenEditHTML(task, today) {
+    return `
+      <div class="closeEditTask">
+          <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeEdit()">
+      </div>
+      <div class="editTaskInfo">
+          <div class="editTitle">
+              <div>Title</div>
+              <div id="editTitle" class="titleInput"><input type="text" value="${task.title}"></div>
+          </div>
+          <div class="editTitle">
+              <div>Description</div>
+              <textarea id="taskDescriptionTextarea">${task.description || ''}</textarea>
+          </div>
+          <div class="editTitle">
+              <div>Due date</div>
+              <div class="titleInput"><input id="dateValue" type="date" value="${task.dueDate || ''}" min="${today}"></div>
+          </div>
+          <div class="editPriorityArea editTitle">
+              <div>Priority: </div>
+              <div id="editPriorityButtons"></div>
+          </div>
+          <div class="editTitle">
+              <div>Assigned to:</div>
+              <div class="editAssignContacts" onclick="closeContactsDropdown()">
+                  <div>Select contacts to assign</div>
+                  <img id="dropDownImg" src="/assets/img/png/arrow_drop_down (1).png">
+              </div>
+              <div id="contactsToChoose" class="d-none contactsToChoose"></div>
+          </div>
+          <div class="editTitle">
+              <div>Subtasks:</div>
+              <div class="editAssignContacts" id="editSubtasks"></div>
+              <div id="newSubtasks"></div>
+          </div>
+      </div>
+      <div class="editOkay" id="editOkay" onclick="collectData('${task.id}')"><span>Ok<img src="assets/img/png/check.png" alt=""></span></div>
+    `;
+  }
+
+  function returnEditPriorityButtonsHTML(){
+    return `
+        <button class="prioButton buttonhover" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg"></button>
+        <button class="prioButton buttonhover" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.png"></button>
+        <button class="prioButton buttonhover" id="button3" onclick="switchButton('Low')">Low   <img src="assets/img/svg/low.svg"></button>
+    `;
+  }
+
+  function returnContactsToChooseHTML(contact, contactClass, color, initials) {
+    return `
+      <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contact}')">
+          <div class="openedAssigendContactsInitials" style="background-color: ${color};">
+              ${initials}
+          </div>
+          <div>${contact}</div>
+      </div>
+    `;
+  }
+
+  function returnEditSubtasksHTML() {
+    return `
+        <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
+            <span>Add new subtask</span>
+            <img src="/assets/img/png/Subtasks icons11.png">
+        </div>
+    `;
+  }
+
+  function returnWriteSubtaskHTML() {
+    return `
+        <div class="addSubtask" id="editSubtask">
+            <input type="text" id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
+            <div class="d-flex">
+                <img src="/assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
+                <img src="/assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
+            </div>
+        </div>
+    `;
+  }
+
+  function returnSubtaskHTML(index, title) {
+    return `
+        <div class="addSubtask editSubtask showedSubtask subtask-container" 
+             onmouseover="showActions(this)" 
+             onmouseout="hideActions(this)">
+            <div class="subtask-title" onclick="editSubtask(${index})">
+                ${title}
+            </div>
+            <div class="d-flex d-none subtask-actions">
+                <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${index})" alt="" />
+                <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+            </div>
+        </div>
+    `;
+  }
+
+  function returnEditSubtaskHTML(index, title) {
+    return `
+        <div class="addSubtask editSubtask">
+            <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
+            <div class="d-flex">
+                <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
+                <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+            </div>
+        </div>
+    `;
+  }
