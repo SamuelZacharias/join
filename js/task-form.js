@@ -3,12 +3,7 @@ let choosenCategory = false;
 let category = ["User Task", "Technical task"];
 let activeButton = 2;
 
-let contacts = localStorage.getItem('contacts');
-if (contacts) {
-  contacts = JSON.parse(contacts);
-} else {
-  contacts = [];
-}
+let contacts = JSON.parse(localStorage.getItem('contactsCanBeAssigned'))
 
 function handleClick(buttonNumber) {
   if (activeButton !== null) {
@@ -197,47 +192,82 @@ document.getElementById('dropdownCategory').addEventListener('click', function()
 
 
 
+let contactColors = [
+  "#FF4646",
+  "#FFE62B",
+  "#FFBB2B",
+  "#C3FF2B",
+  "#0038FF",
+  "#FFC701",
+  "#FC71FF",
+  "#FFA35E",
+  "#FF745E",
+  "#9327FF",
+  "#00BEE8",
+  "#1FD7C1",
+  "#6E52FF",
+  "#FF5EB3",
+  "#FF7A00"
+];
+
+
+let contactInitialColors = {};
+
+
+function assignColors() {
+  for (let i = 0; i < contacts.firstname.length; i++) {
+    let fullName = contacts.firstname[i] + " " + contacts.lastname[i];
+    contactInitialColors[fullName] = contactColors[Math.floor(Math.random() * contactColors.length)];
+  }
+}
 
 let selectedContacts = [];
 
 function showContacts() {
   let contactsContainer = document.getElementById('contacts');
-  contactsContainer.innerHTML = '';
+  contactsContainer.innerHTML = ``;
+  for (let x = 0; x < contacts.firstname.length; x++) {
+    let fullName = contacts.firstname[x] + " " + contacts.lastname[x];
+    let color = contactInitialColors[fullName];
 
-  for (let x = 0; x < contacts.length; x++) {
-    let contact = contacts[x];
-    let fullName = contact.name;
-    let color = contact.color;
-
-    let isSelected = selectedContacts.some(c => c.name === contact.name);
+   
+    let isSelected = selectedContacts.some(c => c.firstname === contacts.firstname[x] && c.lastname === contacts.lastname[x]);
     let selectedClass = isSelected ? 'selected' : '';
 
     contactsContainer.innerHTML += `
       <div class="contactsOpen ${selectedClass}" data-index="${x}">
         <div class="contactInitials" style="background-color: ${color}; ">
-          ${contact.initials}
+          ${contacts.firstname[x].toUpperCase(0).charAt(0)}${contacts.lastname[x].toUpperCase(0).charAt(0)}
         </div>
         <div class="contactName">
-          <span style="width:100%;">${fullName}</span>
+          <span style="width:100%;">${contacts.firstname[x]} ${contacts.lastname[x]}</span>
           <img src="assets/img/png/Rectangle 5.png" alt="">
         </div>
       </div>
     `;
   }
 
+  
   let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
   for (let contactElement of contactElements) {
     contactElement.addEventListener('click', function() {
       let index = this.getAttribute('data-index');
-      let contact = contacts[index];
+      let contact = {
+        firstname: contacts.firstname[index],
+        lastname: contacts.lastname[index]
+      };
 
-      let selectedIndex = selectedContacts.findIndex(c => c.name === contact.name);
+      
+      let selectedIndex = selectedContacts.findIndex(c => c.firstname === contact.firstname && c.lastname === contact.lastname);
       if (selectedIndex === -1) {
+        
         selectedContacts.push(contact);
       } else {
+        
         selectedContacts.splice(selectedIndex, 1);
       }
 
+      
       this.classList.toggle('selected');
       showAssignedContacts();
     });
@@ -259,25 +289,23 @@ function toggleContacts() {
 
 function showAssignedContacts() {
   let assignedContactsContainer = document.getElementById('assignedContacts');
-  assignedContactsContainer.innerHTML = '';
+  assignedContactsContainer.innerHTML = ``;
   let maxContactsToShow = 5;
 
   for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
-    let contact = selectedContacts[a];
-    let fullName = contact.name;  // Assuming `name` field is a single string.
-    let color = contact.color;    // Use the color from the contact object.
-
+    let fullName = selectedContacts[a].firstname + " " + selectedContacts[a].lastname;
+    let color = contactInitialColors[fullName];
     assignedContactsContainer.innerHTML += `
       <div class="contactInitials" style="background-color: ${color}; color:white;">
-        ${contact.initials}
+        ${selectedContacts[a].firstname.toUpperCase().charAt(0)}${selectedContacts[a].lastname.toUpperCase().charAt(0)}
       </div>
     `;
   }
 
   if (selectedContacts.length > maxContactsToShow) {
     let moreCount = selectedContacts.length - maxContactsToShow;
+    
     let moreContactsColor = "#999999"; 
-
     assignedContactsContainer.innerHTML += `
       <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
         +${moreCount} 
@@ -531,7 +559,7 @@ function collectData() {
   const dueDate = form.querySelector('input[type="date"]').value;
   const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
 
-  const assignedContacts = selectedContacts;
+  const assignedContacts = selectedContacts.map(contact => `${contact.firstname} ${contact.lastname}`);
   
   // Set 'completed' to false for each subtask
   const subtasks = subtaskInfos.map(subtask => ({ title: subtask, completed: false }));

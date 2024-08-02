@@ -36,19 +36,21 @@ async function getTasksFromDataBase() {
 
 
 function loadTasksFromLocalStorage() {
-    const savedContacts = JSON.parse(localStorage.getItem('contactsCanBeAssigned')) || [];
+    const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
     const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     const validTasks = savedTasks.filter(task => task !== null);
 
+    // Update tasks array with valid tasks
     tasks.length = 0;  
     tasks.push(...validTasks);
 
+    // Update contacts array directly
     contacts.length = 0;
-    contacts.push(savedContacts);
+    contacts.push(...savedContacts);  // Spread savedContacts into the contacts array
 
     console.log('Loaded tasks:', tasks);
-    
+    console.log('Loaded contacts:', contacts);
 }
 
 

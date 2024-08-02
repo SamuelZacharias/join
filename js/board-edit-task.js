@@ -59,6 +59,7 @@ function switchButton(priority) {
 
 function showContactsToChoose() {
   document.getElementById('dropDownImg').classList.add('dropUpImg');
+
   if (!currentTaskBeingEdited) {
     console.error('No task is currently being edited.');
     return;
@@ -68,66 +69,49 @@ function showContactsToChoose() {
   contactsToChooseElement.innerHTML = '';
   contactsToChooseElement.classList.remove('d-none');
 
-  const contactsList = getFullContactNames();
   const assignedContacts = currentTaskBeingEdited.assignedContacts || [];
-  let contactColorsAssignment = getContactColorsAssignment();
 
-  assignColorsToContacts(contactsList, contactColorsAssignment);
-
-  localStorage.setItem('contactColorsAssignment', JSON.stringify(contactColorsAssignment));
-
-  renderContactsList(contactsList, assignedContacts, contactColorsAssignment, contactsToChooseElement);
+  renderContactsList(contacts, assignedContacts, contactsToChooseElement);
 }
 
-function getFullContactNames() {
-  const contactData = contacts[0];
-  return contactData.firstname.map((firstname, index) => `${firstname} ${contactData.lastname[index]}`);
-}
-
-function getContactColorsAssignment() {
-  return JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
-}
-
-function getRandomColor() {
-  return contactColors[Math.floor(Math.random() * contactColors.length)];
-}
-
-function assignColorsToContacts(contactsList, contactColorsAssignment) {
+function renderContactsList(contactsList, assignedContacts, contactsToChooseElement) {
   contactsList.forEach(contact => {
-    if (!contactColorsAssignment[contact]) {
-      const randomColor = getRandomColor();
-      contactColorsAssignment[contact] = randomColor;
-    }
-  });
-}
-function renderContactsList(contactsList, assignedContacts, contactColorsAssignment, contactsToChooseElement) {
-  contactsList.forEach(contact => {
-    const isAssigned = assignedContacts.includes(contact);
+    const isAssigned = assignedContacts.some(assignedContact => assignedContact.name === contact.name);
     const contactClass = isAssigned ? 'editAssignedTo contactIsAssigned' : '';
-    const initials = getInitials(contact);
-    const color = contactColorsAssignment[contact];
+    const initials = contact.initials;
+    const color = contact.color;
 
-    contactsToChooseElement.innerHTML += returnContactsToChooseHTML(contact, contactClass, color, initials);
+    contactsToChooseElement.innerHTML += returnContactsToChooseHTML(contact.name, contactClass, color, initials);
   });
 }
 
-function getInitials(contact) {
-  const names = contact.split(' ');
-  const initials = names.map(name => name.toUpperCase().charAt(0)).join('');
-  return initials;
+function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
+  return `
+    <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
+        <div class="openedAssigendContactsInitials" style="background-color: ${color};">
+            ${initials}
+        </div>
+        <div>${contactName}</div>
+    </div>
+  `;
 }
 
-
-function toggleContactAssignment(contact) {
+function toggleContactAssignment(contactName) {
   if (!currentTaskBeingEdited) {
       console.warn('No task is currently being edited.');
       return;
   }
 
   const task = currentTaskBeingEdited;
+  const contact = contacts.find(c => c.name === contactName);
 
-  if (isContactAssigned(task, contact)) {
-      unassignContact(task, contact);
+  if (!contact) {
+      console.warn('Contact not found.');
+      return;
+  }
+
+  if (isContactAssigned(task, contactName)) {
+      unassignContact(task, contactName);
   } else {
       assignContact(task, contact);
   }
@@ -135,25 +119,34 @@ function toggleContactAssignment(contact) {
   showContactsToChoose(); // Re-render the contacts list
 }
 
-function isContactAssigned(task, contact) {
+function isContactAssigned(task, contactName) {
   const assignedContacts = task.assignedContacts || [];
-  return assignedContacts.indexOf(contact) > -1;
+  return assignedContacts.some(assignedContact => assignedContact.name === contactName);
 }
 
 function assignContact(task, contact) {
-  const assignedContacts = task.assignedContacts || [];
-  assignedContacts.push(contact);
-  task.assignedContacts = assignedContacts;
+  if (!task.assignedContacts) {
+    task.assignedContacts = [];
+  }
+  
+  if (!task.assignedContacts.some(c => c.name === contact.name)) {
+    task.assignedContacts.push(contact);
+  }
 }
 
-function unassignContact(task, contact) {
-  const assignedContacts = task.assignedContacts || [];
-  const contactIndex = assignedContacts.indexOf(contact);
-  if (contactIndex > -1) {
-      assignedContacts.splice(contactIndex, 1);
+function unassignContact(task, contactName) {
+  if (!task.assignedContacts) {
+    return;
   }
-  task.assignedContacts = assignedContacts;
+
+  const contactIndex = task.assignedContacts.findIndex(c => c.name === contactName);
+  if (contactIndex > -1) {
+      task.assignedContacts.splice(contactIndex, 1);
+  }
 }
+
+
+
 
 
 function closeContactsDropdown(){

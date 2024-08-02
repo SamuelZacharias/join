@@ -122,16 +122,7 @@ function returnOpenEditHTML(task, today) {
     `;
   }
 
-  function returnContactsToChooseHTML(contact, contactClass, color, initials) {
-    return `
-      <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contact}')">
-          <div class="openedAssigendContactsInitials" style="background-color: ${color};">
-              ${initials}
-          </div>
-          <div>${contact}</div>
-      </div>
-    `;
-  }
+  
 
   function returnEditSubtasksHTML() {
     return `

@@ -48,12 +48,12 @@ function renderOpenTaskAssignedContacts(task) {
   if (!task.assignedContacts || task.assignedContacts.length === 0) {
     openedAssignedContacts.innerHTML = 'No contacts assigned';
   } else {
-    const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+    
     let contactsHTML = '';
     for (let x = 0; x < task.assignedContacts.length; x++) {
-      let contactName = task.assignedContacts[x];
-      const initials = getInitials(contactName);
-      const color = contactColorsAssignment[contactName] || '#000';
+      let contactName = task.assignedContacts[x].name;
+      const initials = task.assignedContacts[x].initials
+      const color = task.assignedContacts[x].color
       contactsHTML += returnOpenTaskAssignedContactsHTML(contactName, color, initials);
     }
     openedAssignedContacts.innerHTML = contactsHTML;

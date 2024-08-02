@@ -75,17 +75,16 @@ function renderContacts(i) {
   let renderedContacts = document.getElementById(`contacts${i}`);
   if (renderedContacts) {
       renderedContacts.innerHTML = ''; 
-      const contacts = tasks[i].assignedContacts;
-      const contactColorsAssignment = JSON.parse(localStorage.getItem('contactColorsAssignment')) || {};
+      const contactes = tasks[i].assignedContacts;
 
-      if (contacts && contacts.length > 0) {
+      if (contactes && contactes.length > 0) {
           const maxContactsToShow = 5;
-          for (let c = 0; c < Math.min(contacts.length, maxContactsToShow); c++) {
-              const initials = getInitials(contacts[c]);
-              const color = contactColorsAssignment[contacts[c]] || '#000'; 
+          for (let c = 0; c < Math.min(contactes.length, maxContactsToShow); c++) {
+              const initials = contacts[c].initials
+              const color = contacts[c].color|| '#000'; 
               renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: ${color};">${initials}</div>`;
           }
-          if (contacts.length > maxContactsToShow) {
+          if (contactes.length > maxContactsToShow) {
               const additionalContacts = contacts.length - maxContactsToShow;
               renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: gray;">+${additionalContacts}</div>`;
           }
@@ -95,33 +94,8 @@ function renderContacts(i) {
   }
 }
 
-let contactColors = [
-  "#FF4646","#FFE62B","#FFBB2B","#C3FF2B","#0038FF","#FFC701","#FC71FF","#FFA35E","#FF745E","#9327FF","#00BEE8","#1FD7C1","#6E52FF","#FF5EB3","#FF7A00"
-];
-function assignColors() {
-  // Access the first object in the contacts array
-  let contactsArray = contacts[0];
 
-  // Loop through the firstname array
-  for (let i = 0; i < contactsArray.firstname.length; i++) {
-    // Construct the full name from the firstname and lastname arrays
-    let fullName = contactsArray.firstname[i] + " " + contactsArray.lastname[i];
-    
-    // Assign a random color from contactColors to the full name
-    contactInitialColors[fullName] = contactColors[Math.floor(Math.random() * contactColors.length)];
-  }
-}
 
-function getInitials(name) {
-  const nameParts = name.split(' ');
-  let initials = '';
-  for (let part of nameParts) {
-      if (part.length > 0 && initials.length < 2) { 
-          initials += part[0].toUpperCase();
-      }
-  }
-  return initials;
-}
 
 
 function renderSubtasks(i) {
