@@ -136,8 +136,12 @@ function renderEditHTML(task) {
     let openedEdit = document.getElementById('editTask');
     document.getElementById('editTaskContainer').classList.remove('d-none')
     document.getElementById('editTaskContainer').classList.add('openedTaskContainer')
+
+    // Get today's date in the format YYYY-MM-DD
+    let today = new Date().toISOString().split('T')[0];
+
     openedEdit.innerHTML = `
-        <div class="closeEditTask" >
+        <div class="closeEditTask">
             <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeEdit()">
         </div>
         <div class="editTaskInfo">
@@ -151,7 +155,7 @@ function renderEditHTML(task) {
             </div>
             <div class="editTitle">
                 <div>Due date</div>
-                <div class="titleInput"><input id="dateValue" type="date" value="${task.dueDate || ''}"></div>
+                <div class="titleInput"><input id="dateValue" type="date" value="${task.dueDate || ''}" min="${today}"></div>
             </div>
             <div class="editPriorityArea editTitle">
                 <div>Priority: </div>
@@ -173,6 +177,7 @@ function renderEditHTML(task) {
         </div>
         <div class="editOkay" id="editOkay" onclick="collectData('${task.id}')"><span>Ok<img src="assets/img/png/check.png" alt=""></span></div>
     `;
+
     checkForDescription(task);
     renderEditPriorityButtons(task);
     renderEditSubtasks(task);
@@ -186,8 +191,6 @@ function checkForDescription(task){
       textarea.value = task.description; 
     }
   }
-
-
 
   function renderEditPriorityButtons(task) {
     let buttonsArea = document.getElementById('editPriorityButtons');
@@ -495,6 +498,7 @@ function collectData(taskId) {
     const description = document.getElementById('taskDescriptionTextarea').value;
     const dueDate = document.getElementById('dateValue').value;
     console.log('Collected data:', { title, description, dueDate });  // Debugging line
+    
 
     // Determine priority
     const priorityButtons = document.querySelectorAll('#editPriorityButtons .prioButton');
