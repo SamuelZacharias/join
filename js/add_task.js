@@ -380,16 +380,17 @@ function resetSubtask() {
   `;
 }
 
-function showSubtasks(){
+function showSubtasks() {
   let newSubtask = document.getElementById('newSubtasks');
   newSubtask.innerHTML = '';
   for (let s = 0; s < subtaskInfos.length; s++) {
     newSubtask.innerHTML += `
-      <li onclick="editSubtask(${s})" >
-        <div style="display:flex; justify-content:space-between; height: 24px;">
-         ${subtaskInfos[s]}
-          <div class="d-none">
-            <img src="assets/img/png/editSubtask.png" onclick="editSubtask()" alt="" />
+      <li onmouseenter="showActions(this)" onmouseleave="hideActions(this)">
+        <div class="subtask-item">
+          ${subtaskInfos[s]}
+          <div class="action-icons d-none">
+            <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${s})" alt="" />
+            <div class="vertical-line"></div>
             <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
           </div>
         </div>
@@ -399,13 +400,17 @@ function showSubtasks(){
 }
 
 function showActions(element) {
-  let actions = element.querySelector('.d-none');
-  actions.classList.remove('d-none');
+  let actions = element.querySelector('.action-icons');
+  if (actions) {
+    actions.classList.remove('d-none');
+  }
 }
 
 function hideActions(element) {
-  let actions = element.querySelector('div:not(.d-none)');
-  actions.classList.add('d-none');
+  let actions = element.querySelector('.action-icons');
+  if (actions) {
+    actions.classList.add('d-none');
+  }
 }
 
 function editSubtask(index) {
@@ -463,10 +468,6 @@ function deleteSubtask(index) {
   showSubtasks();
 }
 
-
-
-
-
 function setMinDate() {
   const dateInput = document.getElementById('dateInput');
   const today = new Date();
@@ -477,10 +478,6 @@ function setMinDate() {
 
   dateInput.min = todayDate;
 }
-
-
-
-
 
 document.querySelector('.createButton').addEventListener('click', async function(event) {
   event.preventDefault(); 
