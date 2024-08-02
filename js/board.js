@@ -114,14 +114,6 @@ function handleClickOutside(event) {
         }
 
 }
-  
-
-
-
-
-
-
-
 
 function editTask(taskId) {
     // Retrieve task by ID
@@ -402,19 +394,33 @@ function showSubtasks() {
     newSubtask.innerHTML = '';
     for (let s = 0; s < subtaskInfos.length; s++) {
         newSubtask.innerHTML += `
-            <div class="addSubtask editSubtask  showedSubtask">
-                <div style="width:100%"  onclick="editSubtask(${s})">
+            <div class="addSubtask editSubtask showedSubtask subtask-container" onmouseover="showActions(this)" onmouseout="hideActions(this)">
+                <div class="subtask-title" onclick="editSubtask(${s})">
                     ${subtaskInfos[s].title}
                 </div>
-                <div class="d-flex">
+                <div class="d-flex d-none subtask-actions">
                     <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${s})" alt="" />
                     <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
                 </div>
             </div>
         `;
     }
-   
 }
+
+function showActions(element) {
+    let actions = element.querySelector('.d-none');
+    if (actions) {
+        actions.classList.remove('d-none');
+    }
+}
+  
+function hideActions(element) {
+    let actions = element.querySelector('.d-flex:not(.d-none)');
+    if (actions) {
+        actions.classList.add('d-none');
+    }
+}
+
 function editSubtask(index) {
     // Get the subtask container by index
     let subtaskContainers = document.querySelectorAll('#newSubtasks .addSubtask');

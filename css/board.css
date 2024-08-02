@@ -9,6 +9,10 @@ body {
   max-width: 1440px;
 }
 
+li:hover .d-none {
+  display: block;
+}
+
 .boardLink {
   background-color: #091931;
   color: white !important;
@@ -634,7 +638,6 @@ textarea{
 }
 
 #newSubtasks{
-  background-color: var(--background);
   border-radius: 10px;
 }
 
@@ -684,9 +687,31 @@ textarea{
 
 }
 
+.subtask-container {
+  margin-bottom: 6px; /* Abstand zwischen den Subtasks */
+  min-height: 50px; /* Feste Höhe für die Container */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd; /* Optionale Umrandung für bessere Sichtbarkeit */
+  border-radius: 8px; /* Optionale abgerundete Ecken */
+  transition: background-color 0.3s ease; /* Optionale Animation beim Hovern */
+}
+
+.subtask-container:hover {
+  background-color: #f0f0f0; /* Optionale Hintergrundfarbe beim Hovern */
+}
+
+.subtask-title {
+  flex-grow: 1;
+}
+
+.subtask-actions {
+  display: flex;
+  gap: 2px; /* Abstand zwischen den Icons */
+}
 
 .d-none {
   display: none;
 }
-
-
