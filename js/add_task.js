@@ -448,12 +448,15 @@ function editSubtask(index) {
     }
   }
   let inputField = document.getElementById('editSubtaskInput');
-  inputField.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent the default action if necessary
-        saveSubtask(index); // Call the addSubtask function
-    }
-});
+    if (inputField) {
+        inputField.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default action if necessary
+                saveSubtask(index); // Call the saveSubtask function
+            }
+        });
+        inputField.focus(); 
+};
 }
 
 function saveSubtask(index) {
