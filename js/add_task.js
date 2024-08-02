@@ -386,9 +386,9 @@ function showSubtasks(){
   for (let s = 0; s < subtaskInfos.length; s++) {
     newSubtask.innerHTML += `
       <li onclick="editSubtask(${s})" >
-        <div style="display:flex; justify-content:space-between;">
+        <div style="display:flex; justify-content:space-between; height: 24px;">
          ${subtaskInfos[s]}
-          <div>
+          <div class="d-none">
             <img src="assets/img/png/editSubtask.png" onclick="editSubtask()" alt="" />
             <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
           </div>
@@ -396,6 +396,16 @@ function showSubtasks(){
       </li>
     `;
   }
+}
+
+function showActions(element) {
+  let actions = element.querySelector('.d-none');
+  actions.classList.remove('d-none');
+}
+
+function hideActions(element) {
+  let actions = element.querySelector('div:not(.d-none)');
+  actions.classList.add('d-none');
 }
 
 function editSubtask(index) {
