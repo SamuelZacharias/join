@@ -117,3 +117,120 @@ function handleClickOutside(event) {
 
 }
 
+
+let addTaskColumn = null
+
+function openBoardAddTask(){
+   let addTaskContainer = document.getElementById('addTaskContainer')
+   addTaskContainer.classList.remove('d-none')
+   renderAddTaskBoardHtml(addTaskContainer)
+   addTaskColumn = 'toDo'
+   console.log(addTaskColumn);
+   
+}
+
+function openBoardAddTaskInProgress(){
+    let addTaskContainer = document.getElementById('addTaskContainer')
+    addTaskContainer.classList.remove('d-none')
+    renderAddTaskBoardHtml(addTaskContainer)
+    addTaskColumn = 'inProgress'
+    console.log(addTaskColumn);
+}
+
+function openBoardAddTaskawaitFeedback(){
+    let addTaskContainer = document.getElementById('addTaskContainer')
+    addTaskContainer.classList.remove('d-none')
+    renderAddTaskBoardHtml(addTaskContainer)
+    addTaskColumn = 'awaitFeedback'
+    console.log(addTaskColumn);
+ }
+
+ 
+
+function closeAddTaskBoard(){
+    document.getElementById('addTaskContainer').classList.add('d-none')
+}
+
+
+function renderAddTaskBoardHtml(addTaskContainer){
+    addTaskContainer.innerHTML = `
+        <section class="addTask" >
+            <div class="boardAddTaskTitle">
+                <h1>Add Task</h1>
+                <img src="/assets/img/png/close.png" onclick="closeAddTaskBoard()">
+            </div>
+            <form id="taskForm" >
+              <div class="formLeft">
+                <div class="eachInput">
+                  <span>Title<b style="color: red">*</b></span>
+                  <p class="inputContainer"><input required type="text" /></p>
+                </div>
+                <div class="eachInput">
+                  <span>Description</span>
+                  <p><textarea name="" id=""></textarea></p>
+                </div>
+                <div class="eachInput">
+                  <span>Assigned to</span>
+                  <div class="categoryDropDown" id="dropdownContacts" onclick="toggleContacts()">
+                    <span class="spanCategory" >Select Contacts to assign</span>
+                    <img class="dropDownImg" id="dropDownContactsImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+                  </div>
+                  <div id="contacts" class="d-none"></div>
+                  <div id="assignedContacts"></div>
+                </div>
+              </div>
+              <div class="separator"></div>
+              <div class="formLeft">
+                <div class="eachInput">
+                  <span>Due date <b style="color: red">*</b></span>
+                  <p class="inputContainer"><input required type="date" id="dateInput"/></p>
+                </div>
+                <div class="eachInput">
+                  <span>Prio</span>
+                  <div class="d-flex prioArea">
+                    <button type="button" id="button1" onclick="handleClick(1)" class="buttonCenter prioButton">
+                      Urgent <img id="prioImg1" src="assets/img/svg/urgent.svg" alt="" />
+                    </button>
+                    <button type="button" id="button2" onclick="handleClick(2)" class="buttonCenter prioButton">
+                      Medium <img id="prioImg2" src="assets/img/png/mediumColor.png" alt="" />
+                    </button>
+                    <button type="button" id="button3" onclick="handleClick(3)" class="buttonCenter prioButton">
+                      Low <img id="prioImg3" src="assets/img/svg/low.svg" alt="" />
+                    </button>
+                  </div>
+                </div>
+                <span style="margin-bottom: -6px; margin-top: -8px;">Category <b style="color: red">*</b></span>
+                <div class="categoryDropDown" id="dropdownCategory" onclick="showCategory()">
+                  <span class="spanCategory" >Select task category</span>
+                  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+                </div>
+                <div id="categories"></div>
+                <div class="eachInput">
+                  <span>Subtasks</span>
+                  <div id="subtaskContainer">
+                    <p>
+                      <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
+                      <img src="assets/img/png/Subtasks icons11.png"  onclick="writeSubtaskAddTask()"alt="" />
+                    </p>
+                  </div>
+                  <ul id="newSubtasks" style="display: flex;"></ul>
+                </div>
+              </div>
+            </form>
+            <section class="buttonsSection d-flex">
+              <span><b style="color: red">*</b> This field is Required</span>
+              <div class="buttonArea">
+                <button id="clearButton" class="buttonCenter clear">
+                  Clear
+                  <img src="assets/img/png/iconoir_cancel.png" alt="" />
+                </button>
+                <button type="submit" class="buttonCenter createButton">
+                  Create Task <img src="assets/img/png/check.png" alt="" />
+                </button>
+              </div>
+            </section>
+          </section>
+    `;
+}
+
+

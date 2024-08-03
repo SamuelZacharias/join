@@ -706,6 +706,44 @@ textarea{
   gap: 2px; /* Abstand zwischen den Icons */
 }
 
+
+.addTask{
+  background-color: var(--background);
+  padding: 40px;
+  border-radius: 40px;
+  height: fit-content;
+  width: fit-content;
+}
+
+
+.boardAddTaskTitle{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.boardAddTaskTitle img{
+  width: 20px;
+  height: 20px;
+}
+.boardAddTaskTitle img:hover{
+  cursor: pointer;
+  scale: 1.1;
+  background-color: var(--border);
+  border-radius: 10px;
+}
+
+.addTask input{
+  border: none;
+}
+.addTask textarea{
+  border: none;
+  padding: 0;
+}
+
+
+
+
 .d-none {
   display: none;
 }
+

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/assets/img/png/favicon.png" />
     <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="css/add_task.css">
     <link rel="stylesheet" href="./css/sidebar.css" />
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="style.css">
@@ -17,13 +18,15 @@
     <script src="js/board-open-task.js"></script>
     <script src="js/board-edit-task.js"></script>
     
+    
     <title>My Board</title>
   </head>
   <body onload="getTasksFromDataBase()">
     <div id="openedTaskContainer" class="openedTaskContainer d-none"  ></div>
-    <div id="editTaskContainer" class="openedTaskContainer d-none" >
+    <div id="editTaskContainer" class="openedTaskContainer d-none" ></div>
+    <div id="addTaskContainer" class="openedTaskContainer d-none"></div>
       
-    </div>
+    
     <div class="d-flex">
       <div w3-include-html="Templates/sidebar.html"></div>
       <div>
@@ -31,6 +34,8 @@
       
         
         <div class="boardContent" >
+          
+          
           
           <section name="boardHeader">
             <div class="contentHeader">
@@ -40,21 +45,21 @@
                   <input type="text" id="search" oninput="filterTasks()">
                   <img src="assets/img/png/search (1).png" alt="" onclick="filterTasks()">
                 </div>
-                <button>Add task  <img src="assets/img/png/add.png" alt=""></button>
+                <button onclick="openBoardAddTask()">Add task  <img src="assets/img/png/add.png" alt=""></button>
               </div>
             </div>
             <div class="listsHeaders">
                 <div class="listheader">
                   <span>To do</span>
-                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                  <div class="image" onclick="openBoardAddTask()" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
                 </div>
                 <div class="listheader">
                   <span>In progress</span>
-                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                  <div class="image" onclick="openBoardAddTaskInProgress()"><img  src="assets/img/png/plus button (1).png" alt=""></div>
                 </div>
                 <div class="listheader">
                   <span>Await feedback</span>
-                  <div class="image" ><img  src="assets/img/png/plus button (1).png" alt=""></div>
+                  <div class="image" onclick="openBoardAddTaskawaitFeedback()"><img  src="assets/img/png/plus button (1).png" alt=""></div>
                 </div class="listheader"> 
                 <div class="listheader">Done</div>
             </div>
