@@ -653,7 +653,6 @@ async function sendTaskDataToFirebase() {
   }
 }
 
-
 function showSuccessMessage() {
   let successButton = document.getElementById('signedUpCont');
   successButton.classList.remove('d-none');
@@ -662,4 +661,3 @@ function showSuccessMessage() {
     window.location.href = 'board.html';
   }, 3000);
 }
-
