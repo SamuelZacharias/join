@@ -443,7 +443,7 @@ li:hover .d-none {
   display: flex;
   justify-content: space-between; /* Platzierung der Inhalte mit Abstand */
   align-items: center;
-  height: 24px;
+  height: 32px;
 }
 
 .subtask-content {
@@ -459,6 +459,7 @@ li:hover .d-none {
 .subtask-icons {
   display: flex;
   align-items: center;
+  margin-right: 12px; /* Linker Abstand des Icons-Containers */
 }
 
 .vertical-line {
