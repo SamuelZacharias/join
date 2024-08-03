@@ -160,6 +160,7 @@ function hideCategory() {
   clickCount = 0;
 }
 
+
 document.getElementById("dropdownCategory").addEventListener("click", function() {
   clickCount++;
   if (clickCount % 2 === 1) {

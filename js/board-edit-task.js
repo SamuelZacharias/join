@@ -48,10 +48,10 @@ function switchButton(priority) {
       const element = document.getElementById(button.id);
       if (button.priority === priority) {
           element.classList.add(button.class);
-          element.classList.remove('buttonhover');
+          element.classList.remove('hover-shadow');
       } else {
           element.classList.remove(button.class);
-          element.classList.add('buttonhover');
+          element.classList.add('hover-shadow');
       }
   });
 }

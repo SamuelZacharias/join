@@ -116,9 +116,9 @@ function returnOpenEditHTML(task, today) {
 
   function returnEditPriorityButtonsHTML(){
     return `
-        <button class="prioButton buttonhover" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg"></button>
-        <button class="prioButton buttonhover" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.png"></button>
-        <button class="prioButton buttonhover" id="button3" onclick="switchButton('Low')">Low   <img src="assets/img/svg/low.svg"></button>
+        <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg"></button>
+        <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.png"></button>
+        <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low   <img src="assets/img/svg/low.svg"></button>
     `;
   }
 

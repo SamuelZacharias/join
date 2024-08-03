@@ -23,3 +23,13 @@ body{
   src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
     url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
 }
+
+.urgent{
+  background-color: var(--high);
+}
+.medium {
+  background-color: var(--medium);
+}
+.low{
+  background-color: var(--low);
+}

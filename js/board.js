@@ -1,6 +1,6 @@
 const tasks = [];
 const contacts = []
-
+let selectedContacts = [];
 const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
 
@@ -118,12 +118,18 @@ function handleClickOutside(event) {
 }
 
 
+
+
+
+
 let addTaskColumn = null
 
 function openBoardAddTask(){
    let addTaskContainer = document.getElementById('addTaskContainer')
    addTaskContainer.classList.remove('d-none')
    renderAddTaskBoardHtml(addTaskContainer)
+   document.getElementById('boardAddTask').classList.add('slide-in')
+   handleClick(2)
    addTaskColumn = 'toDo'
    console.log(addTaskColumn);
    
@@ -133,6 +139,8 @@ function openBoardAddTaskInProgress(){
     let addTaskContainer = document.getElementById('addTaskContainer')
     addTaskContainer.classList.remove('d-none')
     renderAddTaskBoardHtml(addTaskContainer)
+    document.getElementById('boardAddTask').classList.add('slide-in')
+    handleClick(2)
     addTaskColumn = 'inProgress'
     console.log(addTaskColumn);
 }
@@ -141,20 +149,25 @@ function openBoardAddTaskawaitFeedback(){
     let addTaskContainer = document.getElementById('addTaskContainer')
     addTaskContainer.classList.remove('d-none')
     renderAddTaskBoardHtml(addTaskContainer)
+    document.getElementById('boardAddTask').classList.add('slide-in')
+    handleClick(2)
     addTaskColumn = 'awaitFeedback'
     console.log(addTaskColumn);
- }
+}
 
- 
 
 function closeAddTaskBoard(){
     document.getElementById('addTaskContainer').classList.add('d-none')
 }
 
+let activeButton = null
+let clickCount = 0;
+let choosenCategory = false;
+let category = ["User Task", "Technical task"];
 
 function renderAddTaskBoardHtml(addTaskContainer){
     addTaskContainer.innerHTML = `
-        <section class="addTask" >
+        <section class="addTask" id="boardAddTask" >
             <div class="boardAddTaskTitle">
                 <h1>Add Task</h1>
                 <img src="/assets/img/png/close.png" onclick="closeAddTaskBoard()">
@@ -233,4 +246,221 @@ function renderAddTaskBoardHtml(addTaskContainer){
     `;
 }
 
+function handleClick(buttonNumber) {
+    if (activeButton !== null) {
+      const previousButton = document.getElementById('button' + activeButton);
+      const previousImage = document.getElementById('prioImg' + activeButton);
+      
+      previousButton.classList.add('hover-shadow');
+      previousButton.style.backgroundColor = '';
+      previousButton.style.color = '';
+      previousButton.style.fontWeight = '';
+  
+      switch (activeButton) {
+        case 1:
+          previousImage.src = 'assets/img/svg/urgent.svg';
+          break;
+        case 2:
+          previousImage.src = 'assets/img/png/mediumColor.png';
+          break;
+        case 3:
+          previousImage.src = 'assets/img/svg/low.svg';
+          break;
+      }
+    }
+  
+    activeButton = buttonNumber;
+    const activeButtonElement = document.getElementById('button' + activeButton);
+    const activeImage = document.getElementById('prioImg' + activeButton);
+  
+    activeButtonElement.classList.remove('hover-shadow');
+    activeButtonElement.style.color = 'white';
+    activeButtonElement.style.fontWeight = '600';
+  
+    switch (buttonNumber) {
+      case 1:
+        activeButtonElement.style.backgroundColor = '#FF3D00';
+        activeImage.src = 'assets/img/png/urgentWhite.png';
+        break;
+      case 2:
+        activeButtonElement.style.backgroundColor = '#FFA800';
+        activeImage.src = 'assets/img/svg/medium.svg';
+        break;
+      case 3:
+        activeButtonElement.style.backgroundColor = '#7AE229';
+        activeImage.src = 'assets/img/png/lowWhite.png';
+        break;
+    }
+  }
 
+  function showCategory() {
+    let categories = document.getElementById('categories');
+    categories.innerHTML = `
+        <div class="openedDropDown">
+          <span class="spanHover" onclick="chooseUserStory()">${category[0]}</span>
+          <span class="spanHover" onclick="chooseTechnical()"> ${category[1]}</span>
+        </div>
+      `; 
+    document.getElementById('categories').classList.remove('d-none');
+    document.getElementById('dropDownImg').classList.remove('dropDownImg');
+    document.getElementById('dropDownImg').classList.add('dropUpImg');
+    choosenCategory = false;
+  }
+  
+  function chooseUserStory() {
+    let chooseCategory = document.getElementById('dropdownCategory');
+    chooseCategory.innerHTML = `
+    <span onclick="showCategory()" class="spanCategory">${category[0]}</span>
+    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+    document.getElementById('categories').classList.add('d-none');
+    choosenCategory = true;
+    clickCount = 0;
+    document.getElementById('dropDownImg').classList.add('dropDownImg');
+  
+    
+    document.getElementById('dropdownCategory').classList.remove('invalid');
+  }
+  
+  function chooseTechnical() {
+    let chooseCategory = document.getElementById('dropdownCategory');
+    chooseCategory.innerHTML = `
+    <span onclick="showCategory()" class="spanCategory">${category[1]}</span>
+    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+    document.getElementById('categories').classList.add('d-none');
+    choosenCategory = true;
+    clickCount = 0;
+    document.getElementById('dropDownImg').classList.add('dropDownImg');
+  
+    
+    document.getElementById('dropdownCategory').classList.remove('invalid');
+  }
+  
+  function hideCategory() {
+    document.getElementById('dropDownImg').classList.add('dropDownImg');
+    document.getElementById('dropDownImg').classList.remove('dropUpImg')
+    document.getElementById('categories').classList.add('d-none');
+    clickCount = 0;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    let clickCount = 0;
+    const dropdown = document.getElementById("dropdownCategory");
+    if (dropdown) {
+      dropdown.addEventListener("click", function() {
+        clickCount++;
+        if (clickCount % 2 === 1) {
+          showCategory();
+        } else {
+          hideCategory();
+        }
+      });
+    } 
+  });
+
+  function handleClickOutside(event) {
+    const container = document.getElementById('dropdownCategory');
+    if (!container.contains(event.target)) {
+      hideCategory();
+    }
+  }
+  
+
+
+
+
+function showContacts() {
+  let contactsContainer = document.getElementById('contacts');
+  contactsContainer.innerHTML = '';
+
+  for (let x = 0; x < contacts.length; x++) {
+    let contact = contacts[x];
+    let fullName = contact.name;
+    let color = contact.color;
+
+    let isSelected = selectedContacts.some(c => c.name === contact.name);
+    let selectedClass = isSelected ? 'selected' : '';
+
+    contactsContainer.innerHTML += `
+      <div class="contactsOpen ${selectedClass}" data-index="${x}">
+        <div class="contactInitials" style="background-color: ${color}; ">
+          ${contact.initials}
+        </div>
+        <div class="contactName">
+          <span style="width:100%;">${fullName}</span>
+          <img src="assets/img/png/Rectangle 5.png" alt="">
+        </div>
+      </div>
+    `;
+  }
+
+  let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
+  for (let contactElement of contactElements) {
+    contactElement.addEventListener('click', function() {
+      let index = this.getAttribute('data-index');
+      let contact = contacts[index];
+
+      let selectedIndex = selectedContacts.findIndex(c => c.name === contact.name);
+      if (selectedIndex === -1) {
+        selectedContacts.push(contact);
+      } else {
+        selectedContacts.splice(selectedIndex, 1);
+      }
+
+      this.classList.toggle('selected');
+      showAssignedContacts();
+    });
+  }
+}
+
+function toggleContacts() {
+  document.getElementById('dropDownContactsImg').classList = ('dropUpImg')
+  let contactsContainer = document.getElementById('contacts');
+  if (contactsContainer.classList.contains('d-none')) {
+    contactsContainer.classList.remove('d-none');
+
+    showContacts();
+  } else {
+    contactsContainer.classList.add('d-none');
+    document.getElementById('dropDownContactsImg').classList = ('dropDownImg')
+  }
+}
+
+function showAssignedContacts() {
+  let assignedContactsContainer = document.getElementById('assignedContacts');
+  assignedContactsContainer.innerHTML = '';
+  let maxContactsToShow = 5;
+
+  for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
+    let contact = selectedContacts[a];
+    let fullName = contact.name;  // Assuming `name` field is a single string.
+    let color = contact.color;    // Use the color from the contact object.
+
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials" style="background-color: ${color}; color:white;">
+        ${contact.initials}
+      </div>
+    `;
+  }
+
+  if (selectedContacts.length > maxContactsToShow) {
+    let moreCount = selectedContacts.length - maxContactsToShow;
+    let moreContactsColor = "#999999"; 
+
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
+        +${moreCount} 
+      </div>
+    `;
+  }
+}
+
+
+document.addEventListener('click', function(event) {
+    let contactsContainer = document.getElementById('contacts');
+    let dropdownContacts = document.getElementById('dropdownContacts');
+    if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
+      contactsContainer.classList.add('d-none');
+      document.getElementById('dropDownContactsImg').classList.add('dropDownImg');
+    document.getElementById('dropDownContactsImg').classList.remove('dropUpImg')
+    }
+  });

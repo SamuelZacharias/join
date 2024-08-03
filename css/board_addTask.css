@@ -1,0 +1,253 @@
+.addTask{
+  background-color: var(--background);
+  padding: 40px;
+  border-radius: 40px;
+  height: fit-content;
+  width: fit-content;
+}
+
+
+.boardAddTaskTitle{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.boardAddTaskTitle img{
+  width: 20px;
+  height: 20px;
+}
+.boardAddTaskTitle img:hover{
+  cursor: pointer;
+  scale: 1.1;
+  background-color: var(--border);
+  border-radius: 10px;
+}
+
+.addTask input{
+  border: none;
+}
+.addTask textarea{
+  border: none;
+  padding: 0;
+}
+
+/* Define the animation */
+@keyframes slideInFromLeft {
+  0% {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+/* Define the animation class */
+.slide-in {
+  animation: slideInFromLeft 0.3s ease-out forwards;
+}
+.addTaskLink{
+  background-color: var(--gray);
+  color: white !important;
+}
+
+form {
+  display: flex;
+  gap: 48px;
+}
+
+.formLeft {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  gap: 16px;
+}
+
+input {
+  font-size: 20px;
+  line-height: 24px;
+  width: 100%;
+  border: none;
+}
+.eachInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.eachInput img{
+  cursor: pointer;
+}
+p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 12px 21px;
+  background-color: white;
+}
+p:hover {
+  border: 1px solid var(--blue);
+}
+
+.categoryDropDown{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 12px;
+  font-size: 20px;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.buttonsSection {
+  margin-top: 90px;
+  justify-content: space-between;
+  padding-right: 133px ;
+}
+.buttonArea {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.buttonCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 16px;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.prioArea {
+  display: flex;
+  justify-content: space-between;
+}
+.prioButton {
+  width: 136px;
+  border-radius: 10px;
+  padding: 16px 10px;
+  gap: 8px;
+  font-size: 20px;
+  border: 1px solid var(--border);
+  background-color: white;
+}
+.prioButton:hover {
+  cursor: pointer;
+}
+.clear {
+  border: 1px solid black;
+  color: black;
+  border-radius: 10px;
+  height: 56px;
+  font-weight: 500;
+}
+.clear img {
+  display: block;
+  transition: opacity 0.125s ease;
+}
+.clear:hover {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  transition: 125ms;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
+}
+.clear:hover img {
+  content: url("/assets/img/png/iconoir_cancel_hover.png");
+}
+
+.createButton{
+  background-color: var(--gray);
+  border-radius: 10px;
+  gap: 8px;
+  font-size: 20px;
+  height: 56px;
+  color: white;
+}
+.createButton:hover{
+  background-color: var(--blue);
+  transition: 125ms;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+#categories{
+  top: 440px;
+  position: absolute;
+  z-index: 44;
+  width: 440px;
+  background-color: white;
+  
+}
+
+.openedDropDown{
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  background-color: white;
+  margin-top: -20px;
+  border-radius: 10px;
+}
+.spanHover{
+  background-color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  border-radius: 10px;
+  width: 100%;
+}
+.spanHover:hover{
+  background-color: var(--background);
+  cursor: pointer;
+}
+
+select:hover{
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.categoryDropDown{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 12px;
+  font-size: 20px;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.dropDownImg{
+  height: 8px;
+  width: 12;
+  margin-right: 16px;
+}
+.dropUpImg{
+  height: 8px;
+  width: 12px;
+  margin-right: 16px;
+  rotate: 180deg;
+}
+.categoryOption{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.categoryDropDown:hover{
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+.spanCategory{
+  width: 100%;
+}
+.hover-shadow {
+  transition: box-shadow 0.125s;
+}
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.d-none {
+  display: none;
+}
