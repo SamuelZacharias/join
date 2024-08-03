@@ -322,20 +322,20 @@ select:hover{
 }
 
 .addSubtask{
-  
   display: flex;
   background-color: white;
   padding: 10px;
   border-radius: 10px;
   border: 0.5px solid var(--border);
 }
+
 .addSubtask img{
   cursor: pointer; 
 }
+
 .error-placeholder::placeholder {
   color: red;
 }
-
 
 #newSubtasks{
   width: 400px;
@@ -346,6 +346,22 @@ select:hover{
   overflow-y: scroll;
   z-index: 33;
   margin-top: 90px;
+  scrollbar-width: none;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 16px; /* Höhe des Strichs */
+  background-color: black; /* Farbe des Strichs */
+  margin: 0 8px; /* Abstand zu den Icons */
+}
+
+.subTaskStyle {
+  display: flex;
+}
+
+.borderLeft {
+  border-left: 1px;
 }
 
 .signedUp{
@@ -412,11 +428,37 @@ li:hover .d-none {
   color: #cdcdcd
 }
 
+.addTaskLink{
+  background-color: #091931;
+  color: white !important;
+}
+
+.subtask-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 16px; /* Höhe des Strichs */
+  background-color: black; /* Farbe des Strichs */
+  margin: 0 8px; /* Abstand zu den Icons */
+}
+
 .d-none{
   display: none;
 }
 
-.addTaskLink{
-  background-color: #091931;
-  color: white !important;
+/* Hover-Effekt für die gesamte Subtask-Item */
+li:hover .subtask-item {
+  height: 24px;
+  background-color: #D1D1D1;
+  border-radius: 6px;
 }

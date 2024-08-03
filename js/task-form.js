@@ -64,7 +64,6 @@ function validateForm() {
   const form = document.getElementById('taskForm');
   const inputs = form.querySelectorAll('input, textarea, select');
   let valid = true;
-
   
   document.querySelectorAll('.inputContainer').forEach(p => {
     p.classList.remove('invalid');
@@ -81,7 +80,6 @@ function validateForm() {
       }
     }
 
-    
     if (input.type === 'date') {
       const selectedDate = new Date(input.value);
       const today = new Date();
@@ -101,7 +99,6 @@ function validateForm() {
     valid = false;
     document.getElementById('dropdownCategory').classList.add('invalid');
   }
-  
   return valid;
   
 }
@@ -129,7 +126,6 @@ function chooseUserStory() {
   choosenCategory = true;
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
-
   
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
@@ -143,7 +139,6 @@ function chooseTechnical() {
   choosenCategory = true;
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
-
   
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
@@ -172,7 +167,6 @@ function handleClickOutside(event) {
 }
 document.addEventListener('click', handleClickOutside);
 
-
 document.querySelectorAll('input, textarea').forEach(input => {
   input.addEventListener('input', function() {
     const parentP = input.closest('.inputContainer');
@@ -188,9 +182,6 @@ document.getElementById('dropdownCategory').addEventListener('click', function()
     document.getElementById('dropdownCategory').classList.remove('invalid');
   }
 });
-
-
-
 
 let contactColors = [
   "#FF4646",
@@ -209,7 +200,6 @@ let contactColors = [
   "#FF5EB3",
   "#FF7A00"
 ];
-
 
 let contactInitialColors = {};
 
@@ -246,7 +236,6 @@ function showContacts() {
       </div>
     `;
   }
-
   
   let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
   for (let contactElement of contactElements) {
@@ -256,8 +245,6 @@ function showContacts() {
         firstname: contacts.firstname[index],
         lastname: contacts.lastname[index]
       };
-
-      
       let selectedIndex = selectedContacts.findIndex(c => c.firstname === contact.firstname && c.lastname === contact.lastname);
       if (selectedIndex === -1) {
         
@@ -266,8 +253,6 @@ function showContacts() {
         
         selectedContacts.splice(selectedIndex, 1);
       }
-
-      
       this.classList.toggle('selected');
       showAssignedContacts();
     });
@@ -323,7 +308,6 @@ document.addEventListener('click', function(event) {
   document.getElementById('dropDownContactsImg').classList.remove('dropUpImg')
   }
 });
-
 
 let subtaskInfos = [];
 
@@ -484,10 +468,6 @@ function deleteSubtask(index) {
   showSubtasks();
 }
 
-
-
-
-
 function setMinDate() {
   const dateInput = document.getElementById('dateInput');
   const today = new Date();
@@ -498,10 +478,6 @@ function setMinDate() {
 
   dateInput.min = todayDate;
 }
-
-
-
-
 
 document.querySelector('.createButton').addEventListener('click', async function(event) {
   event.preventDefault(); 
