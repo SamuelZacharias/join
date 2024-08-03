@@ -370,8 +370,11 @@ function showSubtasks() {
     newSubtask.innerHTML += `
       <li onmouseenter="showActions(this)" onmouseleave="hideActions(this)">
         <div class="subtask-item">
-          ${subtaskInfos[s]}
-          <div class="action-icons d-none">
+          <div class="subtask-content">
+            <span class="custom-bullet">•</span>
+            ${subtaskInfos[s]}
+          </div>
+          <div class="subtask-icons d-none">
             <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${s})" alt="" />
             <div class="vertical-line"></div>
             <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
@@ -383,14 +386,14 @@ function showSubtasks() {
 }
 
 function showActions(element) {
-  let actions = element.querySelector('.action-icons');
+  let actions = element.querySelector('.subtask-icons');
   if (actions) {
     actions.classList.remove('d-none');
   }
 }
 
 function hideActions(element) {
-  let actions = element.querySelector('.action-icons');
+  let actions = element.querySelector('.subtask-icons');
   if (actions) {
     actions.classList.add('d-none');
   }
