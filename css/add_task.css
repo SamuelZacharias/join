@@ -327,6 +327,7 @@ select:hover{
   padding: 10px;
   border-radius: 10px;
   border: 0.5px solid var(--border);
+  width: 440px;
 }
 
 .addSubtask img{
@@ -338,7 +339,7 @@ select:hover{
 }
 
 #newSubtasks{
-  width: 400px;
+  width: 440px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -433,32 +434,45 @@ li:hover .d-none {
   color: white !important;
 }
 
+#newSubtasks {
+  list-style-type: none; /* Standard-Punkt entfernen */
+  padding: 0; /* Standard-Padding entfernen */
+}
+
 .subtask-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Platzierung der Inhalte mit Abstand */
   align-items: center;
   height: 24px;
 }
 
-.action-icons {
+.subtask-content {
+  display: flex;
+  align-items: center;
+}
+
+.custom-bullet {
+  margin-right: 8px; /* Abstand zwischen Punkt und Text */
+  margin-left: 16px;
+}
+
+.subtask-icons {
   display: flex;
   align-items: center;
 }
 
 .vertical-line {
   width: 1px;
-  height: 16px; /* Höhe des Strichs */
-  background-color: black; /* Farbe des Strichs */
-  margin: 0 8px; /* Abstand zu den Icons */
+  height: 16px;
+  background-color: black;
+  margin: 0 8px;
 }
 
-.d-none{
+.d-none {
   display: none;
 }
 
-/* Hover-Effekt für die gesamte Subtask-Item */
 li:hover .subtask-item {
-  height: 24px;
   background-color: #D1D1D1;
   border-radius: 6px;
 }
