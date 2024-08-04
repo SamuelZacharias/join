@@ -401,15 +401,15 @@ li:hover .subtask-item {
   border-radius: 6px;
   cursor: pointer;
 }
-.inputContainer.invalid {
+
+
+.invalid{
   border: 2px solid red;
   padding: 12px 21px;
   border-radius: 10px; 
 }
-.categoryDropDown.invalid {
-  border: 2px solid red;
-  border-radius: 10px; 
-}
+
+
 
 
 .d-none {

@@ -132,6 +132,7 @@ function openBoardAddTask(){
    handleClick(2)
    addTaskColumn = 'toDo'
    console.log(addTaskColumn);
+   setMinDate()
    
 }
 
@@ -143,6 +144,7 @@ function openBoardAddTaskInProgress(){
     handleClick(2)
     addTaskColumn = 'inProgress'
     console.log(addTaskColumn);
+    setMinDate()
 }
 
 function openBoardAddTaskawaitFeedback(){
@@ -153,6 +155,7 @@ function openBoardAddTaskawaitFeedback(){
     handleClick(2)
     addTaskColumn = 'awaitFeedback'
     console.log(addTaskColumn);
+    setMinDate()
 }
 
 
@@ -172,11 +175,11 @@ function renderAddTaskBoardHtml(addTaskContainer){
                 <h1>Add Task</h1>
                 <img src="/assets/img/png/close.png" onclick="closeAddTaskBoard()">
             </div>
-            <form id="taskForm" >
+            <form id="taskFormAddTask" >
               <div class="formLeft">
                 <div class="eachInput">
                   <span>Title<b style="color: red">*</b></span>
-                  <p class="inputContainer"><input required type="text" /></p>
+                  <p class="inputContainerAddTask"><input id="titleInputAddTask" required type="text" /></p>
                 </div>
                 <div class="eachInput">
                   <span>Description</span>
@@ -196,7 +199,7 @@ function renderAddTaskBoardHtml(addTaskContainer){
               <div class="formLeft">
                 <div class="eachInput">
                   <span>Due date <b style="color: red">*</b></span>
-                  <p class="inputContainer"><input required type="date" id="dateInput"/></p>
+                  <p class="inputContainerAddTask"><input required type="date" id="dateInputAddTask"/></p>
                 </div>
                 <div class="eachInput">
                   <span>Prio</span>
@@ -237,7 +240,7 @@ function renderAddTaskBoardHtml(addTaskContainer){
                   Clear
                   <img src="assets/img/png/iconoir_cancel.png" alt="" />
                 </button>
-                <button type="submit" onlick="handleCreateButtonClick()" class="buttonCenter createButton">
+                <button type="submit" onclick="handleCreateButtonClick()" id="createButton" class="buttonCenter createButton">
                   Create Task <img src="assets/img/png/check.png" alt="" />
                 </button>
               </div>
@@ -633,7 +636,7 @@ function hideActionsAddTask(element) {
 }
 
 function setMinDate() {
-  const dateInput = document.getElementById('dateInput');
+  const dateInput = document.getElementById('dateInputAddTask');
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -646,8 +649,7 @@ function setMinDate() {
 
 
 function clearForm() {
-  event.preventDefault();
-  const form = document.getElementById('taskForm');
+  const form = document.getElementById('taskFormAddTask');
   form.reset();
   document.getElementById('dropdownCategory').innerHTML = `
     <span class="spanCategory">Select task category</span>
@@ -660,17 +662,18 @@ function clearForm() {
   selectedContacts = [];
   addTaskBoardInfos = [];
   handleClick(2); 
-  document.querySelectorAll('.inputContainer').forEach(p => {
+  document.querySelectorAll('.inputContainerAddTask').forEach(p => {
     p.classList.remove('invalid');
   });
   document.getElementById('dropdownCategory').classList.remove('invalid');
+  
 }
 
 function submitForm(event) {
-  if (!validateForm()) {
+  if (!validateFormAddTaskBoard()) {
     event.preventDefault();
   } else {
-    document.getElementById('taskForm').submit();
+    document.getElementById('taskFormAddTask').submit();
   }
 }
 
@@ -686,69 +689,82 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function validateForm() {
-  const form = document.getElementById('taskForm');
-  const inputs = form.querySelectorAll('input, textarea, select');
-  let valid = true;
 
+  function validateFormAddTaskBoard() {
+    const form = document.getElementById('taskFormAddTask');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    let valid = true;
   
-  document.querySelectorAll('.inputContainer').forEach(p => {
-    p.classList.remove('invalid');
-  });
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-
+    // First, remove invalid classes immediately
+    document.querySelectorAll('.inputContainerAddTask').forEach(p => {
+      p.classList.remove('invalid');
+    });
+    document.getElementById('dropdownCategory').classList.remove('invalid');
   
-  inputs.forEach(input => {
-    const parentP = input.closest('.inputContainer');
-    if (input.required && !input.value.trim()) {
-      valid = false;
-      if (parentP) {
-        parentP.classList.add('invalid');
-      }
-    }
-
-    
-    if (input.type === 'date') {
-      const selectedDate = new Date(input.value);
-      const today = new Date();
-      
-      today.setHours(0, 0, 0, 0);
-      if (selectedDate < today) {
+    // Validate inputs and add invalid class if necessary
+    inputs.forEach(input => {
+      const parentP = input.closest('.inputContainerAddTask');
+      if (input.required && !input.value.trim()) {
         valid = false;
         if (parentP) {
           parentP.classList.add('invalid');
         }
       }
+  
+      if (input.type === 'date') {
+        const selectedDate = new Date(input.value);
+        const today = new Date();
+  
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+          valid = false;
+          if (parentP) {
+            parentP.classList.add('invalid');
+          }
+        }
+      }
+    });
+  
+    if (!choosenCategory) {
+      valid = false;
+      document.getElementById('dropdownCategory').classList.add('invalid');
     }
-  });
-
- 
-  if (!choosenCategory) {
-    valid = false;
-    document.getElementById('dropdownCategory').classList.add('invalid');
+  
+    // Add timeout to remove 'invalid' class after 0.5 seconds
+    setTimeout(() => {
+      document.querySelectorAll('.invalid').forEach(element => {
+        element.classList.remove('invalid');
+      });
+    }, 800); // 500 milliseconds = 0.5 seconds
+  
+    return valid;
   }
   
-  return valid;
+  async function handleCreateButtonClick() {
+    console.log('createwasclicked');
   
-}
-
-async function handleCreateButtonClick() {
-  event.preventDefault(); 
-
-  if (validateForm()) {
-    collectData(); 
-
-    try {
-      await sendTaskDataToFirebase(); 
-    } catch (error) {
-      console.error('Failed to send task data to Firebase:', error); 
+    if (validateFormAddTaskBoard()) {
+      const taskData = collectDataAddTask();
+      if (taskData) {
+        console.log('Task data collected:', taskData);
+        try {
+          await sendTaskDataToFirebaseAddTask(taskData); 
+          console.log('Task data sent to Firebase successfully');
+        } catch (error) {
+          console.error('Failed to send task data to Firebase:', error); 
+        }
+      } else {
+        console.error('Task data collection failed');
+      }
+    } else {
+      console.error('Form validation failed');
     }
-  } 
-}
+  }
+
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
-function collectData() {
-  const form = document.getElementById('taskForm');
+function collectDataAddTask() {
+  const form = document.getElementById('taskFormAddTask');
   if (!form) {
     return;
   }
@@ -758,10 +774,8 @@ function collectData() {
   const dueDate = form.querySelector('input[type="date"]').value;
   const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
 
-  const assignedContacts = selectedContacts;
-  
-  // Set 'completed' to false for each subtask
-  const subtasks = addTaskBoardInfos.map(subtask => ({ title: subtask, completed: false }));
+  const assignedContacts = selectedContacts || [];
+  const subtasks = (addTaskBoardInfos || []).map(subtask => ({ title: subtask, completed: false }));
 
   let priority = '';
   switch (activeButton) {
@@ -787,31 +801,59 @@ function collectData() {
     category: categoryElement,
     assignedContacts: assignedContacts,
     subtasks: subtasks,
-    column: 'toDo',
+    column: addTaskColumn || 'toDo',
   };
 }
 
-async function sendTaskDataToFirebase() {
+async function initializeTasksNode() {
   try {
-    await initializeTasksNode(); // Ensure the 'tasks' node exists
-
-    // Fetch existing tasks to determine the next index
     const response = await fetch(`${BASE_TASKS_URL}.json`);
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
+    }
+
+    const existingTasks = await response.json();
+    if (existingTasks === null) {
+      // Initialize the 'tasks' node if it doesn't exist
+      const initResponse = await fetch(BASE_TASKS_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      });
+
+      if (!initResponse.ok) {
+        throw new Error(`HTTP error during initialize tasks node PUT! Status: ${initResponse.status}`);
+      }
+    }
+    console.log('Tasks node initialized if not existing');
+  } catch (error) {
+    console.error('Error initializing tasks node:', error);
+  }
+}
+
+
+async function sendTaskDataToFirebaseAddTask() {
+  try {
+    await initializeTasksNode();
+    console.log('Tasks node initialized');
+
+    const response = await fetch(`${BASE_TASKS_URL}.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error during fetch tasks! Status: ${response.status}`);
     }
 
     const existingTasks = await response.json();
     let tasksArray = existingTasks ? Object.keys(existingTasks).map(key => ({ ...existingTasks[key], id: parseInt(key) })) : [];
+    console.log('Existing tasks fetched:', tasksArray);
 
-    // Sort tasks by their ids
     tasksArray.sort((a, b) => a.id - b.id);
 
-    // Ensure task ids are sequential starting from 0
-    tasksArray.forEach((task, index) => {
+    const promises = tasksArray.map((task, index) => {
       if (task.id !== index) {
         task.id = index;
-        fetch(`${BASE_TASKS_URL}/${index}.json`, {
+        return fetch(`${BASE_TASKS_URL}/${index}.json`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -821,17 +863,16 @@ async function sendTaskDataToFirebase() {
       }
     });
 
-    // Determine the next index
+    await Promise.all(promises);
+    console.log('Task IDs updated if necessary');
+
     const nextIndex = tasksArray.length;
-
-    // Collect new task data
-    const taskData = collectData();
+    const taskData = collectDataAddTask();
     if (!taskData) {
-      console.error("No task data to send");
-      return;
+      throw new Error("No task data to send");
     }
+    console.log('Task data collected:', taskData);
 
-    // Send the new task with the determined index
     const taskResponse = await fetch(`${BASE_TASKS_URL}/${nextIndex}.json`, {
       method: 'PUT',
       headers: {
@@ -841,7 +882,7 @@ async function sendTaskDataToFirebase() {
     });
 
     if (!taskResponse.ok) {
-      throw new Error(`HTTP error! Status: ${taskResponse.status}`);
+      throw new Error(`HTTP error during save task! Status: ${taskResponse.status}`);
     }
 
     let responseAsJson = await taskResponse.json();
