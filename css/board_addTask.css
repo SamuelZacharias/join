@@ -222,12 +222,13 @@ select:hover{
   height: 8px;
   width: 12;
   margin-right: 16px;
+  
 }
 .dropUpImg{
   height: 8px;
   width: 12px;
   margin-right: 16px;
-  rotate: 180deg;
+ 
 }
 .categoryOption{
   display: flex;
@@ -248,6 +249,169 @@ select:hover{
 .hover-shadow:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.urgent{
+  background-color: var(--high);
+}
+.medium {
+  background-color: var(--medium);
+}
+.low{
+  background-color: var(--low);
+}
+
+.contacts{
+  background-color: white;
+  height: 200px;
+  overflow-y: scroll;
+  position: absolute;
+  width: 440px;
+  margin-top: 80px;
+  z-index: 44;
+}
+.contactsOpen{
+  display: flex;
+  gap:20px;
+  padding: 8px 12px;
+  background-color: white;
+  border-radius: 10px;
+  border: 0.5px solid white
+}
+
+.contactsOpen:hover{
+  background-color: var(--background);
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+.contactName{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.contactName input{
+  width: 30px;
+  justify-self: flex-end;
+}
+
+.contactInitials{
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  display: flex;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 1px white solid;
+  font-size: 16px;
+}
+
+.selected {
+  border: 0.5px solid white; 
+  background-color: var(--gray); 
+  color: white;
+}
+.selected:hover{
+  background-color: #091931;
+  
+}
+.assignedContacts{
+  display: flex;
+  position: absolute;
+  margin-top: 90px;
+}
+
+.selected img{
+  content: url('/assets/img/png/whiteBox.png');
+}
+
+
+.addSubtask{
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
+  width: 440px;
+}
+
+.addSubtask img{
+  cursor: pointer; 
+}
+
+.error-placeholder::placeholder {
+  color: red;
+}
+
+#newSubtasksAddTask{
+  width: 440px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 80px;
+  overflow-y: scroll;
+  z-index: 33;
+  margin-top: 90px;
+  scrollbar-width: none;
+  list-style-type: none; /* Standard-Punkt entfernen */
+  padding: 0; /* Standard-Padding entfernen */
+}
+
+.vertical-line {
+  width: 1px;
+  height: 16px; /* Höhe des Strichs */
+  background-color: black; /* Farbe des Strichs */
+  margin: 0 8px; /* Abstand zu den Icons */
+}
+.subTaskStyle {
+  display: flex;
+}
+.borderLeft {
+  border-left: 1px;
+}
+.subtaskIconsAddTask {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin-right: 12px; /* Linker Abstand des Icons-Containers */
+}
+.subtask-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.subtask-item {
+  display: flex;
+  justify-content: space-between; /* Platzierung der Inhalte mit Abstand */
+  align-items: center;
+  height: 32px;
+  width: 100%;
+}
+
+.custom-bullet {
+  margin-right: 8px; /* Abstand zwischen Punkt und Text */
+  margin-left: 16px;
+}
+
+
+li:hover .subtask-item {
+  background-color: #D1D1D1;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.inputContainer.invalid {
+  border: 2px solid red;
+  padding: 12px 21px;
+  border-radius: 10px; 
+}
+.categoryDropDown.invalid {
+  border: 2px solid red;
+  border-radius: 10px; 
+}
+
+
 .d-none {
   display: none;
 }

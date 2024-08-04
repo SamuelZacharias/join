@@ -375,9 +375,7 @@ select:hover{
   overflow: hidden;
 }
 
-.d-none{
-  display: none;
-}
+
 
 li:hover .d-none {
   display: block;
@@ -467,11 +465,12 @@ li:hover .d-none {
   margin: 0 8px;
 }
 
-.d-none {
-  display: none;
-}
+
 
 li:hover .subtask-item {
   background-color: #D1D1D1;
   border-radius: 6px;
+}
+.d-none{
+  display: none;
 }
