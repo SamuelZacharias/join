@@ -94,8 +94,10 @@ document.addEventListener('click', handleClickOutside);
 
 
 function closeOpenedTask(){
+    
     document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
     document.getElementById('openedTaskContainer').classList.remove('openedTaskContainer')
+    
     document.getElementById(`editTaskContainer`).classList.add(`d-none`)
     document.getElementById('editTaskContainer').classList.remove('openedTaskContainer')
 }
@@ -159,9 +161,57 @@ function openBoardAddTaskawaitFeedback(){
 }
 
 
-function closeAddTaskBoard(){
-    document.getElementById('addTaskContainer').classList.add('d-none')
+function closeAddTaskBoard() {
+  const taskContainer = document.getElementById('addTaskContainer');
+  
+  if (!taskContainer) {
+      console.error("Element with id 'addTaskContainer' not found");
+      return;
+  }
+
+  // Show success message immediately
+  showSuccessMessageAddTask();
+  
+  // Add the slideOut class immediately
+  taskContainer.classList.add('slideOut');
+  console.log('slideOut class added');
+  
+  // Add the d-none class after 0.3 seconds (300 milliseconds)
+  setTimeout(() => {
+      taskContainer.classList.add('d-none');
+      taskContainer.classList.remove('slideOut'); // Reset the animation class
+      console.log('d-none class added and slideOut class removed');
+  }, 1000); // Adjust timeout if necessary
 }
+
+function showSuccessMessageAddTask() {
+  const successContainer = document.getElementById('successContainer');
+  const successMessageAddTask = document.getElementById('sucessMessageAddTask');
+
+  if (!successContainer) {
+      console.error("Element with id 'successContainer' not found");
+      return;
+  }
+  
+  if (!successMessageAddTask) {
+      console.error("Element with id 'sucessMessageAddTask' not found");
+      return;
+  }
+
+  successContainer.classList.remove('d-none');
+  successMessageAddTask.innerHTML = `Your task was added to ${addTaskColumn}`;
+  console.log('Success message shown');
+  setTimeout(() => {
+    successContainer.classList.add('d-none');
+  }, 1000);
+}
+
+
+function closeAddTaskBoardOnX(){
+  const taskContainer = document.getElementById('addTaskContainer');
+  taskContainer.classList.add('d-none');
+}
+
 
 let activeButton = null
 let clickCount = 0;
@@ -173,7 +223,7 @@ function renderAddTaskBoardHtml(addTaskContainer){
         <section class="addTask" id="boardAddTask" >
             <div class="boardAddTaskTitle">
                 <h1>Add Task</h1>
-                <img src="/assets/img/png/close.png" onclick="closeAddTaskBoard()">
+                <img src="/assets/img/png/close.png" onclick="closeAddTaskBoardOnX()">
             </div>
             <form id="taskFormAddTask" >
               <div class="formLeft">
@@ -226,14 +276,14 @@ function renderAddTaskBoardHtml(addTaskContainer){
                   <div id="subtaskContainerAddTask">
                     <p>
                       <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
-                      <img src="assets/img/png/Subtasks icons11.png"  onclick="writeSubtaskAddTask()"alt="" />
+                      <img onclick="writeSubtaskAddTask()" src="assets/img/png/Subtasks icons11.png"  alt="" />
                     </p>
                   </div>
                   <ul id="newSubtasksAddTask" style="display: flex;"></ul>
                 </div>
               </div>
             </form>
-            <section class="buttonsSection d-flex">
+            <section class="buttonsSection d-flex" style="margin-top: 150px">
               <span><b style="color: red">*</b> This field is Required</span>
               <div class="buttonArea">
                 <button id="clearButton" onclick="clearForm()" class="buttonCenter clear">
@@ -246,6 +296,7 @@ function renderAddTaskBoardHtml(addTaskContainer){
               </div>
             </section>
           </section>
+          
     `;
 }
 
@@ -361,6 +412,11 @@ function handleClick(buttonNumber) {
   });
 
   function handleClickOutside(event) {
+    const addBoardTask = document.getElementById('boardAddTask');
+    if (!addBoardTask) {
+      return; // Do nothing if addBoardTask is not rendered
+    }
+  
     const container = document.getElementById('dropdownCategory');
     if (!container.contains(event.target)) {
       hideCategory();
@@ -459,21 +515,26 @@ function showAssignedContacts() {
 
 
 document.addEventListener('click', function(event) {
-    let contactsContainer = document.getElementById('contacts');
-    let dropdownContacts = document.getElementById('dropdownContacts');
-    if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
-      contactsContainer.classList.add('d-none');
-      document.getElementById('dropDownContactsImg').classList.add('dropDownImg');
-    document.getElementById('dropDownContactsImg').classList.remove('dropUpImg')
-    }
-  });
+  let addBoardTask = document.getElementById('boardAddTask');
+  if (!addBoardTask) {
+    return; // Do nothing if addBoardTask is not rendered
+  }
+
+  let contactsContainer = document.getElementById('contacts');
+  let dropdownContacts = document.getElementById('dropdownContacts');
+  if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
+    contactsContainer.classList.add('d-none');
+    document.getElementById('dropDownContactsImg').classList.add('dropDownImg');
+    document.getElementById('dropDownContactsImg').classList.remove('dropUpImg');
+  }
+});
 
   let addTaskBoardInfos = [];
 
 function writeSubtaskAddTask() {
   let subtaskArea = document.getElementById('subtaskContainerAddTask');
   subtaskArea.innerHTML = `
-      <div class="addSubtask">
+      <div class="addSubtaskAddBoard">
           <input type="text" name="" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
           <div class="d-flex">
               <img src="assets/img/png/subtaskX.png" onclick="resetSubtask()" alt="" />
@@ -750,6 +811,8 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           await sendTaskDataToFirebaseAddTask(taskData); 
           console.log('Task data sent to Firebase successfully');
+          clearForm()
+          closeAddTaskBoard()
         } catch (error) {
           console.error('Failed to send task data to Firebase:', error); 
         }
@@ -887,7 +950,9 @@ async function sendTaskDataToFirebaseAddTask() {
 
     let responseAsJson = await taskResponse.json();
     console.log('Data saved to Firebase:', responseAsJson);
+    getTasksFromDataBase()
   } catch (error) {
     console.error('Error saving data to Firebase:', error);
   }
 }
+

@@ -107,10 +107,10 @@ function returnOpenEditHTML(task, today) {
           <div class="editTitle">
               <div>Subtasks:</div>
               <div class="editAssignContacts" id="editSubtasks"></div>
-              <div id="newSubtasks"></div>
+              <ul id="newSubtasks"></ul>
           </div>
       </div>
-      <div class="editOkay" id="editOkay" onclick="collectData('${task.id}')"><span>Ok<img src="assets/img/png/check.png" alt=""></span></div>
+      <div class="editOkay" id="editOkay" ><span onclick="collectData('${task.id}')">Ok<img src="assets/img/png/check.png" alt=""></span></div>
     `;
   }
 
@@ -147,19 +147,25 @@ function returnOpenEditHTML(task, today) {
 
   function returnSubtaskHTML(index, title) {
     return `
-        <div class="addSubtask editSubtask showedSubtask subtask-container" 
-             onmouseover="showActions(this)" 
-             onmouseout="hideActions(this)">
-            <div class="subtask-title" onclick="editSubtask(${index})">
-                ${title}
-            </div>
-            <div class="d-flex d-none subtask-actions">
-                <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${index})" alt="" />
-                <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
-            </div>
+        <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addSubtask ">
+        <div class="subtask-item">
+          <div class="subtask-content">
+            <span class="custom-bullet">•</span>
+              <div style="width:100%" onclick="editSubtask(${index})"> ${title}</div>
+          </div>
+          <div class="subtaskIconsAddTask d-none">
+            <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${index})" alt="" />
+            <div class="vertical-line"></div>
+            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+          </div>
         </div>
+      </li>
     `;
   }
+
+ 
+
+
 
   function returnEditSubtaskHTML(index, title) {
     return `

@@ -43,9 +43,25 @@
   }
 }
 
+@keyframes slideOut {
+  0% {
+      transform: translateX(0);
+      opacity: 1;
+  }
+  100% {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+}
+
+
 /* Define the animation class */
 .slide-in {
-  animation: slideInFromLeft 0.3s ease-out forwards;
+  animation: slideInFromLeft 0.45s ease-out forwards;
+}
+
+.slideOut {
+  animation: slideOut 1s ease-out forwards;
 }
 .addTaskLink{
   background-color: var(--gray);
@@ -328,7 +344,8 @@ select:hover{
 }
 
 
-.addSubtask{
+.addSubtaskAddBoard{
+  box-sizing: border-box;
   display: flex;
   background-color: white;
   padding: 10px;
@@ -337,7 +354,7 @@ select:hover{
   width: 440px;
 }
 
-.addSubtask img{
+.addSubtaskAddBoard{
   cursor: pointer; 
 }
 
@@ -409,6 +426,14 @@ li:hover .subtask-item {
   border-radius: 10px; 
 }
 
+.sucessMessageAddTask{
+  background-color: var(--gray);
+  width: fit-content;
+  color: white;
+  padding: 16px;
+  font-size: 24px;
+  border-radius: 10px;
+}
 
 
 
