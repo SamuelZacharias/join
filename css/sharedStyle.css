@@ -1,0 +1,45 @@
+.custom-bullet {
+    margin-right: 8px;
+    /* Abstand zwischen Punkt und Text */
+    margin-left: 16px;
+}
+
+.vertical-line {
+    width: 1px;
+    height: 16px;
+    background-color: black;
+    margin: 0 8px;
+}
+
+.subTaskStyle {
+    display: flex;
+  }
+
+li:hover .subtask-item {
+    background-color: #D1D1D1;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.subtask-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.borderLeft {
+    border-left: 1px;
+}
+
+.subtask-item {
+    display: flex;
+    justify-content: space-between;
+    /* Platzierung der Inhalte mit Abstand */
+    align-items: center;
+    height: 32px;
+    width: 100%;
+}
+
+.d-none {
+    display: none;
+}

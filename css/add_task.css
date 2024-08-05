@@ -355,14 +355,6 @@ select:hover{
   margin: 0 8px; /* Abstand zu den Icons */
 }
 
-.subTaskStyle {
-  display: flex;
-}
-
-.borderLeft {
-  border-left: 1px;
-}
-
 .signedUp{
   position: absolute;
   width: 100%;
@@ -435,42 +427,8 @@ li:hover .d-none {
   padding: 0; /* Standard-Padding entfernen */
 }
 
-.subtask-item {
-  display: flex;
-  justify-content: space-between; /* Platzierung der Inhalte mit Abstand */
-  align-items: center;
-  height: 32px;
-}
-
-.subtask-content {
-  display: flex;
-  align-items: center;
-}
-
-.custom-bullet {
-  margin-right: 8px; /* Abstand zwischen Punkt und Text */
-  margin-left: 16px;
-}
-
 .subtask-icons {
   display: flex;
   align-items: center;
   margin-right: 12px; /* Linker Abstand des Icons-Containers */
-}
-
-.vertical-line {
-  width: 1px;
-  height: 16px;
-  background-color: black;
-  margin: 0 8px;
-}
-
-
-
-li:hover .subtask-item {
-  background-color: #D1D1D1;
-  border-radius: 6px;
-}
-.d-none{
-  display: none;
 }

@@ -376,49 +376,12 @@ select:hover{
   padding: 0; /* Standard-Padding entfernen */
 }
 
-.vertical-line {
-  width: 1px;
-  height: 16px; /* Höhe des Strichs */
-  background-color: black; /* Farbe des Strichs */
-  margin: 0 8px; /* Abstand zu den Icons */
-}
-.subTaskStyle {
-  display: flex;
-}
-.borderLeft {
-  border-left: 1px;
-}
 .subtaskIconsAddTask {
   display: flex;
   cursor: pointer;
   align-items: center;
   margin-right: 12px; /* Linker Abstand des Icons-Containers */
 }
-.subtask-content {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-.subtask-item {
-  display: flex;
-  justify-content: space-between; /* Platzierung der Inhalte mit Abstand */
-  align-items: center;
-  height: 32px;
-  width: 100%;
-}
-
-.custom-bullet {
-  margin-right: 8px; /* Abstand zwischen Punkt und Text */
-  margin-left: 16px;
-}
-
-
-li:hover .subtask-item {
-  background-color: #D1D1D1;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
 
 .invalid{
   border: 1px solid red;
@@ -433,10 +396,4 @@ li:hover .subtask-item {
   padding: 16px;
   font-size: 24px;
   border-radius: 10px;
-}
-
-
-
-.d-none {
-  display: none;
 }
