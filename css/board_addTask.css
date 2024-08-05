@@ -1,4 +1,4 @@
-.addTask{
+.addTask {
   background-color: var(--background);
   padding: 40px;
   border-radius: 40px;
@@ -6,27 +6,29 @@
   width: fit-content;
 }
 
-
-.boardAddTaskTitle{
+.boardAddTaskTitle {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
 }
-.boardAddTaskTitle img{
+
+.boardAddTaskTitle img {
   width: 20px;
   height: 20px;
 }
-.boardAddTaskTitle img:hover{
+
+.boardAddTaskTitle img:hover {
   cursor: pointer;
   scale: 1.1;
   background-color: var(--border);
   border-radius: 10px;
 }
 
-.addTask input{
+.addTask input {
   border: none;
 }
-.addTask textarea{
+
+.addTask textarea {
   border: none;
   padding: 0;
 }
@@ -34,28 +36,28 @@
 /* Define the animation */
 @keyframes slideInFromLeft {
   0% {
-      transform: translateX(100%);
-      opacity: 0;
+    transform: translateX(100%);
+    opacity: 0;
   }
+
   100% {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes slideOut {
   0% {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
+
   100% {
-      transform: translateX(100%);
-      opacity: 0;
+    transform: translateX(100%);
+    opacity: 0;
   }
 }
 
-
-/* Define the animation class */
 .slide-in {
   animation: slideInFromLeft 0.45s ease-out forwards;
 }
@@ -63,51 +65,8 @@
 .slideOut {
   animation: slideOut 1s ease-out forwards;
 }
-.addTaskLink{
-  background-color: var(--gray);
-  color: white !important;
-}
 
-form {
-  display: flex;
-  gap: 48px;
-}
-
-.formLeft {
-  display: flex;
-  flex-direction: column;
-  width: 440px;
-  gap: 16px;
-}
-
-input {
-  font-size: 20px;
-  line-height: 24px;
-  width: 100%;
-  border: none;
-}
-.eachInput {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.eachInput img{
-  cursor: pointer;
-}
-p {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  padding: 12px 21px;
-  background-color: white;
-}
-p:hover {
-  border: 1px solid var(--blue);
-}
-
-.categoryDropDown{
+.categoryDropDown {
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -118,88 +77,15 @@ p:hover {
   border: 1px solid var(--border);
 }
 
-.buttonsSection {
-  margin-top: 90px;
-  justify-content: space-between;
-  padding-right: 133px ;
-}
-.buttonArea {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.buttonCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 16px;
-  font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
-}
-.prioArea {
-  display: flex;
-  justify-content: space-between;
-}
-.prioButton {
-  width: 136px;
-  border-radius: 10px;
-  padding: 16px 10px;
-  gap: 8px;
-  font-size: 20px;
-  border: 1px solid var(--border);
-  background-color: white;
-}
-.prioButton:hover {
-  cursor: pointer;
-}
-.clear {
-  border: 1px solid black;
-  color: black;
-  border-radius: 10px;
-  height: 56px;
-  font-weight: 500;
-}
-.clear img {
-  display: block;
-  transition: opacity 0.125s ease;
-}
-.clear:hover {
-  border: 1px solid var(--blue);
-  color: var(--blue);
-  transition: 125ms;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-}
-.clear:hover img {
-  content: url("/assets/img/png/iconoir_cancel_hover.png");
-}
-
-.createButton{
-  background-color: var(--gray);
-  border-radius: 10px;
-  gap: 8px;
-  font-size: 20px;
-  height: 56px;
-  color: white;
-}
-.createButton:hover{
-  background-color: var(--blue);
-  transition: 125ms;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-}
-
-
-#categories{
+#categories {
   top: 440px;
   position: absolute;
   z-index: 44;
   width: 440px;
   background-color: white;
-  
 }
 
-.openedDropDown{
+.openedDropDown {
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -207,76 +93,14 @@ p:hover {
   margin-top: -20px;
   border-radius: 10px;
 }
-.spanHover{
-  background-color: white;
-  padding: 10px;
-  box-sizing: border-box;
-  padding-left: 10px;
-  border-radius: 10px;
-  width: 100%;
-}
-.spanHover:hover{
-  background-color: var(--background);
-  cursor: pointer;
-}
 
-select:hover{
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.categoryDropDown{
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 12px;
-  font-size: 20px;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.dropDownImg{
-  height: 8px;
-  width: 12;
-  margin-right: 16px;
-  
-}
-.dropUpImg{
+.dropUpImg {
   height: 8px;
   width: 12px;
   margin-right: 16px;
- 
-}
-.categoryOption{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: space-between;
-}
-.categoryDropDown:hover{
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.spanCategory{
-  width: 100%;
-}
-.hover-shadow {
-  transition: box-shadow 0.125s;
-}
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.urgent{
-  background-color: var(--high);
-}
-.medium {
-  background-color: var(--medium);
-}
-.low{
-  background-color: var(--low);
-}
-
-.contacts{
+.contacts {
   background-color: white;
   height: 200px;
   overflow-y: scroll;
@@ -285,66 +109,14 @@ select:hover{
   margin-top: 80px;
   z-index: 44;
 }
-.contactsOpen{
-  display: flex;
-  gap:20px;
-  padding: 8px 12px;
-  background-color: white;
-  border-radius: 10px;
-  border: 0.5px solid white
-}
 
-.contactsOpen:hover{
-  background-color: var(--background);
-  cursor: pointer;
-  border: 1px solid var(--border);
-}
-.contactName{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  
-}
-
-.contactName input{
-  width: 30px;
-  justify-self: flex-end;
-}
-
-.contactInitials{
-  width: 24px;
-  height: 24px;
-  padding: 6px;
-  display: flex;
-  border-radius: 100%;
-  align-items: center;
-  justify-content: center;
-  border: 1px white solid;
-  font-size: 16px;
-}
-
-.selected {
-  border: 0.5px solid white; 
-  background-color: var(--gray); 
-  color: white;
-}
-.selected:hover{
-  background-color: #091931;
-  
-}
-.assignedContacts{
+.assignedContacts {
   display: flex;
   position: absolute;
   margin-top: 90px;
 }
 
-.selected img{
-  content: url('/assets/img/png/whiteBox.png');
-}
-
-
-.addSubtaskAddBoard{
+.addSubtaskAddBoard {
   box-sizing: border-box;
   display: flex;
   background-color: white;
@@ -354,15 +126,11 @@ select:hover{
   width: 440px;
 }
 
-.addSubtaskAddBoard{
-  cursor: pointer; 
+.addSubtaskAddBoard {
+  cursor: pointer;
 }
 
-.error-placeholder::placeholder {
-  color: red;
-}
-
-#newSubtasksAddTask{
+#newSubtasksAddTask {
   width: 440px;
   position: absolute;
   display: flex;
@@ -372,24 +140,24 @@ select:hover{
   z-index: 33;
   margin-top: 90px;
   scrollbar-width: none;
-  list-style-type: none; /* Standard-Punkt entfernen */
-  padding: 0; /* Standard-Padding entfernen */
+  list-style-type: none;
+  padding: 0;
 }
 
 .subtaskIconsAddTask {
   display: flex;
   cursor: pointer;
   align-items: center;
-  margin-right: 12px; /* Linker Abstand des Icons-Containers */
+  margin-right: 12px;
 }
 
-.invalid{
+.invalid {
   border: 1px solid red;
   padding: 12px 21px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
 
-.sucessMessageAddTask{
+.sucessMessageAddTask {
   background-color: var(--gray);
   width: fit-content;
   color: white;

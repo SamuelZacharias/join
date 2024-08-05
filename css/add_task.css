@@ -1,7 +1,6 @@
-body{
+body {
   visibility: hidden;
 }
-
 
 .addTask {
   background-color: var(--background);
@@ -14,59 +13,28 @@ body{
   font-size: 20px;
   height: calc(100vh - 206px);
 }
+
 h1 {
   margin: 0;
   font-size: 60px;
   margin-bottom: 48px;
 }
-.formLeft {
-  display: flex;
-  flex-direction: column;
-  width: 440px;
-  gap: 16px;
-}
-form {
-  display: flex;
-  gap: 48px;
-}
+
 .separator {
   height: 424px;
   border: 1px solid var(--blue);
 }
-input {
-  font-size: 20px;
-  line-height: 24px;
-  width: 100%;
-  border: none;
-}
+
 input:focus,
 textarea:focus {
   outline: none;
 }
+
 select {
   padding: 12px 16px;
   border-radius: 10px;
 }
-.eachInput {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.eachInput img{
-  cursor: pointer;
-}
-p {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  padding: 12px 21px;
-  background-color: white;
-}
-p:hover {
-  border: 1px solid var(--blue);
-}
+
 textarea {
   height: 120px;
   width: 100%;
@@ -75,175 +43,48 @@ textarea {
   resize: none;
   font-size: 20px;
 }
-.buttonsSection {
-  margin-top: 90px;
-  justify-content: space-between;
-  padding-right: 133px ;
-}
-.buttonArea {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.buttonCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 16px;
-  font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
-}
-.prioArea {
-  display: flex;
-  justify-content: space-between;
-}
-.prioButton {
-  width: 136px;
-  border-radius: 10px;
-  padding: 16px 10px;
-  gap: 8px;
-  font-size: 20px;
-  border: 1px solid var(--border);
-  background-color: white;
-}
-.prioButton:hover {
-  cursor: pointer;
-}
-.clear {
-  border: 1px solid black;
-  color: black;
-  border-radius: 10px;
-  height: 56px;
-  font-weight: 500;
-}
-.clear img {
-  display: block;
-  transition: opacity 0.125s ease;
-}
-.clear:hover {
-  border: 1px solid var(--blue);
-  color: var(--blue);
-  transition: 125ms;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-}
-.clear:hover img {
-  content: url("/assets/img/png/iconoir_cancel_hover.png");
-}
+
 .d-flex {
   display: flex;
 }
-.createButton{
-  background-color: var(--gray);
-  border-radius: 10px;
-  gap: 8px;
-  font-size: 20px;
-  height: 56px;
-  color: white;
-}
-.createButton:hover{
-  background-color: var(--blue);
-  transition: 125ms;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-}
-select:hover{
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.categoryDropDown{
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 12px;
-  font-size: 20px;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.dropDownImg{
-  height: 8px;
-  width: 12;
-  margin-right: 16px;
-}
-.dropUpImg{
+
+.dropUpImg {
   height: 8px;
   width: 12px;
   margin-right: 16px;
   rotate: 180deg;
 }
-.categoryOption{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: space-between;
-}
-.categoryDropDown:hover{
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.spanCategory{
-  width: 100%;
-}
-.hover-shadow {
-  transition: box-shadow 0.125s;
-}
-.hover-shadow:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 
-.urgent{
-  background-color: var(--urgent);
-}
-.medium {
-  background-color: var(--medium);
-}
-.low{
-  background-color: var(--low);
-}
 .inputContainer.invalid {
   border: 2px solid red;
   padding: 12px 21px;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
+
 .categoryDropDown.invalid {
   border: 2px solid red;
-  border-radius: 10px; 
-}
-
-
-.spanHover{
-  background-color: white;
-  padding: 10px;
-  box-sizing: border-box;
-  padding-left: 10px;
   border-radius: 10px;
-  width: 100%;
-}
-.spanHover:hover{
-  background-color: var(--background);
-  cursor: pointer;
 }
 
-.openedDropDown{
+.openedDropDown {
   display: flex;
   flex-direction: column;
   font-size: 20px;
   background-color: white;
   margin-top: -20px;
- 
+
 }
-#categories{
+
+#categories {
   position: absolute;
   z-index: 44;
   top: 620px;
   width: 440px;
   background-color: white;
-  
 }
 
 
-#contacts{
+#contacts {
   background-color: white;
   height: 280px;
   overflow-y: scroll;
@@ -253,73 +94,13 @@ select:hover{
   z-index: 44;
 }
 
-
-.contactsOpen{
-  display: flex;
-  gap:20px;
-  padding: 8px 12px;
-  background-color: white;
-  border-radius: 10px;
-  border: 0.5px solid white
-}
-
-.contactsOpen:hover{
-  background-color: var(--background);
-  cursor: pointer;
-  border: 1px solid var(--border);
-}
-
-
-.contactName{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  
-}
-.contactName input{
-  width: 30px;
-  justify-self: flex-end;
-}
-
-.contactInitials{
-  width: 24px;
-  height: 24px;
-  padding: 6px;
-  display: flex;
-    border-radius: 100%;
-    align-items: center;
-    justify-content: center;
-    border: 1px white solid;
-   
-    font-size: 16px;
-}
-
-
-
-.selected {
-  border: 0.5px solid white; 
-  background-color: var(--gray); 
-  color: white;
-}
-.selected:hover{
-  background-color: #091931;
-  
-}
-
-
-
-.selected img{
-  content: url('/assets/img/png/whiteBox.png');
-}
-
-#assignedContacts{
+#assignedContacts {
   display: flex;
   position: absolute;
   margin-top: 90px;
 }
 
-.addSubtask{
+.addSubtask {
   display: flex;
   background-color: white;
   padding: 10px;
@@ -328,15 +109,11 @@ select:hover{
   width: 440px;
 }
 
-.addSubtask img{
-  cursor: pointer; 
+.addSubtask img {
+  cursor: pointer;
 }
 
-.error-placeholder::placeholder {
-  color: red;
-}
-
-#newSubtasks{
+#newSubtasks {
   width: 440px;
   position: absolute;
   display: flex;
@@ -350,19 +127,19 @@ select:hover{
 
 .vertical-line {
   width: 1px;
-  height: 16px; /* Höhe des Strichs */
-  background-color: black; /* Farbe des Strichs */
-  margin: 0 8px; /* Abstand zu den Icons */
+  height: 16px;
+  background-color: black;
+  margin: 0 8px;
 }
 
-.signedUp{
+.signedUp {
   position: absolute;
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 999;
   overflow: hidden;
 }
@@ -373,22 +150,25 @@ li:hover .d-none {
   display: block;
 }
 
-.animation{
+.animation {
   animation: slideUp 1.2s ease-out;
 }
 
-@keyframes slideUp{
+@keyframes slideUp {
   from {
-    transform: translateY(100vh); /* Start from below the viewport */
-    
+    transform: translateY(100vh);
+    /* Start from below the viewport */
+
   }
+
   to {
-    transform: translateY(0); /* End at the normal position */
+    transform: translateY(0);
+    /* End at the normal position */
   }
 }
 
 
-#signedUp{
+#signedUp {
   background-color: var(--gray);
   padding: 15px 24px;
   color: white;
@@ -398,7 +178,7 @@ li:hover .d-none {
   text-align: center;
 }
 
-.logOut{
+.logOut {
   display: flex;
   flex-direction: column;
   background-color: var(--gray);
@@ -411,24 +191,19 @@ li:hover .d-none {
 }
 
 
-#logOut a{
+#logOut a {
   text-decoration: none;
   padding: 8px 16px;
   color: #cdcdcd
 }
 
-.addTaskLink{
-  background-color: #091931;
-  color: white !important;
-}
-
 #newSubtasks {
-  list-style-type: none; /* Standard-Punkt entfernen */
-  padding: 0; /* Standard-Padding entfernen */
+  list-style-type: none;
+  padding: 0;
 }
 
 .subtask-icons {
   display: flex;
   align-items: center;
-  margin-right: 12px; /* Linker Abstand des Icons-Containers */
+  margin-right: 12px;
 }
