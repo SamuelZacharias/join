@@ -29,7 +29,7 @@ function returnOpenedTaskHtml(task) {
                     <img class="openedTaskClose" src="/assets/img/png/openedTaskClose.png" onclick="closeOpenedTask()">
                 </div>
                 <h1 id="openedTaskTitle">${task.title}</h1>
-                <p id="openedTaskDescription">${task.description}</p>
+                <div id="openedTaskDescription">${task.description}</div>
                 <div>Due date: ${task.dueDate}</div>
                 <div>Priority: ${task.priority}</div>
                 <div>
