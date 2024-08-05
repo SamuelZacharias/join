@@ -2,8 +2,8 @@ function showCategory() {
   let categories = document.getElementById('categories');
   categories.innerHTML = `
       <div class="openedDropDown">
-        <span class="spanHover" onclick="chooseUserStory()">${category[0]}</span>
-        <span class="spanHover" onclick="chooseTechnical()"> ${category[1]}</span>
+        <span class="spanHover" onclick="chooseCategory(0)">${category[0]}</span>
+        <span class="spanHover" onclick="chooseCategory(1)"> ${category[1]}</span>
       </div>
     `; 
   document.getElementById('categories').classList.remove('d-none');
@@ -12,33 +12,19 @@ function showCategory() {
   choosenCategory = false;
 }
 
-
-
-function chooseUserStory() {
+function chooseCategory(index) {
   let chooseCategory = document.getElementById('dropdownCategory');
+  
+  // Assuming 'category' is an array and 'index' determines which category to select
   chooseCategory.innerHTML = `
-  <span onclick="showCategory()" class="spanCategory">${category[0]}</span>
-  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+    <span onclick="showCategory()" class="spanCategory">${category[index]}</span>
+    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+  `;
+
   document.getElementById('categories').classList.add('d-none');
   choosenCategory = true;
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
-
-  
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-}
-
-function chooseTechnical() {
-  let chooseCategory = document.getElementById('dropdownCategory');
-  chooseCategory.innerHTML = `
-  <span onclick="showCategory()" class="spanCategory">${category[1]}</span>
-  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
-  document.getElementById('categories').classList.add('d-none');
-  choosenCategory = true;
-  clickCount = 0;
-  document.getElementById('dropDownImg').classList.add('dropDownImg');
-
-  
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
 

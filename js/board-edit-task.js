@@ -373,22 +373,6 @@ function saveTask(updatedTask, taskId) {
   }
 }
 
-function updateTaskInFirebaseAndUI(updatedTask) {
-  updateTaskInFirebase(updatedTask).then(() => {
-      console.log('Task updated in Firebase.');
-      renderTasks();
-      closeEdit();
-      openTask(updatedTask);
-  }).catch(error => {
-      console.error('Error updating task in Firebase:', error);
-  });
-  renderTasks();
-  closeEdit();
-  openTask(updatedTask);
-}
-
-
-
 function closeEdit(){
   document.getElementById('editTaskContainer').classList.add('d-none')
 }

@@ -93,3 +93,22 @@ function returnWriteSubtaskAddTaskBoardHTML(){
       </div>
   `;
 }
+
+
+function returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos) {
+  return `
+    <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)">
+      <div class="subtask-item">
+        <div class="subtask-content">
+          <span class="custom-bullet">•</span>
+          <div style="width:100%" onclick="editSubtaskAddTask(${s})">${addTaskBoardInfos[s]}</div>
+        </div>
+        <div class="subtaskIconsAddTask d-none">
+          <img src="assets/img/png/editSubtask.png" onclick="editSubtaskAddTask(${s})" alt="" />
+          <div class="vertical-line"></div>
+          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
+        </div>
+      </div>
+    </li>
+  `;
+}
