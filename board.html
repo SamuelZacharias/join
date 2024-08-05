@@ -23,7 +23,7 @@
     
     <title>My Board</title>
   </head>
-  <body onload="getTasksFromDataBase()">
+  <body onload="getTasksFromDataBase(); loadTasksFromLocalStorage()">
     <div id="openedTaskContainer" class="openedTaskContainer d-none"  ></div>
     <div id="editTaskContainer" class="openedTaskContainer d-none" ></div>
     <div id="addTaskContainer" class="openedTaskContainer d-none"></div>
