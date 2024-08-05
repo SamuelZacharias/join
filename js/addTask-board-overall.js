@@ -12,6 +12,8 @@ function showCategory() {
   choosenCategory = false;
 }
 
+
+
 function chooseUserStory() {
   let chooseCategory = document.getElementById('dropdownCategory');
   chooseCategory.innerHTML = `

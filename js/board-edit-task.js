@@ -1,3 +1,5 @@
+document.addEventListener('click', handleClickOutsideEdit);
+
 function editTask(taskId) {
   // Retrieve task by ID
   let task = getTaskById(taskId);
@@ -85,16 +87,6 @@ function renderContactsList(contactsList, assignedContacts, contactsToChooseElem
   });
 }
 
-function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
-  return `
-    <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
-        <div class="openedAssigendContactsInitials" style="background-color: ${color};">
-            ${initials}
-        </div>
-        <div>${contactName}</div>
-    </div>
-  `;
-}
 
 function toggleContactAssignment(contactName) {
   if (!currentTaskBeingEdited) {
@@ -134,6 +126,7 @@ function assignContact(task, contact) {
   }
 }
 
+
 function unassignContact(task, contactName) {
   if (!task.assignedContacts) {
     return;
@@ -145,10 +138,6 @@ function unassignContact(task, contactName) {
   }
 }
 
-
-
-
-
 function closeContactsDropdown(){
 let  contactsTochoose =  document.getElementById('contactsToChoose')
 if(contactsTochoose.classList.contains('d-none')){
@@ -157,13 +146,10 @@ if(contactsTochoose.classList.contains('d-none')){
 }else{
   contactsTochoose.classList.add('d-none')
   document.getElementById('dropDownImg').classList.remove('dropUpImg')
-}
-}
-
-
+}}
 
 let subtaskInfos = [];
-let isSubtaskEditMode = false; // Flag to check if we're in edit mode
+let isSubtaskEditMode = false; 
 
 function renderEditSubtasks(task) {
   // Initialize subtaskInfos with existing subtasks of the selected task
@@ -189,7 +175,6 @@ function writeSubtask() {
   let subtaskArea = document.getElementById('editAreaSubtask');
   subtaskArea.innerHTML = returnWriteSubtaskHTML();
 }
-
 
 function validateSubtaskInput(subtaskInput, editSubtask) {
   if (subtaskInput.value.trim().length < 3) {
@@ -237,10 +222,6 @@ function addSubtask() {
   renderEditSubtasks({ subtasks: subtaskInfos });
 }
 
-
-
-
-
 function appendSubtaskHTML(container, html) {
   container.innerHTML += html;
 }
@@ -276,7 +257,6 @@ function editSubtask(index) {
   subtaskContainer.innerHTML = returnEditSubtaskHTML(index, subtaskTitle);
 }
 
-
 function handleEditInputError(editInput) {
   editInput.value = '';
   editInput.placeholder = 'Min 3 characters needed';
@@ -299,16 +279,12 @@ function saveSubtask(index) {
       handleEditInputError(editInput);
       return;
   } else {
-      // Clear error styling
       editInput.placeholder = 'Enter subtask';
       editInput.style.borderColor = '';
       editInput.classList.remove('error-placeholder');
   }
-
-  // Update the subtask in the array
   subtaskInfos[index].title = editedSubtask;
 
-  // Re-render the subtasks
   showSubtasks();
 }
 
@@ -316,9 +292,6 @@ function deleteSubtask(index) {
   subtaskInfos.splice(index, 1);
   showSubtasks();
 }
-
-
-
 
 function collectDataEdit(taskId) {
   const task = getTaskById(taskId);

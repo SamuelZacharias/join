@@ -112,28 +112,26 @@ function returnOpenEditHTML(task, today) {
       </div>
       <div class="editOkay" id="editOkay" ><span onclick="collectDataEdit('${task.id}')">Ok<img src="assets/img/png/check.png" alt=""></span></div>
     `;
-  }
+}
 
-  function returnEditPriorityButtonsHTML(){
+function returnEditPriorityButtonsHTML(){
     return `
         <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg"></button>
         <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.png"></button>
         <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low   <img src="assets/img/svg/low.svg"></button>
     `;
-  }
+}
 
-  
-
-  function returnEditSubtasksHTML() {
+function returnEditSubtasksHTML() {
     return `
         <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
             <span>Add new subtask</span>
             <img src="/assets/img/png/Subtasks icons11.png">
         </div>
     `;
-  }
+}
 
-  function returnWriteSubtaskHTML() {
+function returnWriteSubtaskHTML() {
     return `
         <div class="addSubtask" id="editSubtask">
             <input type="text" id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
@@ -143,9 +141,9 @@ function returnOpenEditHTML(task, today) {
             </div>
         </div>
     `;
-  }
+}
 
-  function returnSubtaskHTML(index, title) {
+function returnSubtaskHTML(index, title) {
     return `
         <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addSubtask ">
         <div class="subtask-item">
@@ -161,13 +159,9 @@ function returnOpenEditHTML(task, today) {
         </div>
       </li>
     `;
-  }
+}
 
- 
-
-
-
-  function returnEditSubtaskHTML(index, title) {
+function returnEditSubtaskHTML(index, title) {
     return `
         <div class="addSubtask editSubtask">
             <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
@@ -177,4 +171,15 @@ function returnOpenEditHTML(task, today) {
             </div>
         </div>
     `;
-  }
+}
+
+function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
+    return `
+      <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
+          <div class="openedAssigendContactsInitials" style="background-color: ${color};">
+              ${initials}
+          </div>
+          <div>${contactName}</div>
+      </div>
+    `;
+}
