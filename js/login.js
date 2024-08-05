@@ -1,5 +1,19 @@
 const BASE_URL = "https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/";
 
+async function fetchContacts() {
+    try {
+        const response = await fetch(`${BASE_URL}/contacts.json`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const contacts = await response.json();
+        return contacts;
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+        return null;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     addLoginButtonListener();
     addGuestLoginListener();
@@ -37,10 +51,18 @@ function handleLoginResponse(data, email, password) {
     }
 }
 
-function validatePasswordAndLogin(data, emailIndex, password) {
+async function validatePasswordAndLogin(data, emailIndex, password) {
     if (data.password[emailIndex] === password) {
         localStorage.setItem('loggedInUserName', data.name[emailIndex]);
         localStorage.setItem('loggedInUserEmail', data.email[emailIndex]);
+
+        const contacts = await fetchContacts();
+        if (contacts) {
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+        } else {
+            console.error('Failed to fetch contacts');
+        }
+
         window.location.href = 'summary.html';
     } else {
         showInvalidMessage('invalid', 'Incorrect password', 'invalidPassword');
