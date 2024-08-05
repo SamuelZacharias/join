@@ -1,0 +1,279 @@
+function showCategory() {
+  let categories = document.getElementById('categories');
+  categories.innerHTML = `
+      <div class="openedDropDown">
+        <span class="spanHover" onclick="chooseUserStory()">${category[0]}</span>
+        <span class="spanHover" onclick="chooseTechnical()"> ${category[1]}</span>
+      </div>
+    `; 
+  document.getElementById('categories').classList.remove('d-none');
+  document.getElementById('dropDownImg').classList.remove('dropDownImg');
+  document.getElementById('dropDownImg').classList.add('dropUpImg');
+  choosenCategory = false;
+}
+
+function chooseUserStory() {
+  let chooseCategory = document.getElementById('dropdownCategory');
+  chooseCategory.innerHTML = `
+  <span onclick="showCategory()" class="spanCategory">${category[0]}</span>
+  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+  document.getElementById('categories').classList.add('d-none');
+  choosenCategory = true;
+  clickCount = 0;
+  document.getElementById('dropDownImg').classList.add('dropDownImg');
+
+  
+  document.getElementById('dropdownCategory').classList.remove('invalid');
+}
+
+function chooseTechnical() {
+  let chooseCategory = document.getElementById('dropdownCategory');
+  chooseCategory.innerHTML = `
+  <span onclick="showCategory()" class="spanCategory">${category[1]}</span>
+  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
+  document.getElementById('categories').classList.add('d-none');
+  choosenCategory = true;
+  clickCount = 0;
+  document.getElementById('dropDownImg').classList.add('dropDownImg');
+
+  
+  document.getElementById('dropdownCategory').classList.remove('invalid');
+}
+
+function hideCategory() {
+  document.getElementById('dropDownImg').classList.add('dropDownImg');
+  document.getElementById('dropDownImg').classList.remove('dropUpImg')
+  document.getElementById('categories').classList.add('d-none');
+  clickCount = 0;
+}
+
+function showContacts() {
+  let contactsContainer = document.getElementById('contacts');
+  contactsContainer.innerHTML = '';
+
+  for (let x = 0; x < contacts.length; x++) {
+    let contact = contacts[x];
+    let fullName = contact.name;
+    let color = contact.color;
+
+    let isSelected = selectedContacts.some(c => c.name === contact.name);
+    let selectedClass = isSelected ? 'selected' : '';
+
+    contactsContainer.innerHTML += `
+      <div class="contactsOpen ${selectedClass}" data-index="${x}">
+        <div class="contactInitials" style="background-color: ${color}; ">
+          ${contact.initials}
+        </div>
+        <div class="contactName">
+          <span style="width:100%;">${fullName}</span>
+          <img src="assets/img/png/Rectangle 5.png" alt="">
+        </div>
+      </div>
+    `;
+  }
+
+  let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
+  for (let contactElement of contactElements) {
+    contactElement.addEventListener('click', function() {
+      let index = this.getAttribute('data-index');
+      let contact = contacts[index];
+
+      let selectedIndex = selectedContacts.findIndex(c => c.name === contact.name);
+      if (selectedIndex === -1) {
+        selectedContacts.push(contact);
+      } else {
+        selectedContacts.splice(selectedIndex, 1);
+      }
+
+      this.classList.toggle('selected');
+      showAssignedContacts();
+    });
+  }
+}
+
+function toggleContacts() {
+  document.getElementById('dropDownContactsImg').classList = ('dropUpImg')
+  let contactsContainer = document.getElementById('contacts');
+  if (contactsContainer.classList.contains('d-none')) {
+    contactsContainer.classList.remove('d-none');
+
+    showContacts();
+  } else {
+    contactsContainer.classList.add('d-none');
+    document.getElementById('dropDownContactsImg').classList = ('dropDownImg')
+  }
+}
+
+
+function showAssignedContacts() {
+  let assignedContactsContainer = document.getElementById('assignedContacts');
+  assignedContactsContainer.innerHTML = '';
+  let maxContactsToShow = 5;
+
+  for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
+    let contact = selectedContacts[a];
+    let fullName = contact.name;  // Assuming `name` field is a single string.
+    let color = contact.color;    // Use the color from the contact object.
+
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials" style="background-color: ${color}; color:white;">
+        ${contact.initials}
+      </div>
+    `;
+  }
+
+  if (selectedContacts.length > maxContactsToShow) {
+    let moreCount = selectedContacts.length - maxContactsToShow;
+    let moreContactsColor = "#999999"; 
+
+    assignedContactsContainer.innerHTML += `
+      <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
+        +${moreCount} 
+      </div>
+    `;
+  }
+}
+
+
+function setMinDate() {
+  const dateInputs = ['dateInputAddTask', 'dateInput']; // Array of IDs
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  const todayDate = `${yyyy}-${mm}-${dd}`;
+
+  dateInputs.forEach(id => {
+    const dateInput = document.getElementById(id);
+    if (dateInput) { // Check if the element exists
+      dateInput.min = todayDate;
+    }
+  });
+}
+
+function handleClick(buttonNumber) {
+  if (activeButton !== null) {
+    const previousButton = document.getElementById('button' + activeButton);
+    const previousImage = document.getElementById('prioImg' + activeButton);
+    
+    previousButton.classList.add('hover-shadow');
+    previousButton.style.backgroundColor = '';
+    previousButton.style.color = '';
+    previousButton.style.fontWeight = '';
+
+    switch (activeButton) {
+      case 1:
+        previousImage.src = 'assets/img/svg/urgent.svg';
+        break;
+      case 2:
+        previousImage.src = 'assets/img/png/mediumColor.png';
+        break;
+      case 3:
+        previousImage.src = 'assets/img/svg/low.svg';
+        break;
+    }
+  }
+
+  activeButton = buttonNumber;
+  const activeButtonElement = document.getElementById('button' + activeButton);
+  const activeImage = document.getElementById('prioImg' + activeButton);
+
+  activeButtonElement.classList.remove('hover-shadow');
+  activeButtonElement.style.color = 'white';
+  activeButtonElement.style.fontWeight = '600';
+
+  switch (buttonNumber) {
+    case 1:
+      activeButtonElement.style.backgroundColor = '#FF3D00';
+      activeImage.src = 'assets/img/png/urgentWhite.png';
+      break;
+    case 2:
+      activeButtonElement.style.backgroundColor = '#FFA800';
+      activeImage.src = 'assets/img/svg/medium.svg';
+      break;
+    case 3:
+      activeButtonElement.style.backgroundColor = '#7AE229';
+      activeImage.src = 'assets/img/png/lowWhite.png';
+      break;
+  }
+}
+
+
+function collectData() {
+  // Determine which form to use
+  const form = document.getElementById('taskForm') || document.getElementById('taskFormAddTask');
+  if (!form) {
+    console.error('No form found');
+    return;
+  }
+
+  const title = form.querySelector('input[type="text"]').value;
+  const description = form.querySelector('textarea').value;
+  const dueDate = form.querySelector('input[type="date"]').value;
+
+  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
+
+  // Default values based on the form type
+  const assignedContacts = selectedContacts || [];
+  const subtasks = (form.id === 'taskForm' ? subtaskInfos : addTaskBoardInfos || []).map(subtask => ({ title: subtask, completed: false }));
+
+  let priority = '';
+  switch (activeButton) {
+    case 1:
+      priority = 'Urgent';
+      break;
+    case 2:
+      priority = 'Medium';
+      break;
+    case 3:
+      priority = 'Low';
+      break;
+    default:
+      console.error("Invalid activeButton value");
+      return;
+  }
+
+  // Default column based on the form type
+  const column = form.id === 'taskForm' ? 'toDo' : (addTaskColumn || 'toDo');
+
+  return {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    category: categoryElement,
+    assignedContacts: assignedContacts,
+    subtasks: subtasks,
+    column: column,
+  };
+}
+
+
+
+async function initializeTasksNode() {
+  try {
+    const response = await fetch(`${BASE_TASKS_URL}.json`);
+    if (!response.ok) {
+      throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
+    }
+
+    const existingTasks = await response.json();
+    if (existingTasks === null) {
+      // Initialize the 'tasks' node if it doesn't exist
+      const initResponse = await fetch(BASE_TASKS_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      });
+
+      if (!initResponse.ok) {
+        throw new Error(`HTTP error during initialize tasks node PUT! Status: ${initResponse.status}`);
+      }
+      console.log('Tasks node initialized if not existing');
+    }
+  } catch (error) {
+    console.error('Error initializing tasks node:', error);
+  }
+}

@@ -10,52 +10,7 @@ if (contacts) {
   contacts = [];
 }
 
-function handleClick(buttonNumber) {
-  if (activeButton !== null) {
-    const previousButton = document.getElementById('button' + activeButton);
-    const previousImage = document.getElementById('prioImg' + activeButton);
-    
-    previousButton.classList.add('hover-shadow');
-    previousButton.style.backgroundColor = '';
-    previousButton.style.color = '';
-    previousButton.style.fontWeight = '';
 
-    switch (activeButton) {
-      case 1:
-        previousImage.src = 'assets/img/svg/urgent.svg';
-        break;
-      case 2:
-        previousImage.src = 'assets/img/png/mediumColor.png';
-        break;
-      case 3:
-        previousImage.src = 'assets/img/svg/low.svg';
-        break;
-    }
-  }
-
-  activeButton = buttonNumber;
-  const activeButtonElement = document.getElementById('button' + activeButton);
-  const activeImage = document.getElementById('prioImg' + activeButton);
-
-  activeButtonElement.classList.remove('hover-shadow');
-  activeButtonElement.style.color = 'white';
-  activeButtonElement.style.fontWeight = '600';
-
-  switch (buttonNumber) {
-    case 1:
-      activeButtonElement.style.backgroundColor = '#FF3D00';
-      activeImage.src = 'assets/img/png/urgentWhite.png';
-      break;
-    case 2:
-      activeButtonElement.style.backgroundColor = '#FFA800';
-      activeImage.src = 'assets/img/svg/medium.svg';
-      break;
-    case 3:
-      activeButtonElement.style.backgroundColor = '#7AE229';
-      activeImage.src = 'assets/img/png/lowWhite.png';
-      break;
-  }
-}
 
 function submitForm(event) {
   if (!validateForm()) {
@@ -107,58 +62,17 @@ function validateForm() {
     document.getElementById('dropdownCategory').classList.add('invalid');
   }
   
+  setTimeout(() => {
+    document.querySelectorAll('.invalid').forEach(element => {
+      element.classList.remove('invalid');
+    });
+  }, 800); // 500 milliseconds = 0.5 seconds
+
   return valid;
   
 }
 
-function showCategory() {
-  let categories = document.getElementById('categories');
-  categories.innerHTML = `
-      <div class="openedDropDown">
-        <span class="spanHover" onclick="chooseUserStory()">${category[0]}</span>
-        <span class="spanHover" onclick="chooseTechnical()"> ${category[1]}</span>
-      </div>
-    `; 
-  document.getElementById('categories').classList.remove('d-none');
-  document.getElementById('dropDownImg').classList.remove('dropDownImg');
-  document.getElementById('dropDownImg').classList.add('dropUpImg');
-  choosenCategory = false;
-}
 
-function chooseUserStory() {
-  let chooseCategory = document.getElementById('dropdownCategory');
-  chooseCategory.innerHTML = `
-  <span onclick="showCategory()" class="spanCategory">${category[0]}</span>
-  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
-  document.getElementById('categories').classList.add('d-none');
-  choosenCategory = true;
-  clickCount = 0;
-  document.getElementById('dropDownImg').classList.add('dropDownImg');
-
-  
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-}
-
-function chooseTechnical() {
-  let chooseCategory = document.getElementById('dropdownCategory');
-  chooseCategory.innerHTML = `
-  <span onclick="showCategory()" class="spanCategory">${category[1]}</span>
-  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">`;
-  document.getElementById('categories').classList.add('d-none');
-  choosenCategory = true;
-  clickCount = 0;
-  document.getElementById('dropDownImg').classList.add('dropDownImg');
-
-  
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-}
-
-function hideCategory() {
-  document.getElementById('dropDownImg').classList.add('dropDownImg');
-  document.getElementById('dropDownImg').classList.remove('dropUpImg')
-  document.getElementById('categories').classList.add('d-none');
-  clickCount = 0;
-}
 
 
 document.getElementById("dropdownCategory").addEventListener("click", function() {
@@ -201,91 +115,8 @@ document.getElementById('dropdownCategory').addEventListener('click', function()
 
 let selectedContacts = [];
 
-function showContacts() {
-  let contactsContainer = document.getElementById('contacts');
-  contactsContainer.innerHTML = '';
 
-  for (let x = 0; x < contacts.length; x++) {
-    let contact = contacts[x];
-    let fullName = contact.name;
-    let color = contact.color;
 
-    let isSelected = selectedContacts.some(c => c.name === contact.name);
-    let selectedClass = isSelected ? 'selected' : '';
-
-    contactsContainer.innerHTML += `
-      <div class="contactsOpen ${selectedClass}" data-index="${x}">
-        <div class="contactInitials" style="background-color: ${color}; ">
-          ${contact.initials}
-        </div>
-        <div class="contactName">
-          <span style="width:100%;">${fullName}</span>
-          <img src="assets/img/png/Rectangle 5.png" alt="">
-        </div>
-      </div>
-    `;
-  }
-
-  let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
-  for (let contactElement of contactElements) {
-    contactElement.addEventListener('click', function() {
-      let index = this.getAttribute('data-index');
-      let contact = contacts[index];
-
-      let selectedIndex = selectedContacts.findIndex(c => c.name === contact.name);
-      if (selectedIndex === -1) {
-        selectedContacts.push(contact);
-      } else {
-        selectedContacts.splice(selectedIndex, 1);
-      }
-
-      this.classList.toggle('selected');
-      showAssignedContacts();
-    });
-  }
-}
-
-function toggleContacts() {
-  document.getElementById('dropDownContactsImg').classList = ('dropUpImg')
-  let contactsContainer = document.getElementById('contacts');
-  if (contactsContainer.classList.contains('d-none')) {
-    contactsContainer.classList.remove('d-none');
-
-    showContacts();
-  } else {
-    contactsContainer.classList.add('d-none');
-    document.getElementById('dropDownContactsImg').classList = ('dropDownImg')
-  }
-}
-
-function showAssignedContacts() {
-  let assignedContactsContainer = document.getElementById('assignedContacts');
-  assignedContactsContainer.innerHTML = '';
-  let maxContactsToShow = 5;
-
-  for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
-    let contact = selectedContacts[a];
-    let fullName = contact.name;  // Assuming `name` field is a single string.
-    let color = contact.color;    // Use the color from the contact object.
-
-    assignedContactsContainer.innerHTML += `
-      <div class="contactInitials" style="background-color: ${color}; color:white;">
-        ${contact.initials}
-      </div>
-    `;
-  }
-
-  if (selectedContacts.length > maxContactsToShow) {
-    let moreCount = selectedContacts.length - maxContactsToShow;
-    let moreContactsColor = "#999999"; 
-
-    assignedContactsContainer.innerHTML += `
-      <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
-        +${moreCount} 
-      </div>
-    `;
-  }
-}
 
 document.addEventListener('click', function(event) {
   let contactsContainer = document.getElementById('contacts');
@@ -465,16 +296,6 @@ function deleteSubtask(index) {
   showSubtasks();
 }
 
-function setMinDate() {
-  const dateInput = document.getElementById('dateInput');
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, '0');
-  const dd = String(today.getDate()).padStart(2, '0');
-  const todayDate = `${yyyy}-${mm}-${dd}`;
-
-  dateInput.min = todayDate;
-}
 
 document.querySelector('.createButton').addEventListener('click', async function(event) {
   event.preventDefault(); 
@@ -520,76 +341,7 @@ document.getElementById('clearButton').addEventListener('click', function(event)
 
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
-// Collect task data
-function collectData() {
-  const form = document.getElementById('taskForm');
-  if (!form) {
-    return;
-  }
 
-  const title = form.querySelector('input[type="text"]').value;
-  const description = form.querySelector('textarea').value;
-  const dueDate = form.querySelector('input[type="date"]').value;
-  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
-
-  const assignedContacts = selectedContacts;
-  
-  // Set 'completed' to false for each subtask
-  const subtasks = subtaskInfos.map(subtask => ({ title: subtask, completed: false }));
-
-  let priority = '';
-  switch (activeButton) {
-    case 1:
-      priority = 'Urgent';
-      break;
-    case 2:
-      priority = 'Medium';
-      break;
-    case 3:
-      priority = 'Low';
-      break;
-    default:
-      console.error("Invalid activeButton value");
-      return;
-  }
-
-  return {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    category: categoryElement,
-    assignedContacts: assignedContacts,
-    subtasks: subtasks,
-    column: 'toDo',
-  };
-}
-
-// Initialize tasks node if it doesn't exist
-async function initializeTasksNode() {
-  try {
-    const response = await fetch(`${BASE_TASKS_URL}.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const existingTasks = await response.json();
-    if (existingTasks === null) {
-      // Initialize the 'tasks' node if it doesn't exist
-      await fetch(BASE_TASKS_URL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-      });
-    }
-  } catch (error) {
-    console.error('Error initializing tasks node:', error);
-  }
-}
-
-// Send task data to Firebase
 async function sendTaskDataToFirebase() {
   try {
     await initializeTasksNode(); // Ensure the 'tasks' node exists

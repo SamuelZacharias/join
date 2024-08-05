@@ -320,7 +320,7 @@ function deleteSubtask(index) {
 
 
 
-function collectData(taskId) {
+function collectDataEdit(taskId) {
   const task = getTaskById(taskId);
   if (!task) {
       console.error('Task not found.');

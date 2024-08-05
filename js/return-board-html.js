@@ -110,7 +110,7 @@ function returnOpenEditHTML(task, today) {
               <ul id="newSubtasks"></ul>
           </div>
       </div>
-      <div class="editOkay" id="editOkay" ><span onclick="collectData('${task.id}')">Ok<img src="assets/img/png/check.png" alt=""></span></div>
+      <div class="editOkay" id="editOkay" ><span onclick="collectDataEdit('${task.id}')">Ok<img src="assets/img/png/check.png" alt=""></span></div>
     `;
   }
 
