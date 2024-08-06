@@ -190,15 +190,25 @@ function addContact() {
     document.getElementById('email').value = '';
     document.getElementById('phone').value = '';
     renderContacts(); // Kontaktliste neu rendern
+    loadData();
   } else {
     alert('Bitte füllen Sie alle Felder aus.');
   }
 }
 
 function getNextColor() {
-  const color = colors[colorIndex];
-  colorIndex = (colorIndex + 1) % colors.length; // Index erhöhen und zurücksetzen, wenn das Ende erreicht ist
-  return color;
+  const usedColors = contacts.map(contact => contact.color);
+  let availableColors = colors.filter(color => !usedColors.includes(color));
+
+  if (availableColors.length === 0) {
+    // Alle Farben wurden mindestens einmal verwendet, jetzt doppelte Verwendung zulassen
+    colorIndex = (colorIndex + 1) % colors.length;
+    return colors[colorIndex];
+  }
+
+  // Nächste nicht verwendete Farbe auswählen
+  const nextColor = availableColors[0];
+  return nextColor;
 }
 
 function displayContactInfo(index) {
