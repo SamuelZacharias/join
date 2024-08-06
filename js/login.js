@@ -142,7 +142,10 @@ function clearInvalidMessages() {
 document.addEventListener("DOMContentLoaded", function () {
     // Add the 'visible' class to the overlay after the page has loaded
     setTimeout(function () {
-        document.querySelector('.overlay').classList.add('visible');
+        const overlay = document.querySelector('.overlay');
+        if (overlay) {
+            overlay.classList.add('visible');
+        }
     }, 400); // Adjust the delay as needed (500 milliseconds in this example)
 });
 
@@ -150,20 +153,32 @@ window.onload = function () {
     animationCheck();
     // Setze den Wert nicht hier auf 'false', da dies die Information überschreiben würde.
     setTimeout(function () {
-        document.querySelector('.animated-icon').classList.add('move');
+        const animatedIcon = document.querySelector('.animated-icon');
+        if (animatedIcon) {
+            animatedIcon.classList.add('move');
+        }
     }, 400);
 };
 
 function animationCheck() {
     // Überprüfen, ob die Animation bereits durchgeführt wurde
+    const animatedIcon = document.querySelector('.animated-icon');
+    const body = document.querySelector('body');
+    
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
         // Entfernen der Klasse 'move', wenn die Animation bereits durchgeführt wurde
-        document.querySelector('.animated-icon').classList.remove('animated-icon');
-        document.querySelector('body').classList.remove('overlay');
+        if (animatedIcon) {
+            animatedIcon.classList.remove('animated-icon');
+        }
+        if (body) {
+            body.classList.remove('overlay');
+        }
     } else {
         // Setze den Wert in sessionStorage, um anzuzeigen, dass die Animation durchgeführt wurde
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         // Fügen Sie die Klasse 'move' hinzu, um die Animation auszulösen
-        document.querySelector('.animated-icon').classList.add('move');
+        if (animatedIcon) {
+            animatedIcon.classList.add('move');
+        }
     }
 }
