@@ -27,3 +27,8 @@ body{
     url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
 }
 
+input:focus,
+textarea:focus {
+  outline: none;
+}
+

@@ -57,11 +57,11 @@ function showSubtasksAddTask() {
 
 function editSubtaskAddTask(index) {
   let newSubtask = document.getElementById('newSubtasksAddTask');
-  for (let s = 0; s < addTaskBoardInfos.length; s++) {
-    if (s === index) {
-      newSubtask.innerHTML = returnIfEditSubtaskAddTaskHTML(s, addTaskBoardInfos)
+  
+    if (index >= 0) {
+      newSubtask.innerHTML = returnIfEditSubtaskAddTaskHTML(index, addTaskBoardInfos)
     } else {
-      newSubtask.innerHTML = returnElseEditSubtaskAddTaskHtml(s, addTaskBoardInfos)
+      newSubtask.innerHTML = returnElseEditSubtaskAddTaskHtml(index, addTaskBoardInfos)
     }
   }
   let inputField = document.getElementById('editSubtaskInputAddTask');
@@ -74,7 +74,7 @@ function editSubtaskAddTask(index) {
         });
         inputField.focus(); 
 };
-}
+
 
 function saveSubtaskAddTask(index) {
   let editInput = document.getElementById('editSubtaskInputAddTask');

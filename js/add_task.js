@@ -225,26 +225,26 @@ function hideActions(element) {
 function editSubtask(index) {
   let newSubtask = document.getElementById('newSubtasks');
   
-  for (let s = 0; s < subtaskInfos.length; s++) {
-    if (s === index) {
+  
+    if (index >= 0) {
       newSubtask.innerHTML = `
-        <div class="addSubtask"  style="margin-left:-40px" >
-          <input type="text" id="editSubtaskInput" value="${subtaskInfos[s]}" minlength="3" required />
+        <div class="addSubtask"   >
+          <input type="text" id="editSubtaskInput" value="${subtaskInfos[index]}" minlength="3" required />
           <div class="d-flex">
-            <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${s})" alt="" />
-            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
+            <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
+            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
           </div>
         </div>
       `;
     } else {
       newSubtask.innerHTML = `
-        <div class="addSubtask" style="margin-left:-40px";>
+        <div class="addSubtask" ;>
           <div style="width:100%" onclick="editSubtask(${s})"  >
-            ${subtaskInfos[s]}
+            ${subtaskInfos[index]}
           </div>
           <div class="d-flex">
             <img src="assets/img/png/subtaskDone.png" onclick="showSubtasks()" alt="" />
-            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${s})" alt="" />
+            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
           </div>
         </div>
       `;
@@ -260,7 +260,7 @@ function editSubtask(index) {
         });
         inputField.focus(); 
 };
-}
+
 
 function saveSubtask(index) {
   let editInput = document.getElementById('editSubtaskInput');

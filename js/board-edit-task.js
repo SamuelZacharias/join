@@ -250,8 +250,8 @@ function hideActions(element) {
   }
 }
 
-function editSubtask(index) {
-  let subtaskContainers = document.querySelectorAll('#newSubtasks .addSubtask');
+function editSubtaskBoard(index) {
+  let subtaskContainers = document.querySelectorAll('#newSubtasks .subtask-content');
   let subtaskContainer = subtaskContainers[index];
   let subtaskTitle = subtaskInfos[index].title;
   subtaskContainer.innerHTML = returnEditSubtaskHTML(index, subtaskTitle);

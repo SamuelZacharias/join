@@ -258,11 +258,16 @@ textarea {
     background-color: white;
     border-radius: 10px;
     align-items: center;
+    padding: 4px;
+    border-bottom: 1px solid var(--blue);
 }
+
+
 
 .addSubtask input {
     border: none;
     font-size: 20px;
+    box-sizing: border-box;
 }
 
 .addSubtask img {
@@ -287,10 +292,24 @@ textarea {
 
 .editSubtask {
     box-sizing: border-box;
-    background-color: var(--background);
+    background-color: white;
     border: 1px solid var(--border);
     padding: 4px;
+    display: flex;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 99;
+    width: 100%;
 }
+.addTaskBoardEdit{
+    width: 100%;
+}
+.editSubtaskInput{
+    display: flex;
+    width: 100%;
+}
+
+
 
 .editSubtask input {
     background-color: var(--background);

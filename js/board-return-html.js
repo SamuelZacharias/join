@@ -133,7 +133,7 @@ function returnEditSubtasksHTML() {
 
 function returnWriteSubtaskHTML() {
     return `
-        <div class="addSubtask" id="editSubtask">
+        <div class="editSubtaskInput" id="editSubtask">
             <input type="text" id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
             <div class="d-flex">
                 <img src="/assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
@@ -145,14 +145,14 @@ function returnWriteSubtaskHTML() {
 
 function returnSubtaskHTML(index, title) {
     return `
-        <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addSubtask ">
+        <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addTaskBoardEdit">
         <div class="subtask-item">
           <div class="subtask-content">
             <span class="custom-bullet">•</span>
-              <div style="width:100%" onclick="editSubtask(${index})"> ${title}</div>
+              <div style="width:100%" onclick="editSubtaskBoard(${index})"> ${title}</div>
           </div>
           <div class="subtaskIconsAddTask d-none">
-            <img src="assets/img/png/editSubtask.png" onclick="editSubtask(${index})" alt="" />
+            <img src="assets/img/png/editSubtask.png" onclick="editSubtaskBoard(${index})" alt="" />
             <div class="vertical-line"></div>
             <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
           </div>
@@ -163,7 +163,7 @@ function returnSubtaskHTML(index, title) {
 
 function returnEditSubtaskHTML(index, title) {
     return `
-        <div class="addSubtask editSubtask">
+        <div class=" addSubtask">
             <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
             <div class="d-flex">
                 <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />

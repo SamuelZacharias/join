@@ -113,27 +113,27 @@ function returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos) {
   `;
 }
 
-function returnIfEditSubtaskAddTaskHTML(s, addTaskBoardInfos) {
+function returnIfEditSubtaskAddTaskHTML(index, addTaskBoardInfos) {
   return `
       <div class="addSubtask">
-        <input type="text" id="editSubtaskInputAddTask" value="${addTaskBoardInfos[s]}" minlength="3" required />
+        <input type="text" id="editSubtaskInputAddTask" value="${addTaskBoardInfos[index]}" minlength="3" required />
         <div class="d-flex">
-          <img src="assets/img/png/subtaskDone.png" onclick="saveSubtaskAddTask(${s})" alt="" />
-          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
+          <img src="assets/img/png/subtaskDone.png" onclick="saveSubtaskAddTask(${index})" alt="" />
+          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${index})" alt="" />
         </div>
       </div>
     `;
 }
 
-function returnElseEditSubtaskAddTaskHtml(s, addTaskBoardInfos) {
+function returnElseEditSubtaskAddTaskHtml(index, addTaskBoardInfos) {
   return `
       <div class="addSubtask">
-        <div style="width:100%" onclick="editSubtaskAddTask(${s})">
-          ${addTaskBoardInfos[s]}
+        <div style="width:100%" onclick="editSubtaskAddTask(${index})">
+          ${addTaskBoardInfos[index]}
         </div>
         <div class="d-flex">
           <img src="assets/img/png/subtaskDone.png" onclick="showSubtasksAddTask()" alt="" />
-          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
+          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${index})" alt="" />
         </div>
       </div>
     `;

@@ -40,11 +40,6 @@ input {
   border: none;
 }
 
-input:focus,
-textarea:focus {
-  outline: none;
-}
-
 select {
   padding: 12px 16px;
   border-radius: 10px;
@@ -394,7 +389,6 @@ li:hover .d-none {
   from {
     transform: translateY(100vh);
   }
-
   to {
     transform: translateY(0);
   }
