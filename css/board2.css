@@ -109,20 +109,7 @@ textarea {
     gap: 16px
 }
 
-.prioButton {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    padding: 10px 16px;
-    gap: 8px;
-    align-items: center;
-    cursor: pointer;
-}
+
 
 .urgent {
     background-color: var(--high);

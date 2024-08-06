@@ -76,6 +76,7 @@ function saveTask(updatedTask, taskId) {
   } else {
       console.warn('Task not found in localStorage.');
   }
+  
 }
 
 function closeEdit(){

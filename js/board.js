@@ -8,6 +8,7 @@ let choosenCategory = false;
 let category = ["User Task", "Technical task"];
 let addTaskColumn = null
 
+
 function loadTasksFromLocalStorage() {
   const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
   const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -60,9 +61,10 @@ function openBoardAddTask(columnType) {
   addTaskContainer.classList.remove('d-none');
   renderAddTaskBoardHtml(addTaskContainer);
   document.getElementById('boardAddTask').classList.add('slide-in');
-  handleClick(2);
+  clearForm()
   addTaskColumn = columnType;
   setMinDate();
+  document.getElementById("button2").classList.remove('prioButton')
 }
 
 

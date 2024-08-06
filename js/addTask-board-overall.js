@@ -1,29 +1,25 @@
 function showCategory() {
   let categories = document.getElementById('categories');
-  categories.innerHTML = `
-      <div class="openedDropDown">
-        <span class="spanHover" onclick="chooseCategory(0)">${category[0]}</span>
-        <span class="spanHover" onclick="chooseCategory(1)"> ${category[1]}</span>
-      </div>
-    `; 
+  categories.innerHTML =  returnShowCategoryOverallHtml()
   document.getElementById('categories').classList.remove('d-none');
   document.getElementById('dropDownImg').classList.remove('dropDownImg');
   document.getElementById('dropDownImg').classList.add('dropUpImg');
   choosenCategory = false;
 }
 
+
+
 function chooseCategory(index) {
   let chooseCategory = document.getElementById('dropdownCategory');
-  chooseCategory.innerHTML = `
-    <span onclick="showCategory()" class="spanCategory">${category[index]}</span>
-    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-  `;
+  chooseCategory.innerHTML = returnChooseCategoryOverallHTML(index)
   document.getElementById('categories').classList.add('d-none');
   choosenCategory = true;
   clickCount = 0;
   document.getElementById('dropDownImg').classList.add('dropDownImg');
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
+
+
 
 function hideCategory() {
   document.getElementById('dropDownImg').classList.add('dropDownImg');
@@ -33,92 +29,58 @@ function hideCategory() {
 }
 
 function showContacts() {
-  let contactsContainer = document.getElementById('contacts');
-  contactsContainer.innerHTML = '';
-
-  for (let x = 0; x < contacts.length; x++) {
-    let contact = contacts[x];
-    let fullName = contact.name;
-    let color = contact.color;
-
-    let isSelected = selectedContacts.some(c => c.name === contact.name);
-    let selectedClass = isSelected ? 'selected' : '';
-
-    contactsContainer.innerHTML += `
-      <div class="contactsOpen ${selectedClass}" data-index="${x}">
-        <div class="contactInitials" style="background-color: ${color}; ">
-          ${contact.initials}
-        </div>
-        <div class="contactName">
-          <span style="width:100%;">${fullName}</span>
-          <img src="assets/img/png/Rectangle 5.png" alt="">
-        </div>
-      </div>
-    `;
-  }
-
-  let contactElements = contactsContainer.getElementsByClassName('contactsOpen');
-  for (let contactElement of contactElements) {
-    contactElement.addEventListener('click', function() {
-      let index = this.getAttribute('data-index');
-      let contact = contacts[index];
-
+  let container = document.getElementById('contacts');
+  container.innerHTML = contacts.map((c, i) => returnShowContactsOverallHTML(c, i)).join('');
+  Array.from(container.getElementsByClassName('contactsOpen')).forEach(el => {
+    el.addEventListener('click', function() {
+      let contact = contacts[this.getAttribute('data-index')];
       let selectedIndex = selectedContacts.findIndex(c => c.name === contact.name);
-      if (selectedIndex === -1) {
-        selectedContacts.push(contact);
-      } else {
-        selectedContacts.splice(selectedIndex, 1);
-      }
-
+      selectedIndex === -1 ? selectedContacts.push(contact) : selectedContacts.splice(selectedIndex, 1);
       this.classList.toggle('selected');
       showAssignedContacts();
     });
-  }
+  });
 }
 
 function toggleContacts() {
-  document.getElementById('dropDownContactsImg').classList = ('dropUpImg')
-  let contactsContainer = document.getElementById('contacts');
-  if (contactsContainer.classList.contains('d-none')) {
-    contactsContainer.classList.remove('d-none');
-
-    showContacts();
+  let container = document.getElementById('contacts');
+  let img = document.getElementById('dropDownContactsImg');
+  if (container.classList.toggle('d-none')) {
+    img.classList = 'dropDownImg';
   } else {
-    contactsContainer.classList.add('d-none');
-    document.getElementById('dropDownContactsImg').classList = ('dropDownImg')
+    img.classList = 'dropUpImg';
+    showContacts();
   }
 }
 
+function renderAssignedContactsHTML(contact) {
+  return `
+    <div class="contactInitials" style="background-color: ${contact.color}; color:white;">
+      ${contact.initials}
+    </div>
+  `;
+}
 
 function showAssignedContacts() {
-  let assignedContactsContainer = document.getElementById('assignedContacts');
-  assignedContactsContainer.innerHTML = '';
-  let maxContactsToShow = 5;
-
-  for (let a = 0; a < Math.min(selectedContacts.length, maxContactsToShow); a++) {
-    let contact = selectedContacts[a];
-    let fullName = contact.name;  // Assuming `name` field is a single string.
-    let color = contact.color;    // Use the color from the contact object.
-
-    assignedContactsContainer.innerHTML += `
-      <div class="contactInitials" style="background-color: ${color}; color:white;">
-        ${contact.initials}
-      </div>
-    `;
+  let container = document.getElementById('assignedContacts');
+  container.innerHTML = '';
+  let maxToShow = 5;
+  let totalContacts = selectedContacts.length;
+  for (let i = 0; i < Math.min(totalContacts, maxToShow); i++) {
+    container.innerHTML += renderAssignedContactsHTML(selectedContacts[i]);
   }
+  if (totalContacts > maxToShow) {
+    let moreCount = totalContacts - maxToShow;
+    console.log(`More contacts count: ${moreCount}`); 
+    let moreContactsColor = "#e3e3e3"; 
 
-  if (selectedContacts.length > maxContactsToShow) {
-    let moreCount = selectedContacts.length - maxContactsToShow;
-    let moreContactsColor = "#999999"; 
-
-    assignedContactsContainer.innerHTML += `
+    container.innerHTML += `
       <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
-        +${moreCount} 
+        +${moreCount}
       </div>
     `;
   }
 }
-
 
 function setMinDate() {
   const dateInputs = ['dateInputAddTask', 'dateInput']; // Array of IDs
@@ -127,7 +89,6 @@ function setMinDate() {
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
   const todayDate = `${yyyy}-${mm}-${dd}`;
-
   dateInputs.forEach(id => {
     const dateInput = document.getElementById(id);
     if (dateInput) { // Check if the element exists
@@ -241,7 +202,6 @@ async function initializeTasksNode() {
     if (!response.ok) {
       throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
     }
-
     const existingTasks = await response.json();
     if (existingTasks === null) {
       // Initialize the 'tasks' node if it doesn't exist
