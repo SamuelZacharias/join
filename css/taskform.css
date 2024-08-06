@@ -206,7 +206,6 @@ select:hover{
   border-radius: 10px; 
 }
 
-
 .spanHover{
   background-color: white;
   padding: 10px;
@@ -226,9 +225,6 @@ select:hover{
   font-size: 20px;
   background-color: white;
   margin-top: -20px;
- 
-  
- 
 }
 #categories{
   position: absolute;
@@ -236,9 +232,7 @@ select:hover{
   top: 620px;
   width: 440px;
   background-color: white;
-  
 }
-
 
 #contacts{
   background-color: white;
@@ -249,7 +243,6 @@ select:hover{
   margin-top: 80px;
   z-index: 44;
 }
-
 
 .contactsOpen{
   display: flex;
@@ -266,13 +259,11 @@ select:hover{
   border: 1px solid var(--border);
 }
 
-
 .contactName{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  
 }
 .contactName input{
   width: 30px;
@@ -288,11 +279,8 @@ select:hover{
     align-items: center;
     justify-content: center;
     border: 1px white solid;
-   
     font-size: 16px;
 }
-
-
 
 .selected {
   border: 0.5px solid white; 
@@ -301,10 +289,7 @@ select:hover{
 }
 .selected:hover{
   background-color: #091931;
-  
 }
-
-
 
 .selected img{
   content: url('/assets/img/png/whiteBox.png');
@@ -317,7 +302,6 @@ select:hover{
 }
 
 .addSubtask{
-  
   display: flex;
   background-color: white;
   padding: 10px;
@@ -330,7 +314,6 @@ select:hover{
 .error-placeholder::placeholder {
   color: red;
 }
-
 
 #newSubtasks{
   width: 400px;
@@ -355,10 +338,6 @@ select:hover{
   overflow: hidden;
 }
 
-.d-none{
-  display: none;
-}
-
 li:hover .d-none {
   display: block;
 }
@@ -369,14 +348,12 @@ li:hover .d-none {
 
 @keyframes slideUp{
   from {
-    transform: translateY(100vh); /* Start from below the viewport */
-    
+    transform: translateY(100vh);
   }
   to {
-    transform: translateY(0); /* End at the normal position */
+    transform: translateY(0);
   }
 }
-
 
 #signedUp{
   background-color: var(--gray);
@@ -400,15 +377,10 @@ li:hover .d-none {
   background-color: var(--gray);
 }
 
-
 #logOut a{
   text-decoration: none;
   padding: 8px 16px;
   color: #cdcdcd
-}
-
-.d-none{
-  display: none;
 }
 
 .addTaskLink{

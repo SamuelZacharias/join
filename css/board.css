@@ -155,7 +155,7 @@ input:focus{
   background-color: #e0e0e0;
   border-radius: 5px;
   overflow: hidden;
-  display: none; /* Initially hide the progress bar */
+  display: none;
 }
 
 .progress-bar-fill {
@@ -713,9 +713,3 @@ ul{
   padding:0px;
   gap: 2px;
 }
-
-.d-none{
-  display: none;
-}
-
-

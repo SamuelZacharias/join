@@ -1,20 +1,3 @@
-
-
-:root {
-    --blue: #29ABE2;
-    --gray: #2A3647;
-    --high: #FF3D00;
-    --medium: #FFA800;
-    --low: #7AE229;
-    --technical: #1FD7C1;
-    --story: #0038FF;
-    --noTask: #A8A8A8;
-    --policy: #A8A8A8;
-    --background: #F6F7F8;
-    --highlight: #091931;
-    --border: #D1D1D1;
-}
-
 body {
     font-family: 'inter', Arial, sans-serif;
     margin: 0;
@@ -32,11 +15,6 @@ header {
     background-color: #091931;
     color: white !important;
   }
-
-/* .senterSide {
-    display: flex;
-    justify-content: center;
-} */
 
 #content {
     text-align: center;
@@ -76,14 +54,12 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centers the content horizontally */
     font-weight: 400;
     width: 301px;
     height: 32px;
     font-size: 27px;
     color: var(--gray);
     text-align: center;
-    /* Centers the text inside the div */
 }
 
 .overGreetBox {
@@ -148,7 +124,6 @@ header {
     width: 264px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     justify-content: space-evenly;
@@ -168,7 +143,6 @@ header {
     width: 69px;
     height: 69px;
     border-radius: 50%;
-    /* Corrected the property to create a circular shape */
     background-color: #2A3647;
     display: flex;
     justify-content: center;
@@ -225,7 +199,6 @@ header {
     width: 264px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     justify-content: space-evenly;
@@ -239,7 +212,6 @@ header {
     width: 560px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     justify-content: space-evenly;
@@ -268,7 +240,6 @@ header {
     width: 158px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     flex-direction: column;
@@ -290,7 +261,6 @@ header {
     width: 158px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     flex-direction: column;
@@ -312,7 +282,6 @@ header {
     width: 158px;
     height: 168px;
     border-radius: 12px;
-    /* Corrected the property name */
     box-shadow: 0px 0px 4px 0px #0000001A;
     display: flex;
     flex-direction: column;
@@ -370,7 +339,6 @@ header {
     width: 69px;
     height: 69px;
     border-radius: 50%;
-    /* Corrected the property to create a circular shape */
     background-color: #FF3D00;
     display: flex;
     justify-content: center;
