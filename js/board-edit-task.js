@@ -238,8 +238,10 @@ function showSubtasks() {
 
 function showActions(element) {
   let actions = element.querySelector('.d-none');
-  if (actions) {
-      actions.classList.remove('d-none');
+  if (actions && editSubtaskBoard(index)) {
+      return;
+  }else{
+    actions.classList.remove('d-none');
   }
 }
 

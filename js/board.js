@@ -97,6 +97,7 @@ function closeAddTaskBoard() {
 function closeAddTaskBoardOnX(){
   const taskContainer = document.getElementById('addTaskContainer');
   taskContainer.classList.add('d-none');
+  clearForm()
 }
 
 

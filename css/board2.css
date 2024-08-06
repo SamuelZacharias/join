@@ -299,7 +299,6 @@ textarea {
     border-radius: 10px;
     cursor: pointer;
     z-index: 99;
-    width: 100%;
 }
 .addTaskBoardEdit{
     width: 100%;

@@ -163,11 +163,11 @@ function returnSubtaskHTML(index, title) {
 
 function returnEditSubtaskHTML(index, title) {
     return `
-        <div class=" addSubtask">
+        <div class="editSubtask addSubtask">
             <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
             <div class="d-flex">
                 <img src="assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
-                <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+            
             </div>
         </div>
     `;
