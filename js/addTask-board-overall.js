@@ -191,7 +191,7 @@ function collectData() {
   // Determine which form to use
   const form = document.getElementById('taskForm') || document.getElementById('taskFormAddTask');
   if (!form) {
-    console.error('No form found');
+    console.info('No form found');
     return;
   }
 
@@ -262,6 +262,6 @@ async function initializeTasksNode() {
       console.log('Tasks node initialized if not existing');
     }
   } catch (error) {
-    console.error('Error initializing tasks node:', error);
+    console.info('Error initializing tasks node:', error);
   }
 }

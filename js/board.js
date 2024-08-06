@@ -39,7 +39,6 @@ function closeOpenedTask(){
     
     document.getElementById(`openedTaskContainer`).classList.add(`d-none`)
     document.getElementById('openedTaskContainer').classList.remove('openedTaskContainer')
-    
     document.getElementById(`editTaskContainer`).classList.add(`d-none`)
     document.getElementById('editTaskContainer').classList.remove('openedTaskContainer')
 }
@@ -101,27 +100,7 @@ function closeAddTaskBoard() {
   }, 1000); // Adjust timeout if necessary
 }
 
-function showSuccessMessageAddTask() {
-  const successContainer = document.getElementById('successContainer');
-  const successMessageAddTask = document.getElementById('sucessMessageAddTask');
 
-  if (!successContainer) {
-      console.error("Element with id 'successContainer' not found");
-      return;
-  }
-  
-  if (!successMessageAddTask) {
-      console.error("Element with id 'sucessMessageAddTask' not found");
-      return;
-  }
-
-  successContainer.classList.remove('d-none');
-  successMessageAddTask.innerHTML = `Your task was added to ${addTaskColumn}`;
-  console.log('Success message shown');
-  setTimeout(() => {
-    successContainer.classList.add('d-none');
-  }, 1000);
-}
 
 
 function closeAddTaskBoardOnX(){
@@ -182,178 +161,6 @@ document.addEventListener('click', function(event) {
 });
 
 
-
-function writeSubtaskAddTask() {
-  let subtaskArea = document.getElementById('subtaskContainerAddTask');
-  subtaskArea.innerHTML = returnWriteSubtaskAddTaskBoardHTML()
-  let inputField = document.getElementById('subtaskInput');
-  inputField.addEventListener('focusout', function() {
-      if (!this.value.trim()) {
-          resetSubtask();
-      }
-  });
-  inputField.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-          event.preventDefault();
-          addSubtaaskBoard(); 
-      }
-  });
-  inputField.focus();
-}
-
-function addSubtaaskBoard(){
-  let subtaskInput = document.getElementById('subtaskInput');
-  let subtaskInfo = subtaskInput.value;
-
-  if (subtaskInfo.length < 3) {
-    subtaskInput.value = ''; 
-    subtaskInput.placeholder = 'Min 3 characters needed'; 
-    subtaskInput.style.borderColor = 'red'; 
-    subtaskInput.classList.add('error-placeholder'); 
-    return; 
-  } else {
-    subtaskInput.placeholder = 'Enter subtask'; 
-    subtaskInput.style.borderColor = ''; 
-    subtaskInput.classList.remove('error-placeholder'); 
-  }
-
-  addTaskBoardInfos.push(subtaskInfo);
-  showSubtasksAddTask();
-  resetSubtask();
-}
-
-function resetSubtask() {
-  document.getElementById('subtaskContainerAddTask').innerHTML = `
-    <p>
-      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
-      <img src="assets/img/png/Subtasks icons11.png" alt="" />
-    </p>
-  `;
-}
-
-function showSubtasksAddTask() {
-  let newSubtask = document.getElementById('newSubtasksAddTask');
-  newSubtask.innerHTML = '';
-  for (let s = 0; s < addTaskBoardInfos.length; s++) {
-    newSubtask.innerHTML += returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos)
-  }
-}
-
-
-
-
-function editSubtaskAddTask(index) {
-  let newSubtask = document.getElementById('newSubtasksAddTask');
-  
-  for (let s = 0; s < addTaskBoardInfos.length; s++) {
-    if (s === index) {
-      newSubtask.innerHTML = `
-        <div class="addSubtask" >
-          <input type="text" id="editSubtaskInputAddTask" value="${addTaskBoardInfos[s]}" minlength="3" required />
-          <div class="d-flex">
-            <img src="assets/img/png/subtaskDone.png" onclick="saveSubtaskAddTask(${s})" alt="" />
-            <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
-          </div>
-        </div>
-      `;
-    } else {
-      newSubtask.innerHTML = `
-        <div class="addSubtask">
-          <div style="width:100%" onclick="editSubtaskAddTask(${s})"  >
-            ${addTaskBoardInfos[s]}
-          </div>
-          <div class="d-flex">
-            <img src="assets/img/png/subtaskDone.png" onclick="showSubtasksAddTask()" alt="" />
-            <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
-          </div>
-        </div>
-      `;
-    }
-  }
-  let inputField = document.getElementById('editSubtaskInputAddTask');
-    if (inputField) {
-        inputField.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent the default action if necessary
-                saveSubtaskAddTask(index); // Call the saveSubtask function
-            }
-        });
-        inputField.focus(); 
-};
-}
-
-function saveSubtaskAddTask(index) {
-  let editInput = document.getElementById('editSubtaskInputAddTask');
-  let editedSubtask = editInput.value;
-
-  if (editedSubtask.length < 3) {
-    editInput.value = ''; 
-    editInput.placeholder = 'Min 3 characters needed'; 
-    editInput.style.borderColor = 'red'; 
-    editInput.classList.add('error-placeholder'); 
-    return; 
-  } else {
-    editInput.placeholder = ''; 
-    editInput.style.borderColor = ''; 
-    editInput.classList.remove('error-placeholder'); 
-  }
-
-  addTaskBoardInfos[index] = editedSubtask;
-  showSubtasksAddTask()
-}
-
-function deleteSubtaskAddTask(index) {
-  addTaskBoardInfos.splice(index, 1);
-  showSubtasksAddTask()
-}
-
-function showActions(element) {
-  let actions = element.querySelector('.subtaskIconsAddTask');
-  if (actions) {
-    actions.classList.remove('d-none');
-  }
-}
-
-function hideActionsAddTask(element) {
-  let actions = element.querySelector('.subtaskIconsAddTask');
-  if (actions) {
-    actions.classList.add('d-none');
-  }
-}
-
-
-
-
-
-function clearForm() {
-  const form = document.getElementById('taskFormAddTask');
-  form.reset();
-  document.getElementById('dropdownCategory').innerHTML = `
-    <span class="spanCategory">Select task category</span>
-    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-  `;
-  document.getElementById('assignedContacts').innerHTML = ``;
-  document.getElementById('newSubtasksAddTask').innerHTML = ``;
-  choosenCategory = false;
-  clickCount = 0;
-  selectedContacts = [];
-  addTaskBoardInfos = [];
-  handleClick(2); 
-  document.querySelectorAll('.inputContainerAddTask').forEach(p => {
-    p.classList.remove('invalid');
-  });
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-  
-}
-
-function submitForm(event) {
-  if (!validateFormAddTaskBoard()) {
-    event.preventDefault();
-  } else {
-    document.getElementById('taskFormAddTask').submit();
-  }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   const dropdownCategory = document.getElementById('dropdownCategory');
   if (dropdownCategory) {
@@ -367,77 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-  function validateFormAddTaskBoard() {
-    const form = document.getElementById('taskFormAddTask');
-    const inputs = form.querySelectorAll('input, textarea, select');
-    let valid = true;
   
-    // First, remove invalid classes immediately
-    document.querySelectorAll('.inputContainerAddTask').forEach(p => {
-      p.classList.remove('invalid');
-    });
-    document.getElementById('dropdownCategory').classList.remove('invalid');
   
-    // Validate inputs and add invalid class if necessary
-    inputs.forEach(input => {
-      const parentP = input.closest('.inputContainerAddTask');
-      if (input.required && !input.value.trim()) {
-        valid = false;
-        if (parentP) {
-          parentP.classList.add('invalid');
-        }
-      }
-  
-      if (input.type === 'date') {
-        const selectedDate = new Date(input.value);
-        const today = new Date();
-  
-        today.setHours(0, 0, 0, 0);
-        if (selectedDate < today) {
-          valid = false;
-          if (parentP) {
-            parentP.classList.add('invalid');
-          }
-        }
-      }
-    });
-  
-    if (!choosenCategory) {
-      valid = false;
-      document.getElementById('dropdownCategory').classList.add('invalid');
-    }
-  
-    // Add timeout to remove 'invalid' class after 0.5 seconds
-    setTimeout(() => {
-      document.querySelectorAll('.invalid').forEach(element => {
-        element.classList.remove('invalid');
-      });
-    }, 800); // 500 milliseconds = 0.5 seconds
-  
-    return valid;
-  }
-  
-  async function handleCreateButtonClick() {
-    console.log('createwasclicked');
-  
-    if (validateFormAddTaskBoard()) {
-      const taskData = collectData();
-      if (taskData) {
-        console.log('Task data collected:', taskData);
-        try {
-          await sendTaskDataToFirebaseAddTask(taskData); 
-          console.log('Task data sent to Firebase successfully');
-          clearForm()
-          closeAddTaskBoard()
-        } catch (error) {
-          console.error('Failed to send task data to Firebase:', error); 
-        }
-      } else {
-        console.error('Task data collection failed');
-      }
-    } else {
-      console.error('Form validation failed');
-    }
-  }
-
+ 
 

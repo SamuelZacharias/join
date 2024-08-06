@@ -112,3 +112,29 @@ function returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos) {
     </li>
   `;
 }
+
+function returnIfEditSubtaskAddTaskHTML(s, addTaskBoardInfos) {
+  return `
+      <div class="addSubtask">
+        <input type="text" id="editSubtaskInputAddTask" value="${addTaskBoardInfos[s]}" minlength="3" required />
+        <div class="d-flex">
+          <img src="assets/img/png/subtaskDone.png" onclick="saveSubtaskAddTask(${s})" alt="" />
+          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
+        </div>
+      </div>
+    `;
+}
+
+function returnElseEditSubtaskAddTaskHtml(s, addTaskBoardInfos) {
+  return `
+      <div class="addSubtask">
+        <div style="width:100%" onclick="editSubtaskAddTask(${s})">
+          ${addTaskBoardInfos[s]}
+        </div>
+        <div class="d-flex">
+          <img src="assets/img/png/subtaskDone.png" onclick="showSubtasksAddTask()" alt="" />
+          <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
+        </div>
+      </div>
+    `;
+}

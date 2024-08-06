@@ -66,7 +66,7 @@ function validateForm() {
     document.querySelectorAll('.invalid').forEach(element => {
       element.classList.remove('invalid');
     });
-  }, 800); // 500 milliseconds = 0.5 seconds
+  }, 1000); // 500 milliseconds = 0.5 seconds
 
   return valid;
   

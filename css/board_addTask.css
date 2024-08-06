@@ -66,16 +66,7 @@
   animation: slideOut 1s ease-out forwards;
 }
 
-.categoryDropDown {
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 12px;
-  font-size: 20px;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
+
 
 #categories {
   top: 440px;
@@ -151,11 +142,7 @@
   margin-right: 12px;
 }
 
-.invalid {
-  border: 1px solid red;
-  padding: 12px 21px;
-  border-radius: 10px;
-}
+
 
 .sucessMessageAddTask {
   background-color: var(--gray);

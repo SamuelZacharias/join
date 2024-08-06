@@ -17,7 +17,10 @@ body{
   margin: 0px;
   font-family: "inter", Arial, sans-serif;
 }
-
+.invalid {
+  border: 1px solid red;
+  border-radius: 10px;
+}
 @font-face {
   font-family: "inter";
   src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
