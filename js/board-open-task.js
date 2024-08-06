@@ -44,20 +44,36 @@ function checkforOpenedTitle(task) {
 
 function renderOpenTaskAssignedContacts(task) {
   let openedAssignedContacts = document.getElementById('openedAssignedContacts');
+  console.log('Rendering open task assigned contacts');
+  
   openedAssignedContacts.innerHTML = '';
+
   if (!task.assignedContacts || task.assignedContacts.length === 0) {
     openedAssignedContacts.innerHTML = 'No contacts assigned';
-  } else {
     
-    let contactsHTML = '';
-    for (let x = 0; x < task.assignedContacts.length; x++) {
-      let contactName = task.assignedContacts[x].name;
-      const initials = task.assignedContacts[x].initials
-      const color = task.assignedContacts[x].color
-      contactsHTML += returnOpenTaskAssignedContactsHTML(contactName, color, initials);
-    }
-    openedAssignedContacts.innerHTML = contactsHTML;
+    return;
   }
+  let contactsHTML = '';
+  const validContacts = task.assignedContacts
+    .filter(assignedContact => 
+      contacts.some(contact => contact.name === assignedContact.name)
+    );
+
+  console.log('Valid contacts:', validContacts);
+
+  if (validContacts.length === 0) {
+    openedAssignedContacts.innerHTML = 'No valid contacts assigned';
+    return;
+  }
+
+  for (let x = 0; x < validContacts.length; x++) {
+    let contactName = validContacts[x].name;
+    const initials = validContacts[x].initials;
+    const color = validContacts[x].color;
+    contactsHTML += returnOpenTaskAssignedContactsHTML(contactName, color, initials);
+  }
+
+  openedAssignedContacts.innerHTML = contactsHTML;
 }
 
 function renderOpenTaskSubtasks(task) {

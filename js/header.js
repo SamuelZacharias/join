@@ -13,12 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleUserProfile() {
     let loggedInUserName = localStorage.getItem('loggedInUserName');
     if (loggedInUserName) {
-      console.log('Logged-in user name:', loggedInUserName);
       let initials = getInitials(loggedInUserName);
       updateInitialsElement(initials);
-    } else {
-      console.log('No logged-in user name found');
-    }
+    } 
   }
 
   function getInitials(userName) {
@@ -32,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       initialsElement.innerHTML = `${initials}`;
       initialsElement.addEventListener('click', toggleLogOutVisibility);
     }
-    console.log(initials);
   }
 
   function toggleLogOutVisibility() {

@@ -72,29 +72,40 @@ function renderPriority(i) {
 
 
 function renderContacts(i) {
-  let renderedContacts = document.getElementById(`contacts${i}`);
-  if (renderedContacts) {
-      renderedContacts.innerHTML = ''; 
-      const contactes = tasks[i].assignedContacts;
+    let renderedContacts = document.getElementById(`contacts${i}`);
+    if (renderedContacts) {
+        renderedContacts.innerHTML = ''; 
+        const assignedContacts = tasks[i].assignedContacts;
+  
+        if (assignedContacts && assignedContacts.length > 0) {
+            const maxContactsToShow = 5;
+            
+            const validContacts = assignedContacts
+                .map(contact => contact.name)  
+                .filter(contactName => {
+                    const isValid = contacts.some(contact => contact.name === contactName);
+                    return isValid;
+                });
 
-      if (contactes && contactes.length > 0) {
-          const maxContactsToShow = 5;
-          for (let c = 0; c < Math.min(contactes.length, maxContactsToShow); c++) {
-              const initials = contacts[c].initials
-              const color = contacts[c].color|| '#000'; 
-              renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: ${color};">${initials}</div>`;
-          }
-          if (contactes.length > maxContactsToShow) {
-              const additionalContacts = contacts.length - maxContactsToShow;
-              renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: gray;">+${additionalContacts}</div>`;
-          }
-      } else {
-          renderedContacts.innerHTML = '';
-      }
-  }
+            for (let c = 0; c < Math.min(validContacts.length, maxContactsToShow); c++) {
+                const contactName = validContacts[c];
+                const contact = contacts.find(contact => contact.name === contactName);
+
+                if (contact) {
+                    const initials = contact.initials;
+                    const color = contact.color || '#000';
+                    renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: ${color};">${initials}</div>`;
+                }
+            }
+
+            if (validContacts.length > maxContactsToShow) {
+                const additionalContacts = validContacts.length - maxContactsToShow;
+                console.log(`Additional contacts to display: ${additionalContacts}`);
+                renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: gray;">+${additionalContacts}</div>`;
+            }
+        } 
+    }
 }
-
-
 
 
 

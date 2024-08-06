@@ -71,15 +71,11 @@ function validateFormAddTaskBoard() {
 }
 
 async function handleCreateButtonClick() {
-  console.log('createwasclicked');
-
   if (validateFormAddTaskBoard()) {
     const taskData = collectData();
     if (taskData) {
-      console.log('Task data collected:', taskData);
       try {
         await sendTaskDataToFirebaseAddTask(taskData); 
-        console.log('Task data sent to Firebase successfully');
         clearForm()
         closeAddTaskBoard()
       } catch (error) {
@@ -89,7 +85,7 @@ async function handleCreateButtonClick() {
       console.error('Task data collection failed');
     }
   } else {
-    console.error('Form validation failed');
+    console.warn('Form validation failed');
   }
 }
 
@@ -107,18 +103,17 @@ function showSuccessMessageAddTask() {
   const successMessageAddTask = document.getElementById('sucessMessageAddTask');
 
   if (!successContainer) {
-      console.error("Element with id 'successContainer' not found");
+      console.warn("Element with id 'successContainer' not found");
       return;
   }
   
   if (!successMessageAddTask) {
-      console.error("Element with id 'sucessMessageAddTask' not found");
+      console.warn("Element with id 'sucessMessageAddTask' not found");
       return;
   }
 
   successContainer.classList.remove('d-none');
   successMessageAddTask.innerHTML = `Your task was added to ${addTaskColumn}`;
-  console.log('Success message shown');
   setTimeout(() => {
     successContainer.classList.add('d-none');
   }, 1000);

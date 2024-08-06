@@ -2,6 +2,11 @@ const tasks = [];
 const contacts = []
 let selectedContacts = [];
 let addTaskBoardInfos = [];
+let activeButton = null
+let clickCount = 0;
+let choosenCategory = false;
+let category = ["User Task", "Technical task"];
+let addTaskColumn = null
 
 function loadTasksFromLocalStorage() {
     const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
@@ -17,10 +22,7 @@ function loadTasksFromLocalStorage() {
     contacts.length = 0;
     contacts.push(...savedContacts);  // Spread savedContacts into the contacts array
 
-    console.log('Loaded tasks:', tasks);
-    console.log('Loaded contacts:', contacts);
 }
-
 
 function filterTasks() {
     const searchInput = document.getElementById('search').value.toLowerCase();
@@ -33,7 +35,6 @@ function filterTasks() {
 function renderFilteredTasks(filteredTasks) {
     renderTasks(filteredTasks);
 }
-
 
 function closeOpenedTask(){
     
@@ -60,7 +61,7 @@ function handleClickOutsideEdit(event) {
 
 }
 
-let addTaskColumn = null
+
 
 function openBoardAddTask(columnType) {
   let addTaskContainer = document.getElementById('addTaskContainer');
@@ -71,7 +72,6 @@ function openBoardAddTask(columnType) {
   
   // Set the addTaskColumn based on the columnType parameter
   addTaskColumn = columnType;
-  console.log(addTaskColumn);
   
   setMinDate();
 }
@@ -81,26 +81,17 @@ function closeAddTaskBoard() {
   const taskContainer = document.getElementById('addTaskContainer');
   
   if (!taskContainer) {
-      console.error("Element with id 'addTaskContainer' not found");
       return;
   }
-
-  // Show success message immediately
   showSuccessMessageAddTask();
   
-  // Add the slideOut class immediately
   taskContainer.classList.add('slideOut');
-  console.log('slideOut class added');
   
-  // Add the d-none class after 0.3 seconds (300 milliseconds)
   setTimeout(() => {
       taskContainer.classList.add('d-none');
-      taskContainer.classList.remove('slideOut'); // Reset the animation class
-      console.log('d-none class added and slideOut class removed');
-  }, 1000); // Adjust timeout if necessary
+      taskContainer.classList.remove('slideOut'); 
+  }, 1000); 
 }
-
-
 
 
 function closeAddTaskBoardOnX(){
@@ -109,10 +100,6 @@ function closeAddTaskBoardOnX(){
 }
 
 
-let activeButton = null
-let clickCount = 0;
-let choosenCategory = false;
-let category = ["User Task", "Technical task"];
 
 
 
@@ -138,19 +125,16 @@ document.addEventListener('click', function(event) {
   }
 });
 
-
 function resetDropDownIconsCategory(){
   document.getElementById('dropDownImg').classList.add('dropDownImg');
   document.getElementById('dropDownImg').classList.remove('dropUpImg');
 }
-
 
 document.addEventListener('click', function(event) {
   let addBoardTask = document.getElementById('boardAddTask');
   if (!addBoardTask) {
     return;
   }
-
   let contactsContainer = document.getElementById('contacts');
   let dropdownContacts = document.getElementById('dropdownContacts');
   if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
@@ -159,7 +143,6 @@ document.addEventListener('click', function(event) {
     document.getElementById('dropDownContactsImg').classList.remove('dropUpImg');
   }
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
   const dropdownCategory = document.getElementById('dropdownCategory');
