@@ -200,28 +200,28 @@ function displayContactInfo(index) {
   highlightContact(index);
 }
 
-// Funktion zum Löschen eines Kontakts
 function deleteContact(index) {
-  let contactToDelete = contacts[index];
-  if (!contactToDelete) return; // Sicherstellen, dass der Kontakt existiert
+  if (index < 0 || index >= contacts.length) return; // Sicherstellen, dass der Index gültig ist
 
-  let contactId = contactToDelete.id; // ID des zu löschenden Kontakts
+  console.log(`Versuche, Kontakt an Index ${index} zu löschen`);
 
-  console.log(`Versuche, Kontakt mit ID ${contactId} zu löschen`);
+  // Kontakt aus dem Array entfernen
+  contacts.splice(index, 1);
 
-  fetch(`${BASE_TASKS_URL}/${contactId}.json`, {
-    method: 'DELETE'
+  // Geändertes Array in Firebase speichern
+  fetch(BASE_TASKS_URL + '.json', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(contacts)
   })
-  .then(response => {
-    if (response.ok) {
-      console.log('Kontakt erfolgreich gelöscht');
-      contacts.splice(index, 1); // Entfernt den Kontakt aus dem Array
-      renderContacts(); // Aktualisiert die Anzeige
-      storeFirstAndLastNames();
-      document.querySelector('.contacts-info-box').innerHTML = '';
-    } else {
-      console.error('Fehler beim Löschen des Kontakts:', response.statusText);
-    }
+  .then(response => response.json())
+  .then(data => {
+    console.log('Kontakt erfolgreich gelöscht', data);
+    renderContacts(); // Aktualisiert die Anzeige
+    storeFirstAndLastNames();
+    document.querySelector('.contacts-info-box').innerHTML = '';
   })
   .catch(error => {
     console.error('Fehler beim Löschen des Kontakts:', error);
