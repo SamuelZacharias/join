@@ -73,8 +73,6 @@ function validateForm() {
 }
 
 
-
-
 document.getElementById("dropdownCategory").addEventListener("click", function() {
   clickCount++;
   if (clickCount % 2 === 1) {
@@ -318,7 +316,7 @@ document.querySelector('.createButton').addEventListener('click', async function
 
 
 document.getElementById('clearButton').addEventListener('click', function(event) {
-  event.preventDefault();
+  
   const form = document.getElementById('taskForm');
   form.reset();
   document.getElementById('dropdownCategory').innerHTML = `

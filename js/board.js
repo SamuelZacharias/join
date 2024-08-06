@@ -1,39 +1,7 @@
 const tasks = [];
 const contacts = []
 let selectedContacts = [];
-const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
-
-
-async function getTasksFromDataBase() {
-    try {
-        const response = await fetch(BASE_URL + '.json');
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-        }
-
-        const responseAsJson = await response.json();
-        console.log('Tasks fetched from database:', responseAsJson);
-
-        const tasksArray = Object.keys(responseAsJson)
-            .filter(key => responseAsJson[key] !== null)
-            .map(key => ({ id: key, ...responseAsJson[key] }));
-
-        // Clear and update the tasks array
-        tasks.length = 0;
-        tasks.push(...tasksArray);
-
-        console.log('Tasks array:', tasks);
-
-        // Update local storage
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-
-        // Load tasks from local storage to ensure consistency
-        renderTasks()
-    } catch (error) {
-        console.warn('There was a problem with the fetch operation:', error);
-    }
-}
-
+let addTaskBoardInfos = [];
 
 function loadTasksFromLocalStorage() {
     const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
@@ -54,7 +22,6 @@ function loadTasksFromLocalStorage() {
 }
 
 
-
 function filterTasks() {
     const searchInput = document.getElementById('search').value.toLowerCase();
     const filteredTasks = tasks.filter(task => {
@@ -66,31 +33,6 @@ function filterTasks() {
 function renderFilteredTasks(filteredTasks) {
     renderTasks(filteredTasks);
 }
-
-
-
-
-async function updateTaskInFirebase(task) {
-    try {
-        const response = await fetch(`${BASE_URL}${task.id}.json`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-        }
-        const updatedTask = await response.json();
-        console.log('Task updated in Firebase:', updatedTask);
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
-
-document.addEventListener('click', handleClickOutsideEdit);
-
 
 
 function closeOpenedTask(){
@@ -119,45 +61,20 @@ function handleClickOutsideEdit(event) {
 
 }
 
-
-
-
-
-
 let addTaskColumn = null
 
-function openBoardAddTask(){
-   let addTaskContainer = document.getElementById('addTaskContainer')
-   addTaskContainer.classList.remove('d-none')
-   renderAddTaskBoardHtml(addTaskContainer)
-   document.getElementById('boardAddTask').classList.add('slide-in')
-   handleClick(2)
-   addTaskColumn = 'toDo'
-   console.log(addTaskColumn);
-   setMinDate()
-   
-}
-
-function openBoardAddTaskInProgress(){
-    let addTaskContainer = document.getElementById('addTaskContainer')
-    addTaskContainer.classList.remove('d-none')
-    renderAddTaskBoardHtml(addTaskContainer)
-    document.getElementById('boardAddTask').classList.add('slide-in')
-    handleClick(2)
-    addTaskColumn = 'inProgress'
-    console.log(addTaskColumn);
-    setMinDate()
-}
-
-function openBoardAddTaskawaitFeedback(){
-    let addTaskContainer = document.getElementById('addTaskContainer')
-    addTaskContainer.classList.remove('d-none')
-    renderAddTaskBoardHtml(addTaskContainer)
-    document.getElementById('boardAddTask').classList.add('slide-in')
-    handleClick(2)
-    addTaskColumn = 'awaitFeedback'
-    console.log(addTaskColumn);
-    setMinDate()
+function openBoardAddTask(columnType) {
+  let addTaskContainer = document.getElementById('addTaskContainer');
+  addTaskContainer.classList.remove('d-none');
+  renderAddTaskBoardHtml(addTaskContainer);
+  document.getElementById('boardAddTask').classList.add('slide-in');
+  handleClick(2);
+  
+  // Set the addTaskColumn based on the columnType parameter
+  addTaskColumn = columnType;
+  console.log(addTaskColumn);
+  
+  setMinDate();
 }
 
 
@@ -218,132 +135,41 @@ let clickCount = 0;
 let choosenCategory = false;
 let category = ["User Task", "Technical task"];
 
-function renderAddTaskBoardHtml(addTaskContainer){
-    addTaskContainer.innerHTML = `
-        <section class="addTask" id="boardAddTask" >
-            <div class="boardAddTaskTitle">
-                <h1>Add Task</h1>
-                <img src="/assets/img/png/close.png" onclick="closeAddTaskBoardOnX()">
-            </div>
-            <form id="taskFormAddTask" >
-              <div class="formLeft">
-                <div class="eachInput">
-                  <span>Title<b style="color: red">*</b></span>
-                  <p class="inputContainerAddTask"><input id="titleInputAddTask" required type="text" /></p>
-                </div>
-                <div class="eachInput">
-                  <span>Description</span>
-                  <p><textarea name="" id=""></textarea></p>
-                </div>
-                <div class="eachInput">
-                  <span>Assigned to</span>
-                  <div class="categoryDropDown" id="dropdownContacts" onclick="toggleContacts()">
-                    <span class="spanCategory" >Select Contacts to assign</span>
-                    <img class="dropDownImg" id="dropDownContactsImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-                  </div>
-                  <div id="contacts" class=" contacts d-none"></div>
-                  <div id="assignedContacts" class="assignedContacts"></div>
-                </div>
-              </div>
-              <div class="separator"></div>
-              <div class="formLeft">
-                <div class="eachInput">
-                  <span>Due date <b style="color: red">*</b></span>
-                  <p class="inputContainerAddTask"><input required type="date" id="dateInputAddTask"/></p>
-                </div>
-                <div class="eachInput">
-                  <span>Prio</span>
-                  <div class="d-flex prioArea">
-                    <button type="button" id="button1" onclick="handleClick(1)" class="buttonCenter prioButton">
-                      Urgent <img id="prioImg1" src="assets/img/svg/urgent.svg" alt="" />
-                    </button>
-                    <button type="button" id="button2" onclick="handleClick(2)" class="buttonCenter prioButton">
-                      Medium <img id="prioImg2" src="assets/img/png/mediumColor.png" alt="" />
-                    </button>
-                    <button type="button" id="button3" onclick="handleClick(3)" class="buttonCenter prioButton">
-                      Low <img id="prioImg3" src="assets/img/svg/low.svg" alt="" />
-                    </button>
-                  </div>
-                </div>
-                <span style="margin-bottom: -6px; margin-top: -8px;">Category <b style="color: red">*</b></span>
-                <div class="categoryDropDown" id="dropdownCategory" onclick="showCategory()">
-                  <span class="spanCategory" >Select task category</span>
-                  <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
-                </div>
-                <div id="categories"></div>
-                <div class="eachInput">
-                  <span>Subtasks</span>
-                  <div id="subtaskContainerAddTask">
-                    <p>
-                      <input type="text" name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
-                      <img onclick="writeSubtaskAddTask()" src="assets/img/png/Subtasks icons11.png"  alt="" />
-                    </p>
-                  </div>
-                  <ul id="newSubtasksAddTask" style="display: flex;"></ul>
-                </div>
-              </div>
-            </form>
-            <section class="buttonsSection d-flex" style="margin-top: 150px">
-              <span><b style="color: red">*</b> This field is Required</span>
-              <div class="buttonArea">
-                <button id="clearButton" onclick="clearForm()" class="buttonCenter clear">
-                  Clear
-                  <img src="assets/img/png/iconoir_cancel.png" alt="" />
-                </button>
-                <button type="submit" onclick="handleCreateButtonClick()" id="createButton" class="buttonCenter createButton">
-                  Create Task <img src="assets/img/png/check.png" alt="" />
-                </button>
-              </div>
-            </section>
-          </section>
-          
-    `;
-}
-
-
-
-  document.addEventListener("DOMContentLoaded", function() {
-    let clickCount = 0;
-    const dropdown = document.getElementById("dropdownCategory");
-    if (dropdown) {
-      dropdown.addEventListener("click", function() {
-        clickCount++;
-        if (clickCount % 2 === 1) {
-          showCategory();
-        } else {
-          hideCategory();
-        }
-      });
-    } 
-  });
-
-  function handleClickOutside(event) {
-    const addBoardTask = document.getElementById('boardAddTask');
-    if (!addBoardTask) {
-      return; // Do nothing if addBoardTask is not rendered
-    }
-  
-    const container = document.getElementById('dropdownCategory');
-    if (!container.contains(event.target)) {
-      hideCategory();
-    }
-  }
-  
-
-
-
-
-
-
-
-
-
 
 
 document.addEventListener('click', function(event) {
   let addBoardTask = document.getElementById('boardAddTask');
   if (!addBoardTask) {
-    return; // Do nothing if addBoardTask is not rendered
+    return; 
+  }
+  let categoryContainer = document.getElementById('categories');
+  let dropdownCategory = document.getElementById('dropdownCategory');
+  if (dropdownCategory.contains(event.target)) {
+    clickCount = clickCount === 0 ? 1 : 0;
+    if (clickCount === 1) {
+      categoryContainer.classList.remove('d-none');
+    } else {
+      resetDropDownIconsCategory()
+      categoryContainer.classList.add('d-none');
+    }
+  } else if (!categoryContainer.classList.contains('d-none') && !categoryContainer.contains(event.target)) {
+    categoryContainer.classList.add('d-none');
+    clickCount = 0; 
+    resetDropDownIconsCategory()
+  }
+});
+
+
+function resetDropDownIconsCategory(){
+  document.getElementById('dropDownImg').classList.add('dropDownImg');
+  document.getElementById('dropDownImg').classList.remove('dropUpImg');
+}
+
+
+document.addEventListener('click', function(event) {
+  let addBoardTask = document.getElementById('boardAddTask');
+  if (!addBoardTask) {
+    return;
   }
 
   let contactsContainer = document.getElementById('contacts');
@@ -355,39 +181,23 @@ document.addEventListener('click', function(event) {
   }
 });
 
-  let addTaskBoardInfos = [];
+
 
 function writeSubtaskAddTask() {
   let subtaskArea = document.getElementById('subtaskContainerAddTask');
-  subtaskArea.innerHTML = `
-      <div class="addSubtaskAddBoard">
-          <input type="text" name="" autofocus id="subtaskInput" minlength="3" required placeholder="Enter subtask"/>
-          <div class="d-flex">
-              <img src="assets/img/png/subtaskX.png" onclick="resetSubtask()" alt="" />
-              <img src="assets/img/png/subtaskDone.png" onclick="addSubtaaskBoard();" alt="" />
-          </div>
-      </div>
-  `;
-
-  // Get the newly created input field
+  subtaskArea.innerHTML = returnWriteSubtaskAddTaskBoardHTML()
   let inputField = document.getElementById('subtaskInput');
-
-  // Add event listener for focusout event
   inputField.addEventListener('focusout', function() {
       if (!this.value.trim()) {
           resetSubtask();
       }
   });
-
-  // Add event listener for keydown event to detect Enter key
   inputField.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
-          event.preventDefault(); // Prevent the default action if necessary
-          addSubtaaskBoard(); // Call the addSubtask function
+          event.preventDefault();
+          addSubtaaskBoard(); 
       }
   });
-
-  // Ensure the input gets focus
   inputField.focus();
 }
 
@@ -425,23 +235,12 @@ function showSubtasksAddTask() {
   let newSubtask = document.getElementById('newSubtasksAddTask');
   newSubtask.innerHTML = '';
   for (let s = 0; s < addTaskBoardInfos.length; s++) {
-    newSubtask.innerHTML += `
-      <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)">
-        <div class="subtask-item">
-          <div class="subtask-content">
-            <span class="custom-bullet">•</span>
-              <div style="width:100%" onclick="editSubtaskAddTask(${s})">${addTaskBoardInfos[s]}</div>
-          </div>
-          <div class="subtaskIconsAddTask d-none">
-            <img src="assets/img/png/editSubtask.png" onclick="editSubtaskAddTask(${s})" alt="" />
-            <div class="vertical-line"></div>
-            <img src="assets/img/png/delete.png" onclick="deleteSubtaskAddTask(${s})" alt="" />
-          </div>
-        </div>
-      </li>
-    `;
+    newSubtask.innerHTML += returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos)
   }
 }
+
+
+
 
 function editSubtaskAddTask(index) {
   let newSubtask = document.getElementById('newSubtasksAddTask');
@@ -641,66 +440,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
-
-
-
-async function sendTaskDataToFirebaseAddTask() {
-  try {
-    await initializeTasksNode();
-    console.log('Tasks node initialized');
-
-    const response = await fetch(`${BASE_TASKS_URL}.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP error during fetch tasks! Status: ${response.status}`);
-    }
-
-    const existingTasks = await response.json();
-    let tasksArray = existingTasks ? Object.keys(existingTasks).map(key => ({ ...existingTasks[key], id: parseInt(key) })) : [];
-    console.log('Existing tasks fetched:', tasksArray);
-
-    tasksArray.sort((a, b) => a.id - b.id);
-
-    const promises = tasksArray.map((task, index) => {
-      if (task.id !== index) {
-        task.id = index;
-        return fetch(`${BASE_TASKS_URL}/${index}.json`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(task)
-        });
-      }
-    });
-
-    await Promise.all(promises);
-    console.log('Task IDs updated if necessary');
-
-    const nextIndex = tasksArray.length;
-    const taskData = collectData();
-    if (!taskData) {
-      throw new Error("No task data to send");
-    }
-    console.log('Task data collected:', taskData);
-
-    const taskResponse = await fetch(`${BASE_TASKS_URL}/${nextIndex}.json`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(taskData)
-    });
-
-    if (!taskResponse.ok) {
-      throw new Error(`HTTP error during save task! Status: ${taskResponse.status}`);
-    }
-
-    let responseAsJson = await taskResponse.json();
-    console.log('Data saved to Firebase:', responseAsJson);
-    getTasksFromDataBase()
-  } catch (error) {
-    console.error('Error saving data to Firebase:', error);
-  }
-}
 
