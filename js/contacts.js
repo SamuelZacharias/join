@@ -1,5 +1,24 @@
 let contacts = [];
 let initials = [];
+let colorIndex = 0;
+
+const colors = [
+  '#FF7A00',
+  '#FF5EB3',
+  '#9747FF',
+  '#9327FF',
+  '#00BEE8',
+  '#1FD7C1',
+  '#FF745E',
+  '#FFA35E',
+  '#FC71FF',
+  '#FFC701',
+  '#0038FF',
+  '#C3FF2B',
+  '#FFE62B',
+  '#FF4646',
+  '#FFBB2B'
+];
 
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
 
@@ -145,7 +164,6 @@ async function openDialogSuccesfully() {
   }, 300); // 1000 Millisekunden = 1 Sekunde
 }
 
-// Funktion zum Hinzufügen eines Kontakts
 function addContact() {
   let name = document.getElementById('name').value;
   let email = document.getElementById('email').value;
@@ -159,7 +177,7 @@ function addContact() {
       name: name,
       email: email,
       phone: phone,
-      color: getRandomColor(), // Zufällige Farbe zuweisen
+      color: getNextColor(), // Farbe aus der festgelegten Liste zuweisen
       initials: name.split(' ').map(part => part.charAt(0).toUpperCase()).join('') // Initialen berechnen
     };
 
@@ -171,21 +189,15 @@ function addContact() {
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
     document.getElementById('phone').value = '';
-    renderContacts();
-     // Kontaktliste neu rendern
+    renderContacts(); // Kontaktliste neu rendern
   } else {
     alert('Bitte füllen Sie alle Felder aus.');
   }
-  
 }
 
-
-function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-  }
+function getNextColor() {
+  const color = colors[colorIndex];
+  colorIndex = (colorIndex + 1) % colors.length; // Index erhöhen und zurücksetzen, wenn das Ende erreicht ist
   return color;
 }
 
