@@ -183,3 +183,12 @@ function returnContactsToChooseHTML(contactName, contactClass, color, initials) 
       </div>
     `;
 }
+
+function returnResetBoardSubtaskHtml(){
+    return `
+    <p>
+      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
+      <img src="assets/img/png/Subtasks icons11.png" alt="" />
+    </p>
+  `;
+}

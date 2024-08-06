@@ -38,12 +38,7 @@ function addSubtaaskBoard(){
 }
 
 function resetSubtask() {
-  document.getElementById('subtaskContainerAddTask').innerHTML = `
-    <p>
-      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
-      <img src="assets/img/png/Subtasks icons11.png" alt="" />
-    </p>
-  `;
+  document.getElementById('subtaskContainerAddTask').innerHTML = returnResetBoardSubtaskHtml()
 }
 
 function showSubtasksAddTask() {
@@ -57,7 +52,6 @@ function showSubtasksAddTask() {
 
 function editSubtaskAddTask(index) {
   let newSubtask = document.getElementById('newSubtasksAddTask');
-  
     if (index >= 0) {
       newSubtask.innerHTML = returnIfEditSubtaskAddTaskHTML(index, addTaskBoardInfos)
     } else {
@@ -79,7 +73,6 @@ function editSubtaskAddTask(index) {
 function saveSubtaskAddTask(index) {
   let editInput = document.getElementById('editSubtaskInputAddTask');
   let editedSubtask = editInput.value;
-
   if (editedSubtask.length < 3) {
     editInput.value = ''; 
     editInput.placeholder = 'Min 3 characters needed'; 
@@ -91,7 +84,6 @@ function saveSubtaskAddTask(index) {
     editInput.style.borderColor = ''; 
     editInput.classList.remove('error-placeholder'); 
   }
-
   addTaskBoardInfos[index] = editedSubtask;
   showSubtasksAddTask()
 }

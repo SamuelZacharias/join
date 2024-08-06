@@ -240,7 +240,7 @@ function collectData() {
 
 async function initializeTasksNode() {
   try {
-    const response = await fetch(`${BASE_TASKS_URL}.json`);
+    const response = await fetch(`https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/.json`);
     if (!response.ok) {
       throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
     }
