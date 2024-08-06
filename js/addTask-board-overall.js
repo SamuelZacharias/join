@@ -14,13 +14,10 @@ function showCategory() {
 
 function chooseCategory(index) {
   let chooseCategory = document.getElementById('dropdownCategory');
-  
-  // Assuming 'category' is an array and 'index' determines which category to select
   chooseCategory.innerHTML = `
     <span onclick="showCategory()" class="spanCategory">${category[index]}</span>
     <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
   `;
-
   document.getElementById('categories').classList.add('d-none');
   choosenCategory = true;
   clickCount = 0;
