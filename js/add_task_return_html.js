@@ -49,10 +49,10 @@ function returnEditSubtaskAddtaskIfHtml(index) {
   `;
 }
 
-function returnEditSubtaskAddTaskElseHtml(index, s) {
+function returnEditSubtaskAddTaskElseHtml(index) {
   return `
     <div class="addSubtask">
-      <div style="width:100%" onclick="editSubtask(${s})">
+      <div style="width:100%" onclick="editSubtask(${index})">
         ${subtaskInfos[index]}
       </div>
       <div class="d-flex">

@@ -187,26 +187,28 @@ function hideActions(element) {
   }
 }
 
-function editSubtask(index) {
+function updateSubtaskHtml(index) {
   let newSubtask = document.getElementById('newSubtasks');
   if (index >= 0) {
-    newSubtask.innerHTML = returnEditSubtaskAddtaskIfHtml(index);
+      newSubtask.innerHTML = returnEditSubtaskAddtaskIfHtml(index);
   } else {
-    newSubtask.innerHTML = returnEditSubtaskAddTaskElseHtml(index, s);
+      newSubtask.innerHTML = returnEditSubtaskAddTaskElseHtml(index);
   }
 }
 
-
+function editSubtask(index) {
+  updateSubtaskHtml(index);
   let inputField = document.getElementById('editSubtaskInput');
-    if (inputField) {
-        inputField.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent the default action if necessary
-                saveSubtask(index); // Call the saveSubtask function
-            }
-        });
-        inputField.focus(); 
-};
+  if (inputField) {
+      inputField.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+              event.preventDefault(); // Prevent the default action if necessary
+              saveSubtask(index); // Call the saveSubtask function
+          }
+      });
+      inputField.focus(); 
+  }
+}
 
 
 function saveSubtask(index) {
@@ -244,7 +246,6 @@ document.querySelector('.createButton').addEventListener('click', async function
     }
   } 
 });
-
 
 document.getElementById('clearButton').addEventListener('click', function(event) {
   const form = document.getElementById('taskForm');
