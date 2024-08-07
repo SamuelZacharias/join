@@ -140,7 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
+setInterval(() => {
+  loadTasksFromLocalStorage()
+  console.log('taskrerendered');
+  
+}, 5000);
 
 
 
