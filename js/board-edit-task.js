@@ -1,7 +1,9 @@
+let subtaskInfos = [];
+let isSubtaskEditMode = false; 
+
 document.addEventListener('click', handleClickOutsideEdit);
 
 function editTask(taskId) {
-  // Retrieve task by ID
   let task = getTaskById(taskId);
   console.log('Task to edit:', task);  
   if (!task) {
@@ -58,21 +60,16 @@ function switchButton(priority) {
   });
 }
 
-
 function showContactsToChoose() {
   document.getElementById('dropDownImg').classList.add('dropUpImg');
-
   if (!currentTaskBeingEdited) {
     console.error('No task is currently being edited.');
     return;
   }
-
   const contactsToChooseElement = document.getElementById('contactsToChoose');
   contactsToChooseElement.innerHTML = '';
   contactsToChooseElement.classList.remove('d-none');
-
   const assignedContacts = currentTaskBeingEdited.assignedContacts || [];
-
   renderContactsList(contacts, assignedContacts, contactsToChooseElement);
 }
 
@@ -87,28 +84,23 @@ function renderContactsList(contactsList, assignedContacts, contactsToChooseElem
   });
 }
 
-
 function toggleContactAssignment(contactName) {
   if (!currentTaskBeingEdited) {
       console.warn('No task is currently being edited.');
       return;
   }
-
   const task = currentTaskBeingEdited;
   const contact = contacts.find(c => c.name === contactName);
-
   if (!contact) {
       console.warn('Contact not found.');
       return;
   }
-
   if (isContactAssigned(task, contactName)) {
       unassignContact(task, contactName);
   } else {
       assignContact(task, contact);
   }
-
-  showContactsToChoose(); // Re-render the contacts list
+  showContactsToChoose(); 
 }
 
 function isContactAssigned(task, contactName) {
@@ -120,7 +112,6 @@ function assignContact(task, contact) {
   if (!task.assignedContacts) {
     task.assignedContacts = [];
   }
-  
   if (!task.assignedContacts.some(c => c.name === contact.name)) {
     task.assignedContacts.push(contact);
   }
@@ -131,7 +122,6 @@ function unassignContact(task, contactName) {
   if (!task.assignedContacts) {
     return;
   }
-
   const contactIndex = task.assignedContacts.findIndex(c => c.name === contactName);
   if (contactIndex > -1) {
       task.assignedContacts.splice(contactIndex, 1);
@@ -148,23 +138,18 @@ if(contactsTochoose.classList.contains('d-none')){
   document.getElementById('dropDownImg').classList.remove('dropUpImg')
 }}
 
-let subtaskInfos = [];
-let isSubtaskEditMode = false; 
-
 function renderEditSubtasks(task) {
-  // Initialize subtaskInfos with existing subtasks of the selected task
   subtaskInfos = task.subtasks || [];
-
   let editSubtaskArea = document.getElementById('editSubtasks');
   editSubtaskArea.innerHTML = returnEditSubtasksHTML();
-  showSubtasks();  // Call to display existing subtasks when rendering the edit area
+  showSubtasks();  
 }
 
 function startWritingSubtask() {
   if (!isSubtaskEditMode) {
       writeSubtask();
       
-      isSubtaskEditMode = true; // Set flag to prevent redundant calls
+      isSubtaskEditMode = true; 
   }else{
       isSubtaskEditMode = false
       
@@ -210,13 +195,10 @@ function addSubtask() {
   let subtaskInput = document.getElementById('subtaskInput2');
   let subtaskInfo = subtaskInput.value.trim();
   let editSubtask = document.getElementById('editSubtasks');
-
   addInputEventListener(subtaskInput, editSubtask);
-
   if (!validateSubtaskInput(subtaskInput, editSubtask)) {
     return;
   }
-
   clearInputAndAddSubtask(subtaskInput, subtaskInfos);
   showSubtasks();
   renderEditSubtasks({ subtasks: subtaskInfos });
@@ -229,7 +211,6 @@ function appendSubtaskHTML(container, html) {
 function showSubtasks() {
   let newSubtask = document.getElementById('newSubtasks');
   newSubtask.innerHTML = ''; // Clear existing content
-
   for (let s = 0; s < subtaskInfos.length; s++) {
     const subtaskHTML = returnSubtaskHTML(s, subtaskInfos[s].title);
     appendSubtaskHTML(newSubtask, subtaskHTML);
@@ -264,19 +245,16 @@ function handleEditInputError(editInput) {
   editInput.placeholder = 'Min 3 characters needed';
   editInput.style.borderColor = 'red';
   editInput.classList.add('error-placeholder');
-
-  // Add focus event listener to remove error styling
   editInput.addEventListener('focus', function() {
       editInput.placeholder = 'Enter subtask';
       editInput.style.borderColor = '';
       editInput.classList.remove('error-placeholder');
-  }, { once: true }); // Ensure the listener is called only once
+  }, { once: true });
 }
 
 function saveSubtask(index) {
   let editInput = document.getElementById('editSubtaskInput');
   let editedSubtask = editInput.value.trim();
-
   if (editedSubtask.length < 3) {
       handleEditInputError(editInput);
       return;
@@ -286,7 +264,6 @@ function saveSubtask(index) {
       editInput.classList.remove('error-placeholder');
   }
   subtaskInfos[index].title = editedSubtask;
-
   showSubtasks();
 }
 

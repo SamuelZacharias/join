@@ -19,7 +19,6 @@ function writeSubtaskAddTask() {
 function addSubtaaskBoard(){
   let subtaskInput = document.getElementById('subtaskInput');
   let subtaskInfo = subtaskInput.value;
-
   if (subtaskInfo.length < 3) {
     subtaskInput.value = ''; 
     subtaskInput.placeholder = 'Min 3 characters needed'; 
@@ -31,7 +30,6 @@ function addSubtaaskBoard(){
     subtaskInput.style.borderColor = ''; 
     subtaskInput.classList.remove('error-placeholder'); 
   }
-
   addTaskBoardInfos.push(subtaskInfo);
   showSubtasksAddTask();
   resetSubtask();
@@ -48,7 +46,6 @@ function showSubtasksAddTask() {
     newSubtask.innerHTML += returnShowSubtasksAddTaskHtml(s, addTaskBoardInfos)
   }
 }
-
 
 function editSubtaskAddTask(index) {
   let newSubtask = document.getElementById('newSubtasksAddTask');
