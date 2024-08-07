@@ -145,6 +145,8 @@ function handleClick(buttonNumber) {
 }
 
 
+
+
 function collectData() {
   // Determine which form to use
   const form = document.getElementById('taskForm') || document.getElementById('taskFormAddTask');

@@ -11,7 +11,7 @@ function clearForm() {
   clickCount = 0;
   selectedContacts = [];
   addTaskBoardInfos = [];
-  handleClick(2); 
+  switchButton('Medium') 
   document.querySelectorAll('.inputContainerAddTask').forEach(p => {
     p.classList.remove('invalid');
   });

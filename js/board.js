@@ -61,10 +61,9 @@ function openBoardAddTask(columnType) {
   addTaskContainer.classList.remove('d-none');
   renderAddTaskBoardHtml(addTaskContainer);
   document.getElementById('boardAddTask').classList.add('slide-in');
-  clearForm()
+  switchButton('Medium')
   addTaskColumn = columnType;
   setMinDate();
-  document.getElementById("button2").classList.remove('prioButton')
 }
 
 
