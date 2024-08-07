@@ -1,6 +1,7 @@
 let contacts = [];
 let initials = [];
 let colorIndex = 0;
+let highlightedContactIndex = -1; // Store the index of the highlighted contact
 
 const colors = [
   '#FF7A00',
@@ -67,6 +68,11 @@ function renderContacts() {
             contactList.innerHTML += generateContact(contact, initials, index);
           });
         });
+
+        // Reapply the highlight if a contact is selected
+        if (highlightedContactIndex >= 0) {
+          highlightContact(highlightedContactIndex);
+        }
       } else {
         console.log('Keine Kontakte gefunden.');
       }
@@ -304,13 +310,24 @@ function editContact() {
   // Ersetze das alte Kontaktobjekt in der Array durch das aktualisierte
   contacts[index] = updatedContact;
 
-  // Speichere die aktualisierten Daten in localStorage
-  localStorage.setItem('contacts', JSON.stringify(contacts));
-  storeFirstAndLastNames();
-  renderContacts();
-  saveData();
-  closeDialogEdit();
-  displayContactInfo(index);
+  // Speichere die aktualisierten Daten in Firebase
+  fetch(BASE_TASKS_URL + '.json', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(contacts)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Daten erfolgreich gespeichert:', data);
+    loadData(); // Kontakte neu laden
+    closeDialogEdit();
+    highlightContact(index); // Reapply highlight after editing
+  })
+  .catch(error => {
+    console.error('Fehler beim Speichern der Daten:', error);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -428,4 +445,15 @@ function truncate(text, maxLength = 20) {
     return text.substring(0, maxLength) + '...';
   }
   return text;
+}
+
+function highlightContact(index) {
+  const contacts = document.getElementsByClassName('contacts');
+  for (let i = 0; i < contacts.length; i++) {
+    contacts[i].style.backgroundColor = '';
+    contacts[i].style.color = 'black';
+  }
+  document.getElementById(`contact${index}`).style.backgroundColor = 'var(--gray)';
+  document.getElementById(`contact${index}`).style.color = 'white';
+  highlightedContactIndex = index; // Store the highlighted contact index
 }
