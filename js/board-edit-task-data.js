@@ -81,6 +81,7 @@ function saveTask(updatedTask, taskId) {
 
 function closeEdit(){
   document.getElementById('editTaskContainer').classList.add('d-none')
+  switchButton('Medium')
 }
 
 function getTaskById(taskId) {

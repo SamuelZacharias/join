@@ -80,6 +80,8 @@ p:hover {
     justify-content: space-between;
 }
 
+
+
 .prioButton {
     width: 136px;
     border-radius: 10px;
@@ -120,7 +122,7 @@ select:hover {
 }
 
 .clear:hover img {
-    content: url("/assets/img/png/iconoir_cancel_hover.png");
+    content: url("../assets/img/png/iconoir_cancel_hover.png");
 }
 
 .createButton {
@@ -262,7 +264,7 @@ select:hover {
 }
 
 .selected img {
-    content: url('/assets/img/png/whiteBox.png');
+    content: url('../assets/img/png/whiteBox.png');
 }
 
 .subTaskStyle {

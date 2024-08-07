@@ -117,7 +117,7 @@ textarea {
 }
 
 .urgent img {
-    content: url('/assets/img/png/urgentWhite.png');
+    content: url('../assets/img/png/urgentWhite.png');
 }
 
 .medium {
@@ -126,7 +126,7 @@ textarea {
 }
 
 .medium img {
-    content: url('/assets/img/svg/medium.svg')
+    content: url('../assets/img/svg/medium.svg')
 }
 
 .low {
@@ -135,7 +135,7 @@ textarea {
 }
 
 .low img {
-    content: url('/assets/img/png/lowWhite.png')
+    content: url('../assets/img/png/lowWhite.png')
 }
 
 .openedAssigendContactsArea {

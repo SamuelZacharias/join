@@ -109,7 +109,7 @@ input:focus {
 }
 
 .image:hover img {
-  content: url('/assets/img/png/blueHoverBoard.png');
+  content: url('../assets/img/png/blueHoverBoard.png');
   cursor: pointer;
 }
 
