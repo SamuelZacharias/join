@@ -32,3 +32,6 @@ textarea:focus {
   outline: none;
 }
 
+.d-none {
+  display: none;
+}
