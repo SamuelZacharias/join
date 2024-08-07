@@ -335,16 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadData(); // Stellen sicher, dass Daten geladen sind
 });
 
-function highlightContact(index) {
-  const contacts = document.getElementsByClassName('contacts');
-  for (let i = 0; i < contacts.length; i++) {
-      contacts[i].style.backgroundColor = '';
-      contacts[i].style.color = 'black';
-  }
-  document.getElementById(`contact${index}`).style.backgroundColor = 'var(--gray)';
-  document.getElementById(`contact${index}`).style.color = 'white';
-}
-
 function setError(inputElement, message) {
   inputElement.dataset.originalPlaceholder = inputElement.placeholder;
   inputElement.placeholder = message;
@@ -450,11 +440,24 @@ function truncate(text, maxLength = 20) {
 
 function highlightContact(index) {
   const contacts = document.getElementsByClassName('contacts');
+  
+  // Reset the styles for all contacts
   for (let i = 0; i < contacts.length; i++) {
     contacts[i].style.backgroundColor = '';
     contacts[i].style.color = 'black';
   }
-  document.getElementById(`contact${index}`).style.backgroundColor = 'var(--gray)';
-  document.getElementById(`contact${index}`).style.color = 'white';
-  highlightedContactIndex = index; // Store the highlighted contact index
+  
+  // Get the contact element to be highlighted
+  const contactElement = document.getElementById(`contact${index}`);
+  
+  // Check if the contact element exists before trying to change its style
+  if (contactElement) {
+    contactElement.style.backgroundColor = 'var(--gray)';
+    contactElement.style.color = 'white';
+  } else {
+    console.warn(`Contact with index ${index} does not exist.`);
+  }
+  
+  // Store the highlighted contact index
+  highlightedContactIndex = index;
 }
