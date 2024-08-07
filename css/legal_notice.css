@@ -32,7 +32,7 @@ span{
   height: 83vh;
   padding-left: 96px;
   overflow-y: scroll;
-  padding-top: 96px;
+  padding-top: 35px;
   flex-direction: column;
 }
 
