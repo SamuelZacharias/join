@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
   // Wert aus dem lokalen Speicher löschen
   localStorage.removeItem('loggedInUserName');
-
+  localStorage.removeItem('loggedInUserEmail');
 }
 
 function includeHTML(callback) {
