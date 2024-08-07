@@ -188,13 +188,13 @@ function collectData() {
 
   let priority = '';
   switch (activeButton) {
-    case 1:
+    case 1 | 4:
       priority = 'Urgent';
       break;
-    case 2:
+    case 2 | 5:
       priority = 'Medium';
       break;
-    case 3:
+    case 3 | 6:
       priority = 'Low';
       break;
     default:
