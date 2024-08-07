@@ -1,3 +1,18 @@
+:root {
+  --blue: #29abe2;
+  --gray: #2a3647;
+  --high: #ff3d00;
+  --medium: #ffa800;
+  --low: #7ae229;
+  --technical: #1fd7c1;
+  --story: #0038ff;
+  --noTask: #a8a8a8;
+  --policy: #a8a8a8;
+  --background: #f6f7f8;
+  --hightlight: #091931;
+  --border: #d1d1d1;
+}
+
 body {
   font-family: 'inter', Arial, sans-serif;
   background-color: var(--background);

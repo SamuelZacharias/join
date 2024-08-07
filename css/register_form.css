@@ -41,6 +41,7 @@ body {
   display: flex;
   justify-content: flex-start;
 }
+
 .logo img {
   width: 100px;
   height: 120px;
@@ -69,6 +70,7 @@ body {
 input {
   border: none;
 }
+
 input:focus {
   outline: none;
 }
@@ -97,6 +99,7 @@ input:focus {
   margin-top: -32px;
   border-radius: 50%;
 }
+
 .backArrow:hover {
   background-color: var(--border);
   cursor: pointer;
@@ -105,14 +108,17 @@ input:focus {
 ::placeholder {
   color: var(--border);
 }
+
 .icon {
   width: 24px;
   height: 24px;
 }
+
 h1 {
   font-size: 61px;
   margin: 0px;
 }
+
 .input {
   width: 320px;
   display: flex;
@@ -122,10 +128,12 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 10px;
 }
+
 .input input {
   width: 100%;
   height: 150%;
 }
+
 .input img:hover {
   cursor: pointer;
 }
@@ -142,13 +150,16 @@ h1 {
   gap: 16px;
   padding: 4px;
 }
+
 .check input:hover {
   cursor: pointer;
 }
+
 .check span {
   display: flex;
   align-items: center;
 }
+
 .check a {
   color: var(--blue);
   padding: 4px;
@@ -157,19 +168,23 @@ h1 {
   display: flex;
   justify-content: flex-start;
 }
+
 .check a:hover {
   text-decoration: underline var(--blue);
   font-weight: 600;
 }
-.check:hover input{
+
+.check:hover input {
   box-shadow: 0px 0px 6px 0px var(--gray);
 }
+
 form {
   display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: center;
 }
+
 button {
   background-color: var(--gray);
   padding: 15px 24px;
@@ -179,21 +194,25 @@ button {
   width: 130px;
   border: none;
 }
+
 .policy {
   display: flex;
   gap: 32px;
   position: fixed;
   bottom: 5px;
 }
+
 .policy a:hover {
   color: var(--blue);
   transform: scale(1.1);
 }
+
 button:hover {
   background-color: var(--blue);
   cursor: pointer;
   transition: 200ms;
 }
+
 span {
   color: var(--policy);
 }
@@ -204,7 +223,7 @@ input:-webkit-autofill {
 }
 
 
-#wrongRepeat{
+#wrongRepeat {
   display: flex;
   width: 100%;
   height: 5px;
@@ -212,11 +231,11 @@ input:-webkit-autofill {
   color: red;
 }
 
-.invalid{
+.invalid {
   border: 2px solid red;
 }
 
-.signedUp{
+.signedUp {
   position: absolute;
   overflow: hidden;
   width: 100%;
@@ -225,29 +244,33 @@ input:-webkit-autofill {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 99;
 }
 
-.signedUp button{
+.signedUp button {
   width: 400px;
 }
-.animation{
+
+.animation {
   animation: slideUp 300ms ease-out;
 }
 
-@keyframes slideUp{
+@keyframes slideUp {
   from {
-    transform: translateY(100vh); /* Start from below the viewport */
-    
+    transform: translateY(100vh);
+    /* Start from below the viewport */
+
   }
+
   to {
-    transform: translateY(0); /* End at the normal position */
+    transform: translateY(0);
+    /* End at the normal position */
   }
 }
 
 
-#signedUp{
+#signedUp {
   background-color: var(--gray);
   padding: 15px 24px;
   color: white;
