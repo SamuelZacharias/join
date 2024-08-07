@@ -94,6 +94,8 @@ function hideElements() {
     styleSheet.innerHTML = `
           .icon-bar { display: none !important; }
           #user-profile-initials { display: none !important; }
+          .credit-box { height: 655px !important; }
+          .icon-box { width: 42px !important; }
       `;
     document.head.appendChild(styleSheet);
   }
