@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     let loggedInUserName = localStorage.getItem('loggedInUserName');
-
     if (loggedInUserName) {
         console.log('Logged-in user name:', loggedInUserName);
         let greetNameElement = document.getElementById('greetName');
@@ -13,39 +12,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getGreeting() {
-    const now = new Date(); // Erstellen Sie ein neues Date-Objekt für die aktuelle Zeit
-    const hours = now.getHours(); // Stunden aus dem Date-Objekt holen
-
+    const now = new Date();
+    const hours = now.getHours(); 
     let greeting;
-
     if (hours < 12) {
-        greeting = "Good morning"; // Begrüßung für die Zeit von 00:00 bis 11:59
+        greeting = "Good morning"; 
     } else if (hours < 18) {
-        greeting = "Good afternoon"; // Begrüßung für die Zeit von 12:00 bis 17:59
+        greeting = "Good afternoon"; 
     } else {
-        greeting = "Good evening"; // Begrüßung für die Zeit von 18:00 bis 23:59
+        greeting = "Good evening"; 
     }
-
     return greeting;
 }
 
 function generateGreetingHTML() {
-    const time = getGreeting(); // Aktuelle Begrüßung ermitteln
-    // HTML-String mit der Begrüßung als Variable
+    const time = getGreeting(); 
     const htmlContent = `<div>
         <h1>${time}</h1>
     </div>`;
     return htmlContent;
 }
 
-console.log(generateGreetingHTML()); // Ausgabe des HTML-Inhalts
-
 function updateGreeting() {
     const greeting = getGreeting();
     document.querySelector('.greetBox1').textContent = greeting + ',';
 }
 
-// Aktualisieren der Begrüßung, sobald die Seite geladen ist
 window.onload = updateGreeting;
 
 function formatDate(date) {
@@ -63,54 +55,36 @@ function setFutureDate() {
 const tasks = [];
 
 function loadTasksFromLocalStorage() {
-    // Retrieve the tasks JSON string from localStorage
     let tasksFromStorage = localStorage.getItem('tasks');
-
-    // Check if tasks data exists in localStorage
     if (tasksFromStorage) {
-        // Parse the JSON string into an array
         const parsedTasks = JSON.parse(tasksFromStorage);
-
-        // Clear the current tasks array
         tasks.length = 0;
-
-        // Push the parsed tasks into the tasks array
         tasks.push(...parsedTasks);
     }
 }
 
 function countCompletedTasks() {
-    // Use the filter method to count tasks where the 'column' is 'done'
     const completedTasksCount = tasks.filter(task => task.column === 'done').length;
-
     return completedTasksCount;
 }
 
 function completedTaskstoDoCount() {
-    // Use the filter method to count tasks where the 'column' is 'done'
     const completedTaskstoDoCount = tasks.filter(task => task.column === 'toDo').length;
-
     return completedTaskstoDoCount;
 }
 
 function completedTasksInProgress() {
-    // Use the filter method to count tasks where the 'column' is 'done'
     const completedTasksInProgress = tasks.filter(task => task.column === 'inProgress').length;
-
     return completedTasksInProgress;
 }
 
 function completedTasksFeedback() {
-    // Use the filter method to count tasks where the 'column' is 'done'
     const completedTasksFeedback = tasks.filter(task => task.column === 'awaitFeedback').length;
-
     return completedTasksFeedback;
 }
 
 function completedTasksUrgent() {
-    // Use the filter method to count tasks where the 'column' is 'done'
     const completedTasksUrgent = tasks.filter(task => task.priority === 'Urgent').length;
-
     return completedTasksUrgent;
 }
 
