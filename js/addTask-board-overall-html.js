@@ -37,3 +37,11 @@ function renderOverallAssignedContactsHTML(contact) {
     </div>
   `;
 }
+
+function renderAssignedContactsHTML(contact) {
+  return `
+    <div class="contactInitials" style="background-color: ${contact.color}; color:white;">
+      ${contact.initials}
+    </div>
+  `;
+}

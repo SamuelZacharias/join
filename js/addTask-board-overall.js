@@ -7,8 +7,6 @@ function showCategory() {
   choosenCategory = false;
 }
 
-
-
 function chooseCategory(index) {
   let chooseCategory = document.getElementById('dropdownCategory');
   chooseCategory.innerHTML = returnChooseCategoryOverallHTML(index)
@@ -18,8 +16,6 @@ function chooseCategory(index) {
   document.getElementById('dropDownImg').classList.add('dropDownImg');
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
-
-
 
 function hideCategory() {
   document.getElementById('dropDownImg').classList.add('dropDownImg');
@@ -53,14 +49,6 @@ function toggleContacts() {
   }
 }
 
-function renderAssignedContactsHTML(contact) {
-  return `
-    <div class="contactInitials" style="background-color: ${contact.color}; color:white;">
-      ${contact.initials}
-    </div>
-  `;
-}
-
 function showAssignedContacts() {
   let container = document.getElementById('assignedContacts');
   container.innerHTML = '';
@@ -73,7 +61,6 @@ function showAssignedContacts() {
     let moreCount = totalContacts - maxToShow;
     console.log(`More contacts count: ${moreCount}`); 
     let moreContactsColor = "#e3e3e3"; 
-
     container.innerHTML += `
       <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
         +${moreCount}
@@ -97,154 +84,151 @@ function setMinDate() {
   });
 }
 
-function handleClick(buttonNumber) {
-  if (activeButton !== null) {
-    const previousButton = document.getElementById('button' + activeButton);
-    const previousImage = document.getElementById('prioImg' + activeButton);
-    
-    previousButton.classList.add('hover-shadow');
-    previousButton.style.backgroundColor = '';
-    previousButton.style.color = '';
-    previousButton.style.fontWeight = '';
+function resetPreviousButton(activeButton) {
+  if (activeButton === null) return;
+  const previousButton = document.getElementById('button' + activeButton);
+  const previousImage = document.getElementById('prioImg' + activeButton);
+  previousButton.classList.add('hover-shadow');
+  previousButton.style = '';
+  previousImage.src = getImageSource(activeButton, false);
+}
 
-    switch (activeButton) {
-      case 1:
-        previousImage.src = 'assets/img/svg/urgent.svg';
-        break;
-      case 2:
-        previousImage.src = 'assets/img/png/mediumColor.png';
-        break;
-      case 3:
-        previousImage.src = 'assets/img/svg/low.svg';
-        break;
-      case 4:
-        previousImage.src = './assets/img/svg/urgent.svg';
-        break;
-      case 5:
-        previousImage.src = './assets/img/png/mediumColor.png';
-        break;
-      case 6:
-        previousImage.src = './assets/img/svg/low.svg';
-        break;
-    }
-  }
-
-  activeButton = buttonNumber;
-  const activeButtonElement = document.getElementById('button' + activeButton);
-  const activeImage = document.getElementById('prioImg' + activeButton);
-
+function updateActiveButton(buttonNumber) {
+  const activeButtonElement = document.getElementById('button' + buttonNumber);
+  const activeImage = document.getElementById('prioImg' + buttonNumber);
   activeButtonElement.classList.remove('hover-shadow');
   activeButtonElement.style.color = 'white';
   activeButtonElement.style.fontWeight = '600';
+  activeButtonElement.style.backgroundColor = getButtonColor(buttonNumber);
+  activeImage.src = getImageSource(buttonNumber, true);
+}
 
+function handleClick(buttonNumber) {
+  resetPreviousButton(activeButton);
+  activeButton = buttonNumber;
+  updateActiveButton(buttonNumber);
+}
+
+function getButtonColor(buttonNumber) {
   switch (buttonNumber) {
     case 1:
-      activeButtonElement.style.backgroundColor = '#FF3D00';
-      activeImage.src = 'assets/img/png/urgentWhite.png';
-      break;
-    case 2:
-      activeButtonElement.style.backgroundColor = '#FFA800';
-      activeImage.src = 'assets/img/svg/medium.svg';
-      break;
-    case 3:
-      activeButtonElement.style.backgroundColor = '#7AE229';
-      activeImage.src = 'assets/img/png/lowWhite.png';
-      break;
     case 4:
-      activeButtonElement.style.backgroundColor = '#FF3D00';
-      activeImage.src = './assets/img/png/urgentWhite.png';
-      break;
+      return '#FF3D00';
+    case 2:
     case 5:
-      activeButtonElement.style.backgroundColor = '#FFA800';
-      activeImage.src = './assets/img/svg/medium.svg';
-      break;
+      return '#FFA800';
+    case 3:
     case 6:
-      activeButtonElement.style.backgroundColor = '#7AE229';
-      activeImage.src = './assets/img/png/lowWhite.png';
-      break;
+      return '#7AE229';
   }
 }
 
-
-
+function getImageSource(buttonNumber, isActive) {
+  const state = isActive ? 'White' : '';
+  switch (buttonNumber) {
+    case 1:
+      return `assets/img/${isActive ? 'png' : 'svg'}/urgent${state}.${isActive ? 'png' : 'svg'}`;
+    case 2:
+      return `assets/img/${isActive ? 'svg' : 'png'}/medium${state ? '' : 'Color'}.${isActive ? 'svg' : 'png'}`;
+    case 3:
+      return `assets/img/${isActive ? 'png' : 'svg'}/low${state}.${isActive ? 'png' : 'svg'}`;
+    case 4:
+      return `./assets/img/${isActive ? 'png' : 'svg'}/urgent${state}.${isActive ? 'png' : 'svg'}`;
+    case 5:
+      return `./assets/img/${isActive ? 'svg' : 'png'}/medium${state ? '' : 'Color'}.${isActive ? 'svg' : 'png'}`;
+    case 6:
+      return `./assets/img/${isActive ? 'png' : 'svg'}/low${state}.${isActive ? 'png' : 'svg'}`;
+  }
+}
 
 function collectData() {
-  // Determine which form to use
-  const form = document.getElementById('taskForm') || document.getElementById('taskFormAddTask');
-  if (!form) {
-    console.info('No form found');
-    return;
-  }
-
-  const title = form.querySelector('input[type="text"]').value;
-  const description = form.querySelector('textarea').value;
-  const dueDate = form.querySelector('input[type="date"]').value;
-
-  const categoryElement = document.getElementById('dropdownCategory').querySelector('span').innerText;
-
-  // Default values based on the form type
-  const assignedContacts = selectedContacts || [];
-  const subtasks = (form.id === 'taskForm' ? subtaskInfos : addTaskBoardInfos || []).map(subtask => ({ title: subtask, completed: false }));
-
-  let priority = '';
-  switch (activeButton) {
-    case 1:
-    case 4:
-      priority = 'Urgent';
-      break;
-    case 2:
-    case 5:
-      priority = 'Medium';
-      break;
-    case 3:
-    case 6:
-      priority = 'Low';
-      break;
-    default:
-      console.error("Invalid activeButton value");
-      return;
-  }
-
-  // Default column based on the form type
-  const column = form.id === 'taskForm' ? 'toDo' : (addTaskColumn || 'toDo');
+  const form = getFormAddTask();
+  if (!form) return console.info('No form found');
 
   return {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    category: categoryElement,
-    assignedContacts: assignedContacts,
-    subtasks: subtasks,
-    column: column,
+    title: getInputValueAddTask(form, 'input[type="text"]'),
+    description: getInputValueAddTask(form, 'textarea'),
+    dueDate: getInputValueAddTask(form, 'input[type="date"]'),
+    priority: getPriorityAddTask(activeButton),
+    category: getCategoryAddTask(),
+    assignedContacts: getAssignedContactsAddTask(),
+    subtasks: getSubtasksAddTask(form),
+    column: getColumnAddTask(form)
   };
 }
 
+function getFormAddTask() {
+  return document.getElementById('taskForm') || document.getElementById('taskFormAddTask');
+}
 
+function getInputValueAddTask(form, selector) {
+  return form.querySelector(selector).value;
+}
+
+function getPriorityAddTask(activeButton) {
+  switch (activeButton) {
+    case 1:
+    case 4:
+      return 'Urgent';
+    case 2:
+    case 5:
+      return 'Medium';
+    case 3:
+    case 6:
+      return 'Low';
+    default:
+      console.error("Invalid activeButton value");
+      return '';
+  }
+}
+
+function getCategoryAddTask() {
+  return document.getElementById('dropdownCategory').querySelector('span').innerText;
+}
+
+function getAssignedContactsAddTask() {
+  return selectedContacts || [];
+}
+
+function getSubtasksAddTask(form) {
+  const subtasks = form.id === 'taskForm' ? subtaskInfos : addTaskBoardInfos || [];
+  return subtasks.map(subtask => ({ title: subtask, completed: false }));
+}
+
+function getColumnAddTask(form) {
+  return form.id === 'taskForm' ? 'toDo' : (addTaskColumn || 'toDo');
+}
 
 async function initializeTasksNode() {
   try {
-    const response = await fetch(`https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
-    }
-    const existingTasks = await response.json();
+    const existingTasks = await fetchTasks();
     if (existingTasks === null) {
-      // Initialize the 'tasks' node if it doesn't exist
-      const initResponse = await fetch(BASE_TASKS_URL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-      });
-
-      if (!initResponse.ok) {
-        throw new Error(`HTTP error during initialize tasks node PUT! Status: ${initResponse.status}`);
-      }
-      console.log('Tasks node initialized if not existing');
+      await initializeTasks();
     }
   } catch (error) {
     console.info('Error initializing tasks node:', error);
   }
+}
+
+async function fetchTasks() {
+  const response = await fetch(`https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/.json`);
+  if (!response.ok) {
+    throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
+  }
+  return await response.json();
+}
+
+async function initializeTasks() {
+  const initResponse = await fetch(BASE_TASKS_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+
+  if (!initResponse.ok) {
+    throw new Error(`HTTP error during initialize tasks node PUT! Status: ${initResponse.status}`);
+  }
+  console.log('Tasks node initialized if not existing');
 }
