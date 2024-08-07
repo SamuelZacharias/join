@@ -76,7 +76,6 @@ function renderContacts() {
     });
 }
 
-
 // Funktion zum Berechnen und Speichern der Initialen
 function updateInitials() {
   initials = contacts.map(contact => {
@@ -109,7 +108,6 @@ async function closeDialog() {
   dialogContainer.classList.remove("d-flex");
   dialogContainer.open = false;
 }
-
 
 async function openDialogEdit(index) {
   
@@ -250,8 +248,6 @@ function deleteContact(index) {
   });
 }
 
-
-
 function saveData() {
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
@@ -287,7 +283,6 @@ function loadData() {
       console.error('Fehler beim Laden der Daten:', error);
     });
 }
-
 
 function editContact() {
   // Hole den Index aus dem data-Attribut des Eingabefeldes
@@ -422,9 +417,6 @@ function validateEditForm() {
   }
 }
 
-
-
-
 // Function to extract and store first and last names separately
 function storeFirstAndLastNames() {
   localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -436,4 +428,3 @@ function truncate(text, maxLength = 20) {
   }
   return text;
 }
-

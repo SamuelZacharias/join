@@ -292,5 +292,3 @@ function deleteSubtask(index) {
   subtaskInfos.splice(index, 1);
   showSubtasks();
 }
-
-
