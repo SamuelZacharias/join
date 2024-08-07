@@ -306,8 +306,9 @@ function editContact() {
 
   // Speichere die aktualisierten Daten in localStorage
   localStorage.setItem('contacts', JSON.stringify(contacts));
-  storeFirstAndLastNames()
+  storeFirstAndLastNames();
   renderContacts();
+  saveData();
   closeDialogEdit();
   displayContactInfo(index);
 }
