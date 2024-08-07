@@ -61,7 +61,7 @@ function openBoardAddTask(columnType) {
   addTaskContainer.classList.remove('d-none');
   renderAddTaskBoardHtml(addTaskContainer);
   document.getElementById('boardAddTask').classList.add('slide-in');
-  switchButton('Medium')
+  handleClick(5)
   addTaskColumn = columnType;
   setMinDate();
 }

@@ -11,7 +11,7 @@ function returnShowCategoryOverallHtml(){
 function returnChooseCategoryOverallHTML(index){
   return `
     <span onclick="showCategory()" class="spanCategory">${category[index]}</span>
-    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png" alt="">
+    <img class="dropDownImg" id="dropDownImg" src="./assets/img/png/arrow_drop_down (1).png" alt="">
   `;
 }
 
@@ -24,7 +24,7 @@ function returnShowContactsOverallHTML(contact, index) {
       </div>
       <div class="contactName">
         <span style="width:100%;">${contact.name}</span>
-        <img src="assets/img/png/Rectangle 5.png" alt="">
+        <img src="./assets/img/png/Rectangle 5.png" alt="">
       </div>
     </div>
   `;

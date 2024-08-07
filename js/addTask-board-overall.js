@@ -117,6 +117,15 @@ function handleClick(buttonNumber) {
       case 3:
         previousImage.src = 'assets/img/svg/low.svg';
         break;
+      case 4:
+        previousImage.src = './assets/img/svg/urgent.svg';
+        break;
+      case 5:
+        previousImage.src = './assets/img/png/mediumColor.png';
+        break;
+      case 6:
+        previousImage.src = './assets/img/svg/low.svg';
+        break;
     }
   }
 
@@ -140,6 +149,18 @@ function handleClick(buttonNumber) {
     case 3:
       activeButtonElement.style.backgroundColor = '#7AE229';
       activeImage.src = 'assets/img/png/lowWhite.png';
+      break;
+    case 4:
+      activeButtonElement.style.backgroundColor = '#FF3D00';
+      activeImage.src = './assets/img/png/urgentWhite.png';
+      break;
+    case 5:
+      activeButtonElement.style.backgroundColor = '#FFA800';
+      activeImage.src = './assets/img/svg/medium.svg';
+      break;
+    case 6:
+      activeButtonElement.style.backgroundColor = '#7AE229';
+      activeImage.src = './assets/img/png/lowWhite.png';
       break;
   }
 }

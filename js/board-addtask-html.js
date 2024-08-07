@@ -35,14 +35,14 @@ function renderAddTaskBoardHtml(addTaskContainer){
                 <div class="eachInput">
                   <span>Prio</span>
                   <div class="d-flex prioArea">
-                    <button type="button" id="button4" onclick="switchButton('Urgent')" class="buttonCenter prioButton">
-                      Urgent <img id="prioImg1" src="assets/img/svg/urgent.svg" alt="" />
+                    <button type="button" id="button4" onclick="handleClick(4)" class="buttonCenter prioButton">
+                      Urgent <img id="prioImg4" src="assets/img/svg/urgent.svg" alt="" />
                     </button>
-                    <button type="button" id="button5" onclick="switchButton('Medium')" class="buttonCenter prioButton">
-                      Medium <img id="prioImg2" src="assets/img/png/mediumColor.png" alt="" />
+                    <button type="button" id="button5" onclick="handleClick(5)" class="buttonCenter prioButton">
+                      Medium <img id="prioImg5" src="assets/img/png/mediumColor.png" alt="" />
                     </button>
-                    <button type="button" id="button6" onclick="switchButton('Low')" class="buttonCenter prioButton">
-                      Low <img id="prioImg3" src="assets/img/svg/low.svg" alt="" />
+                    <button type="button" id="button6" onclick="handleClick(6)" class="buttonCenter prioButton">
+                      Low <img id="prioImg6" src="assets/img/svg/low.svg" alt="" />
                     </button>
                   </div>
                 </div>
