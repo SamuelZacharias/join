@@ -247,6 +247,7 @@ function deleteContact(index) {
     console.log('Kontakt erfolgreich gelöscht', data);
     renderContacts(); // Aktualisiert die Anzeige
     storeFirstAndLastNames();
+    loadData();
     document.querySelector('.contacts-info-box').innerHTML = '';
   })
   .catch(error => {
