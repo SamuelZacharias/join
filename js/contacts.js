@@ -324,6 +324,7 @@ function editContact() {
     console.log('Daten erfolgreich gespeichert:', data);
     loadData(); // Kontakte neu laden
     closeDialogEdit();
+    displayContactInfo(index)
     highlightContact(index); // Reapply highlight after editing
   })
   .catch(error => {
