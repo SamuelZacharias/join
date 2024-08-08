@@ -36,9 +36,7 @@ function renderContacts() {
         const sortedInitials = Object.keys(groupedContacts).sort();
 
         sortedInitials.forEach(initial => {
-          
           contactList.innerHTML += generateLetterBox(initial);
-          
           groupedContacts[initial].forEach(({ contact, initials, index }) => {
             contactList.innerHTML += generateContact(contact, initials, index);
           });
@@ -188,7 +186,6 @@ function editContact() {
   };
 
   contacts[index] = updatedContact;
-
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
     headers: {
