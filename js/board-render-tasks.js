@@ -101,44 +101,27 @@ function renderContacts(i) {
 }
 
 function renderSubtasks(i) {
-  const subtaskArea = document.getElementById(`subtaskArea${i}`);
-  if (!subtaskArea) {
-      console.error(`Subtask area not found for task index ${i}`);
-      return;
+    const subtaskArea = document.getElementById(`subtaskArea${i}`);
+    if (!subtaskArea) return console.error(`Subtask area not found for task index ${i}`);
+  
+    let progressBar = subtaskArea.querySelector('.progress-bar');
+    let progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
+    let subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
+  
+    if (!progressBar) {
+        subtaskArea.innerHTML += `<div class='progress-bar'><div class='progress-bar-fill'></div></div><div class='subtaskProgressText'></div>`;
+        progressBar = subtaskArea.querySelector('.progress-bar');
+        progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
+        subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
+    }
+  
+    const subtasks = tasks[i].subtasks || [];
+    const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
+    const progress = (completedSubtasks / subtasks.length) * 100;
+  
+    progressBarFill.style.width = `${progress}%`;
+    progressBar.style.display = subtasks.length ? 'flex' : 'none';
+    subtaskProgressText.textContent = `${completedSubtasks}/${subtasks.length} Subtasks`;
+    subtaskProgressText.style.display = subtasks.length ? 'flex' : 'none';
+    subtaskArea.style.display = subtasks.length ? 'flex' : 'none';
   }
-
-  let progressBar = subtaskArea.querySelector('.progress-bar');
-  let progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
-  let subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
-
-  if (!progressBar) {
-      progressBar = document.createElement('div');
-      progressBar.className = 'progress-bar';
-      subtaskArea.appendChild(progressBar);
-
-      progressBarFill = document.createElement('div');
-      progressBarFill.className = 'progress-bar-fill';
-      progressBar.appendChild(progressBarFill);
-
-      subtaskProgressText = document.createElement('div');
-      subtaskProgressText.className = 'subtaskProgressText';
-      subtaskArea.appendChild(subtaskProgressText);
-  }
-
-  const subtasks = tasks[i].subtasks;
-
-  if (!subtasks || subtasks.length === 0) {
-      subtaskArea.style.display = 'none';
-      return;
-  }
-  const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
-  const totalSubtasks = subtasks.length;
-  const progress = (completedSubtasks / totalSubtasks) * 100;
-  console.log(`Task ${i}: ${completedSubtasks}/${totalSubtasks} subtasks completed`);
-  console.log(`Progress: ${progress}%`);
-  progressBarFill.style.width = `${progress}%`;
-  progressBar.style.display = totalSubtasks > 0 ? 'flex' : 'none';
-  subtaskProgressText.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
-  subtaskProgressText.style.display = totalSubtasks > 0 ? 'flex' : 'none';
-  subtaskArea.style.display = totalSubtasks > 0 ? 'flex' : 'none';
-}
