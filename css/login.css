@@ -350,7 +350,7 @@ input {
 }
 
 .move {
-  animation: moveToOriginalPosition 2s forwards ease-in-out;
+  animation: moveToOriginalPosition 1.5s forwards ease-in-out;
   opacity: 1;
 }
 
