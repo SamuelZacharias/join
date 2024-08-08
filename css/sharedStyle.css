@@ -254,7 +254,6 @@ select:hover {
 }
 
 .selected {
-    border: 0.5px solid white;
     background-color: var(--gray);
     color: white;
 }

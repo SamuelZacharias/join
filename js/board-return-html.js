@@ -176,10 +176,13 @@ function returnEditSubtaskHTML(index, title) {
 function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
     return `
       <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
-          <div class="openedAssigendContactsInitials" style="background-color: ${color};">
+            <div class="openedAssigendContactsInitials" style="background-color: ${color};">
               ${initials}
-          </div>
-          <div>${contactName}</div>
+            </div>
+            <div class="contactName">
+                <span style="width:100%;">${contactName}</span>
+                <img src="/assets/img/png/Rectangle 5.png" alt="">
+            </div>
       </div>
     `;
 }

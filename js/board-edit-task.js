@@ -3,7 +3,6 @@ let isSubtaskEditMode = false;
 
 document.addEventListener('click', handleClickOutsideEdit);
 
-
 function editTask(taskId) {
   let task = getTaskById(taskId);
   console.log('Task to edit:', task);  
@@ -77,7 +76,7 @@ function showContactsToChoose() {
 function renderContactsList(contactsList, assignedContacts, contactsToChooseElement) {
   contactsList.forEach(contact => {
     const isAssigned = assignedContacts.some(assignedContact => assignedContact.name === contact.name);
-    const contactClass = isAssigned ? 'editAssignedTo contactIsAssigned' : '';
+    const contactClass = isAssigned ? 'selected' : '';
     const initials = contact.initials;
     const color = contact.color;
 
@@ -160,6 +159,14 @@ function startWritingSubtask() {
 function writeSubtask() {
   let subtaskArea = document.getElementById('editAreaSubtask');
   subtaskArea.innerHTML = returnWriteSubtaskHTML();
+  let subtaskInput = document.getElementById('subtaskInput2');
+  subtaskInput.focus()
+  subtaskInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();  // Prevent default Enter behavior
+        addSubtask();  // Trigger addSubtask function
+    }
+});
 }
 
 function validateSubtaskInput(subtaskInput, editSubtask) {
@@ -239,6 +246,14 @@ function editSubtaskBoard(index) {
   let subtaskContainer = subtaskContainers[index];
   let subtaskTitle = subtaskInfos[index].title;
   subtaskContainer.innerHTML = returnEditSubtaskHTML(index, subtaskTitle);
+  let editInput = document.getElementById('editSubtaskInput');
+    editInput.focus(); 
+    editInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();  
+            saveSubtask(index); 
+        }
+    });
 }
 
 function handleEditInputError(editInput) {
@@ -250,6 +265,7 @@ function handleEditInputError(editInput) {
       editInput.placeholder = 'Enter subtask';
       editInput.style.borderColor = '';
       editInput.classList.remove('error-placeholder');
+
   }, { once: true });
 }
 
@@ -263,6 +279,7 @@ function saveSubtask(index) {
       editInput.placeholder = 'Enter subtask';
       editInput.style.borderColor = '';
       editInput.classList.remove('error-placeholder');
+      
   }
   subtaskInfos[index].title = editedSubtask;
   showSubtasks();
@@ -272,3 +289,5 @@ function deleteSubtask(index) {
   subtaskInfos.splice(index, 1);
   showSubtasks();
 }
+
+
