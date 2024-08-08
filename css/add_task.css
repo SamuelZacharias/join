@@ -71,7 +71,9 @@ textarea {
   flex-direction: column;
   font-size: 20px;
   background-color: white;
-  margin-top: -20px;
+  margin-top: -40px;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
 
 }
 
@@ -90,8 +92,10 @@ textarea {
   overflow-y: scroll;
   position: absolute;
   width: 440px;
-  margin-top: 80px;
+  margin-top: 75px;
   z-index: 44;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
 }
 
 #assignedContacts {
