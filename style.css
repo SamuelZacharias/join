@@ -13,6 +13,10 @@
   --border : #D1D1D1;
 }
 
+html{
+  background-color: var(--background);
+}
+
 body{
   margin: 0px;
   font-family: "inter", Arial, sans-serif;
