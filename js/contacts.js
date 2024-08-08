@@ -148,8 +148,54 @@ async function closeDialogEdit() {
 
 async function openDialogSuccesfully() {
   const dialogContainer = document.getElementById("succesfullyCreated");
-  
+    let dialogResponse = document.getElementById('succesfullyDeleted')
+  dialogResponse.innerHTML = `Contact was succesfully created`
   // Verzögerung von 1 Sekunde, bevor der Dialog angezeigt wird
+  setTimeout(async () => {
+      // Dialog anzeigen
+      dialogContainer.open = true;
+      await sleep(300);
+      dialogContainer.classList.add("dialog-open");
+      dialogContainer.classList.add("d-flex");
+
+      // Verzögerung von 2 Sekunden, bevor der Dialog ausgeblendet wird
+      await sleep(1000); // 2000 Millisekunden = 2 Sekunden
+
+      // Dialog wieder ausblenden
+      dialogContainer.classList.remove("dialog-open");
+      await sleep(300); // Kleine Verzögerung für die Animation
+      dialogContainer.classList.remove("d-flex");
+      dialogContainer.open = false;
+  }, 300); // 1000 Millisekunden = 1 Sekunde
+}
+
+async function openDialogSuccesfullySaved() {
+  const dialogContainer = document.getElementById("succesfullyCreated");
+    let dialogResponse = document.getElementById('succesfullyDeleted')
+  dialogResponse.innerHTML = `Contact info has been updated`
+  // Verzögerung von 1 Sekunde, bevor der Dialog angezeigt wird
+  setTimeout(async () => {
+      // Dialog anzeigen
+      dialogContainer.open = true;
+      await sleep(300);
+      dialogContainer.classList.add("dialog-open");
+      dialogContainer.classList.add("d-flex");
+
+      // Verzögerung von 2 Sekunden, bevor der Dialog ausgeblendet wird
+      await sleep(1000); // 2000 Millisekunden = 2 Sekunden
+
+      // Dialog wieder ausblenden
+      dialogContainer.classList.remove("dialog-open");
+      await sleep(300); // Kleine Verzögerung für die Animation
+      dialogContainer.classList.remove("d-flex");
+      dialogContainer.open = false;
+  }, 300); // 1000 Millisekunden = 1 Sekunde
+}
+
+async function openDialogSuccesfullyDeleted() {
+  const dialogContainer = document.getElementById("succesfullyCreated");
+  let dialogResponse = document.getElementById('succesfullyDeleted')
+  dialogResponse.innerHTML = `Contact was succesfully deleted`
   setTimeout(async () => {
       // Dialog anzeigen
       dialogContainer.open = true;
@@ -247,6 +293,7 @@ function deleteContact(index) {
   .then(response => response.json())
   .then(data => {
     console.log('Kontakt erfolgreich gelöscht', data);
+    openDialogSuccesfullyDeleted()
     renderContacts(); 
     highlightContact(this)
     storeFirstAndLastNames();
@@ -327,6 +374,7 @@ function editContact() {
     console.log('Daten erfolgreich gespeichert:', data);
     loadData(); // Kontakte neu laden
     closeDialogEdit();
+    openDialogSuccesfullySaved()
     displayContactInfo(index)
     highlightContact(index); // Reapply highlight after editing
   })
