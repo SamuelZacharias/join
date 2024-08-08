@@ -44,6 +44,7 @@ tr{
     display: flex;
     width: calc(100vw - 424px);
     height: calc(100vh - 166px);
+    max-width: 1600px;
     overflow: scroll;
     margin-top: 35px;
     padding-left: 96px;
