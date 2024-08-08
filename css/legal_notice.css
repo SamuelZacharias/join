@@ -25,15 +25,14 @@ span{
 }
 
 .content-legal-notice {
-  gap: 30px;
   display: flex;
-  color: black;
-  width: 1014px;
-  height: 83vh;
+  width: calc(100vw - 424px);
+  height: calc(100vh - 166px);
+  overflow: scroll;
+  margin-top: 35px;
   padding-left: 96px;
-  overflow-y: scroll;
-  padding-top: 35px;
   flex-direction: column;
+  gap: 30px;
 }
 
 .content-legal-notice::-webkit-scrollbar{

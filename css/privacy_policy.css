@@ -9,11 +9,11 @@ body {
 
 .content-policy {
   display: flex;
-  width: 1016px;
-  height: 82vh;
+  width: calc(100vw - 424px);
+  height: calc(100vh - 166px);
   overflow: scroll;
   margin-top: 35px;
-  margin-left: 96px;
+  padding-left: 96px;
   flex-direction: column;
   gap: 30px;
 }

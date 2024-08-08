@@ -41,10 +41,14 @@ tr{
 
 
 .content-help{
-    width: 1014px;
-    padding: 35px 0px 0px 94px;
+    display: flex;
+    width: calc(100vw - 424px);
+    height: calc(100vh - 166px);
     overflow: scroll;
-     height: 82vh;
+    margin-top: 35px;
+    padding-left: 96px;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .content-help::-webkit-scrollbar{
