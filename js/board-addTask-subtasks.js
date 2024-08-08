@@ -1,23 +1,19 @@
 function writeSubtaskAddTask() {
   let subtaskArea = document.getElementById('subtaskContainerAddTask');
   subtaskArea.innerHTML = returnWriteSubtaskAddTaskBoardHTML()
-  let inputField = document.getElementById('subtaskInput');
+  let inputField = document.getElementById('subtaskInput') ;
   inputField.addEventListener('focusout', function() {
       if (!this.value.trim()) {
           resetSubtask();
       }
   });
-  writeSubtaskAddtaskEnterKey(inputField)
-  inputField.focus();
-}
-
-function writeSubtaskAddtaskEnterKey(inputField){
   inputField.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        addSubtaaskBoard(); 
-    }
-});
+      if (event.key === 'Enter') {
+          event.preventDefault();
+          addSubtaaskBoard(); 
+      }
+  });
+  inputField.focus();
 }
 
 function addSubtaaskBoard(){
@@ -27,12 +23,7 @@ function addSubtaaskBoard(){
     subtaskInput.value = ''; 
     subtaskInput.placeholder = 'Min 3 characters needed'; 
     subtaskInput.style.borderColor = 'red'; 
-    subtaskInput.classList.add('error-placeholder'); 
     return; 
-  } else {
-    subtaskInput.placeholder = 'Enter subtask'; 
-    subtaskInput.style.borderColor = ''; 
-    subtaskInput.classList.remove('error-placeholder'); 
   }
   addTaskBoardInfos.push(subtaskInfo);
   showSubtasksAddTask();
@@ -53,22 +44,22 @@ function showSubtasksAddTask() {
 
 function editSubtaskAddTask(index) {
   let newSubtask = document.getElementById('newSubtasksAddTask');
-    if (index >= 0) {
-      newSubtask.innerHTML = returnIfEditSubtaskAddTaskHTML(index, addTaskBoardInfos)
-    } else {
-      newSubtask.innerHTML = returnElseEditSubtaskAddTaskHtml(index, addTaskBoardInfos)
-    }
+  if (index >= 0) {
+    newSubtask.innerHTML = returnIfEditSubtaskAddTaskHTML(index, addTaskBoardInfos);
+  } else {
+    newSubtask.innerHTML = returnElseEditSubtaskAddTaskHtml(index, addTaskBoardInfos);
   }
   let inputField = document.getElementById('editSubtaskInputAddTask');
-    if (inputField) {
-        inputField.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent the default action if necessary
-                saveSubtaskAddTask(index); // Call the saveSubtask function
-            }
-        });
-        inputField.focus(); 
-};
+  if (inputField) {
+    inputField.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault(); 
+        saveSubtaskAddTask(index);
+      }
+    });
+    inputField.focus();
+  }
+}
 
 
 function saveSubtaskAddTask(index) {
@@ -78,12 +69,10 @@ function saveSubtaskAddTask(index) {
     editInput.value = ''; 
     editInput.placeholder = 'Min 3 characters needed'; 
     editInput.style.borderColor = 'red'; 
-    editInput.classList.add('error-placeholder'); 
     return; 
   } else {
     editInput.placeholder = ''; 
     editInput.style.borderColor = ''; 
-    editInput.classList.remove('error-placeholder'); 
   }
   addTaskBoardInfos[index] = editedSubtask;
   showSubtasksAddTask()

@@ -155,12 +155,10 @@ function addSubtask(){
     subtaskInput.value = ''; 
     subtaskInput.placeholder = 'Min 3 characters needed'; 
     subtaskInput.style.borderColor = 'red'; 
-    subtaskInput.classList.add('error-placeholder'); 
     return; 
   } else {
     subtaskInput.placeholder = 'Enter subtask'; 
     subtaskInput.style.borderColor = ''; 
-    subtaskInput.classList.remove('error-placeholder'); 
   }
   subtaskInfos.push(subtaskInfo);
   showSubtasks();
@@ -223,12 +221,10 @@ function saveSubtask(index) {
     editInput.value = ''; 
     editInput.placeholder = 'Min 3 characters needed'; 
     editInput.style.borderColor = 'red'; 
-    editInput.classList.add('error-placeholder'); 
     return; 
   } else {
     editInput.placeholder = ''; 
     editInput.style.borderColor = ''; 
-    editInput.classList.remove('error-placeholder'); 
   }
   subtaskInfos[index] = editedSubtask;
   showSubtasks();
