@@ -8,7 +8,6 @@ const colors = ['#FF7A00','#FF5EB3','#9747FF','#9327FF','#00BEE8','#1FD7C1','#FF
 
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
 
-
 function renderContacts() {
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = ''; 
@@ -22,7 +21,6 @@ function renderContacts() {
           let nameParts = contact.name.split(' ');
           return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
         });
-
     
         const groupedContacts = contacts.reduce((acc, contact, index) => {
           let nameParts = contact.name.split(' ');
@@ -38,15 +36,11 @@ function renderContacts() {
         const sortedInitials = Object.keys(groupedContacts).sort();
 
         sortedInitials.forEach(initial => {
-          
           contactList.innerHTML += generateLetterBox(initial);
-
-          
           groupedContacts[initial].forEach(({ contact, initials, index }) => {
             contactList.innerHTML += generateContact(contact, initials, index);
           });
         });
-
         
         if (highlightedContactIndex >= 0) {
           highlightContact(highlightedContactIndex);
@@ -58,7 +52,6 @@ function renderContacts() {
     });
 }
 
-
 function updateInitials() {
   initials = contacts.map(contact => {
       let nameParts = contact.name.split(' ');
@@ -66,8 +59,6 @@ function updateInitials() {
   });
   localStorage.setItem('initials', JSON.stringify(initials));
 }
-
-
 
 function addContact() {
   let name = document.getElementById('name').value;
@@ -195,7 +186,6 @@ function editContact() {
   };
 
   contacts[index] = updatedContact;
-
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
     headers: {
@@ -232,76 +222,6 @@ function clearError(inputElement) {
       inputElement.placeholder = inputElement.dataset.originalPlaceholder;
   }
   inputElement.classList.remove('error');
-}
-
-function validateForm() {
-  let isValid = true;
-  const nameInput = document.getElementById('name');
-  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 23) {
-      setError(nameInput, 'Max Mustermann, max. 23 Zeichen');
-      isValid = false;
-      nameInput.value = '';
-  } else {
-      clearError(nameInput);
-  }
-
-  const emailInput = document.getElementById('email');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setError(emailInput, 'Ungültige E-Mail (test@test.de)');
-      isValid = false;
-      emailInput.value = '';
-  } else {
-      clearError(emailInput);
-  }
-
-  const phoneInput = document.getElementById('phone');
-  if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Ungültige Telefonnummer 0176123123');
-      isValid = false;
-      phoneInput.value = '';
-  } else {
-      clearError(phoneInput);
-  }
-
-  if (isValid) {
-    addContact();
-    closeDialog(); 
-    openDialogContact("Contact was successfully created");
-  }
-}
-
-function validateEditForm() {
-  let isValid = true;
-  const nameInput = document.getElementById('inputEditName');
-  if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 23) {
-      setError(nameInput, 'Max Mustermann, max. 23 Zeichen');
-      isValid = false;
-      nameInput.value = '';
-  } else {
-      clearError(nameInput);
-  }
-
-  const emailInput = document.getElementById('inputEditEmail');
-  if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      setError(emailInput, 'Ungültige E-Mail (test@test.de)');
-      isValid = false;
-      emailInput.value = '';
-  } else {
-      clearError(emailInput);
-  }
-
-  const phoneInput = document.getElementById('inputEditPhone');
-  if (!phoneInput.value.match(/^\d+$/)) {
-      setError(phoneInput, 'Ungültige Telefonnummer 0176123123');
-      isValid = false;
-      phoneInput.value = '';
-  } else {
-      clearError(phoneInput);
-  }
-
-  if (isValid) {
-    editContact();
-  }
 }
 
 function storeFirstAndLastNames() {

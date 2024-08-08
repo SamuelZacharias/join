@@ -81,4 +81,3 @@ function dragLeave(event) {
   const column = event.currentTarget;
   column.classList.remove('columnDragTo');
 }
-

@@ -101,5 +101,4 @@ function hideElements() {
   }
 }
 
-/* Initial call to load the sidebar and header, then possibly hide the elements */
 includeHTML(hideElements);
