@@ -3,7 +3,7 @@ header {
   font-size: 20px !important;
   font-family: "inter", Arial, sans-serif;
   display: flex;
-  width: 1208px;
+  width: calc(100vw - 232px);
   height: 96px;
   padding: 20px 40px 20px 116px;
   gap: 0px;
@@ -61,7 +61,7 @@ header {
   border-radius: 20px 0px 20px 20px;
   position: absolute;
   top: 70px;
-  left: 1180px;
+  left: calc(100vw - 260px);
   z-index: 999;
 }
 
