@@ -41,15 +41,31 @@ function updateGreeting() {
 window.onload = updateGreeting;
 
 function formatDate(date) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    // Format the date as needed, e.g., 'DD-MM-YYYY'
+    const day = ('0' + date.getDate()).slice(-2);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
 }
 
 function setFutureDate() {
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + 14);
-    const formattedDate = formatDate(futureDate);
-    document.querySelector('.date').textContent = formattedDate;
+    loadTasksFromLocalStorage();
+
+    const urgentTasks = tasks.filter(task => task.priority === "Urgent");
+    if (urgentTasks.length > 0) {
+        const earliestUrgentTask = urgentTasks.reduce((earliest, current) => {
+            return new Date(current.dueDate) < new Date(earliest.dueDate) ? current : earliest;
+        });
+
+        const futureDate = new Date(earliestUrgentTask.dueDate);
+        const formattedDate = formatDate(futureDate);
+        document.querySelector('.date').textContent = formattedDate;
+    } else {
+        const futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + 14);
+        const formattedDate = formatDate(futureDate);
+        document.querySelector('.date').textContent = formattedDate;
+    }
 }
 
 const tasks = [];

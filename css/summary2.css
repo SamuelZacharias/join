@@ -82,6 +82,7 @@
 }
 
 .date {
+    display: flex;
     width: 178px;
     height: 25px;
     font-weight: 700;
@@ -101,6 +102,7 @@
 }
 
 .upcoming {
+    display: flex;
     width: 148px;
     height: 19px;
     font-weight: 400;
