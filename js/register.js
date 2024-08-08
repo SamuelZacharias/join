@@ -51,12 +51,20 @@ function addRegisterInfo(newRegisterInfo) {
 
 
 function validateName(name) {
-  let words = name.trim().split(/\s+/); 
+  let words = name.trim().split(/\s+/);
+  
+  // Check if the name contains numbers
+  if (/\d/.test(name)) {
+    document.getElementById('invalidName').classList.add('invalid');
+    return false;
+  }
+  
+  // Check if the name has exactly two words
   if (words.length !== 2) {
-    document.getElementById('invalidName').classList.add('invalid'); 
+    document.getElementById('invalidName').classList.add('invalid');
     return false;
   } else {
-    document.getElementById('invalidName').classList.remove('invalid'); 
+    document.getElementById('invalidName').classList.remove('invalid');
     return true;
   }
 }
@@ -89,15 +97,47 @@ function validateForm(registerInfo) {
     displayNameError();
     return false;
   }
+
+  if (!displayRequiredPasswordFormat()) {
+    return false;
+  }
+
   if (registerInfo.password !== registerInfo.repeatPassword) {
     displayPasswordMismatchError();
+    return false;
+  }
+
+  if (!document.getElementById('acceptPolicy').checked) {
+    displayPolicyError();
     return false;
   }
   return true;
 }
 
 function displayNameError() {
-  document.getElementById('wrongRepeat').innerHTML = `Name must contain exactly two words`;
+  document.getElementById('wrongRepeat').innerHTML = `Name must contain exactly two words and no numbers`;
+}
+
+function displayPolicyError() {
+  document.getElementById('wrongRepeat').innerHTML = `You must accept our Privacy Policy`
+  document.getElementById('invalidPolicy').classList.add('invalid');
+}
+
+
+function displayRequiredPasswordFormat() {
+  let password = document.getElementById('password').value;
+  let passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/;
+  if (password.length < 8) {
+    document.getElementById('wrongRepeat').innerHTML = `Password must be at least 8 characters long.`;
+    document.getElementById('invalidPassword').classList.add('invalid');
+    return false;
+  }
+  if (!passwordPattern.test(password)) {
+    document.getElementById('wrongRepeat').innerHTML = `Password must contain at least one number, one uppercase letter, and one lowercase letter.`;
+    document.getElementById('invalidPassword').classList.add('invalid');
+    return false;
+  }
+  return true;
 }
 
 function displayPasswordMismatchError() {
@@ -111,7 +151,7 @@ async function isEmailInUse(email) {
 }
 
 function displayEmailInUseError() {
-  document.getElementById('wrongRepeat').innerHTML = `Email already in use!`;
+  document.getElementById('wrongRepeat').innerHTML = `Email already in use or invalid!`;
   document.getElementById('invalidEmail').classList.add(`invalid`);
 }
 
@@ -120,7 +160,6 @@ async function submitRegistration(registerInfo) {
   await saveRegisterInfoToFirebase(); 
   showSuccessMessage();
 }
-
 
 function showSuccessMessage() {
   let successButton = document.getElementById('signedUpCont');
@@ -139,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('name').addEventListener('input', resetErrorState); 
 });
 
-
 function showPassword() {
   var x = document.getElementById("password");
   if (x.type === "password") {
@@ -156,4 +194,6 @@ function resetErrorState() {
   document.getElementById('invalid').classList.remove('invalid');
   document.getElementById('invalidEmail').classList.remove('invalid');  
   document.getElementById('invalidName').classList.remove('invalid'); 
+  document.getElementById('invalidPassword').classList.remove('invalid');
+  document.getElementById('invalidPolicy').classList.remove('invalid');
 }
