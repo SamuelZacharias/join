@@ -22,9 +22,19 @@ function submitForm(event) {
 
 function validateForm() {
   resetInvalidStates();
-  let valid = validateInputs();
-  validateFormCategory();
+
+  // Run input validation
+  let validInputs = validateInputs();
+
+  // Run category validation
+  let validCategory = validateFormCategory();
+
+  // Combine the results - form is valid only if both are valid
+  let valid = validInputs && validCategory;
+
+  // Additional validation (e.g., form timeout)
   validateFormTimeout();
+
   return valid;
 }
 
@@ -42,6 +52,7 @@ function validateInputs() {
     }
     validateDateInput(input);
   });
+  
   return valid;
 }
 
@@ -60,11 +71,15 @@ function validateFormTimeout() {
   }, 1000); 
 }
 
-function validateFormCategory(){
+function validateFormCategory() {
+  let valid = false
   if (!choosenCategory) {
     valid = false;
     document.getElementById('dropdownCategory').classList.add('invalid');
+  }else{
+    valid = true
   }
+  return valid
 }
 
 function validateDateInput(input){
