@@ -188,13 +188,15 @@ function addContact() {
     contacts.push(newContact);
     saveData(); // Kontakte speichern
     storeFirstAndLastNames();
-
     // Formular zurücksetzen
     document.getElementById('name').value = '';
     document.getElementById('email').value = '';
     document.getElementById('phone').value = '';
     renderContacts(); // Kontaktliste neu rendern
     loadData();
+    let lastIndex = contacts.length - 1; // Get the index of the last added contact
+    highlightContact(lastIndex); // Highlight the last added contact
+    displayContactInfo(lastIndex)
   } else {
     alert('Bitte füllen Sie alle Felder aus.');
   }
@@ -245,7 +247,8 @@ function deleteContact(index) {
   .then(response => response.json())
   .then(data => {
     console.log('Kontakt erfolgreich gelöscht', data);
-    renderContacts(); // Aktualisiert die Anzeige
+    renderContacts(); 
+    highlightContact(this)
     storeFirstAndLastNames();
     loadData();
     document.querySelector('.contacts-info-box').innerHTML = '';

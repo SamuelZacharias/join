@@ -19,11 +19,11 @@ body {
 }
 
 .contact-box {
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 32px 24px 32px 24px;
   display: flex;
   width: 456px;
-  height: 90vh;
+  height: calc(100vh - 96px);
   background-color: white;
   box-shadow: 1px 0px 4px 0px #0000001a;
   box-sizing: border-box;
@@ -310,4 +310,9 @@ h3 {
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+.highlight {
+  background-color: yellow; /* Highlight color */
+  transition: background-color 0.5s ease; /* Smooth transition */
 }
