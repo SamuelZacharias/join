@@ -22,19 +22,10 @@ function submitForm(event) {
 
 function validateForm() {
   resetInvalidStates();
-
-  // Run input validation
   let validInputs = validateInputs();
-
-  // Run category validation
   let validCategory = validateFormCategory();
-
-  // Combine the results - form is valid only if both are valid
   let valid = validInputs && validCategory;
-
-  // Additional validation (e.g., form timeout)
   validateFormTimeout();
-
   return valid;
 }
 
@@ -68,7 +59,7 @@ function validateFormTimeout() {
     document.querySelectorAll('.invalid').forEach(element => {
       element.classList.remove('invalid');
     });
-  }, 1000); 
+  }, 2000); 
 }
 
 function validateFormCategory() {
