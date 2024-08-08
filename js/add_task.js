@@ -216,7 +216,6 @@ function editSubtask(index) {
   }
 }
 
-
 function saveSubtask(index) {
   let editInput = document.getElementById('editSubtaskInput');
   let editedSubtask = editInput.value;
@@ -270,7 +269,6 @@ document.getElementById('clearButton').addEventListener('click', function(event)
   document.getElementById('dropdownCategory').classList.remove('invalid');
 });
 
-
 function showSuccessMessage() {
   let successButton = document.getElementById('signedUpCont');
   successButton.classList.remove('d-none');
@@ -279,4 +277,3 @@ function showSuccessMessage() {
     window.location.href = 'board.html';
   }, 3000);
 }
-
