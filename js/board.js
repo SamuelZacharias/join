@@ -53,24 +53,6 @@ function handleClickOutsideEdit(event) {
   }
 }
 
-function handleClickOutsideAddTask(event) {
-  const container = document.getElementById('addTaskContainer');
-  if (container.contains(event.target)) {
-    document.getElementById('addTaskContainer').classList.add('d-none')
-
-    container.classList.add('openedTaskContainer')
-  }
-
-  const containerAddTask = document.getElementById('boardAddTask');
-  if (containerAddTask.contains(event.target)) {
-    document.getElementById('addTaskContainer').classList.add('d-none')
-
-    containerAddTask.classList.add('openedTaskContainer')
-  }
-}
-
-
-
 function openBoardAddTask(columnType) {
   let addTaskContainer = document.getElementById('addTaskContainer');
   addTaskContainer.classList.remove('d-none');

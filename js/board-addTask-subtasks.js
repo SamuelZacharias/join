@@ -7,13 +7,17 @@ function writeSubtaskAddTask() {
           resetSubtask();
       }
   });
-  inputField.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-          event.preventDefault();
-          addSubtaaskBoard(); 
-      }
-  });
+  writeSubtaskAddtaskEnterKey(inputField)
   inputField.focus();
+}
+
+function writeSubtaskAddtaskEnterKey(inputField){
+  inputField.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        addSubtaaskBoard(); 
+    }
+});
 }
 
 function addSubtaaskBoard(){

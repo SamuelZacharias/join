@@ -1,7 +1,7 @@
 
 function renderAddTaskBoardHtml(addTaskContainer){
     addTaskContainer.innerHTML = `
-        <section class="addTask" id="boardAddTask" onclick="event.stopPropagation()" >
+        <section class="addTask" id="boardAddTask" >
             <div class="boardAddTaskTitle">
                 <h1>Add Task</h1>
                 <img src="/assets/img/png/close.png" onclick="closeAddTaskBoardOnX()">
