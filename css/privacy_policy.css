@@ -16,6 +16,7 @@ body {
   padding-left: 96px;
   flex-direction: column;
   gap: 30px;
+  max-width: 1600px;
 }
 
 .content-policy::-webkit-scrollbar {
