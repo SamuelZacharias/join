@@ -38,11 +38,6 @@ function renderTasks(tasksToRender = tasks) {
   });
 }
 
-
-
-
-
-
 function categoryColor(i, task) {
   const categoryElement = document.getElementById(`taskCategory${i}`);
   if (categoryElement) {
@@ -53,7 +48,6 @@ function categoryColor(i, task) {
       }
   }
 }
-
 
 function renderPriority(i) {
   const priorityElement = document.getElementById(`priority${i}`);
@@ -69,7 +63,6 @@ function renderPriority(i) {
       }
   }
 }
-
 
 function renderContacts(i) {
     let renderedContacts = document.getElementById(`contacts${i}`);
@@ -106,8 +99,6 @@ function renderContacts(i) {
         } 
     }
 }
-
-
 
 function renderSubtasks(i) {
   const subtaskArea = document.getElementById(`subtaskArea${i}`);

@@ -8,7 +8,6 @@ let choosenCategory = false;
 let category = ["User Story", "Technical task"];
 let addTaskColumn = null
 
-
 function loadTasksFromLocalStorage() {
   const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
   const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -54,8 +53,6 @@ function handleClickOutsideEdit(event) {
   }
 }
 
-
-
 function openBoardAddTask(columnType) {
   let addTaskContainer = document.getElementById('addTaskContainer');
   addTaskContainer.classList.remove('d-none');
@@ -65,7 +62,6 @@ function openBoardAddTask(columnType) {
   addTaskColumn = columnType;
   setMinDate();
 }
-
 
 function closeAddTaskBoard() {
   const taskContainer = document.getElementById('addTaskContainer');
@@ -79,7 +75,6 @@ function closeAddTaskBoard() {
     taskContainer.classList.remove('slideOut');
   }, 1000);
 }
-
 
 function closeAddTaskBoardOnX() {
   const taskContainer = document.getElementById('addTaskContainer');
@@ -139,13 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
 setInterval(() => {
   getTasksFromDataBase()
   console.log('taskrerendered');
   
 }, 15000);
-
-
-
-

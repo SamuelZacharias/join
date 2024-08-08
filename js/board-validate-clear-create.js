@@ -19,7 +19,6 @@ function clearForm() {
   
 }
 
-
 function validateFormAddTaskBoard() {
   const form = document.getElementById('taskFormAddTask');
   const inputs = form.querySelectorAll('input, textarea, select');
@@ -88,7 +87,6 @@ async function handleCreateButtonClick() {
     console.warn('Form validation failed');
   }
 }
-
 
 function submitForm(event) {
   if (!validateFormAddTaskBoard()) {

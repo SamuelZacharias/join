@@ -22,7 +22,6 @@ async function fetchRegisterInfo() {
   }
 }
 
-
 async function saveRegisterInfoToFirebase() {
   try {
     let response = await fetch(BASE_URL + "registerInfo.json", {
@@ -68,7 +67,6 @@ function validateName(name) {
     return true;
   }
 }
-
 
 async function handleFormSubmit(event) {
   event.preventDefault(); 
@@ -122,7 +120,6 @@ function displayPolicyError() {
   document.getElementById('wrongRepeat').innerHTML = `You must accept our Privacy Policy`
   document.getElementById('invalidPolicy').classList.add('invalid');
 }
-
 
 function displayRequiredPasswordFormat() {
   let password = document.getElementById('password').value;
