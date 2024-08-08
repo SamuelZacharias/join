@@ -42,7 +42,8 @@ function handleLoginResponse(data, email, password) {
     if (data && data.email) {
         const emailIndex = data.email.indexOf(email);
         if (emailIndex === -1) {
-            showInvalidMessage('invalid', 'Email does not exist.', 'invalidEmail');
+            showInvalidMessage('invalid', 'Email or password invalid.', 'invalidEmail');
+            showInvalidMessage('invalid', 'Email or password invalid.', 'invalidPassword');
         } else {
             validatePasswordAndLogin(data, emailIndex, password);
         }
@@ -65,7 +66,8 @@ async function validatePasswordAndLogin(data, emailIndex, password) {
 
         window.location.href = 'summary.html';
     } else {
-        showInvalidMessage('invalid', 'Incorrect password', 'invalidPassword');
+        showInvalidMessage('invalid', 'Email or password invalid.', 'invalidPassword');
+        showInvalidMessage('invalid', 'Email or password invalid.', 'invalidEmail');
     }
 }
 
