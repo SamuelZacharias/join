@@ -133,7 +133,7 @@ function displayRequiredPasswordFormat() {
     return false;
   }
   if (!passwordPattern.test(password)) {
-    document.getElementById('wrongRepeat').innerHTML = `Password must contain at least one number, one uppercase letter, and one lowercase letter.`;
+    document.getElementById('wrongRepeat').innerHTML = `Password must have at least numbers, upper and lowercase letters`;
     document.getElementById('invalidPassword').classList.add('invalid');
     return false;
   }
