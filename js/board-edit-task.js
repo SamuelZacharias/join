@@ -2,6 +2,7 @@ let subtaskInfos = [];
 let isSubtaskEditMode = false; 
 
 document.addEventListener('click', handleClickOutsideEdit);
+document.addEventListener('click', handleClickOutsideAddTask);
 
 function editTask(taskId) {
   let task = getTaskById(taskId);
