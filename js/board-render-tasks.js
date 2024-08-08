@@ -46,7 +46,7 @@ function renderTasks(tasksToRender = tasks) {
 function categoryColor(i, task) {
   const categoryElement = document.getElementById(`taskCategory${i}`);
   if (categoryElement) {
-      if (task.category === 'User Task') {
+      if (task.category === 'User Story') {
           categoryElement.classList.add('userTask');
       } else if (task.category === 'Technical task') {
           categoryElement.classList.add('technicalTask');

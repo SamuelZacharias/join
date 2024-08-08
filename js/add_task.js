@@ -1,6 +1,6 @@
 let clickCount = 0;
 let choosenCategory = false;
-let category = ["User Task", "Technical task"];
+let category = ["User Story", "Technical task"];
 let activeButton = 2;
 let selectedContacts = [];
 let contacts = localStorage.getItem('contacts');

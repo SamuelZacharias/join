@@ -5,7 +5,7 @@ let addTaskBoardInfos = [];
 let activeButton = null
 let clickCount = 0;
 let choosenCategory = false;
-let category = ["User Task", "Technical task"];
+let category = ["User Story", "Technical task"];
 let addTaskColumn = null
 
 

@@ -16,7 +16,7 @@ function openTask(task) {
 function openedCategoryColor(task) {
   const categoryElement = document.getElementById(`openedTaskCategory`);
   if (categoryElement) {
-    if (task.category === 'User Task') {
+    if (task.category === 'User Story') {
       categoryElement.classList.add('userTask');
     } else if (task.category === 'Technical task') {
       categoryElement.classList.add('technicalTask');
