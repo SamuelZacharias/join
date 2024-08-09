@@ -3,11 +3,10 @@ body {
 }
 
 .addTask {
-  background-color: var(--background);
   display: flex;
   width: 100%;
   width: calc(1207.99px - 96px);
-  padding-top: 206px;
+  padding-top: 96px;
   padding-left: 96px;
   flex-direction: column;
   font-size: 20px;
@@ -182,17 +181,7 @@ li:hover .d-none {
   text-align: center;
 }
 
-.logOut {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--gray);
-  padding: 10px;
-  border-radius: 20px 0px 20px 20px;
-  position: absolute;
-  top: 70px;
-  left: 946px;
-  background-color: var(--gray);
-}
+
 
 
 #logOut a {

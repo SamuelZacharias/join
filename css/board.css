@@ -5,7 +5,6 @@ body {
 
 .d-flex {
   display: flex;
-  max-width: 1440px;
 }
 
 li:hover .d-none {
@@ -18,10 +17,10 @@ li:hover .d-none {
 }
 
 .boardContent {
-  height: 40px;
-  background-color: var(--background);
-  width: calc(1440px - 232px);
   height: calc(100% - 96px);
+  width: 1440px;
+  box-sizing: border-box;
+  z-index: -2;
 }
 
 h1 {
@@ -99,6 +98,8 @@ input:focus {
   font-size: 20px;
   font-weight: 700;
   padding-bottom: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .listheader {
@@ -120,7 +121,9 @@ input:focus {
   justify-content: space-between;
   padding: 0px 64px;
   box-sizing: border-box;
-  height: 60vh;
+  height: calc(100vh - 350.75px);
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .taskColumn {
