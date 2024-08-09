@@ -136,3 +136,21 @@ document.addEventListener('DOMContentLoaded', function () {
 setInterval(() => {
   getTasksFromDataBase()
 }, 15000);
+
+function isTouchDevice() {
+  // Check for touch support in modern browsers
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
+    return true;
+  }
+
+  // Older method for certain devices
+  const mediaQuery = window.matchMedia('(pointer: coarse)');
+  return mediaQuery && mediaQuery.matches;
+}
+
+// Example usage
+if (isTouchDevice()) {
+  console.log("User is on a touch device.");
+} else {
+  console.log("User is not on a touch device.");
+}

@@ -1,7 +1,14 @@
 function returnRenderHtml(i, task) {
   return `
-  <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)" onclick="openTask(tasks[${i}])">
-      <span id="taskCategory${i}" class="taskCategory">${task.category}</span>
+  <div draggable="true" class="taskCard" id="taskCard${i}" ondragstart="drag(event)" ondragend="dragEnd(event)" onmousedown="mouseHold(event)" 
+        onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)" onclick="openTask(tasks[${i}])">
+      <div class="taskCategoryContainer">
+        <div id="taskCategory${i}" class="taskCategory">${task.category}</div>
+        <div class="mobileArrowsContainer">
+            <img class="leftArrow" src="/assets/img/png/arrow-left-line.png">
+            <img class="rightArrow" src="/assets/img/png/arrow-left-line.png">
+        </div>
+      </div>
       <div class="taskInfo">
           <div class="taskTitle">${task.title || 'No Title'}</div>
           <div id="taskDescription${i}" class="taskDescription">${task.description || 'No Description'}</div>
