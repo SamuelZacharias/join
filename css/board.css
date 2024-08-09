@@ -18,7 +18,7 @@ li:hover .d-none {
 
 .boardContent {
   height: calc(100% - 96px);
-  width: 1440px;
+  max-width: 1440px;
   box-sizing: border-box;
   z-index: -2;
 }
@@ -117,9 +117,9 @@ input:focus {
 .taskArea {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   padding: 0px 64px;
+  gap: 20px;
   box-sizing: border-box;
   height: calc(100vh - 350.75px);
   overflow-y: scroll;
