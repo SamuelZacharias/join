@@ -56,14 +56,12 @@ async function validatePasswordAndLogin(data, emailIndex, password) {
     if (data.password[emailIndex] === password) {
         localStorage.setItem('loggedInUserName', data.name[emailIndex]);
         localStorage.setItem('loggedInUserEmail', data.email[emailIndex]);
-
         const contacts = await fetchContacts();
         if (contacts) {
             localStorage.setItem('contacts', JSON.stringify(contacts));
         } else {
             console.error('Failed to fetch contacts');
         }
-
         window.location.href = 'summary.html';
     } else {
         showInvalidMessage('invalid', 'Email or password invalid.', 'invalidPassword');
@@ -124,11 +122,9 @@ function loadRememberedCredentials() {
 function addInputListeners() {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('repeatPassword');
-
     emailInput.addEventListener('input', function () {
         clearInvalidMessages();
     });
-
     passwordInput.addEventListener('input', function () {
         clearInvalidMessages();
     });
@@ -142,18 +138,16 @@ function clearInvalidMessages() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Add the 'visible' class to the overlay after the page has loaded
     setTimeout(function () {
         const overlay = document.querySelector('.overlay');
         if (overlay) {
             overlay.classList.add('visible');
         }
-    }, 400); // Adjust the delay as needed (500 milliseconds in this example)
+    }, 400); 
 });
 
 window.onload = function () {
     animationCheck();
-    // Setze den Wert nicht hier auf 'false', da dies die Information überschreiben würde.
     setTimeout(function () {
         const animatedIcon = document.querySelector('.animated-icon');
         if (animatedIcon) {
@@ -163,12 +157,9 @@ window.onload = function () {
 };
 
 function animationCheck() {
-    // Überprüfen, ob die Animation bereits durchgeführt wurde
     const animatedIcon = document.querySelector('.animated-icon');
     const body = document.querySelector('body');
-    
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
-        // Entfernen der Klasse 'move', wenn die Animation bereits durchgeführt wurde
         if (animatedIcon) {
             animatedIcon.classList.remove('animated-icon');
         }
@@ -176,9 +167,7 @@ function animationCheck() {
             body.classList.remove('overlay');
         }
     } else {
-        // Setze den Wert in sessionStorage, um anzuzeigen, dass die Animation durchgeführt wurde
         sessionStorage.setItem('sessionStorageAnimation', 'true');
-        // Fügen Sie die Klasse 'move' hinzu, um die Animation auszulösen
         if (animatedIcon) {
             animatedIcon.classList.add('move');
         }

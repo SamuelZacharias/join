@@ -41,14 +41,11 @@ function handleClickOutsideEdit(event) {
   const container = document.getElementById('openedTaskContainer');
   if (container.contains(event.target)) {
     document.getElementById('openedTaskContainer').classList.add('d-none')
-
     container.classList.remove('openedTaskContainer')
   }
-
   const containerEdit = document.getElementById('editTaskContainer');
   if (containerEdit.contains(event.target)) {
     document.getElementById('editTaskContainer').classList.add('d-none')
-
     containerEdit.classList.remove('openedTaskContainer')
   }
 }
@@ -103,6 +100,8 @@ document.addEventListener('click', function (event) {
     resetDropDownIconsCategory()
   }
 });
+
+
 
 function resetDropDownIconsCategory() {
   document.getElementById('dropDownImg').classList.add('dropDownImg');

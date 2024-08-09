@@ -22,7 +22,6 @@ async function includeHTML() {
           promises.push(promise);
       }
   }
-
   await Promise.all(promises);
   document.dispatchEvent(new CustomEvent('includesLoaded'));
 }

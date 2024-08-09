@@ -1,3 +1,6 @@
+const tasks = [];
+window.onload = updateGreeting;
+
 document.addEventListener('DOMContentLoaded', () => {
     let loggedInUserName = localStorage.getItem('loggedInUserName');
     if (loggedInUserName) {
@@ -38,7 +41,7 @@ function updateGreeting() {
     document.querySelector('.greetBox1').textContent = greeting + ',';
 }
 
-window.onload = updateGreeting;
+
 
 function formatDate(date) {
     // Format the date as needed, e.g., 'DD-MM-YYYY'
@@ -50,13 +53,11 @@ function formatDate(date) {
 
 function setFutureDate() {
     loadTasksFromLocalStorage();
-
     const urgentTasks = tasks.filter(task => task.priority === "Urgent");
     if (urgentTasks.length > 0) {
         const earliestUrgentTask = urgentTasks.reduce((earliest, current) => {
             return new Date(current.dueDate) < new Date(earliest.dueDate) ? current : earliest;
         });
-
         const futureDate = new Date(earliestUrgentTask.dueDate);
         const formattedDate = formatDate(futureDate);
         document.querySelector('.date').textContent = formattedDate;
@@ -67,8 +68,6 @@ function setFutureDate() {
         document.querySelector('.date').textContent = formattedDate;
     }
 }
-
-const tasks = [];
 
 function loadTasksFromLocalStorage() {
     let tasksFromStorage = localStorage.getItem('tasks');

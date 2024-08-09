@@ -51,14 +51,11 @@ function addRegisterInfo(newRegisterInfo) {
 
 function validateName(name) {
   let words = name.trim().split(/\s+/);
-  
-  // Check if the name contains numbers
   if (/\d/.test(name)) {
     document.getElementById('invalidName').classList.add('invalid');
     return false;
   }
   
-  // Check if the name has exactly two words
   if (words.length !== 2) {
     document.getElementById('invalidName').classList.add('invalid');
     return false;
@@ -95,16 +92,13 @@ function validateForm(registerInfo) {
     displayNameError();
     return false;
   }
-
   if (!displayRequiredPasswordFormat()) {
     return false;
   }
-
   if (registerInfo.password !== registerInfo.repeatPassword) {
     displayPasswordMismatchError();
     return false;
   }
-
   if (!document.getElementById('acceptPolicy').checked) {
     displayPolicyError();
     return false;
