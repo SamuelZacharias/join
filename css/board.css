@@ -352,4 +352,26 @@ input:focus {
   .boardContent {
     width: 100%;
   }
+
+.taskCategoryContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskCategoryContainer img{
+  width: 20px;
+  height: 20px;
+}
+.mobileArrowsContainer{
+  height: fit-content;
+  width: fit-content;
+}
+.leftArrow{
+  rotate: 90deg;
+  margin-right: -10px;
+}
+.rightArrow{
+  rotate: -90deg;
+}
 }

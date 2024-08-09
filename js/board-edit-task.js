@@ -4,8 +4,7 @@ let isSubtaskEditMode = false;
 document.addEventListener('click', handleClickOutsideEdit);
 
 function editTask(taskId) {
-  let task = getTaskById(taskId);
-  console.log('Task to edit:', task);  
+  let task = getTaskById(taskId); 
   if (!task) {
       console.error('Task not found.');
       return;
@@ -16,7 +15,6 @@ function editTask(taskId) {
 }
 
 function renderEditHTML(task) {
-  console.log('Rendering edit form for task:', task); 
   let openedEdit = document.getElementById('editTask');
   document.getElementById('editTaskContainer').classList.remove('d-none');
   document.getElementById('editTaskContainer').classList.add('openedTaskContainer');

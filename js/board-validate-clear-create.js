@@ -12,61 +12,47 @@ function clearForm() {
   selectedContacts = [];
   addTaskBoardInfos = [];
   handleClick(5)
-  document.querySelectorAll('.inputContainerAddTask').forEach(p => {
-    p.classList.remove('invalid');
-  });
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-  
 }
 
 function validateFormAddTaskBoard() {
+  clearValidationErrors();
   const form = document.getElementById('taskFormAddTask');
   const inputs = form.querySelectorAll('input, textarea, select');
+  const validInputs = validateInputFields(inputs);
+  const validCategory = validateCategorySelection(choosenCategory);
+  setTimeout(() => clearValidationErrors(), 2000);
+  return validInputs && validCategory;
+}
+
+function validateCategorySelection(choosenCategory) {
+  if (!choosenCategory) {
+    document.getElementById('dropdownCategory').classList.add('invalid');
+    return false;
+  }
+  return true;
+}
+
+function validateInputFields(inputs) {
   let valid = true;
-
-  // First, remove invalid classes immediately
-  document.querySelectorAll('.inputContainerAddTask').forEach(p => {
-    p.classList.remove('invalid');
-  });
-  document.getElementById('dropdownCategory').classList.remove('invalid');
-
-  // Validate inputs and add invalid class if necessary
   inputs.forEach(input => {
     const parentP = input.closest('.inputContainerAddTask');
     if (input.required && !input.value.trim()) {
       valid = false;
-      if (parentP) {
-        parentP.classList.add('invalid');
-      }
+      parentP?.classList.add('invalid');
     }
-
-    if (input.type === 'date') {
-      const selectedDate = new Date(input.value);
-      const today = new Date();
-
-      today.setHours(0, 0, 0, 0);
-      if (selectedDate < today) {
-        valid = false;
-        if (parentP) {
-          parentP.classList.add('invalid');
-        }
-      }
+    if (input.type === 'date' && new Date(input.value) < new Date().setHours(0, 0, 0, 0)) {
+      valid = false;
+      parentP?.classList.add('invalid');
     }
   });
-
-  if (!choosenCategory) {
-    valid = false;
-    document.getElementById('dropdownCategory').classList.add('invalid');
-  }
-
-  // Add timeout to remove 'invalid' class after 0.5 seconds
-  setTimeout(() => {
-    document.querySelectorAll('.invalid').forEach(element => {
-      element.classList.remove('invalid');
-    });
-  }, 1000); // 500 milliseconds = 0.5 seconds
-
   return valid;
+}
+
+function clearValidationErrors() {
+  document.querySelectorAll('.inputContainerAddTask')
+    .forEach(p => p.classList.remove('invalid'));
+  document.getElementById('dropdownCategory')
+    .classList.remove('invalid');
 }
 
 async function handleCreateButtonClick() {
@@ -83,9 +69,7 @@ async function handleCreateButtonClick() {
     } else {
       console.error('Task data collection failed');
     }
-  } else {
-    console.warn('Form validation failed');
-  }
+  } 
 }
 
 function submitForm(event) {
@@ -99,17 +83,14 @@ function submitForm(event) {
 function showSuccessMessageAddTask() {
   const successContainer = document.getElementById('successContainer');
   const successMessageAddTask = document.getElementById('sucessMessageAddTask');
-
   if (!successContainer) {
       console.warn("Element with id 'successContainer' not found");
       return;
   }
-  
   if (!successMessageAddTask) {
       console.warn("Element with id 'sucessMessageAddTask' not found");
       return;
   }
-
   successContainer.classList.remove('d-none');
   successMessageAddTask.innerHTML = `Your task was added to ${addTaskColumn}`;
   setTimeout(() => {

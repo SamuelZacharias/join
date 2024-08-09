@@ -1,5 +1,11 @@
 function renderTasks(tasksToRender = tasks) {
-    loadTasksFromLocalStorage()
+    loadTasksFromLocalStorage();
+    clearColumnsBoard();
+    renderTasksToColumnsBoard(tasksToRender);
+    updateNoTaskMessagesBoard();
+}
+
+function clearColumnsBoard() {
     const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
         const columnElement = document.getElementById(columnId);
@@ -7,7 +13,9 @@ function renderTasks(tasksToRender = tasks) {
             columnElement.innerHTML = '';
         }
     });
+}
 
+function renderTasksToColumnsBoard(tasksToRender) {
     tasksToRender.forEach((task, i) => {
         const columnElement = document.getElementById(task.column);
         if (columnElement) {
@@ -19,7 +27,10 @@ function renderTasks(tasksToRender = tasks) {
             renderSubtasks(i);
         }
     });
+}
 
+function updateNoTaskMessagesBoard() {
+    const columns = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
     columns.forEach(columnId => {
         const columnElement = document.getElementById(columnId);
         if (columnElement) {
@@ -70,11 +81,20 @@ function renderPriority(i) {
 function renderContacts(i) {
     const renderedContacts = document.getElementById(`contacts${i}`);
     if (!renderedContacts) return;
-    renderedContacts.innerHTML = '';
+
+    const validContacts = getValidContactsBoard(i);
+    renderValidContactsBoard(renderedContacts, validContacts);
+}
+
+function getValidContactsBoard(i) {
     const assignedContacts = tasks[i].assignedContacts || [];
-    const validContacts = assignedContacts
+    return assignedContacts
         .map(c => c.name)
         .filter(name => contacts.some(c => c.name === name));
+}
+
+function renderValidContactsBoard(renderedContacts, validContacts) {
+    renderedContacts.innerHTML = '';
     validContacts.slice(0, 5).forEach(name => {
         const contact = contacts.find(c => c.name === name);
         if (contact) {

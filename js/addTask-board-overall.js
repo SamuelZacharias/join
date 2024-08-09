@@ -59,7 +59,6 @@ function showAssignedContacts() {
   }
   if (totalContacts > maxToShow) {
     let moreCount = totalContacts - maxToShow;
-    console.log(`More contacts count: ${moreCount}`); 
     let moreContactsColor = "#e3e3e3"; 
     container.innerHTML += `
       <div class="contactInitials more-contacts" style="background-color: ${moreContactsColor};">
@@ -230,5 +229,4 @@ async function initializeTasks() {
   if (!initResponse.ok) {
     throw new Error(`HTTP error during initialize tasks node PUT! Status: ${initResponse.status}`);
   }
-  console.log('Tasks node initialized if not existing');
 }

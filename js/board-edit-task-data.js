@@ -18,7 +18,6 @@ function collectFormData() {
   const title = document.getElementById('editTitle').querySelector('input').value;
   const description = document.getElementById('taskDescriptionTextarea').value;
   const dueDate = document.getElementById('dateValue').value;
-  console.log('Collected data:', { title, description, dueDate });
   return { title, description, dueDate };
 }
 
@@ -34,7 +33,6 @@ function determinePriority() {
           priority = 'Low';
       }
   });
-  console.log('Priority:', priority);
   return priority;
 }
 
@@ -47,7 +45,6 @@ function collectSubtasks() {
       title: subtask.title,
       completed: subtask.completed
   }));
-  console.log('Collected subtasks:', subtasks);
   return subtasks;
 }
 
@@ -69,7 +66,6 @@ function saveTask(updatedTask, taskId) {
   if (taskIndex !== -1) {
       tasks[taskIndex] = updatedTask;
       localStorage.setItem('tasks', JSON.stringify(tasks));
-      console.log('Task updated in localStorage.');
   } else {
       console.warn('Task not found in localStorage.');
   }
