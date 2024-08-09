@@ -124,6 +124,7 @@ aside {
   }
 
   .icon-bar {
+    width: 80vw;
     height: 80px;
     display: flex;
     gap: 15px;
