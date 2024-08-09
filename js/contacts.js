@@ -11,37 +11,12 @@ const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedat
 function renderContacts() {
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = ''; 
-
   fetch(BASE_TASKS_URL + '.json')
     .then(response => response.json())
     .then(data => {
       if (data) {
-        contacts = Object.values(data);
-        initials = contacts.map(contact => {
-          let nameParts = contact.name.split(' ');
-          return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-        });
-    
-        const groupedContacts = contacts.reduce((acc, contact, index) => {
-          let nameParts = contact.name.split(' ');
-          let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-          let firstInitial = initials.charAt(0);
-
-          if (!acc[firstInitial]) {
-            acc[firstInitial] = [];
-          }
-          acc[firstInitial].push({ contact, initials, index });
-          return acc;
-        }, {});
-        const sortedInitials = Object.keys(groupedContacts).sort();
-
-        sortedInitials.forEach(initial => {
-          contactList.innerHTML += generateLetterBox(initial);
-          groupedContacts[initial].forEach(({ contact, initials, index }) => {
-            contactList.innerHTML += generateContact(contact, initials, index);
-          });
-        });
-        
+        renderContactsContactInitials(data)
+        renderContactsGroupedContacts()
         if (highlightedContactIndex >= 0) {
           highlightContact(highlightedContactIndex);
         }
@@ -50,6 +25,38 @@ function renderContacts() {
     .catch(error => {
       console.error('Fehler beim Laden der Daten:', error);
     });
+}
+
+function renderContactsContactInitials(data){
+  contacts = Object.values(data);
+  initials = contacts.map(contact => {
+    let nameParts = contact.name.split(' ');
+    return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+  });
+}
+
+function renderContactsGroupedContacts(){
+  const groupedContacts = contacts.reduce((acc, contact, index) => {
+    let nameParts = contact.name.split(' ');
+    let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+    let firstInitial = initials.charAt(0);
+    if (!acc[firstInitial]) {
+      acc[firstInitial] = [];
+    }
+    acc[firstInitial].push({ contact, initials, index });
+    return acc;
+  }, {});
+  renderContactsSortedInitials(groupedContacts)
+}
+
+function renderContactsSortedInitials(groupedContacts){
+  const sortedInitials = Object.keys(groupedContacts).sort();
+        sortedInitials.forEach(initial => {
+          contactList.innerHTML += generateLetterBox(initial);
+          groupedContacts[initial].forEach(({ contact, initials, index }) => {
+            contactList.innerHTML += generateContact(contact, initials, index);
+          });
+        });
 }
 
 function updateInitials() {
@@ -61,42 +68,57 @@ function updateInitials() {
 }
 
 function addContact() {
-  let name = document.getElementById('name').value;
-  let email = document.getElementById('email').value;
-  let phone = document.getElementById('phone').value;
-
-  if (name && email && phone) {
-    let newId = Date.now(); 
-
-    let newContact = {
-      id: newId,
-      name: name,
-      email: email,
-      phone: phone,
-      color: getNextColor(), 
-      initials: name.split(' ').map(part => part.charAt(0).toUpperCase()).join('')
-    };
-
-    contacts.push(newContact);
-    saveData(); 
-    storeFirstAndLastNames();
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('phone').value = '';
-    renderContacts();
-    loadData();
-    let lastIndex = contacts.length - 1; 
-    highlightContact(lastIndex); 
-    displayContactInfo(lastIndex)
+  const contactData = getContactData();
+  if (contactData) {
+    const newContact = createAndSaveContact(contactData);
+    updateUI(newContact);
   } else {
     alert('Bitte füllen Sie alle Felder aus.');
   }
 }
 
+function getContactData() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  if (name && email && phone) {
+    return { name, email, phone };
+  } else {
+    return null;
+  }
+}
+
+function createAndSaveContact(contactData) {
+  const newContact = {
+    id: Date.now(),
+    name: contactData.name,
+    email: contactData.email,
+    phone: contactData.phone,
+    color: getNextColor(),
+    initials: contactData.name.split(' ').map(part => part.charAt(0).toUpperCase()).join(''),
+  };
+  contacts.push(newContact);
+  saveData();
+  storeFirstAndLastNames();
+  return newContact;
+}
+
+function updateUI(newContact) {
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('phone').value = '';
+  renderContacts();
+  loadData();
+  const lastIndex = contacts.length - 1;
+  highlightContact(lastIndex);
+  displayContactInfo(lastIndex);
+}
+
+
+
 function getNextColor() {
   const usedColors = contacts.map(contact => contact.color);
   let availableColors = colors.filter(color => !usedColors.includes(color));
-
   if (availableColors.length === 0) {
     colorIndex = (colorIndex + 1) % colors.length;
     return colors[colorIndex];
@@ -119,7 +141,6 @@ function displayContactInfo(index) {
 function deleteContact(index) {
   if (index < 0 || index >= contacts.length) return; 
   contacts.splice(index, 1);
-
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
     headers: {
@@ -129,16 +150,20 @@ function deleteContact(index) {
   })
   .then(response => response.json())
   .then(data => {
-    openDialogContact("Contact was successfully deleted");
-    renderContacts(); 
-    highlightContact(this)
-    storeFirstAndLastNames();
-    loadData();
+    contactWasDeleted()
     document.querySelector('.contacts-info-box').innerHTML = '';
   })
   .catch(error => {
     console.error('Fehler beim Löschen des Kontakts:', error);
   });
+}
+
+function contactWasDeleted(){
+    openDialogContact("Contact was successfully deleted");
+    renderContacts(); 
+    highlightContact(this)
+    storeFirstAndLastNames();
+    loadData();
 }
 
 function saveData() {
@@ -173,18 +198,7 @@ function loadData() {
 
 function editContact() {
   const index = document.getElementById('inputEditName').dataset.index;
-
-  const updatedName = document.getElementById('inputEditName').value;
-  const updatedEmail = document.getElementById('inputEditEmail').value;
-  const updatedPhone = document.getElementById('inputEditPhone').value;
-
-  const updatedContact = {
-      ...contacts[index],
-      name: updatedName,
-      email: updatedEmail,
-      phone: updatedPhone
-  };
-
+  const updatedContact = getDataContactEdit(index);getDataContactEdit(index)
   contacts[index] = updatedContact;
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
@@ -195,16 +209,32 @@ function editContact() {
   })
   .then(response => response.json())
   .then(data => {
-    console.log('Daten erfolgreich gespeichert:', data);
-    loadData(); 
-    closeDialogEdit();
-    openDialogContact("Contact info has been updated");
-    displayContactInfo(index)
-    highlightContact(index); 
+    contactWasEdited(index)
   })
   .catch(error => {
     console.error('Fehler beim Speichern der Daten:', error);
   });
+}
+
+function getDataContactEdit(index){
+  const updatedName = document.getElementById('inputEditName').value;
+  const updatedEmail = document.getElementById('inputEditEmail').value;
+  const updatedPhone = document.getElementById('inputEditPhone').value;
+  const updatedContact = {
+      ...contacts[index],
+      name: updatedName,
+      email: updatedEmail,
+      phone: updatedPhone
+  };
+  return updatedContact
+}
+
+function contactWasEdited(index){
+  loadData(); 
+  closeDialogEdit();
+  openDialogContact("Contact info has been updated");
+  displayContactInfo(index)
+  highlightContact(index)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

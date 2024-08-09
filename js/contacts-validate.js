@@ -54,13 +54,13 @@ function validatePhoneContact() {
 
 function validateEditForm() {
     let isValid = true;
-    if (!validateNameContact()) {
+    if (!validateNameContactEdit()) {
         isValid = false;
     }
-    if (!validateEmailContact()) {
+    if (!validateEmailContactEdit()) {
         isValid = false;
     }
-    if (!validatePhoneContact()) {
+    if (!validatePhoneContactEdit()) {
         isValid = false;
     }
     if (isValid) {
@@ -68,7 +68,7 @@ function validateEditForm() {
     }
 }
 
-function validateNameContact() {
+function validateNameContactEdit() {
     const nameInput = document.getElementById('inputEditName');
     const namePattern = /^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/;
     if (!nameInput.value.match(namePattern) || nameInput.value.length > 23) {
@@ -81,7 +81,7 @@ function validateNameContact() {
     }
 }
 
-function validateEmailContact() {
+function validateEmailContactEdit() {
     const emailInput = document.getElementById('inputEditEmail');
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailInput.value.match(emailPattern)) {
@@ -94,7 +94,7 @@ function validateEmailContact() {
     }
 }
 
-function validatePhoneContact() {
+function validatePhoneContactEdit() {
     const phoneInput = document.getElementById('inputEditPhone');
     const phonePattern = /^\d+$/;
     if (!phoneInput.value.match(phonePattern)) {
