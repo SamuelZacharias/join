@@ -135,6 +135,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 setInterval(() => {
   getTasksFromDataBase()
-  console.log('taskrerendered');
-  
 }, 15000);

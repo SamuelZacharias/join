@@ -14,9 +14,6 @@ function clearForm() {
   handleClick(5)
 }
 
-
-
-
 function validateFormAddTaskBoard() {
   clearValidationErrors();
   const form = document.getElementById('taskFormAddTask');
@@ -72,9 +69,7 @@ async function handleCreateButtonClick() {
     } else {
       console.error('Task data collection failed');
     }
-  } else {
-    console.warn('Form validation failed');
-  }
+  } 
 }
 
 function submitForm(event) {
@@ -88,17 +83,14 @@ function submitForm(event) {
 function showSuccessMessageAddTask() {
   const successContainer = document.getElementById('successContainer');
   const successMessageAddTask = document.getElementById('sucessMessageAddTask');
-
   if (!successContainer) {
       console.warn("Element with id 'successContainer' not found");
       return;
   }
-  
   if (!successMessageAddTask) {
       console.warn("Element with id 'sucessMessageAddTask' not found");
       return;
   }
-
   successContainer.classList.remove('d-none');
   successMessageAddTask.innerHTML = `Your task was added to ${addTaskColumn}`;
   setTimeout(() => {

@@ -65,9 +65,8 @@ async function sendTaskDataToFirebase() {
     const existingTasks = await fetchExistingTasks();
     const nextIndex = await adjustTaskIdsAndUpdate(existingTasks);
     const taskData = collectNewTaskData();
-    if (!taskData) return; // Early exit if there's no data to send
+    if (!taskData) return; 
     const responseAsJson = await sendNewTask(nextIndex, taskData);
-    console.info('Data saved to Firebase:', responseAsJson);
   } catch (error) {
     console.error('Error saving data to Firebase:', error);
   }
