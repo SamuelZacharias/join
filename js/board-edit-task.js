@@ -163,8 +163,8 @@ function writeSubtask() {
   subtaskInput.focus()
   subtaskInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        event.preventDefault();  // Prevent default Enter behavior
-        addSubtask();  // Trigger addSubtask function
+        event.preventDefault(); 
+        addSubtask();  
     }
 });
 }
@@ -218,7 +218,7 @@ function appendSubtaskHTML(container, html) {
 
 function showSubtasks() {
   let newSubtask = document.getElementById('newSubtasks');
-  newSubtask.innerHTML = ''; // Clear existing content
+  newSubtask.innerHTML = ''; 
   for (let s = 0; s < subtaskInfos.length; s++) {
     const subtaskHTML = returnSubtaskHTML(s, subtaskInfos[s].title);
     appendSubtaskHTML(newSubtask, subtaskHTML);
