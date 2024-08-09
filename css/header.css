@@ -1,4 +1,3 @@
-
 header {
   font-size: 20px !important;
   font-family: "inter", Arial, sans-serif;
@@ -19,7 +18,7 @@ header {
   height: 32px;
 }
 
-.help:hover{
+.help:hover {
   scale: 1.3;
   transition: 125ms;
 }
@@ -37,7 +36,8 @@ header {
   justify-content: center;
   color: #29abe2;
 }
-.user-profile-initials-box:hover{
+
+.user-profile-initials-box:hover {
   background-color: var(--background);
   cursor: pointer;
 }
@@ -52,7 +52,7 @@ header {
 
 
 
-.logOut{
+.logOut {
   display: flex;
   flex-direction: column;
   background-color: var(--gray);
@@ -66,16 +66,22 @@ header {
 }
 
 
-#logOut a{
+#logOut a {
   text-decoration: none;
   padding: 8px 16px;
   color: #cdcdcd
 }
 
-.d-none{
+.d-none {
   display: none;
 }
 
-#logOut a:hover{
+#logOut a:hover {
   background-color: #2a3d59;
+}
+
+@media screen and (max-width: 1068px) {
+  header {
+    width: 100%;
+  }
 }

@@ -347,3 +347,9 @@ input:focus {
   background-color: var(--background);
   cursor: pointer;
 }
+
+@media screen and (max-width: 1068px) {
+  .boardContent {
+    width: 100%;
+  }
+}

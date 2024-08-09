@@ -1,0 +1,68 @@
+:root {
+    --blue: #29abe2;
+    --gray: #2a3647;
+    --high: #ff3d00;
+    --medium: #ffa800;
+    --low: #7ae229;
+    --technical: #1fd7c1;
+    --story: #0038ff;
+    --noTask: #a8a8a8;
+    --policy: #a8a8a8;
+    --background: #f6f7f8;
+    --hightlight: #091931;
+    --border: #d1d1d1;
+}
+
+@font-face {
+    font-family: "inter";
+    src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
+        url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
+}
+
+body {
+    margin: 0px;
+    font-family: "inter", Arial, sans-serif;
+}
+
+.backgroundColor {
+    background-color: var(--gray);
+}
+
+.row {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.border {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 8 1 8 1;
+    font-size: 14px;
+    font-weight: 400;
+    width: 80px;
+    height: 76px;
+    gap: 10px;
+}
+
+.border:hover {
+    background-color: var(--hightlight);
+    cursor: pointer;
+}
