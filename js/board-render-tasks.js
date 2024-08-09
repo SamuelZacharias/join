@@ -88,6 +88,7 @@ function renderContacts(i) {
     }
 }
 
+
 function renderSubtasks(i) {
     const subtaskArea = document.getElementById(`subtaskArea${i}`);
     if (!subtaskArea) return console.error(`Subtask area not found for task index ${i}`);
