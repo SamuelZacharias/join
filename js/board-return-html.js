@@ -100,7 +100,7 @@ function returnOpenEditHTML(task, today) {
               <div>Assigned to:</div>
               <div class="editAssignContacts" onclick="closeContactsDropdown()">
                   <div>Select contacts to assign</div>
-                  <img id="dropDownImg" src="./assets/img/png/arrow_drop_down (1).png">
+                  <img class="dropDownImg" id="dropDownImg" src="./assets/img/png/arrow_drop_down (1).png">
               </div>
               <div id="contactsToChoose" class="d-none contactsToChoose"></div>
           </div>
