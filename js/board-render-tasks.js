@@ -38,6 +38,8 @@ function renderTasks(tasksToRender = tasks) {
     });
 }
 
+
+
 function categoryColor(i, task) {
     const categoryElement = document.getElementById(`taskCategory${i}`);
     if (categoryElement) {
@@ -48,6 +50,7 @@ function categoryColor(i, task) {
         }
     }
 }
+
 
 function renderPriority(i) {
     const priorityElement = document.getElementById(`priority${i}`);
@@ -67,13 +70,11 @@ function renderPriority(i) {
 function renderContacts(i) {
     const renderedContacts = document.getElementById(`contacts${i}`);
     if (!renderedContacts) return;
-
     renderedContacts.innerHTML = '';
     const assignedContacts = tasks[i].assignedContacts || [];
     const validContacts = assignedContacts
         .map(c => c.name)
         .filter(name => contacts.some(c => c.name === name));
-
     validContacts.slice(0, 5).forEach(name => {
         const contact = contacts.find(c => c.name === name);
         if (contact) {
@@ -81,7 +82,6 @@ function renderContacts(i) {
             renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: ${color};">${initials}</div>`;
         }
     });
-
     if (validContacts.length > 5) {
         const additionalContacts = validContacts.length - 5;
         renderedContacts.innerHTML += `<div class="assignedTaskContacts" style="background-color: gray;">+${additionalContacts}</div>`;
@@ -93,24 +93,36 @@ function renderSubtasks(i) {
     const subtaskArea = document.getElementById(`subtaskArea${i}`);
     if (!subtaskArea) return console.error(`Subtask area not found for task index ${i}`);
 
+    let { progressBar, progressBarFill, subtaskProgressText } = setupProgressBarBoard(subtaskArea);
+    updateSubtaskProgressBoard(i, progressBar, progressBarFill, subtaskProgressText);
+    handleSubtaskAreaDisplayBoard(subtaskArea, tasks[i].subtasks || []);
+}
+
+function setupProgressBarBoard(subtaskArea) {
     let progressBar = subtaskArea.querySelector('.progress-bar');
     let progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
     let subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
-
     if (!progressBar) {
         subtaskArea.innerHTML += `<div class='progress-bar'><div class='progress-bar-fill'></div></div><div class='subtaskProgressText'></div>`;
         progressBar = subtaskArea.querySelector('.progress-bar');
         progressBarFill = subtaskArea.querySelector('.progress-bar-fill');
         subtaskProgressText = subtaskArea.querySelector('.subtaskProgressText');
     }
+    return { progressBar, progressBarFill, subtaskProgressText };
+}
 
+function updateSubtaskProgressBoard(i, progressBar, progressBarFill, subtaskProgressText) {
     const subtasks = tasks[i].subtasks || [];
     const completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
     const progress = (completedSubtasks / subtasks.length) * 100;
 
     progressBarFill.style.width = `${progress}%`;
-    progressBar.style.display = subtasks.length ? 'flex' : 'none';
     subtaskProgressText.textContent = `${completedSubtasks}/${subtasks.length} Subtasks`;
-    subtaskProgressText.style.display = subtasks.length ? 'flex' : 'none';
-    subtaskArea.style.display = subtasks.length ? 'flex' : 'none';
+}
+
+function handleSubtaskAreaDisplayBoard(subtaskArea, subtasks) {
+    const hasSubtasks = subtasks.length > 0;
+    subtaskArea.querySelector('.progress-bar').style.display = hasSubtasks ? 'flex' : 'none';
+    subtaskArea.querySelector('.subtaskProgressText').style.display = hasSubtasks ? 'flex' : 'none';
+    subtaskArea.style.display = hasSubtasks ? 'flex' : 'none';
 }

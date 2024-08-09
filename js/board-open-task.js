@@ -44,41 +44,37 @@ function checkforOpenedTitle(task) {
 
 function renderOpenTaskAssignedContacts(task) {
   let openedAssignedContacts = document.getElementById('openedAssignedContacts');
-  console.log('Rendering open task assigned contacts');
-  
   openedAssignedContacts.innerHTML = '';
-
-  if (!task.assignedContacts || task.assignedContacts.length === 0) {
-    openedAssignedContacts.innerHTML = 'No contacts assigned';
-    
-    return;
-  }
-  let contactsHTML = '';
-  const validContacts = task.assignedContacts
-    .filter(assignedContact => 
-      contacts.some(contact => contact.name === assignedContact.name)
-    );
-
-  console.log('Valid contacts:', validContacts);
-
+  const validContacts = getValidContactsAssignedContacts(task.assignedContacts);
   if (validContacts.length === 0) {
     openedAssignedContacts.innerHTML = 'No valid contacts assigned';
     return;
   }
-
-  for (let x = 0; x < validContacts.length; x++) {
-    let contactName = validContacts[x].name;
-    const initials = validContacts[x].initials;
-    const color = validContacts[x].color;
-    contactsHTML += returnOpenTaskAssignedContactsHTML(contactName, color, initials);
-  }
-
+  const contactsHTML = renderContactsHTML(validContacts);
   openedAssignedContacts.innerHTML = contactsHTML;
+}
+
+function getValidContactsAssignedContacts(assignedContacts) {
+  if (!assignedContacts || assignedContacts.length === 0) {
+    return [];
+  }
+  return assignedContacts.filter(assignedContact => 
+    contacts.some(contact => contact.name === assignedContact.name)
+  );
+}
+
+function renderContactsHTML(validContacts) {
+  let contactsHTML = '';
+  for (let x = 0; x < validContacts.length; x++) {
+    const { name, initials, color } = validContacts[x];
+    contactsHTML += returnOpenTaskAssignedContactsHTML(name, color, initials);
+  }
+  return contactsHTML;
 }
 
 function renderOpenTaskSubtasks(task) {
   let openedSubtasksArea = document.getElementById('openedSubtasks');
-  openedSubtasksArea.innerHTML = ''; // Clear existing subtasks
+  openedSubtasksArea.innerHTML = '';
   if (!task.subtasks || task.subtasks.length === 0) {
     openedSubtasksArea.innerHTML = 'No Subtasks';
   } else {
@@ -118,7 +114,6 @@ async function deleteTask(taskId) {
     tasks.splice(taskIndex, 1);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
-    console.log('Task deleted successfully:', taskId);
     closeOpenedTask();
   } catch (error) {
     console.error('There was a problem with the delete operation:', error);

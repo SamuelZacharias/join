@@ -4,16 +4,13 @@ function collectDataEdit(taskId) {
       console.error('Task not found.');
       return null;
   }
-
   const formData = collectFormData();
   const priority = determinePriority();
   const assignedContacts = getAssignedContacts();
   const subtasks = collectSubtasks();
-
   const updatedTask = createUpdatedTask(task, formData, priority, assignedContacts, subtasks);
   saveTask(updatedTask, taskId);
   updateTaskInFirebaseAndUI(updatedTask);
-
   return updatedTask;
 }
 
@@ -76,7 +73,6 @@ function saveTask(updatedTask, taskId) {
   } else {
       console.warn('Task not found in localStorage.');
   }
-  
 }
 
 function closeEdit(){
