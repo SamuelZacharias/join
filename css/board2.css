@@ -176,10 +176,7 @@ textarea {
     cursor: pointer;
 }
 
-.editAssignContacts img {
-    width: 8px;
-    height: 5px;
-}
+
 
 .editAssignedTo {
     background-color: var(--gray);
@@ -187,7 +184,13 @@ textarea {
 }
 
 .dropUpImg {
+    height: 8px;
+    width: 12px;
     transform: rotate(180deg);
+}
+.dropDownImg {
+    height: 8px;
+    width: 12px;
 }
 
 .contactsToChoose {
