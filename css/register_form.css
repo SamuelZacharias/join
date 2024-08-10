@@ -1,23 +1,4 @@
-:root {
-  --blue: #29abe2;
-  --gray: #2a3647;
-  --high: #ff3d00;
-  --medium: #ffa800;
-  --low: #7ae229;
-  --technical: #1fd7c1;
-  --story: #0038ff;
-  --noTask: #a8a8a8;
-  --policy: #a8a8a8;
-  --background: #f6f7f8;
-  --hightlight: #091931;
-  --border: #d1d1d1;
-}
 
-@font-face {
-  font-family: "inter";
-  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
-    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
-}
 
 a {
   text-decoration: none;
@@ -33,6 +14,8 @@ body {
   align-items: center;
   height: 100vh;
   font-family: "inter", Arial, sans-serif;
+  scrollbar-width: none;
+  overflow-y: scroll;
 }
 
 
@@ -51,9 +34,9 @@ body {
 
 .register {
   display: flex;
+  margin-top: 70px;
   flex-direction: column;
   align-items: center;
-  margin-top: -20px;
   background-color: white;
   padding: 0px 88px 48px 88px;
   border-radius: 30px;
@@ -179,6 +162,7 @@ h1 {
 }
 
 form {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -279,6 +263,60 @@ input:-webkit-autofill {
   width: 400px;
   text-align: center;
 }
+
+@media screen and (max-width: 1068px){
+ 
+  .logo img{
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .logo img{
+    margin-top: 30px;
+    width: 64px;
+    height: 78px;
+  }
+  .register{
+    padding: 0px 30px 48px 30px;
+    margin-top: 60px;
+    width: 80vw;
+  }
+  .input{
+    width: 320px;
+  }
+  .check{
+    width: 110%;
+  }
+  .logoLogIn img {
+    width: 64px;
+    height: 78px;
+  }
+ .backArrow{
+  left: -150px;
+ }
+  
+}
+@media screen and (max-width: 400px){
+  .backArrow{
+    left: -135px;
+  }
+  .input{
+    width: 85%;
+  }
+
+}
+
+@media(max-height: 799px){
+  .policy {
+    display: flex;
+    gap: 32px;
+    position: relative;
+    margin-top: 30px;
+  }
+}
+
+
 
 .d-none {
   display: none;

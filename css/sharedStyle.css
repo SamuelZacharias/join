@@ -9,10 +9,7 @@ form {
     gap: 48px;
 }
 
-.addTaskLink {
-    background-color: var(--gray);
-    color: white !important;
-}
+
 
 .formLeft {
     display: flex;
