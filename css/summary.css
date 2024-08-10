@@ -269,3 +269,15 @@ header {
     gap: 13px;
     border-radius: 30px;
 }
+
+@media screen and (max-width: 1068px) {
+    .overGreetBox {
+        display: none;
+    }
+
+    .seperatorBox {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+}
