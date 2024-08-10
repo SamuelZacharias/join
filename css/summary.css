@@ -281,3 +281,17 @@ header {
         align-items: flex-start;
     }
 }
+
+@media screen and (max-width: 750px) {
+    .dynamic {
+        width: auto;
+    }
+
+    .to .done {
+        width: 200px;
+    }
+
+    .urgentDate {
+        width: auto;
+    }
+}
