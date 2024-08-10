@@ -100,19 +100,19 @@ aside {
 }
 
 @media screen and (max-width: 1068px) {
-
+  .content-sidebar{
+    width: 100%;
+  }
   aside {
     display: flex;
     overflow: hidden;
-    width: 100%;
+    width: 100vw;
     height: 80px;
     position: fixed;
-    /* Positionieren am unteren Rand */
     bottom: 0;
     left: 0;
     flex-direction: row;
-    justify-content: space-around;
-    /* Icons über die Breite verteilen */
+    justify-content: space-between;
   }
 
   .logo-sidebar {
@@ -124,16 +124,14 @@ aside {
   }
 
   .icon-bar {
-    width: 80vw;
+    width: 100%;
     height: 80px;
     display: flex;
-    gap: 15px;
     flex-direction: row;
     color: #cdcdcd;
-    margin-right: 16px;
-    margin-left: 16px;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0;
+    gap: 0px;
   }
 
   .box-icons {
@@ -144,5 +142,16 @@ aside {
     height: 76px;
     display: flex;
     align-items: center;
+  }
+  .box-icons svg{
+    width: 24px;
+    height: 24px;
+  }
+ 
+}
+
+@media screen and (max-width: 600px){
+  .icon-bar{
+    justify-content: space-between;
   }
 }

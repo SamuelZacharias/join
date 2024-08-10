@@ -26,11 +26,11 @@ span{
 
 .content-legal-notice {
   display: flex;
-  width: calc(100vw - 424px);
   height: calc(100vh - 166px);
   overflow: scroll;
   margin-top: 35px;
   padding-left: 96px;
+  padding-right: 96px;
   flex-direction: column;
   gap: 30px;
   max-width: 1600px;
@@ -93,3 +93,16 @@ span{
 .not-logged-in .box-icons {
   display: none !important;
 }
+
+@media  (max-width: 1068px) {
+  .content-legal-notice {
+    display: flex;
+    height: calc(100vh - 246px);
+    overflow-y: scroll;
+    margin-top: 35px;
+    flex-direction: column;
+    gap: 30px;
+    padding-left: 40px;
+    padding-right: 40px
+}
+};
