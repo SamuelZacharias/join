@@ -99,27 +99,27 @@ function hideElements() {
  
 
 document.addEventListener('DOMContentLoaded', function() {
-  function checkForWidthHeader() {
-    let logoContainer = document.getElementById('headerLogo');
-    if (logoContainer) {
-      logoContainer.innerHTML = window.innerWidth < 600 
-        ? `<img src="/assets/img/png/Capa 2.png">` 
-        : `<span>Kanban Project Management Tool</span>`;
-    }
-  }
-
-  function checkForHeaderLogo() {
-    let logoContainer = document.getElementById('headerLogo');
-    if (logoContainer) {
-      checkForWidthHeader();
-      window.addEventListener('resize', checkForWidthHeader);
-    } else {
-      setTimeout(checkForHeaderLogo, 100);
-    }
-  }
-
   checkForHeaderLogo();
 });
 
+
+function checkForWidthHeader() {
+  let logoContainer = document.getElementById('headerLogo');
+  if (logoContainer) {
+    logoContainer.innerHTML = window.innerWidth < 600 
+      ? `<img src="/assets/img/png/Capa 2.png">` 
+      : `<span>Kanban Project Management Tool</span>`;
+  }
+}
+
+function checkForHeaderLogo() {
+  let logoContainer = document.getElementById('headerLogo');
+  if (logoContainer) {
+    checkForWidthHeader();
+    window.addEventListener('resize', checkForWidthHeader);
+  } else {
+    setTimeout(checkForHeaderLogo, 100);
+  }
+}
 
 includeHTML(hideElements);
