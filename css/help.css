@@ -42,12 +42,12 @@ tr{
 
 .content-help{
     display: flex;
-    width: calc(100vw - 424px);
     height: calc(100vh - 166px);
     max-width: 1600px;
     overflow: scroll;
     margin-top: 35px;
     padding-left: 96px;
+    padding-right: 96px;
     flex-direction: column;
     gap: 30px;
 }
@@ -66,7 +66,6 @@ tr{
 }
 
 .what-is-join{
-    height: 238px;
     display: flex;
     gap: 16px;
     flex-direction: column;
@@ -98,4 +97,29 @@ tr{
   .arrowBack:hover {
     cursor: pointer;
   }
+
+  @media  (max-width: 1068px) {
+    h1{
+        font-size: 56px;
+    }
+    .content-help{
+      display: flex;
+      height: calc(100vh - 246px);
+      overflow-y: scroll;
+      margin-top: 35px;
+      flex-direction: column;
+      gap: 30px;
+      padding-left: 40px;
+      padding-right: 40px
+  }
+  .help-text{
+    margin-top: 0px;
+  }
+  tbody{
+    gap: 16px;
+  }
+  tr{
+    gap: 16px
+  }
+  };
   

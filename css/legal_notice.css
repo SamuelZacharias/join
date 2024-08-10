@@ -95,6 +95,9 @@ span{
 }
 
 @media  (max-width: 1068px) {
+  h1{
+    font-size: 56px;
+}
   .content-legal-notice {
     display: flex;
     height: calc(100vh - 246px);
