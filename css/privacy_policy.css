@@ -9,11 +9,11 @@ body {
 
 .content-policy {
   display: flex;
-  width: calc(100vw - 424px);
   height: calc(100vh - 166px);
   overflow: scroll;
   margin-top: 35px;
   padding-left: 96px;
+  padding-right: 96px;
   flex-direction: column;
   gap: 30px;
   max-width: 1600px;
@@ -65,3 +65,22 @@ h1 {
 .not-logged-in .box-icons {
   display: none !important;
 }
+
+@media  (max-width: 1068px) {
+  h1{
+    font-size: 56px;
+  }
+  .content-policy {
+    margin-top: 35px;
+    gap: 30px;
+    padding-left: 40px;
+    padding-right: 40px
+  }
+}
+
+@media  (max-width: 600px) {
+  .content-policy {
+    padding-left: 20px;
+    padding-right: 20px
+  }
+};
