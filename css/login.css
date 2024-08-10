@@ -7,6 +7,7 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -355,12 +356,13 @@ input {
   .signUpMobile{
     display: flex;
   }
-}
-
-@media screen and (max-width: 600px){
   .headSection{
     margin-top: 30px;
   }
+}
+
+@media screen and (max-width: 600px){
+  
   .register{
     padding: 0px 30px 48px 30px;
     margin-top: 60px;
@@ -382,5 +384,15 @@ input {
  
   .logIn{
     width: 190px;
+  }
+}
+
+@media(max-height: 850px){
+  .policy {
+    display: flex;
+    gap: 32px;
+    position: relative;
+    bottom: 5px;
+    margin-top: 30px;
   }
 }
