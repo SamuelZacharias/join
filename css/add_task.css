@@ -182,7 +182,10 @@ li:hover .d-none {
 }
 
 
-
+.addTaskLink{
+  background-color: #091931;
+  color: white !important;
+}
 
 #logOut a {
   text-decoration: none;
