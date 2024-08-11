@@ -290,15 +290,19 @@ li:hover .d-none {
       margin-top: 40px !important;
     }
 }
-@media (max-height:860px){
+@media (max-height:840px){
   .addTask{
     height: calc(100vh - 126px);
     overflow-y: scroll;
     padding-top: 20px;
   }
-  
+  #categories{
+    top: 540px
+  }
 }
-@media (max-height:600px) {
+
+
+@media (max-height:745px) {
   .addTask{
     overflow-y: scroll;
     scrollbar-width: none;
