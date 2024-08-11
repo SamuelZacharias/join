@@ -132,7 +132,6 @@ input:focus {
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  scrollbar-width: none;
 }
 
 .noTask {
@@ -298,7 +297,6 @@ input:focus {
   height: fit-content;
   border-radius: 30px;
   padding: 48px 40px;
-  scrollbar-width: none;
 }
 
 .openedTaskCategory {
@@ -335,8 +333,7 @@ input:focus {
 
 #openedSubtasks {
   max-height: 110px;
-  overflow-y: scroll;
-  scrollbar-width: none;
+  overflow-y: scroll
 }
 
 .openedSubtaskTitle {

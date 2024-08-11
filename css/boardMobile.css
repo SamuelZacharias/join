@@ -5,6 +5,7 @@
   }
   .taskColumn{
     width: 200px;
+    height: 100%;
   }
   .contentHeader{
     width: calc(100vw - 300px);
