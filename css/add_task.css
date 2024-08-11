@@ -284,18 +284,64 @@ li:hover .d-none {
 @media (min-width: 1160px) {
     .addTask{
       overflow-y: scroll;
-      padding-top: 20px;
       padding-bottom: 20px;
     }
     .buttonsSection{
-      margin-top: 50px !important;
+      margin-top: 40px !important;
     }
 }
-@media (max-height:500px){
+@media (max-height:860px){
   .addTask{
+    height: calc(100vh - 126px);
     overflow-y: scroll;
     padding-top: 20px;
-    padding-bottom: 20px;
   }
   
+}
+@media (max-height:600px) {
+  .addTask{
+    overflow-y: scroll;
+    scrollbar-width: none;
+    align-items: center;
+    padding-left: 0px;
+  }
+  #newSubtasks, #contacts {
+    position: relative !important;
+    margin-top: 0px !important;
+  }
+  #categories{
+    position: relative !important;
+    top: 80px;
+  }
+  .formLeft, #newSubtasks, #contacts, #categories{
+    width: 99vw !important; 
+  }
+  form{
+    flex-direction: column;
+  }
+  .separator{
+    display: none;
+  }
+  .buttonsSection{
+    flex-direction: column-reverse;
+    margin-top: 30px !important;
+    gap: 24px;
+    margin-top: 0px !important;
+    margin-bottom: 70px !important;
+    width: 99vw !important; 
+    padding-right: 0px !important;
+  }
+  .buttonArea{
+    justify-content: center;
+  }
+  textarea{
+    height: 80px;
+  }
+  h1{
+    margin-bottom: 20px;
+    font-size: 48px;
+  }
+  .clear, .createButton{
+    height: 40px !important; 
+  }
 }
