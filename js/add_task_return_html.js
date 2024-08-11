@@ -1,7 +1,7 @@
 function returnResetSubtaskHtml(){
  return `
     <p>
-      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtask()" />
+      <input type="text" autofocus name="" placeholder="Add new subtask" id="subtaskInput" readonly onclick="writeSubtask()" />
       <img src="assets/img/png/Subtasks icons11.png" alt="" />
     </p>
   `;
@@ -22,7 +22,7 @@ function returnWriteSubtaskHtmlAddTask(){
 function returnShowAddTaskSubtaskHTML(subtaskText, s) {
   return `
     <li onmouseenter="showActions(this)" onmouseleave="hideActions(this)">
-      <div class="subtask-item">
+      <div class="subtask-item" onclick="editSubtask(${s})">
         <div class="subtask-content">
           <span class="custom-bullet">•</span>
           ${subtaskText}

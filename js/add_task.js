@@ -132,12 +132,17 @@ document.addEventListener('click', function(event) {
 
 function writeSubtask() {
   let subtaskArea = document.getElementById('subtaskContainer');
-  subtaskArea.innerHTML = returnWriteSubtaskHtmlAddTask()
+  subtaskArea.innerHTML = returnWriteSubtaskHtmlAddTask();
   let inputField = document.getElementById('subtaskInput');
-  inputField.addEventListener('focusout', function() {
-      if (!this.value.trim()) {
+  document.querySelectorAll('.addSubtask img').forEach(function(image) {
+      image.addEventListener('mousedown', function(event) {
+          event.preventDefault(); 
+      });
+  });
+  inputField.addEventListener('focusout', function(event) {
+     
           resetSubtask();
-      }
+      
   });
   inputField.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
