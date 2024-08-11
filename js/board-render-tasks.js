@@ -137,7 +137,13 @@ function updateSubtaskProgressBoard(i, progressBar, progressBarFill, subtaskProg
     const progress = (completedSubtasks / subtasks.length) * 100;
 
     progressBarFill.style.width = `${progress}%`;
-    subtaskProgressText.textContent = `${completedSubtasks}/${subtasks.length} Subtasks`;
+   
+    if(window.innerWidth < 1440){
+        subtaskProgressText.textContent = `${completedSubtasks}/${subtasks.length}`;
+    }
+    if(window.innerWidth > 1440){
+        subtaskProgressText.textContent = `${completedSubtasks}/${subtasks.length} Subtasks`;
+    }
 }
 
 function handleSubtaskAreaDisplayBoard(subtaskArea, subtasks) {

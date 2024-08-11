@@ -122,8 +122,7 @@ input:focus {
   gap: 20px;
   box-sizing: border-box;
   height: calc(100vh - 350.75px);
-  overflow-y: scroll;
-  scrollbar-width: none;
+ 
 }
 
 .taskColumn {
@@ -132,6 +131,8 @@ input:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .noTask {
@@ -192,6 +193,7 @@ input:focus {
   border-radius: 10px;
   margin-bottom: 16px;
   gap: 24px;
+  z-index: 10;
 }
 
 .taskCategory {
@@ -351,33 +353,34 @@ input:focus {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1068px) {
-  .boardContent {
-    width: 100%;
-  }
 
-  .taskCategoryContainer {
+.taskCategoryContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
-  .taskCategoryContainer img {
+.taskCategoryContainer img {
     width: 20px;
     height: 20px;
-  }
+}
 
-  .mobileArrowsContainer {
+.mobileArrowsContainer {
     height: fit-content;
     width: fit-content;
-  }
+}
 
-  .leftArrow {
+.leftArrow {
     rotate: 90deg;
     margin-right: -10px;
-  }
+}
 
   .rightArrow {
     rotate: -90deg;
-  }
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

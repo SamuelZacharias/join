@@ -19,10 +19,15 @@ function loadTasksFromLocalStorage() {
 }
 
 function filterTasks() {
+  // Get the values from both search inputs
   const searchInput = document.getElementById('search').value.toLowerCase();
+  const searchMobileInput = document.getElementById('searchMobile').value.toLowerCase();
+  const searchTerm = searchInput || searchMobileInput;
+  
   const filteredTasks = tasks.filter(task => {
-    return task.title.includes(searchInput) || task.description.toLowerCase().includes(searchInput);
+      return task.title.toLowerCase().includes(searchTerm) || task.description.toLowerCase().includes(searchTerm);
   });
+  
   renderFilteredTasks(filteredTasks);
 }
 
@@ -135,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 setInterval(() => {
   getTasksFromDataBase()
-}, 15000);
+}, 1500000);
 
 function isTouchDevice() {
   // Check for touch support in modern browsers

@@ -109,8 +109,6 @@ textarea {
     gap: 16px
 }
 
-
-
 .urgent {
     background-color: var(--high);
     color: white;
@@ -298,8 +296,6 @@ textarea {
     width: 100%;
 }
 
-
-
 .editSubtask input {
     background-color: var(--background);
     padding-left: 10px;
@@ -371,4 +367,8 @@ ul {
     list-style: none;
     padding: 0px;
     gap: 2px;
+}
+
+.contentHeaderMobile{
+    display: none;
 }
