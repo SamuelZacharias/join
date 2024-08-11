@@ -1,0 +1,11 @@
+@media (max-width: 1170px ){
+  form{
+    gap: 16px;
+  }
+  .formLeft , .addSubtaskAddBoard, #newSubtasksAddTask, .contacts, #categories{
+    width: 360px;
+  }
+  .buttonsSection{
+    margin-top: 100px !important;
+  }
+}

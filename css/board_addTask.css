@@ -145,7 +145,10 @@
   margin-right: 12px;
 }
 
-
+.separator{
+  width: 1px;
+  background-color: var(--blue);
+}
 
 .sucessMessageAddTask {
   background-color: var(--gray);
