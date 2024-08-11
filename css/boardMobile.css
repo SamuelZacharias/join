@@ -153,3 +153,32 @@
     padding: 0px;
   }
 }
+
+@media (max-height:800px){
+  
+  .addMobile{
+    padding: 10px 20px;
+  }
+
+  .addMobile h1, .contentHeader h1{
+    font-size: 36px;
+  }
+  .inputarea, .inputarea .input{
+    padding-bottom: 10px;
+  }
+  .taskArea{
+    height: calc(100vh - 240px);
+  }
+  .inputarea .input{
+    padding: 0px;
+  }
+  .inputarea input{
+    padding: 0px 10px;
+  }
+  .inputarea button{
+    padding: 0px 10px;
+  }
+  .contentHeader{
+    padding: 20px 20px;
+  }
+}
