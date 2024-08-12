@@ -47,7 +47,7 @@ function renderOpenTaskAssignedContacts(task) {
   openedAssignedContacts.innerHTML = '';
   const validContacts = getValidContactsAssignedContacts(task.assignedContacts);
   if (validContacts.length === 0) {
-    openedAssignedContacts.innerHTML = 'No valid contacts assigned';
+    openedAssignedContacts.innerHTML = 'No contacts assigned';
     return;
   }
   const contactsHTML = renderContactsHTML(validContacts);

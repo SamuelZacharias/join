@@ -281,6 +281,7 @@ li:hover .subtask-item {
     display: flex;
     align-items: center;
     width: 100%;
+    overflow: hidden;
 }
 
 .borderLeft {
@@ -295,7 +296,9 @@ li:hover .subtask-item {
     height: 32px;
     width: 100%;
 }
-
+.checkmark {
+    text-overflow: clip 
+}
 .d-none {
     display: none;
 }
