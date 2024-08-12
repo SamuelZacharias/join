@@ -38,6 +38,7 @@
     background-color: var(--background);
     height: calc(100vh - 160px);
     width: 100vw;
+    overflow-y: scroll;
   }
   .closeContactInfo{
     display: flex;
@@ -115,12 +116,12 @@
     display: block;
     position: fixed;
     right: 50px;
-    bottom:160px
+    bottom: 100px
   }
   .contact-box-edit-delete{
     display: none;
     position: fixed;
-    bottom: 200px;
+    bottom: 140px;
     flex-direction: column;
     gap: 16px;
     right: 90px;
