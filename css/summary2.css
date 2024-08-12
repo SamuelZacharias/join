@@ -209,6 +209,7 @@
     }
 
     .greeting-container {
+        display: none;
         position: absolute;
         top: 80px;
         left: 0;
@@ -231,7 +232,7 @@
         line-height: 43.2px;
         color: black;
         opacity: 0;
-        animation: fadeInOut 4s ease-in-out forwards;
+        animation: fadeInOut 2s ease-in-out forwards;
     }
 
     .greeting-name {
@@ -243,7 +244,7 @@
         color: var(--blue);
         margin-top: 10px;
         opacity: 0;
-        animation: fadeInOut 4s ease-in-out forwards;
+        animation: fadeInOut 2s ease-in-out forwards;
         animation-delay: 0.25s;
     }
 

@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
   localStorage.removeItem('loggedInUserName');
   localStorage.removeItem('loggedInUserEmail');
+  sessionStorage.setItem('ShowGreetingScreen', 'false');
+  sessionStorage.removeItem('loggedInUserName');
 }
 
 function includeHTML(callback) {

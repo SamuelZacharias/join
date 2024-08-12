@@ -15,20 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getGreeting() {
     const now = new Date();
-    const hours = now.getHours(); 
+    const hours = now.getHours();
     let greeting;
     if (hours < 12) {
-        greeting = "Good morning"; 
+        greeting = "Good morning";
     } else if (hours < 18) {
-        greeting = "Good afternoon"; 
+        greeting = "Good afternoon";
     } else {
-        greeting = "Good evening"; 
+        greeting = "Good evening";
     }
     return greeting;
 }
 
 function generateGreetingHTML() {
-    const time = getGreeting(); 
+    const time = getGreeting();
     const htmlContent = `<div>
         <h1>${time}</h1>
     </div>`;
@@ -103,25 +103,30 @@ function completedTasksUrgent() {
 }
 
 window.onload = function () {
-    updateGreeting();
-    showGreeting();
+    const showGreeting = sessionStorage.getItem('ShowGreetingScreen') === 'true';
 
-    setTimeout(function () {
-        document.getElementById('greeting-container').style.display = 'none';
+    if (!showGreeting) {
+        document.getElementById('greeting-container').style.display = 'flex';
+        showGreetingMessage();
         
-        // Hier der restliche Code, der bei page load ausgeführt werden soll
-        setFutureDate();
-        loadTasksFromLocalStorage();
-        document.getElementById('doneCount').innerHTML = countCompletedTasks();
-        document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
-        document.getElementById('inProgress').innerHTML = completedTasksInProgress();
-        document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
-        document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
-        document.getElementById('board').innerHTML = tasks.length;
-    }, 4000); // 4 Sekunden, um die Animation abzuschließen
+        setTimeout(function () {
+            document.getElementById('greeting-container').style.display = 'none';
+            setFutureDate();
+            loadTasksFromLocalStorage();
+            document.getElementById('doneCount').innerHTML = countCompletedTasks();
+            document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
+            document.getElementById('inProgress').innerHTML = completedTasksInProgress();
+            document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
+            document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
+            document.getElementById('board').innerHTML = tasks.length;
+        }, 2000);
+        sessionStorage.setItem('ShowGreetingScreen', 'true');
+    } else {
+        document.getElementById('greeting-container').style.display = 'none';
+    }
 };
 
-function showGreeting() {
+function showGreetingMessage() {
     const greeting = getGreeting();
     document.getElementById('greeting').textContent = greeting + ',';
     document.getElementById('greeting-name').textContent = localStorage.getItem('loggedInUserName');
