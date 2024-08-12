@@ -206,7 +206,7 @@
         /* Startet direkt unter dem Header */
         left: 0;
         width: 100%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 160px);
         /* Höhe angepasst, um Platz für den Header zu lassen */
         display: flex;
         flex-direction: column;
