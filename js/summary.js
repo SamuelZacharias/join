@@ -104,12 +104,24 @@ function completedTasksUrgent() {
 
 window.onload = function () {
     updateGreeting();
-    setFutureDate();
-    loadTasksFromLocalStorage();
-    document.getElementById('doneCount').innerHTML = countCompletedTasks()
-    document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount()
-    document.getElementById('inProgress').innerHTML = completedTasksInProgress()
-    document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback()
-    document.getElementById('urgentCount').innerHTML = completedTasksUrgent()
-    document.getElementById('board').innerHTML = tasks.length;
+    showGreeting();
+
+    setTimeout(function () {
+        document.getElementById('greeting-container').style.display = 'none';
+        
+        // Hier der restliche Code, der bei page load ausgeführt werden soll
+        setFutureDate();
+        loadTasksFromLocalStorage();
+        document.getElementById('doneCount').innerHTML = countCompletedTasks();
+        document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
+        document.getElementById('inProgress').innerHTML = completedTasksInProgress();
+        document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
+        document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
+        document.getElementById('board').innerHTML = tasks.length;
+    }, 4000); // 4 Sekunden, um die Animation abzuschließen
 };
+
+function showGreeting() {
+    const greeting = getGreeting();
+    document.getElementById('greeting').textContent = greeting + ', ' + localStorage.getItem('loggedInUserName');
+}
