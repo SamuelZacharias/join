@@ -156,4 +156,10 @@
   .contact-box button{
     right: 20px;
   }
+  .editContactPoints{
+    right: 20px;
+  }
+  .contact-box-edit-delete{
+    right: 60px
+  }
 }

@@ -114,7 +114,7 @@ aside {
     left: 0;
     flex-direction: row;
     justify-content: space-between;
-    z-index: 99;
+    z-index: 80;
   }
 
   .logo-sidebar {

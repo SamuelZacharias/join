@@ -131,7 +131,7 @@ h1 {
 }
 
 .grey-background {
-  z-index: +7;
+  z-index: 89;
   position: fixed;
   top: 0;
   left: 0;

@@ -249,24 +249,13 @@ document.addEventListener('DOMContentLoaded', () => {
   loadData(); 
 });
 
-function setError(inputElement, message) {
-  inputElement.dataset.originalPlaceholder = inputElement.placeholder;
-  inputElement.placeholder = message;
-  inputElement.classList.add('error');
-}
 
-function clearError(inputElement) {
-  if (inputElement.dataset.originalPlaceholder) {
-      inputElement.placeholder = inputElement.dataset.originalPlaceholder;
-  }
-  inputElement.classList.remove('error');
-}
 
 function storeFirstAndLastNames() {
   localStorage.setItem('contacts', JSON.stringify(contacts));
 }
 
-function truncate(text, maxLength = 20) {
+function truncate(text, maxLength = 16) {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + '...';
   }
@@ -297,20 +286,15 @@ function hideContactInfo(){
 function showEditContactMobile() {
   let containerEditDeleteMobile = document.querySelector('.contact-box-edit-delete');
   let editContactPoints = document.querySelector('.editContactPoints');
-
-  // Show the container
   containerEditDeleteMobile.style.display = "flex";
 
-  // Define the click handler
   function handleClickOutside(event) {
-    // Check if the click is outside both the container and the editContactPoints
     if (!containerEditDeleteMobile.contains(event.target) &&
         !editContactPoints.contains(event.target)) {
-      containerEditDeleteMobile.style.display = "none"; // Hide the container
-      document.removeEventListener('click', handleClickOutside); // Remove the event listener
+      containerEditDeleteMobile.style.display = "none"; 
+      document.removeEventListener('click', handleClickOutside); 
     }
   }
 
-  // Add the event listener to the document
   document.addEventListener('click', handleClickOutside);
 }
