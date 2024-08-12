@@ -107,6 +107,7 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .image:hover img {
@@ -131,6 +132,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   overflow-y: scroll;
 }
 
@@ -182,7 +184,7 @@ input:focus {
 }
 
 .taskCard {
-  width: 100%;
+  width: 98%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -297,6 +299,7 @@ input:focus {
   height: fit-content;
   border-radius: 30px;
   padding: 48px 40px;
+  scrollbar-width: none;
 }
 
 .openedTaskCategory {
