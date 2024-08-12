@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/header.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
     <link rel="stylesheet" href="./css/contacts.css" />
+    <link rel="stylesheet" href="css/contactsMobile.css">
     <link rel="stylesheet" href="./css/dialog-contacts.css" />
     <link rel="stylesheet" href="css/dialogContactsMobile.css">
     <link rel="stylesheet" href="style.css"/>
@@ -32,15 +33,24 @@
             </button>
             <div id="contactList"></div>
           </div>
-          <div>
+          <div class="rightInfoBox">
             <div class="text-box">
-              <h1>Contacts</h1>
+              <div class="headerContacts">
+                <h1>Contacts</h1>
+                <img class="closeContactInfo" onclick="hideContactInfo()" src="assets/img/png/arrow-left-line.png" alt="">
+              </div>
+              
               <div class="text-seperator"></div>
               <span class="info-text">Better with a Team</span>
             </div>
             <div class="contacts-info-box"></div>
-            
+            <div onclick="showEditContactMobile()" class="editContactPoints">
+              <li></li>
+              <li></li>
+              <li></li>
+            </div> 
           </div>
+          
           </div>
         </div>
       </div>

@@ -128,6 +128,8 @@ function getNextColor() {
 }
 
 function displayContactInfo(index) {
+  let contactinfo = document.querySelector('.rightInfoBox')
+  contactinfo.style.display = 'block'
   const contact = contacts[index];
   let nameParts = contact.name.split(' ');
   let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
@@ -156,6 +158,12 @@ function deleteContact(index) {
   .catch(error => {
     console.error('Fehler beim Löschen des Kontakts:', error);
   });
+  if(window.innerWidth < 600){
+    setTimeout(() => {
+      hideContactInfo()
+    }, 1000);
+    
+  }
 }
 
 function contactWasDeleted(){
@@ -277,4 +285,32 @@ function highlightContact(index) {
     contactElement.style.color = 'white';
   }
   highlightedContactIndex = index;
+}
+
+function hideContactInfo(){
+  let contactInfoContainer = document.querySelector('.rightInfoBox')
+  contactInfoContainer.style.display = "none"
+  highlightedContactIndex = -1;
+  renderContacts()
+}
+
+function showEditContactMobile() {
+  let containerEditDeleteMobile = document.querySelector('.contact-box-edit-delete');
+  let editContactPoints = document.querySelector('.editContactPoints');
+
+  // Show the container
+  containerEditDeleteMobile.style.display = "flex";
+
+  // Define the click handler
+  function handleClickOutside(event) {
+    // Check if the click is outside both the container and the editContactPoints
+    if (!containerEditDeleteMobile.contains(event.target) &&
+        !editContactPoints.contains(event.target)) {
+      containerEditDeleteMobile.style.display = "none"; // Hide the container
+      document.removeEventListener('click', handleClickOutside); // Remove the event listener
+    }
+  }
+
+  // Add the event listener to the document
+  document.addEventListener('click', handleClickOutside);
 }
