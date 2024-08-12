@@ -111,19 +111,21 @@ window.onload = function () {
         
         setTimeout(function () {
             document.getElementById('greeting-container').style.display = 'none';
-            setFutureDate();
-            loadTasksFromLocalStorage();
-            document.getElementById('doneCount').innerHTML = countCompletedTasks();
-            document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
-            document.getElementById('inProgress').innerHTML = completedTasksInProgress();
-            document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
-            document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
-            document.getElementById('board').innerHTML = tasks.length;
         }, 2000);
+
         sessionStorage.setItem('ShowGreetingScreen', 'true');
     } else {
         document.getElementById('greeting-container').style.display = 'none';
     }
+
+    setFutureDate();
+    loadTasksFromLocalStorage();
+    document.getElementById('doneCount').innerHTML = countCompletedTasks();
+    document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
+    document.getElementById('inProgress').innerHTML = completedTasksInProgress();
+    document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
+    document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
+    document.getElementById('board').innerHTML = tasks.length;
 };
 
 function showGreetingMessage() {
