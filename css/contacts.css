@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "inter";
-  src: url("./assets/fonts/static/Inter-Black.ttf") format("interBlack"),
-    url("./assets/fonts/static/Inter-Bold.ttf") format("interBold");
-}
 
 body {
   font-family: "inter";
@@ -75,8 +70,6 @@ body {
   cursor: pointer;
   background-color: #f4f4f4a6;
 }
-
-
 
 .contacts:target{
   background-color: #2a3647;

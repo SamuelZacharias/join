@@ -336,7 +336,8 @@ input:focus {
 
 #openedSubtasks {
   max-height: 110px;
-  overflow-y: scroll
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .openedSubtaskTitle {

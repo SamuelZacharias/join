@@ -1,0 +1,49 @@
+@media (max-width: 1300px){
+  #dialog-contacts, #dialog-edit{
+    width: 95vw;
+    height: 60vh;
+}
+.dialog-left {
+  width: 40vw;
+  height: 60vh;
+  padding: 33px 24px 33px 24px;
+}
+.dialog-left h2{
+  margin-top: 30px;
+  font-size: 54px;
+}
+.dialog-text {
+  font-size: 24px;
+}
+
+.dialog-right {
+  width: 55vw;
+}
+}
+
+@media (max-width: 1000px){
+  #dialog-contacts, #dialog-edit{
+    flex-direction: column;
+    width: 95vw;
+    height: 90vh;
+}
+.dialog-left {
+  width: 95vw;
+  height: 30vh;
+  padding: 33px 24px 33px 24px;
+}
+.dialog-right {
+  width: 95vw;
+  height: 60vh;
+}
+.dialog-content-right img{
+  content: url(/assets/img/png/add.png);
+  width: 30px;
+  height: 30px;
+  rotate: 45deg;
+}
+.dialog-content-right img:hover{
+  background-color: gray;
+  border-radius: 50%;
+}
+}
