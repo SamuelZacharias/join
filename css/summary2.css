@@ -203,14 +203,19 @@
     .greeting-container {
         position: absolute;
         top: 80px;
+        /* Startet direkt unter dem Header */
         left: 0;
         width: 100%;
-        height: calc(100vh - 160px);
+        height: calc(100vh - 80px);
+        /* Höhe angepasst, um Platz für den Header zu lassen */
         display: flex;
+        flex-direction: column;
+        /* Ermöglicht vertikale Anordnung */
         justify-content: center;
         align-items: center;
         background-color: var(--background);
-        z-index: 9999;
+        z-index: 9998;
+        /* Leicht unter dem Header, wenn Header einen höheren z-index hat */
         text-align: center;
         /* Text innerhalb des Containers zentrieren */
     }
@@ -221,7 +226,8 @@
         font-weight: 400;
         font-size: 36px;
         line-height: 43.2px;
-        color: var(--blue);
+        color: black;
+        /* Greeting in Schwarz */
         opacity: 0;
         animation: fadeInOut 4s ease-in-out forwards;
     }
@@ -233,8 +239,13 @@
         font-size: 47px;
         line-height: 56.4px;
         color: var(--blue);
+        /* Name in Blau */
         margin-top: 10px;
         /* Optionaler Abstand zwischen Greeting und Name */
+        opacity: 0;
+        animation: fadeInOut 4s ease-in-out forwards;
+        animation-delay: 0.5s;
+        /* Verzögerung für einen leicht versetzten Effekt */
     }
 
 }

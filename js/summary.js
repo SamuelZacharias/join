@@ -123,5 +123,6 @@ window.onload = function () {
 
 function showGreeting() {
     const greeting = getGreeting();
-    document.getElementById('greeting').textContent = greeting + ', ' + localStorage.getItem('loggedInUserName');
+    document.getElementById('greeting').textContent = greeting + ',';
+    document.getElementById('greeting-name').textContent = localStorage.getItem('loggedInUserName');
 }
