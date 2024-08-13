@@ -1,3 +1,15 @@
+/**
+ * Generates the HTML for a contact card.
+ * 
+ * This function creates a contact card with the contact's initials, name, and email. 
+ * The name and email are truncated if necessary. The contact card is clickable and 
+ * triggers the `displayContactInfo` function when clicked.
+ * 
+ * @param {Object} contact - The contact object containing name, email, color, and other information.
+ * @param {string} initials - The initials of the contact.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} The HTML string for the contact card.
+ */
 function generateContact(contact, initials, index) {
   const truncatedName = truncate(contact.name);
   const truncatedEmail = truncate(contact.email);
@@ -13,16 +25,33 @@ function generateContact(contact, initials, index) {
   `;
 }
 
+/**
+ * Generates the HTML for a letter box.
+ * 
+ * This function creates a letter box with the given initial, followed by a separator.
+ * 
+ * @param {string} initial - The initial letter to display in the letter box.
+ * @returns {string} The HTML string for the letter box.
+ */
 function generateLetterBox(initial) {
   return `<div class="letter-box">${initial}</div>
             <div class="contact-seperator"></div>`;
 }
 
+/**
+ * Generates the HTML for detailed contact information.
+ * 
+ * This function creates a detailed view of a contact, including options to edit or delete 
+ * the contact, and displays the contact's name, email, and phone number.
+ * 
+ * @param {Object} contact - The contact object containing name, email, phone, color, and other information.
+ * @param {string} initials - The initials of the contact.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} The HTML string for the detailed contact information.
+ */
 function generateContactInfo(contact, initials, index) {
   return `
   <div class="contacts-info">
-             
-            
       <div class="contacts-info-name">
         <div class="big-letter-circle" style="background-color: ${contact.color};">${initials}</div>
         <div class="contact-box-name">
@@ -60,6 +89,16 @@ function generateContactInfo(contact, initials, index) {
     `;
 }
 
+/**
+ * Generates the HTML for a large circle displaying the contact's initials.
+ * 
+ * This function creates a large circle with the contact's initials, styled with the 
+ * contact's specific color.
+ * 
+ * @param {Object} contact - The contact object containing color information.
+ * @param {string} initials - The initials of the contact.
+ * @returns {string} The HTML string for the large circle with initials.
+ */
 function generateBigLetterCircle(contact, initials) {
   return `
     <div class="bigLetterCircle" style="background-color: ${contact.color}";>${initials}
@@ -67,6 +106,15 @@ function generateBigLetterCircle(contact, initials) {
     `;
 }
 
+/**
+ * Generates the HTML for the delete button in a dialog.
+ * 
+ * This function creates a delete button that triggers the `deleteContact` function 
+ * and a save button that triggers the `validateEditForm` function, both within a dialog.
+ * 
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} The HTML string for the delete button dialog.
+ */
 function generateDeleteButtonDialog(index){
   return `
   <button onclick="deleteContact(${index}), closeDialogEdit()" class="button-delete">

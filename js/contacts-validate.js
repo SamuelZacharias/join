@@ -1,3 +1,9 @@
+/**
+ * Validates the contact form and adds the contact if all validations pass.
+ * 
+ * This function checks the validity of the name, email, and phone fields. 
+ * If all fields are valid, it adds the contact, closes the dialog, and opens a success dialog.
+ */
 function validateForm() {
     let isValid = true;
     if (!validateNameContact()) {
@@ -16,12 +22,23 @@ function validateForm() {
     }
 }
 
+/**
+ * Sets an error message on an input element and applies an error class.
+ * 
+ * @param {HTMLElement} inputElement - The input element to set the error on.
+ * @param {string} message - The error message to display as the placeholder.
+ */
 function setError(inputElement, message) {
     inputElement.dataset.originalPlaceholder = inputElement.placeholder;
     inputElement.placeholder = message;
     inputElement.classList.add('error');
-  }
-  
+}
+
+/**
+ * Clears the error message and removes the error class from an input element.
+ * 
+ * @param {HTMLElement} inputElement - The input element to clear the error from.
+ */
 function clearError(inputElement) {
     if (inputElement.dataset.originalPlaceholder) {
         inputElement.placeholder = inputElement.dataset.originalPlaceholder;
@@ -29,6 +46,14 @@ function clearError(inputElement) {
     inputElement.classList.remove('error');
 }
 
+/**
+ * Validates the contact's name field.
+ * 
+ * The name must consist of two words (first and last name), and each word must only contain letters.
+ * The total length of the name must not exceed 20 characters.
+ * 
+ * @returns {boolean} Returns `true` if the name is valid, otherwise `false`.
+ */
 function validateNameContact() {
     const nameInput = document.getElementById('name');
     nameInput.addEventListener('input', function() {
@@ -42,10 +67,15 @@ function validateNameContact() {
         clearError(nameInput);
         return true;
     }
-    
 }
 
-
+/**
+ * Validates the contact's email field.
+ * 
+ * The email must be in a valid format (e.g., test@test.com).
+ * 
+ * @returns {boolean} Returns `true` if the email is valid, otherwise `false`.
+ */
 function validateEmailContact() {
     const emailInput = document.getElementById('email');
     emailInput.addEventListener('input', function() {
@@ -61,6 +91,13 @@ function validateEmailContact() {
     }
 }
 
+/**
+ * Validates the contact's phone field.
+ * 
+ * The phone number must only contain digits.
+ * 
+ * @returns {boolean} Returns `true` if the phone number is valid, otherwise `false`.
+ */
 function validatePhoneContact() {
     const phoneInput = document.getElementById('phone');
     phoneInput.addEventListener('input', function() {
@@ -76,6 +113,12 @@ function validatePhoneContact() {
     }
 }
 
+/**
+ * Validates the edit contact form and saves the edited contact if all validations pass.
+ * 
+ * This function checks the validity of the name, email, and phone fields in the edit form. 
+ * If all fields are valid, it saves the edited contact.
+ */
 function validateEditForm() {
     let isValid = true;
     if (!validateNameContactEdit()) {
@@ -92,6 +135,14 @@ function validateEditForm() {
     }
 }
 
+/**
+ * Validates the contact's name field in the edit form.
+ * 
+ * The name must consist of two words (first and last name), and each word must only contain letters.
+ * The total length of the name must not exceed 20 characters.
+ * 
+ * @returns {boolean} Returns `true` if the name is valid, otherwise `false`.
+ */
 function validateNameContactEdit() {
     const nameInput = document.getElementById('inputEditName');
     const namePattern = /^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/;
@@ -108,6 +159,13 @@ function validateNameContactEdit() {
     }
 }
 
+/**
+ * Validates the contact's email field in the edit form.
+ * 
+ * The email must be in a valid format (e.g., test@test.com).
+ * 
+ * @returns {boolean} Returns `true` if the email is valid, otherwise `false`.
+ */
 function validateEmailContactEdit() {
     const emailInput = document.getElementById('inputEditEmail');
     emailInput.addEventListener('input', function() {
@@ -124,6 +182,13 @@ function validateEmailContactEdit() {
     }
 }
 
+/**
+ * Validates the contact's phone field in the edit form.
+ * 
+ * The phone number must only contain digits.
+ * 
+ * @returns {boolean} Returns `true` if the phone number is valid, otherwise `false`.
+ */
 function validatePhoneContactEdit() {
     const phoneInput = document.getElementById('inputEditPhone');
     phoneInput.addEventListener('input', function() {

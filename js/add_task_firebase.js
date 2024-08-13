@@ -1,7 +1,18 @@
-
+/**
+ * Base URL for the Firebase tasks database.
+ * 
+ * @constant {string}
+ */
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
-
+/**
+ * Fetches the existing tasks from the Firebase database.
+ * 
+ * This function makes a GET request to the Firebase database to retrieve all existing tasks.
+ * 
+ * @returns {Promise<Object>} A promise that resolves to the JSON object containing all tasks.
+ * @throws Will throw an error if the fetch operation fails.
+ */
 async function fetchExistingTasks() {
   const response = await fetch(`${BASE_TASKS_URL}.json`);
   if (!response.ok) {
@@ -10,6 +21,16 @@ async function fetchExistingTasks() {
   return await response.json();
 }
 
+/**
+ * Adjusts task IDs and updates them in Firebase.
+ * 
+ * This function sorts the tasks by their IDs and ensures that each task has a consecutive ID.
+ * If a task ID is not consecutive, it updates the task with the correct ID in the Firebase database.
+ * 
+ * @param {Object} existingTasks - The object containing existing tasks from Firebase.
+ * @returns {Promise<number>} A promise that resolves to the next index to be used for a new task.
+ * @throws Will throw an error if any update operation fails.
+ */
 async function adjustTaskIdsAndUpdate(existingTasks) {
   let tasksArray = existingTasks ? Object.keys(existingTasks).map(key => ({
     ...existingTasks[key],
@@ -35,6 +56,13 @@ async function adjustTaskIdsAndUpdate(existingTasks) {
   return tasksArray.length; 
 }
 
+/**
+ * Collects the new task data from the form.
+ * 
+ * This function gathers all the necessary data from the form to create a new task.
+ * 
+ * @returns {Object|null} The task data object, or null if data collection fails.
+ */
 function collectNewTaskData() {
   const taskData = collectData();
   if (!taskData) {
@@ -44,7 +72,16 @@ function collectNewTaskData() {
   return taskData;
 }
 
-
+/**
+ * Sends a new task to Firebase.
+ * 
+ * This function sends the collected task data to Firebase, creating a new task with the specified index.
+ * 
+ * @param {number} nextIndex - The index to be assigned to the new task.
+ * @param {Object} taskData - The data of the new task to be sent.
+ * @returns {Promise<Object>} A promise that resolves to the JSON object of the newly created task.
+ * @throws Will throw an error if the task creation operation fails.
+ */
 async function sendNewTask(nextIndex, taskData) {
   const taskResponse = await fetch(`${BASE_TASKS_URL}/${nextIndex}.json`, {
     method: 'PUT',
@@ -59,6 +96,15 @@ async function sendNewTask(nextIndex, taskData) {
   return await taskResponse.json();
 }
 
+/**
+ * Sends the task data to Firebase, handling the entire process from initialization to saving the new task.
+ * 
+ * This function initializes the tasks node, fetches existing tasks, adjusts task IDs, and sends the new task data to Firebase.
+ * 
+ * @async
+ * @returns {Promise<void>}
+ * @throws Will log an error to the console if any step in the process fails.
+ */
 async function sendTaskDataToFirebase() {
   try {
     await initializeTasksNode();

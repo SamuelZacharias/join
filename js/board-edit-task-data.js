@@ -1,3 +1,12 @@
+/**
+ * Collects and updates the data for a task being edited.
+ * 
+ * This function gathers data from the edit form, updates the task with the new information,
+ * saves it locally, and updates it in Firebase.
+ * 
+ * @param {number} taskId - The ID of the task being edited.
+ * @returns {Object|null} The updated task object, or `null` if the task was not found.
+ */
 function collectDataEdit(taskId) {
   const task = getTaskById(taskId);
   if (!task) {
@@ -14,6 +23,13 @@ function collectDataEdit(taskId) {
   return updatedTask;
 }
 
+/**
+ * Collects the form data from the task edit form.
+ * 
+ * This function retrieves the title, description, and due date from the edit form.
+ * 
+ * @returns {Object} An object containing the title, description, and due date of the task.
+ */
 function collectFormData() {
   const title = document.getElementById('editTitle').querySelector('input').value;
   const description = document.getElementById('taskDescriptionTextarea').value;
@@ -21,6 +37,13 @@ function collectFormData() {
   return { title, description, dueDate };
 }
 
+/**
+ * Determines the priority level of the task from the edit form.
+ * 
+ * This function checks which priority button is selected and returns the corresponding priority level.
+ * 
+ * @returns {string} The priority level ('Urgent', 'Medium', 'Low').
+ */
 function determinePriority() {
   const priorityButtons = document.querySelectorAll('#editPriorityButtons .prioButton');
   let priority = '';
@@ -36,10 +59,24 @@ function determinePriority() {
   return priority;
 }
 
+/**
+ * Retrieves the contacts assigned to the task being edited.
+ * 
+ * This function returns the list of contacts currently assigned to the task.
+ * 
+ * @returns {Array<Object>} An array of contact objects assigned to the task.
+ */
 function getAssignedContacts() {
   return currentTaskBeingEdited.assignedContacts || [];
 }
 
+/**
+ * Collects the subtasks from the subtask input fields.
+ * 
+ * This function gathers the subtasks, including their title and completion status.
+ * 
+ * @returns {Array<Object>} An array of subtask objects, each containing a title and completion status.
+ */
 function collectSubtasks() {
   const subtasks = subtaskInfos.map(subtask => ({
       title: subtask.title,
@@ -48,6 +85,18 @@ function collectSubtasks() {
   return subtasks;
 }
 
+/**
+ * Creates an updated task object with the new data from the edit form.
+ * 
+ * This function merges the original task data with the updated data from the form.
+ * 
+ * @param {Object} task - The original task object.
+ * @param {Object} formData - The updated form data containing title, description, and due date.
+ * @param {string} priority - The updated priority level.
+ * @param {Array<Object>} assignedContacts - The updated list of assigned contacts.
+ * @param {Array<Object>} subtasks - The updated list of subtasks.
+ * @returns {Object} The updated task object.
+ */
 function createUpdatedTask(task, formData, priority, assignedContacts, subtasks) {
   return {
       ...task,
@@ -60,6 +109,14 @@ function createUpdatedTask(task, formData, priority, assignedContacts, subtasks)
   };
 }
 
+/**
+ * Saves the updated task to localStorage.
+ * 
+ * This function updates the task in localStorage with the new data from the edit form.
+ * 
+ * @param {Object} updatedTask - The updated task object to save.
+ * @param {number} taskId - The ID of the task being updated.
+ */
 function saveTask(updatedTask, taskId) {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   const taskIndex = tasks.findIndex(t => t.id === taskId);
@@ -71,11 +128,24 @@ function saveTask(updatedTask, taskId) {
   }
 }
 
-function closeEdit(){
-  document.getElementById('editTaskContainer').classList.add('d-none')
-  switchButton('Medium')
+/**
+ * Closes the task edit interface and resets the priority button to its default state.
+ * 
+ * This function hides the task edit UI and resets the priority button selection.
+ */
+function closeEdit() {
+  document.getElementById('editTaskContainer').classList.add('d-none');
+  switchButton('Medium');
 }
 
+/**
+ * Retrieves a task by its ID from localStorage.
+ * 
+ * This function searches for a task in localStorage by its ID and returns it.
+ * 
+ * @param {number} taskId - The ID of the task to retrieve.
+ * @returns {Object|undefined} The task object if found, or `undefined` if not.
+ */
 function getTaskById(taskId) {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   return tasks.find(task => task.id === taskId);

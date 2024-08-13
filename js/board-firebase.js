@@ -1,5 +1,17 @@
+/**
+ * The base URL for the Firebase database where tasks are stored.
+ * @constant {string}
+ */
 const BASE_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
+/**
+ * Fetches tasks from the Firebase database and updates the local tasks array.
+ * 
+ * This function retrieves all tasks from the Firebase database, filters out null entries,
+ * and updates the local `tasks` array. It then stores the tasks in `localStorage` and renders them.
+ * 
+ * @returns {Promise<void>} A promise that resolves when the tasks have been fetched and processed.
+ */
 async function getTasksFromDataBase() {
   try {
       const response = await fetch(BASE_URL + '.json');
@@ -13,12 +25,20 @@ async function getTasksFromDataBase() {
       tasks.length = 0;
       tasks.push(...tasksArray);
       localStorage.setItem('tasks', JSON.stringify(tasks));
-      renderTasks()
+      renderTasks();
   } catch (error) {
       console.warn('There was a problem with the fetch operation:', error);
   }
 }
 
+/**
+ * Updates a task in the Firebase database.
+ * 
+ * This function sends a PUT request to Firebase to update the specified task.
+ * 
+ * @param {Object} task - The task object to update in Firebase.
+ * @returns {Promise<void>} A promise that resolves when the task has been updated.
+ */
 async function updateTaskInFirebase(task) {
   try {
       const response = await fetch(`${BASE_URL}${task.id}.json`, {
@@ -37,6 +57,14 @@ async function updateTaskInFirebase(task) {
   }
 }
 
+/**
+ * Sends new task data to Firebase and updates the task list.
+ * 
+ * This function initializes the tasks node in Firebase if necessary, fetches and sorts existing tasks,
+ * updates their IDs, and saves the new task. Finally, it fetches the updated tasks list from Firebase.
+ * 
+ * @returns {Promise<void>} A promise that resolves when the new task has been saved and the tasks list updated.
+ */
 async function sendTaskDataToFirebaseAddTask() {
   try {
     await initializeTasksNode();
@@ -57,6 +85,14 @@ async function sendTaskDataToFirebaseAddTask() {
   }
 }
 
+/**
+ * Fetches and sorts tasks from Firebase.
+ * 
+ * This function retrieves tasks from Firebase, sorts them by their IDs, and returns the sorted array.
+ * 
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of sorted tasks.
+ * @throws {Error} If the fetch operation fails.
+ */
 async function fetchAndSortTasksAddTask() {
   const response = await fetch(`${BASE_URL}.json`);
   if (!response.ok) {
@@ -70,6 +106,14 @@ async function fetchAndSortTasksAddTask() {
   return tasksArray;
 }
 
+/**
+ * Updates the IDs of tasks in Firebase to ensure they are sequential.
+ * 
+ * This function iterates over the sorted tasks and updates their IDs in Firebase if they are not sequential.
+ * 
+ * @param {Array<Object>} tasksArray - The array of sorted tasks.
+ * @returns {Promise<void>} A promise that resolves when all task IDs have been updated.
+ */
 async function updateTaskIdsAddTask(tasksArray) {
   const promises = tasksArray.map((task, index) => {
     if (task.id !== index) {
@@ -87,6 +131,16 @@ async function updateTaskIdsAddTask(tasksArray) {
   await Promise.all(promises);
 }
 
+/**
+ * Saves a new task to Firebase.
+ * 
+ * This function sends a PUT request to Firebase to save the new task at the next available index.
+ * 
+ * @param {Object} taskData - The data of the task to save.
+ * @param {number} nextIndex - The index at which to save the new task.
+ * @returns {Promise<Object>} A promise that resolves to the saved task data.
+ * @throws {Error} If the save operation fails.
+ */
 async function saveNewTaskAddTask(taskData, nextIndex) {
   const taskResponse = await fetch(`${BASE_URL}/${nextIndex}.json`, {
     method: 'PUT',
@@ -103,6 +157,13 @@ async function saveNewTaskAddTask(taskData, nextIndex) {
   return await taskResponse.json();
 }
 
+/**
+ * Updates a task in Firebase and refreshes the UI.
+ * 
+ * This function updates the task in Firebase, re-renders the task board, and opens the updated task in the UI.
+ * 
+ * @param {Object} updatedTask - The task object to update and display.
+ */
 function updateTaskInFirebaseAndUI(updatedTask) {
   updateTaskInFirebase(updatedTask).then(() => {
       renderTasks();
@@ -111,7 +172,4 @@ function updateTaskInFirebaseAndUI(updatedTask) {
   }).catch(error => {
       console.warn('Error updating task in Firebase:', error);
   });
-  renderTasks();
-  closeEdit();
-  openTask(updatedTask);
 }

@@ -1,8 +1,20 @@
+/**
+ * Event listener that triggers when the DOM content is fully loaded.
+ * 
+ * This listener sets up handling for the 'includesLoaded' event and manages the 
+ * user's profile display, including showing initials and handling logout visibility.
+ */
 document.addEventListener('DOMContentLoaded', () => {
   let includesLoadedHandled = false;
 
   document.addEventListener('includesLoaded', handleIncludesLoaded);
 
+  /**
+   * Handles the 'includesLoaded' event.
+   * 
+   * Ensures that the user profile is only handled once, even if the event is triggered multiple times.
+   * Calls the function to handle user profile information.
+   */
   function handleIncludesLoaded() {
     if (!includesLoadedHandled) {
       includesLoadedHandled = true;
@@ -10,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /**
+   * Handles the display of the user's profile initials.
+   * 
+   * Retrieves the logged-in user's name from localStorage, generates initials, 
+   * and updates the relevant DOM element.
+   */
   function handleUserProfile() {
     let loggedInUserName = localStorage.getItem('loggedInUserName');
     if (loggedInUserName) {
@@ -18,11 +36,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /**
+   * Generates the initials from the user's name.
+   * 
+   * @param {string} userName - The full name of the user.
+   * @returns {string} The initials generated from the user's name.
+   */
   function getInitials(userName) {
     let nameParts = userName.split(' ');
     return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
   }
 
+  /**
+   * Updates the DOM element displaying the user's initials.
+   * 
+   * Also adds a click event listener to toggle the visibility of the logout button.
+   * 
+   * @param {string} initials - The initials of the logged-in user.
+   */
   function updateInitialsElement(initials) {
     let initialsElement = document.getElementById('user-profile-initials');
     if (initialsElement) {
@@ -31,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /**
+   * Toggles the visibility of the logout element.
+   * 
+   * This function hides or shows the logout button when the user clicks on their initials.
+   */
   function toggleLogOutVisibility() {
     let logOutElement = document.getElementById('logOut');
     if (logOutElement) {
@@ -38,6 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /**
+   * Event listener that handles clicks on the document.
+   * 
+   * If the user clicks outside the logout button and their initials, the logout button is hidden.
+   * 
+   * @param {Event} event - The click event.
+   */
   document.addEventListener('click', handleDocumentClick);
 
   function handleDocumentClick(event) {
@@ -52,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+/**
+ * Logs the user out by clearing relevant data from localStorage and sessionStorage.
+ */
 function logout() {
   localStorage.removeItem('loggedInUserName');
   localStorage.removeItem('loggedInUserEmail');
@@ -59,6 +105,14 @@ function logout() {
   sessionStorage.removeItem('loggedInUserName');
 }
 
+/**
+ * Includes HTML content from external files into elements with the `w3-include-html` attribute.
+ * 
+ * This function recursively loads content into all matching elements and calls a callback function 
+ * once all content is loaded.
+ * 
+ * @param {Function} callback - A function to call after all includes are loaded.
+ */
 function includeHTML(callback) {
   var z, i, elmnt, file, xhttp;
   z = document.getElementsByTagName("*");
@@ -83,6 +137,11 @@ function includeHTML(callback) {
   if (callback) callback();
 }
 
+/**
+ * Hides certain elements on the page if the user is not logged in.
+ * 
+ * This function dynamically inserts CSS to hide elements like the icon bar and user profile initials.
+ */
 function hideElements() {
   if (!localStorage.getItem('loggedInUserName')) {
     var styleSheet = document.createElement('style');
@@ -97,14 +156,21 @@ function hideElements() {
   }
 }
 
-
- 
-
+/**
+ * Event listener that triggers when the DOM content is fully loaded.
+ * 
+ * This listener initializes the checking of the header logo and its responsiveness.
+ */
 document.addEventListener('DOMContentLoaded', function() {
   checkForHeaderLogo();
 });
 
-
+/**
+ * Updates the header logo based on the window width.
+ * 
+ * This function checks if the window width is below 600 pixels and updates the logo 
+ * in the header accordingly.
+ */
 function checkForWidthHeader() {
   let logoContainer = document.getElementById('headerLogo');
   if (logoContainer) {
@@ -114,6 +180,11 @@ function checkForWidthHeader() {
   }
 }
 
+/**
+ * Checks for the presence of the header logo element and adjusts it based on screen width.
+ * 
+ * If the header logo is not present, the function rechecks after a delay until the element is found.
+ */
 function checkForHeaderLogo() {
   let logoContainer = document.getElementById('headerLogo');
   if (logoContainer) {
@@ -124,4 +195,5 @@ function checkForHeaderLogo() {
   }
 }
 
+// Initialize HTML inclusion and element hiding
 includeHTML(hideElements);

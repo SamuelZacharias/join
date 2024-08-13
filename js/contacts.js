@@ -1,13 +1,44 @@
+/**
+ * Array to store the list of contacts.
+ * @type {Array<Object>}
+ */
 let contacts = [];
+
+/**
+ * Array to store the initials of the contacts.
+ * @type {Array<string>}
+ */
 let initials = [];
+
+/**
+ * Index for cycling through colors.
+ * @type {number}
+ */
 let colorIndex = 0;
-let highlightedContactIndex = -1; 
+
+/**
+ * Index of the currently highlighted contact.
+ * @type {number}
+ */
+let highlightedContactIndex = -1;
+
+/**
+ * Array of color codes used for contact avatars.
+ * @type {Array<string>}
+ */
 const colors = ['#FF7A00','#FF5EB3','#9747FF','#9327FF','#00BEE8','#1FD7C1','#FF745E',
   '#FFA35E','#FC71FF','#FFC701','#0038FF','#C3FF2B','#FFE62B','#FF4646','#FFBB2B'
 ];
 
+/**
+ * Base URL for the contacts data in Firebase.
+ * @constant {string}
+ */
 const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
 
+/**
+ * Renders the list of contacts by fetching data from the server and displaying it.
+ */
 function renderContacts() {
   const contactList = document.getElementById('contactList');
   contactList.innerHTML = ''; 
@@ -15,8 +46,8 @@ function renderContacts() {
     .then(response => response.json())
     .then(data => {
       if (data) {
-        renderContactsContactInitials(data)
-        renderContactsGroupedContacts()
+        renderContactsContactInitials(data);
+        renderContactsGroupedContacts();
         if (highlightedContactIndex >= 0) {
           highlightContact(highlightedContactIndex);
         }
@@ -27,6 +58,11 @@ function renderContacts() {
     });
 }
 
+/**
+ * Extracts and stores contact initials from the fetched data.
+ * 
+ * @param {Object} data - The data fetched from the server.
+ */
 function renderContactsContactInitials(data){
   contacts = Object.values(data);
   initials = contacts.map(contact => {
@@ -35,6 +71,9 @@ function renderContactsContactInitials(data){
   });
 }
 
+/**
+ * Groups contacts by their initials and renders them.
+ */
 function renderContactsGroupedContacts(){
   const groupedContacts = contacts.reduce((acc, contact, index) => {
     let nameParts = contact.name.split(' ');
@@ -46,19 +85,27 @@ function renderContactsGroupedContacts(){
     acc[firstInitial].push({ contact, initials, index });
     return acc;
   }, {});
-  renderContactsSortedInitials(groupedContacts)
+  renderContactsSortedInitials(groupedContacts);
 }
 
+/**
+ * Sorts the grouped contacts by their initials and renders them in the contact list.
+ * 
+ * @param {Object} groupedContacts - The contacts grouped by their initials.
+ */
 function renderContactsSortedInitials(groupedContacts){
   const sortedInitials = Object.keys(groupedContacts).sort();
-        sortedInitials.forEach(initial => {
-          contactList.innerHTML += generateLetterBox(initial);
-          groupedContacts[initial].forEach(({ contact, initials, index }) => {
-            contactList.innerHTML += generateContact(contact, initials, index);
-          });
-        });
+  sortedInitials.forEach(initial => {
+    contactList.innerHTML += generateLetterBox(initial);
+    groupedContacts[initial].forEach(({ contact, initials, index }) => {
+      contactList.innerHTML += generateContact(contact, initials, index);
+    });
+  });
 }
 
+/**
+ * Updates the list of initials for the contacts and saves them to localStorage.
+ */
 function updateInitials() {
   initials = contacts.map(contact => {
       let nameParts = contact.name.split(' ');
@@ -67,6 +114,12 @@ function updateInitials() {
   localStorage.setItem('initials', JSON.stringify(initials));
 }
 
+/**
+ * Adds a new contact to the list.
+ * 
+ * This function collects the data from the input fields, creates a new contact, 
+ * saves it, and updates the UI.
+ */
 function addContact() {
   const contactData = getContactData();
   if (contactData) {
@@ -77,6 +130,11 @@ function addContact() {
   }
 }
 
+/**
+ * Retrieves the contact data from the input fields.
+ * 
+ * @returns {Object|null} The contact data if all fields are filled, otherwise null.
+ */
 function getContactData() {
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
@@ -88,6 +146,12 @@ function getContactData() {
   }
 }
 
+/**
+ * Creates a new contact object and saves it to the contacts array and server.
+ * 
+ * @param {Object} contactData - The data of the contact to create.
+ * @returns {Object} The newly created contact object.
+ */
 function createAndSaveContact(contactData) {
   const newContact = {
     id: Date.now(),
@@ -103,6 +167,11 @@ function createAndSaveContact(contactData) {
   return newContact;
 }
 
+/**
+ * Updates the UI after adding a new contact.
+ * 
+ * @param {Object} newContact - The newly added contact.
+ */
 function updateUI(newContact) {
   document.getElementById('name').value = '';
   document.getElementById('email').value = '';
@@ -114,8 +183,11 @@ function updateUI(newContact) {
   displayContactInfo(lastIndex);
 }
 
-
-
+/**
+ * Returns the next available color for a contact.
+ * 
+ * @returns {string} The next available color.
+ */
 function getNextColor() {
   const usedColors = contacts.map(contact => contact.color);
   let availableColors = colors.filter(color => !usedColors.includes(color));
@@ -127,9 +199,14 @@ function getNextColor() {
   return nextColor;
 }
 
+/**
+ * Displays the contact information for the selected contact.
+ * 
+ * @param {number} index - The index of the contact to display.
+ */
 function displayContactInfo(index) {
-  let contactinfo = document.querySelector('.rightInfoBox')
-  contactinfo.style.display = 'block'
+  let contactinfo = document.querySelector('.rightInfoBox');
+  contactinfo.style.display = 'block';
   const contact = contacts[index];
   let nameParts = contact.name.split(' ');
   let initials = nameParts.map(part => part.charAt(0).toUpperCase()).join('');
@@ -140,6 +217,11 @@ function displayContactInfo(index) {
   highlightContact(index);
 }
 
+/**
+ * Deletes a contact from the list.
+ * 
+ * @param {number} index - The index of the contact to delete.
+ */
 function deleteContact(index) {
   if (index < 0 || index >= contacts.length) return; 
   contacts.splice(index, 1);
@@ -152,7 +234,7 @@ function deleteContact(index) {
   })
   .then(response => response.json())
   .then(data => {
-    contactWasDeleted()
+    contactWasDeleted();
     document.querySelector('.contacts-info-box').innerHTML = '';
   })
   .catch(error => {
@@ -160,20 +242,24 @@ function deleteContact(index) {
   });
   if(window.innerWidth < 600){
     setTimeout(() => {
-      hideContactInfo()
+      hideContactInfo();
     }, 1000);
-    
   }
 }
 
+/**
+ * Handles actions after a contact has been successfully deleted.
+ */
 function contactWasDeleted(){
-    openDialogContact("Contact was successfully deleted");
-    renderContacts(); 
-    highlightContact(this)
-    storeFirstAndLastNames();
-    loadData();
+  openDialogContact("Contact was successfully deleted");
+  renderContacts(); 
+  storeFirstAndLastNames();
+  loadData();
 }
 
+/**
+ * Saves the contact data to the server.
+ */
 function saveData() {
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
@@ -188,6 +274,9 @@ function saveData() {
   });
 }
 
+/**
+ * Loads the contact data from the server and updates the UI.
+ */
 function loadData() {
   fetch(BASE_TASKS_URL + '.json')
     .then(response => response.json())
@@ -204,9 +293,14 @@ function loadData() {
     });
 }
 
+/**
+ * Edits an existing contact.
+ * 
+ * This function updates the contact information based on the input fields and saves the changes.
+ */
 function editContact() {
   const index = document.getElementById('inputEditName').dataset.index;
-  const updatedContact = getDataContactEdit(index);getDataContactEdit(index)
+  const updatedContact = getDataContactEdit(index);
   contacts[index] = updatedContact;
   fetch(BASE_TASKS_URL + '.json', {
     method: 'PUT',
@@ -217,13 +311,19 @@ function editContact() {
   })
   .then(response => response.json())
   .then(data => {
-    contactWasEdited(index)
+    contactWasEdited(index);
   })
   .catch(error => {
     console.error('Fehler beim Speichern der Daten:', error);
   });
 }
 
+/**
+ * Retrieves the edited contact data from the input fields.
+ * 
+ * @param {number} index - The index of the contact being edited.
+ * @returns {Object} The updated contact data.
+ */
 function getDataContactEdit(index){
   const updatedName = document.getElementById('inputEditName').value;
   const updatedEmail = document.getElementById('inputEditEmail').value;
@@ -234,27 +334,36 @@ function getDataContactEdit(index){
       email: updatedEmail,
       phone: updatedPhone
   };
-  return updatedContact
+  return updatedContact;
 }
 
+/**
+ * Handles actions after a contact has been successfully edited.
+ * 
+ * @param {number} index - The index of the contact that was edited.
+ */
 function contactWasEdited(index){
   loadData(); 
   closeDialogEdit();
   openDialogContact("Contact info has been updated");
-  displayContactInfo(index)
-  highlightContact(index)
+  displayContactInfo(index);
+  highlightContact(index);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadData(); 
-});
-
-
-
+/**
+ * Stores the contacts' data in localStorage.
+ */
 function storeFirstAndLastNames() {
   localStorage.setItem('contacts', JSON.stringify(contacts));
 }
 
+/**
+ * Truncates a given text to a maximum length.
+ * 
+ * @param {string} text - The text to truncate.
+ * @param {number} [maxLength=16] - The maximum length of the truncated text.
+ * @returns {string} The truncated text.
+ */
 function truncate(text, maxLength = 16) {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + '...';
@@ -262,6 +371,11 @@ function truncate(text, maxLength = 16) {
   return text;
 }
 
+/**
+ * Highlights the selected contact in the UI.
+ * 
+ * @param {number} index - The index of the contact to highlight.
+ */
 function highlightContact(index) {
   const contacts = document.getElementsByClassName('contacts');
   for (let i = 0; i < contacts.length; i++) {
@@ -276,13 +390,19 @@ function highlightContact(index) {
   highlightedContactIndex = index;
 }
 
+/**
+ * Hides the contact information panel in the UI.
+ */
 function hideContactInfo(){
-  let contactInfoContainer = document.querySelector('.rightInfoBox')
-  contactInfoContainer.style.display = "none"
+  let contactInfoContainer = document.querySelector('.rightInfoBox');
+  contactInfoContainer.style.display = "none";
   highlightedContactIndex = -1;
-  renderContacts()
+  renderContacts();
 }
 
+/**
+ * Shows the edit and delete options for a contact on mobile devices.
+ */
 function showEditContactMobile() {
   let containerEditDeleteMobile = document.querySelector('.contact-box-edit-delete');
   let editContactPoints = document.querySelector('.editContactPoints');
@@ -298,3 +418,10 @@ function showEditContactMobile() {
 
   document.addEventListener('click', handleClickOutside);
 }
+
+/**
+ * Event listener that loads the contact data when the DOM content is fully loaded.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  loadData(); 
+});
