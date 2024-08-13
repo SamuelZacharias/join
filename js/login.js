@@ -273,7 +273,7 @@ function animateOverlayUnder1000px() {
     }
     setTimeout(() => {
         overlay.classList.add('d-none')
-    }, 3000);
+    }, 2800);
 }
 
 /**
@@ -310,5 +310,5 @@ function animateLogoUnder600px() {
     }, 1600);
     setTimeout(() => {
         overlay.classList.add('d-none')
-    }, 3000);
+    }, 2800);
 }

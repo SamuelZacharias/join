@@ -158,8 +158,8 @@ function completedTasksUrgent() {
  * Handles window load event and initializes the greeting screen and task list.
  */
 window.onload = function () {
+    
     const showGreeting = sessionStorage.getItem('ShowGreetingScreen') === 'true';
-
     if (window.innerWidth <= 850 && !showGreeting) {
         document.getElementById('greeting-container').style.display = 'flex';
         showGreetingMessage();
@@ -171,6 +171,7 @@ window.onload = function () {
         sessionStorage.setItem('ShowGreetingScreen', 'true');
     } else {
         document.getElementById('greeting-container').style.display = 'none';
+        updateGreeting()
     }
 
     setFutureDate();
