@@ -174,3 +174,22 @@ async function openDialogContactTimeout(dialogContainer) {
     dialogContainer.open = false;
   }, 300);
 }
+
+/**
+ * Shows the edit and delete options for a contact on mobile devices.
+ */
+function showEditContactMobile() {
+  let containerEditDeleteMobile = document.querySelector('.contact-box-edit-delete');
+  let editContactPoints = document.querySelector('.editContactPoints');
+  containerEditDeleteMobile.style.display = "flex";
+
+  function handleClickOutside(event) {
+    if (!containerEditDeleteMobile.contains(event.target) &&
+        !editContactPoints.contains(event.target)) {
+      containerEditDeleteMobile.style.display = "none"; 
+      document.removeEventListener('click', handleClickOutside); 
+    }
+  }
+
+  document.addEventListener('click', handleClickOutside);
+}

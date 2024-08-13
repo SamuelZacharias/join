@@ -150,3 +150,49 @@ function getTaskById(taskId) {
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   return tasks.find(task => task.id === taskId);
 }
+
+/**
+ * Shows the action buttons for editing or deleting a subtask.
+ * 
+ * This function displays the actions when a subtask is hovered over.
+ * 
+ * @param {HTMLElement} element - The element that was hovered over to show the actions.
+ */
+function showActions(element) {
+  let actions = element.querySelector('.d-none');
+  if (actions && editSubtaskBoard(index)) {
+    return;
+  } else {
+    actions.classList.remove('d-none');
+  }
+}
+
+/**
+ * Hides the action buttons for a subtask.
+ * 
+ * This function hides the actions when the subtask is no longer hovered over.
+ * 
+ * @param {HTMLElement} element - The element that was hovered away from.
+ */
+function hideActions(element) {
+  let actions = element.querySelector('.d-flex:not(.d-none)');
+  if (actions) {
+    actions.classList.add('d-none');
+  }
+}
+
+/**
+ * Toggles the visibility of the contacts dropdown list.
+ * 
+ * This function shows or hides the dropdown list of contacts available for assignment to the task.
+ */
+function closeContactsDropdown() {
+  let contactsToChoose = document.getElementById('contactsToChoose');
+  if (contactsToChoose.classList.contains('d-none')) {
+    showContactsToChoose();
+    document.getElementById('dropDownImg').classList.add('dropUpImg');
+  } else {
+    contactsToChoose.classList.add('d-none');
+    document.getElementById('dropDownImg').classList.remove('dropUpImg');
+  }
+}

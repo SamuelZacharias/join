@@ -401,25 +401,6 @@ function hideContactInfo(){
 }
 
 /**
- * Shows the edit and delete options for a contact on mobile devices.
- */
-function showEditContactMobile() {
-  let containerEditDeleteMobile = document.querySelector('.contact-box-edit-delete');
-  let editContactPoints = document.querySelector('.editContactPoints');
-  containerEditDeleteMobile.style.display = "flex";
-
-  function handleClickOutside(event) {
-    if (!containerEditDeleteMobile.contains(event.target) &&
-        !editContactPoints.contains(event.target)) {
-      containerEditDeleteMobile.style.display = "none"; 
-      document.removeEventListener('click', handleClickOutside); 
-    }
-  }
-
-  document.addEventListener('click', handleClickOutside);
-}
-
-/**
  * Event listener that loads the contact data when the DOM content is fully loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {
