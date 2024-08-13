@@ -105,8 +105,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-
-
 function resetDropDownIconsCategory() {
   document.getElementById('dropDownImg').classList.add('dropDownImg');
   document.getElementById('dropDownImg').classList.remove('dropUpImg');
@@ -145,10 +143,8 @@ setInterval(() => {
 function openDragMobile(i) {
   let dragMobileContainer = document.getElementById(dragMobileContainer${ i });
 
-  // Show the container
   dragMobileContainer.classList.remove('d-none');
 
-  // Function to hide the container if clicked outside
   function handleClickOutsideOpenDragMobile(event) {
     if (!dragMobileContainer.contains(event.target)) {
       dragMobileContainer.classList.add('d-none');
