@@ -21,8 +21,8 @@ function returnRenderHtml(i, task) {
               <div onclick="changeColumnDone(${i})">Move to done</div>
           </div>
           <div class="mobileArrowsContainer" onclick="openDragMobile(${i}); event.stopPropagation()">
-              <img class="leftArrow" src="\assets/img/png/arrow-left-line.png">
-              <img class="rightArrow" src="\assets/img/png/arrow-left-line.png">
+              <img class="leftArrow" src="assets/img/png/arrow-left-line.png">
+              <img class="rightArrow" src="assets/img/png/arrow-left-line.png">
           </div>
         </div>
         <div class="taskInfo">
@@ -75,8 +75,8 @@ function returnRenderHtml(i, task) {
                       <div id="openedSubtasks"></div>
                   </div>
                   <div class="deleteEditArea">
-                      <div onclick="deleteTask('${task.id}')" class="delete"><img src="./assets/img/png/delete.png"> Delete</div>
-                      <div onclick="editTask('${task.id}')" class="edit"><img src="./assets/img/png/editOpen.png"> Edit</div>
+                      <div onclick="deleteTask('${task.id}')" class="delete"><img src="assets/img/png/delete.png"> Delete</div>
+                      <div onclick="editTask('${task.id}')" class="edit"><img src="assets/img/png/editOpen.png"> Edit</div>
                   </div>
               </div>
           </div>
@@ -140,7 +140,7 @@ function returnRenderHtml(i, task) {
   function returnOpenEditHTML(task, today) {
       return `
         <div class="closeEditTask">
-            <img class="openedTaskClose" src="./assets/img/png/openedTaskClose.png" onclick="closeEdit()">
+            <img class="openedTaskClose" src="assets/img/png/openedTaskClose.png" onclick="closeEdit()">
         </div>
         <div class="editTaskInfo">
             <div class="editTitle">
@@ -163,7 +163,7 @@ function returnRenderHtml(i, task) {
                 <div>Assigned to:</div>
                 <div class="editAssignContacts" onclick="closeContactsDropdown()">
                     <div>Select contacts to assign</div>
-                    <img class="dropDownImg" id="dropDownImg" src="/assets/img/png/arrow_drop_down (1).png">
+                    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png">
                 </div>
                 <div id="contactsToChoose" class="d-none contactsToChoose"></div>
             </div>
@@ -184,9 +184,9 @@ function returnRenderHtml(i, task) {
    */
   function returnEditPriorityButtonsHTML(){
       return `
-          <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="./assets/img/svg/urgentwhite.png" alt=""></button>
-          <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="./assets/img/svg/medium.png" alt=""></button>
-          <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="./assets/img/svg/low.png" alt=""></button>
+          <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg" alt=""></button>
+          <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.svg" alt=""></button>
+          <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="assets/img/svg/low.svg" alt=""></button>
       `;
   }
   
@@ -194,7 +194,7 @@ function returnRenderHtml(i, task) {
     return `
         <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
             <span>Add new subtask</span>
-            <img src="./assets/img/png/Subtasks icons11.png">
+            <img src="assets/img/png/Subtasks icons11.png">
         </div>
     `;
 }
@@ -203,8 +203,8 @@ function returnWriteSubtaskHTML() {
         <div class="editSubtaskInput" id="editSubtask">
             <input type="text" id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
             <div class="d-flex">
-                <img src="./assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
-                <img src="./assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
+                <img src="assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
+                <img src="assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
             </div>
         </div>
     `;
@@ -218,9 +218,9 @@ function returnSubtaskHTML(index, title) {
               <div style="width:100%" onclick="editSubtaskBoard(${index})"> ${title}</div>
           </div>
           <div class="subtaskIconsAddTask d-none">
-            <img src="./assets/img/png/editSubtask.png" onclick="editSubtaskBoard(${index})" alt="" />
+            <img src="assets/img/png/editSubtask.png" onclick="editSubtaskBoard(${index})" alt="" />
             <div class="vertical-line"></div>
-            <img src="./assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+            <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
           </div>
         </div>
       </li>
@@ -235,7 +235,7 @@ function returnContactsToChooseHTML(contactName, contactClass, color, initials) 
             </div>
             <div class="contactName">
                 <span style="width:100%;">${contactName}</span>
-                <img src="/assets/img/png/Rectangle 5.png" alt="">
+                <img src="assets/img/png/Rectangle 5.png" alt="">
             </div>
       </div>
     `;
@@ -244,7 +244,7 @@ function returnResetBoardSubtaskHtml(){
     return `
     <p>
       <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
-      <img src="./assets/img/png/Subtasks icons11.png" alt="" />
+      <img src="assets/img/png/Subtasks icons11.png" alt="" />
     </p>
   `;
 }
