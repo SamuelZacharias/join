@@ -142,50 +142,19 @@ function clearInvalidMessages() {
 
 
 
-/*document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(function () {
-        const overlay = document.querySelector('.overlay');
-        if (overlay) {
-            overlay.classList.remove('visible');
-        }
-    }, 1400); 
-});
 
-window.onload = function () {
-    animationCheck();
-    setTimeout(function () {
-        const animatedIcon = document.querySelector('.animated-icon');
-        if (animatedIcon) {
-            animatedIcon.classList.add('move');
-        }
-    }, 400);
-};
 
 function animationCheck() {
-    const animatedIcon = document.querySelector('.animated-icon');
-    const body = document.querySelector('body');
     const overlay = document.querySelector('.overlay');
-
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
-        if (animatedIcon) {
-            animatedIcon.classList.remove('animated-icon');
-        }
-        if (body) {
-            body.classList.remove('overlay');
-        }
         if (overlay) {
             overlay.style.display = 'none';
         }
     } else {
         sessionStorage.setItem('sessionStorageAnimation', 'true');
-        if (animatedIcon) {
-            animatedIcon.classList.add('move');
-            setTimeout(function () {
-                location.reload();
-            }, 1600);
-        }
+        overlay.style.display = 'flex';
     }
-}*/ 
+}
  
 
 function animateOverlayUnder1000px(){
@@ -201,6 +170,7 @@ function animateOverlayUnder1000px(){
 }
 
 window.onload = function () {
+    animationCheck()
     animateOverlayUnder1000px()
     if(window.innerWidth < 600){
         animateLogoUnder600px()
