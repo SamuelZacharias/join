@@ -175,6 +175,7 @@
     padding: 20px;
     align-items: center;
   }
+ 
   .addMobile h1{
     font-size: 46px;
   }
@@ -184,6 +185,11 @@
     height: fit-content;
     width: fit-content;
     border-radius: 10px;
+  }
+  .addMobile button:hover{
+    background-color: var(--blue);
+    cursor: pointer;
+    transition: 125ms;
   }
   .inputarea{
     justify-content: center;
