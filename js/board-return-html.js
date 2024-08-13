@@ -11,8 +11,8 @@ function returnRenderHtml(i, task) {
             <div onclick="changeColumnDone(${i})">Move to done</div>
         </div>
         <div class="mobileArrowsContainer" onclick="openDragMobile(${i}); event.stopPropagation()">
-            <img class="leftArrow" src="/assets/img/png/arrow-left-line.png">
-            <img class="rightArrow" src="/assets/img/png/arrow-left-line.png">
+            <img class="leftArrow" src="\assets/img/png/arrow-left-line.png">
+            <img class="rightArrow" src="\assets/img/png/arrow-left-line.png">
         </div>
       </div>
       <div class="taskInfo">
@@ -113,7 +113,7 @@ function returnOpenEditHTML(task, today) {
               <div>Assigned to:</div>
               <div class="editAssignContacts" onclick="closeContactsDropdown()">
                   <div>Select contacts to assign</div>
-                  <img class="dropDownImg" id="dropDownImg" src="./assets/img/png/arrow_drop_down (1).png">
+                  <img class="dropDownImg" id="dropDownImg" src="/assets/img/png/arrow_drop_down (1).png">
               </div>
               <div id="contactsToChoose" class="d-none contactsToChoose"></div>
           </div>
