@@ -117,3 +117,34 @@ async function sendTaskDataToFirebase() {
     console.error('Error saving data to Firebase:', error);
   }
 }
+
+/**
+ * Adds a timeout to remove the invalid state from form elements after a delay.
+ * 
+ * This function ensures that the invalid markers are removed after a set time (2000ms).
+ */
+function validateFormTimeout() {
+  setTimeout(() => {
+    document.querySelectorAll('.invalid').forEach(element => {
+      element.classList.remove('invalid');
+    });
+  }, 2000); 
+}
+
+/**
+ * Validates if a category has been selected.
+ * 
+ * This function checks if the `choosenCategory` variable is set to true. If not, it marks the category dropdown as invalid.
+ * 
+ * @returns {boolean} True if a category is selected, otherwise false.
+ */
+function validateFormCategory() {
+  let valid = false;
+  if (!choosenCategory) {
+    valid = false;
+    document.getElementById('dropdownCategory').classList.add('invalid');
+  } else {
+    valid = true;
+  }
+  return valid;
+}
