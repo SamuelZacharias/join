@@ -153,6 +153,9 @@ function animationCheck() {
     } else {
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         overlay.style.display = 'flex';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 3000);
     }
 }
  
