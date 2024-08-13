@@ -196,7 +196,7 @@ function validatePhoneContactEdit() {
     });
     const phonePattern = /^\d+$/;
     if (!phoneInput.value.match(phonePattern)) {
-        setError(phoneInput, 'Invalid Telefonnummer 0176123123');
+        setError(phoneInput, '(0176123123)');
         phoneInput.value = '';
         return false;
     } else {
