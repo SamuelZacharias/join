@@ -135,6 +135,7 @@ input:focus {
   align-items: center;
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .noTask {
@@ -318,6 +319,9 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+.taskDetails h1{
+  font-size: 32px;
 }
 
 .deleteEditArea {
