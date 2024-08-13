@@ -152,36 +152,6 @@ function getTaskById(taskId) {
 }
 
 /**
- * Shows the action buttons for editing or deleting a subtask.
- * 
- * This function displays the actions when a subtask is hovered over.
- * 
- * @param {HTMLElement} element - The element that was hovered over to show the actions.
- */
-function showActions(element) {
-  let actions = element.querySelector('.d-none');
-  if (actions && editSubtaskBoard(index)) {
-    return;
-  } else {
-    actions.classList.remove('d-none');
-  }
-}
-
-/**
- * Hides the action buttons for a subtask.
- * 
- * This function hides the actions when the subtask is no longer hovered over.
- * 
- * @param {HTMLElement} element - The element that was hovered away from.
- */
-function hideActions(element) {
-  let actions = element.querySelector('.d-flex:not(.d-none)');
-  if (actions) {
-    actions.classList.add('d-none');
-  }
-}
-
-/**
  * Toggles the visibility of the contacts dropdown list.
  * 
  * This function shows or hides the dropdown list of contacts available for assignment to the task.
@@ -195,4 +165,27 @@ function closeContactsDropdown() {
     contactsToChoose.classList.add('d-none');
     document.getElementById('dropDownImg').classList.remove('dropUpImg');
   }
+}
+
+/**
+ * Highlights the button corresponding to the task's priority and deactivates the others.
+ * 
+ * @param {string} priority - The priority level of the task ('Urgent', 'Medium', 'Low').
+ */
+function switchButton(priority) {
+  const buttons = [
+      { id: 'button1', priority: 'Urgent', class: 'urgent' },
+      { id: 'button2', priority: 'Medium', class: 'medium' },
+      { id: 'button3', priority: 'Low', class: 'low' },
+  ];
+  buttons.forEach(button => {
+      const element = document.getElementById(button.id);
+      if (button.priority === priority) {
+          element.classList.add(button.class);
+          element.classList.remove('hover-shadow');
+      } else {
+          element.classList.remove(button.class);
+          element.classList.add('hover-shadow');
+      }
+  });
 }
