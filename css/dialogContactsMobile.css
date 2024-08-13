@@ -87,7 +87,7 @@
   margin-top: -60vh;
 }
 .dialog-content-right .close-cross{
-  content: url(../assets/img/png/add.png);
+  content: url('../assets/img/png/add.png');
   width: 30px;
   height: 30px;
   rotate: 45deg;
