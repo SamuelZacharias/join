@@ -299,7 +299,7 @@ function animateLogoUnder600px() {
     let overlay = document.querySelector('.overlay')
     overlay.style.backgroundColor = 'var(--gray)';
     let animatedIcon = document.querySelector('.animated-icon')
-    animatedIcon.src = "/assets/img/png/Join logo vector.png";
+    animatedIcon.src = "./assets/img/png/Join logo vector.png";
     if (window.innerWidth < 600) {
         overlay.classList.remove('animationOverlayDekstopUnder1000px')
         animatedIcon.classList.remove('animationLogoDekstop')

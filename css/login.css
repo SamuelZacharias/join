@@ -315,7 +315,7 @@ input {
     left: 20vw;
     width: 280px;
     height: 350px;
-    content: url(/assets/img/png/Join\ logo\ vector.png);
+    content: url(../assets/img/png/Join\ logo\ vector.png);
     
   }
   to {
@@ -324,7 +324,7 @@ input {
     position: absolute;
     width: 64px;
     height: 78px;
-    content: url(/assets/img/png/Capa\ 2.png);
+    content: url('../assets/img/png/Capa\ 2.png');
   }
 }
 
