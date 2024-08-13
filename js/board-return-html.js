@@ -187,7 +187,8 @@ function returnEditPriorityButtonsHTML() {
           <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="./assets/img/svg/urgentwhite.png" alt=""></button>
           <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="./assets/img/svg/medium.png" alt=""></button>
           <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="./assets/img/svg/low.png" alt=""></button>
-  }
+ `; 
+}
   
   /**
    * Generates the HTML for the priority buttons in the task edit form.
