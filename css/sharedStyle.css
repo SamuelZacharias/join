@@ -61,6 +61,7 @@ p:hover {
 }
 
 .buttonsSection {
+    max-width: 1000px;
     margin-top: 90px;
     justify-content: space-between;
     padding-right: 133px;
