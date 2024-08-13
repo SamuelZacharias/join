@@ -141,9 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         const overlay = document.querySelector('.overlay');
         if (overlay) {
-            overlay.classList.add('visible');
+            overlay.classList.remove('visible');
         }
-    }, 400); 
+    }, 1400); 
 });
 
 window.onload = function () {
@@ -159,6 +159,8 @@ window.onload = function () {
 function animationCheck() {
     const animatedIcon = document.querySelector('.animated-icon');
     const body = document.querySelector('body');
+    const overlay = document.querySelector('.overlay');
+
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
         if (animatedIcon) {
             animatedIcon.classList.remove('animated-icon');
@@ -166,10 +168,16 @@ function animationCheck() {
         if (body) {
             body.classList.remove('overlay');
         }
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
     } else {
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         if (animatedIcon) {
             animatedIcon.classList.add('move');
+            setTimeout(function () {
+                location.reload();
+            }, 1600);
         }
     }
 }
