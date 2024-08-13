@@ -19,7 +19,6 @@ function loadTasksFromLocalStorage() {
 }
 
 function filterTasks() {
-  // Get the values from both search inputs
   const searchInput = document.getElementById('search').value.toLowerCase();
   const searchMobileInput = document.getElementById('searchMobile').value.toLowerCase();
   const searchTerm = searchInput || searchMobileInput;
@@ -142,20 +141,54 @@ setInterval(() => {
   getTasksFromDataBase()
 }, 1500000);
 
-function isTouchDevice() {
-  // Check for touch support in modern browsers
-  if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
-    return true;
-  }
 
-  // Older method for certain devices
-  const mediaQuery = window.matchMedia('(pointer: coarse)');
-  return mediaQuery && mediaQuery.matches;
+function openDragMobile(i) {
+  let dragMobileContainer = document.getElementById(`dragMobileContainer${i}`);
+  
+  // Show the container
+  dragMobileContainer.classList.remove('d-none');
+
+  // Function to hide the container if clicked outside
+  function handleClickOutsideOpenDragMobile(event) {
+      if (!dragMobileContainer.contains(event.target)) {
+          dragMobileContainer.classList.add('d-none');
+          document.removeEventListener('click', handleClickOutsideOpenDragMobile);
+      }
+  }
+  document.addEventListener('click', handleClickOutsideOpenDragMobile);
 }
 
-// Example usage
-if (isTouchDevice()) {
-  console.log("User is on a touch device.");
-} else {
-  console.log("User is not on a touch device.");
+async function changeColumnToDo(i) {
+  let taskcard = tasks[i];
+  taskcard.column = "toDo";
+  updateTaskInFirebase(taskcard)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  renderTasks();
+ 
+}
+async function changeColumnInProgress(i) {
+  let taskcard = tasks[i];
+  taskcard.column = "inProgress";
+  updateTaskInFirebase(taskcard)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  renderTasks();
+ 
+}
+
+async function changeColumnFeedback(i) {
+  let taskcard = tasks[i];
+  taskcard.column = "awaitFeedback";
+  updateTaskInFirebase(taskcard)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  renderTasks();
+ 
+}
+
+async function changeColumnDone(i) {
+  let taskcard = tasks[i];
+  taskcard.column = "done";
+  updateTaskInFirebase(taskcard)
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+  renderTasks();
+ 
 }

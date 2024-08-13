@@ -4,7 +4,13 @@ function returnRenderHtml(i, task) {
         onmouseup="mouseRelease(event)" onmouseleave="mouseLeave(event)" onclick="openTask(tasks[${i}])">
       <div class="taskCategoryContainer">
         <div id="taskCategory${i}" class="taskCategory">${task.category}</div>
-        <div class="mobileArrowsContainer">
+        <div id="dragMobileContainer${i}" class="dragMobile d-none" onclick="event.stopPropagation()">
+            <div onclick="changeColumnToDo(${i})">Move to do</div>
+            <div onclick="changeColumnInProgress(${i})">Move in progress</div>
+            <div onclick="changeColumnFeedback(${i})">Move feedback</div>
+            <div onclick="changeColumnDone(${i})">Move to done</div>
+        </div>
+        <div class="mobileArrowsContainer" onclick="openDragMobile(${i}); event.stopPropagation()">
             <img class="leftArrow" src="/assets/img/png/arrow-left-line.png">
             <img class="rightArrow" src="/assets/img/png/arrow-left-line.png">
         </div>

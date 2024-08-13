@@ -127,6 +127,7 @@ input:focus {
 }
 
 .taskColumn {
+  position: relative;
   border-radius: 10px;
   width: 252px;
   display: flex;
@@ -367,8 +368,15 @@ input:focus {
 }
 
 .mobileArrowsContainer {
-    height: fit-content;
-    width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  height: 30px;
+  width: 35px;
+}
+.mobileArrowsContainer:hover{
+  background-color: var(--gray);
+  border-radius: 8px;
 }
 
 .leftArrow {

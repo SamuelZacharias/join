@@ -1,7 +1,33 @@
+.dragMobile{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 25px;
+  background-color: var(--gray);
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  gap: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+@media(min-width:1440px){
+  .dragMobile{
+    margin-left: 50px;
+  }
+}
+
 @media (max-width:1440px){
   .taskArea{
     padding: 0px 30px;
     scrollbar-width: none;
+  }
+  .dragMobile{
+    margin-left: 0px;
   }
   .taskColumn{
     width: 200px;
@@ -96,6 +122,9 @@
   .taskArea{
     flex-direction: column;
   }
+  .dragMobile{
+    margin-left: 25px;
+  }
   .taskColumn{
     flex-direction: row;
     width: calc(100vw - 60px);
@@ -184,4 +213,6 @@
   }
 }
 
-
+.d-none{
+  display: none;
+}
