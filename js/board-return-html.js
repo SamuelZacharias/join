@@ -41,21 +41,21 @@ function returnRenderHtml(i, task) {
         </div>
     </div>
     `;
-  }
-  
-  /**
-   * Generates the HTML for the opened task view.
-   *
-   * @param {Object} task - The task object containing task details.
-   * @param {string} task.category - The category of the task.
-   * @param {string} task.title - The title of the task.
-   * @param {string} task.description - The description of the task.
-   * @param {string} task.dueDate - The due date of the task.
-   * @param {string} task.priority - The priority level of the task.
-   * @returns {string} - The HTML string for the opened task view.
-   */
-  function returnOpenedTaskHtml(task) {
-      return `
+}
+
+/**
+ * Generates the HTML for the opened task view.
+ *
+ * @param {Object} task - The task object containing task details.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {string} task.dueDate - The due date of the task.
+ * @param {string} task.priority - The priority level of the task.
+ * @returns {string} - The HTML string for the opened task view.
+ */
+function returnOpenedTaskHtml(task) {
+    return `
           <div class="openedTask" id="openedTask" onclick="event.stopPropagation()">
               <div class="taskDetails">
                   <div class="openedTaskCategory">
@@ -81,18 +81,18 @@ function returnRenderHtml(i, task) {
               </div>
           </div>
       `;
-  }
-  
-  /**
-   * Generates the HTML for displaying assigned contacts in the opened task view.
-   *
-   * @param {string} contactName - The name of the contact.
-   * @param {string} color - The background color associated with the contact.
-   * @param {string} initials - The initials of the contact.
-   * @returns {string} - The HTML string for the assigned contact element.
-   */
-  function returnOpenTaskAssignedContactsHTML(contactName, color, initials) {
-      return `
+}
+
+/**
+ * Generates the HTML for displaying assigned contacts in the opened task view.
+ *
+ * @param {string} contactName - The name of the contact.
+ * @param {string} color - The background color associated with the contact.
+ * @param {string} initials - The initials of the contact.
+ * @returns {string} - The HTML string for the assigned contact element.
+ */
+function returnOpenTaskAssignedContactsHTML(contactName, color, initials) {
+    return `
           <div class="openedAssigendContacts">
               <div class="openedAssigendContactsInitials" style="background-color: ${color};">
                   ${initials}
@@ -100,21 +100,21 @@ function returnRenderHtml(i, task) {
               <div>${contactName}</div>
           </div>
       `;
-  }
-  
-  /**
-   * Generates the HTML for displaying a subtask in the opened task view.
-   *
-   * @param {string} taskId - The ID of the parent task.
-   * @param {number} subtaskIndex - The index of the subtask within the task's subtasks array.
-   * @param {Object} subtask - The subtask object containing subtask details.
-   * @param {string} subtask.title - The title of the subtask.
-   * @param {boolean} subtask.completed - Indicates whether the subtask is completed.
-   * @returns {string} - The HTML string for the subtask element.
-   */
-  function returnOpenTaskSubtaskHTML(taskId, subtaskIndex, subtask) {
-      let isChecked = subtask.completed ? 'checked' : '';
-      return `
+}
+
+/**
+ * Generates the HTML for displaying a subtask in the opened task view.
+ *
+ * @param {string} taskId - The ID of the parent task.
+ * @param {number} subtaskIndex - The index of the subtask within the task's subtasks array.
+ * @param {Object} subtask - The subtask object containing subtask details.
+ * @param {string} subtask.title - The title of the subtask.
+ * @param {boolean} subtask.completed - Indicates whether the subtask is completed.
+ * @returns {string} - The HTML string for the subtask element.
+ */
+function returnOpenTaskSubtaskHTML(taskId, subtaskIndex, subtask) {
+    let isChecked = subtask.completed ? 'checked' : '';
+    return `
           <div class="openedSubtaskTitle">
               <label class="custom-checkbox">
                   <input type="checkbox" ${isChecked}
@@ -124,21 +124,21 @@ function returnRenderHtml(i, task) {
               </label>
           </div>
       `;
-  }
-  
-  /**
-   * Generates the HTML for the task edit form in the opened task view.
-   *
-   * @param {Object} task - The task object containing task details.
-   * @param {string} task.title - The title of the task.
-   * @param {string} task.description - The description of the task.
-   * @param {string} task.dueDate - The due date of the task.
-   * @param {string} task.priority - The priority level of the task.
-   * @param {string} today - The current date formatted as YYYY-MM-DD.
-   * @returns {string} - The HTML string for the task edit form.
-   */
-  function returnOpenEditHTML(task, today) {
-      return `
+}
+
+/**
+ * Generates the HTML for the task edit form in the opened task view.
+ *
+ * @param {Object} task - The task object containing task details.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - The description of the task.
+ * @param {string} task.dueDate - The due date of the task.
+ * @param {string} task.priority - The priority level of the task.
+ * @param {string} today - The current date formatted as YYYY-MM-DD.
+ * @returns {string} - The HTML string for the task edit form.
+ */
+function returnOpenEditHTML(task, today) {
+    return `
         <div class="closeEditTask">
             <img class="openedTaskClose" src="./assets/img/png/openedTaskClose.png" onclick="closeEdit()">
         </div>
@@ -175,22 +175,26 @@ function returnRenderHtml(i, task) {
         </div>
         <div class="editOkay" id="editOkay" ><span onclick="collectDataEdit('${task.id}')">Ok<img src="assets/img/png/check.png" alt=""></span></div>
       `;
-  }
-  
-  /**
-   * Generates the HTML for the priority buttons in the task edit form.
-   *
-   * @returns {string} - The HTML string for the priority buttons.
-   */
-  function returnEditPriorityButtonsHTML(){
-      return `
+}
+
+/**
+ * Generates the HTML for the priority buttons in the task edit form.
+ *
+ * @returns {string} - The HTML string for the priority buttons.
+ */
+function returnEditPriorityButtonsHTML() {
+    return `
           <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="./assets/img/svg/urgentwhite.png" alt=""></button>
           <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="./assets/img/svg/medium.png" alt=""></button>
           <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="./assets/img/svg/low.png" alt=""></button>
       `;
-  }
-  
-  function returnEditSubtasksHTML() {
+}
+
+/**
+ * Generates the HTML for the area where a new subtask can be added.
+ * @returns {string} HTML string for the subtask addition area.
+ */
+function returnEditSubtasksHTML() {
     return `
         <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
             <span>Add new subtask</span>
@@ -198,6 +202,11 @@ function returnRenderHtml(i, task) {
         </div>
     `;
 }
+
+/**
+ * Generates the HTML for the input area where a new subtask can be written.
+ * @returns {string} HTML string for the subtask input area.
+ */
 function returnWriteSubtaskHTML() {
     return `
         <div class="editSubtaskInput" id="editSubtask">
@@ -209,6 +218,13 @@ function returnWriteSubtaskHTML() {
         </div>
     `;
 }
+
+/**
+ * Generates the HTML for a single subtask item in a task board.
+ * @param {number} index - The index of the subtask.
+ * @param {string} title - The title of the subtask.
+ * @returns {string} HTML string for a subtask item.
+ */
 function returnSubtaskHTML(index, title) {
     return `
         <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addTaskBoardEdit">
@@ -227,6 +243,14 @@ function returnSubtaskHTML(index, title) {
     `;
 }
 
+/**
+ * Generates the HTML for a contact option that can be chosen for assignment.
+ * @param {string} contactName - The name of the contact.
+ * @param {string} contactClass - The CSS class to apply to the contact element.
+ * @param {string} color - The background color for the contact's initials.
+ * @param {string} initials - The initials of the contact.
+ * @returns {string} HTML string for a contact option.
+ */
 function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
     return `
       <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
@@ -240,7 +264,12 @@ function returnContactsToChooseHTML(contactName, contactClass, color, initials) 
       </div>
     `;
 }
-function returnResetBoardSubtaskHtml(){
+
+/**
+ * Generates the HTML for resetting or adding a new subtask in the board.
+ * @returns {string} HTML string for resetting the subtask board.
+ */
+function returnResetBoardSubtaskHtml() {
     return `
     <p>
       <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
