@@ -105,7 +105,7 @@ function completedTasksUrgent() {
 window.onload = function () {
     const showGreeting = sessionStorage.getItem('ShowGreetingScreen') === 'true';
 
-    if (!showGreeting) {
+    if (window.innerWidth <= 850 && !showGreeting) {
         document.getElementById('greeting-container').style.display = 'flex';
         showGreetingMessage();
         
