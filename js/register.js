@@ -170,7 +170,6 @@ function displayNameError() {
  */
 function displayPolicyError() {
   document.getElementById('wrongRepeat').innerHTML = `You must accept our Privacy Policy`;
-  document.getElementById('policyInvalid').classList.add('invalid');
 }
 
 /**
