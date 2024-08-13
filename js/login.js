@@ -137,7 +137,12 @@ function clearInvalidMessages() {
     document.getElementById('invalidPassword').classList.remove('invalid');
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+
+
+
+
+
+/*document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         const overlay = document.querySelector('.overlay');
         if (overlay) {
@@ -180,4 +185,43 @@ function animationCheck() {
             }, 1600);
         }
     }
+}*/ 
+ 
+
+function animateOverlayUnder1000px(){
+    let overlay = document.querySelector('.overlay')
+    overlay.style.backgroundColor = 'transparent'
+    if(window.innerWidth < 1000){
+        overlay.classList.remove('animationOverlayDekstop')
+        overlay.classList.add('animationOverlayDekstopUnder1000px')
+    }
+    setTimeout(() => {
+        overlay.classList.add('d-none')
+    }, 3000);
+}
+
+window.onload = function () {
+    animateOverlayUnder1000px()
+    if(window.innerWidth < 600){
+        animateLogoUnder600px()
+    }
+    
+};
+
+function animateLogoUnder600px(){
+    let overlay = document.querySelector('.overlay')
+    overlay.style.backgroundColor = 'var(--gray)';
+    let animatedIcon = document.querySelector('.animated-icon')
+    animatedIcon.src = "/assets/img/png/Join logo vector.png";
+    if(window.innerWidth < 600){
+        overlay.classList.remove('animationOverlayDekstopUnder1000px')
+        animatedIcon.classList.remove('animationLogoDekstop')
+        animatedIcon.classList.add('animationLogoUnder600px')
+    }
+    setTimeout(() => {
+        overlay.style.backgroundColor = 'transparent'
+    }, 1600);
+    setTimeout(() => {
+        overlay.classList.add('d-none')
+    }, 3000);
 }
