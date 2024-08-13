@@ -279,5 +279,5 @@ function resetErrorState() {
   document.getElementById('invalidEmail').classList.remove('invalid');  
   document.getElementById('invalidName').classList.remove('invalid'); 
   document.getElementById('invalidPassword').classList.remove('invalid');
-  document.getElementById('invalidPolicy').classList.remove('invalid');
+  document.getElementById('policyInvalid').classList.remove('invalid');
 }

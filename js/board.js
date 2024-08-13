@@ -196,7 +196,7 @@ async function changeColumnToDo(i) {
   let taskcard = tasks[i];
   taskcard.column = "toDo";
   await updateTaskInFirebase(taskcard);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(taskcard));
   renderTasks();
 }
 
@@ -210,7 +210,7 @@ async function changeColumnInProgress(i) {
   let taskcard = tasks[i];
   taskcard.column = "inProgress";
   await updateTaskInFirebase(taskcard);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(taskcard));
   renderTasks();
 }
 
@@ -224,7 +224,7 @@ async function changeColumnFeedback(i) {
   let taskcard = tasks[i];
   taskcard.column = "awaitFeedback";
   await updateTaskInFirebase(taskcard);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(taskcard));
   renderTasks();
 }
 
@@ -238,6 +238,6 @@ async function changeColumnDone(i) {
   let taskcard = tasks[i];
   taskcard.column = "done";
   await updateTaskInFirebase(taskcard);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(taskcard));
   renderTasks();
 }

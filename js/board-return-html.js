@@ -190,3 +190,61 @@ function returnRenderHtml(i, task) {
       `;
   }
   
+  function returnEditSubtasksHTML() {
+    return `
+        <div id="editAreaSubtask" onclick="startWritingSubtask()" class="subtaskAdd">
+            <span>Add new subtask</span>
+            <img src="./assets/img/png/Subtasks icons11.png">
+        </div>
+    `;
+}
+function returnWriteSubtaskHTML() {
+    return `
+        <div class="editSubtaskInput" id="editSubtask">
+            <input type="text" id="subtaskInput2" minlength="3" required placeholder="Enter subtask"/>
+            <div class="d-flex">
+                <img src="./assets/img/png/subtaskX.png" onclick="renderEditSubtasks({ subtasks: subtaskInfos })" alt="" />
+                <img src="./assets/img/png/subtaskDone.png" onclick="addSubtask();" alt="" />
+            </div>
+        </div>
+    `;
+}
+function returnSubtaskHTML(index, title) {
+    return `
+        <li onmouseenter="showActions(this)" onmouseleave="hideActionsAddTask(this)" class="addTaskBoardEdit">
+        <div class="subtask-item">
+          <div class="subtask-content">
+            <span class="custom-bullet">•</span>
+              <div style="width:100%" onclick="editSubtaskBoard(${index})"> ${title}</div>
+          </div>
+          <div class="subtaskIconsAddTask d-none">
+            <img src="./assets/img/png/editSubtask.png" onclick="editSubtaskBoard(${index})" alt="" />
+            <div class="vertical-line"></div>
+            <img src="./assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+          </div>
+        </div>
+      </li>
+    `;
+}
+
+function returnContactsToChooseHTML(contactName, contactClass, color, initials) {
+    return `
+      <div class="contactToChoose ${contactClass}" onclick="toggleContactAssignment('${contactName}')">
+            <div class="openedAssigendContactsInitials" style="background-color: ${color};">
+              ${initials}
+            </div>
+            <div class="contactName">
+                <span style="width:100%;">${contactName}</span>
+                <img src="/assets/img/png/Rectangle 5.png" alt="">
+            </div>
+      </div>
+    `;
+}
+function returnResetBoardSubtaskHtml(){
+    return `
+    <p>
+      <input type="text" autofocus name="" placeholder="Add new subtask" readonly onclick="writeSubtaskAddTask()" />
+      <img src="./assets/img/png/Subtasks icons11.png" alt="" />
+    </p>
+  `;
+}

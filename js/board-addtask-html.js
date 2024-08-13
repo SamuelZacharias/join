@@ -12,7 +12,7 @@ function renderAddTaskBoardHtml(addTaskContainer) {
       <section class="addTask" id="boardAddTask">
           <div class="boardAddTaskTitle">
               <h1>Add Task</h1>
-              <img src="/assets/img/png/close.png" onclick="closeAddTaskBoardOnX()">
+              <img src="./assets/img/png/close.png" onclick="closeAddTaskBoardOnX()">
           </div>
           <form id="taskFormAddTask">
             <div class="formLeft">
