@@ -243,13 +243,19 @@ function returnSubtaskHTML(index, title) {
     `;
 }
 
+/**
+ * Generates the HTML for editing an existing subtask.
+ * 
+ * @param {number} index - The index of the subtask being edited.
+ * @param {string} title - The current title of the subtask.
+ * @returns {string} HTML string for the subtask editing area.
+ */
 function returnEditSubtaskHTML(index, title) {
     return `
         <div class="editSubtask addSubtask">
             <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
             <div class="d-flex">
                 <img src="./assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
-            
             </div>
         </div>
     `;
