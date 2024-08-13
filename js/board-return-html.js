@@ -163,7 +163,7 @@ function returnOpenEditHTML(task, today) {
                 <div>Assigned to:</div>
                 <div class="editAssignContacts" onclick="closeContactsDropdown()">
                     <div>Select contacts to assign</div>
-                    <img class="dropDownImg" id="dropDownImg" src="assets/img/png/arrow_drop_down (1).png">
+                    <img class="dropDownImg" id="dropDownImg" src="./assets/img/png/arrow_drop_down (1).png">
                 </div>
                 <div id="contactsToChoose" class="d-none contactsToChoose"></div>
             </div>
@@ -184,23 +184,10 @@ function returnOpenEditHTML(task, today) {
  */
 function returnEditPriorityButtonsHTML() {
     return `
-          <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="./assets/img/svg/urgentwhite.png" alt=""></button>
-          <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="./assets/img/svg/medium.png" alt=""></button>
-          <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="./assets/img/svg/low.png" alt=""></button>
+          <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="./assets/img/svg/urgent.svg" alt=""></button>
+          <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="./assets/img/png/mediumColor.png" alt=""></button>
+          <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="./assets/img/svg/low.svg" alt=""></button>
  `; 
-}
-  
-  /**
-   * Generates the HTML for the priority buttons in the task edit form.
-   *
-   * @returns {string} - The HTML string for the priority buttons.
-   */
-  function returnEditPriorityButtonsHTML(){
-      return `
-          <button class="prioButton hover-shadow" id="button1" onclick="switchButton('Urgent')">Urgent <img src="assets/img/svg/urgent.svg" alt=""></button>
-          <button class="prioButton hover-shadow" id="button2" onclick="switchButton('Medium')">Medium <img src="assets/img/png/mediumColor.svg" alt=""></button>
-          <button class="prioButton hover-shadow" id="button3" onclick="switchButton('Low')">Low <img src="assets/img/svg/low.svg" alt=""></button>
-      `;
 }
 
 /**
@@ -253,6 +240,18 @@ function returnSubtaskHTML(index, title) {
           </div>
         </div>
       </li>
+    `;
+}
+
+function returnEditSubtaskHTML(index, title) {
+    return `
+        <div class="editSubtask addSubtask">
+            <input type="text" id="editSubtaskInput" value="${title}" minlength="3" required />
+            <div class="d-flex">
+                <img src="./assets/img/png/subtaskDone.png" onclick="saveSubtask(${index})" alt="" />
+            
+            </div>
+        </div>
     `;
 }
 
