@@ -1,3 +1,14 @@
+/**
+ * Global variables used to manage the state of the task form and selections.
+ * 
+ * @type {number} clickCount - Tracks the number of times the category dropdown is clicked.
+ * @type {boolean} choosenCategory - Indicates whether a category has been selected.
+ * @type {Array<string>} category - The list of available task categories.
+ * @type {number} activeButton - Tracks the currently active priority button.
+ * @type {Array<Object>} selectedContacts - The list of contacts selected for the task.
+ * @type {Array<Object>} contacts - The list of all contacts stored in local storage.
+ * @type {Array<Object>} subtaskInfos - The list of subtasks associated with the task.
+ */
 let clickCount = 0;
 let choosenCategory = false;
 let category = ["User Story", "Technical task"];
@@ -12,6 +23,13 @@ if (contacts) {
   contacts = [];
 }
 
+/**
+ * Handles the form submission event.
+ * 
+ * This function validates the form before submission. If the form is invalid, the submission is prevented.
+ * 
+ * @param {Event} event - The form submission event.
+ */
 function submitForm(event) {
   if (!validateForm()) {
     event.preventDefault();
@@ -20,6 +38,14 @@ function submitForm(event) {
   }
 }
 
+/**
+ * Validates the task form.
+ * 
+ * This function checks if the required inputs are filled out and if a category is selected. If the form is invalid,
+ * it marks the invalid fields and returns false.
+ * 
+ * @returns {boolean} True if the form is valid, otherwise false.
+ */
 function validateForm() {
   resetInvalidStates();
   let validInputs = validateInputs();
@@ -29,6 +55,13 @@ function validateForm() {
   return valid;
 }
 
+/**
+ * Validates the input fields within the task form.
+ * 
+ * This function checks each required input field and ensures that it is filled out. It also validates the date input.
+ * 
+ * @returns {boolean} True if all required inputs are valid, otherwise false.
+ */
 function validateInputs() {
   const form = document.getElementById('taskForm');
   const inputs = form.querySelectorAll('input, textarea, select');
@@ -47,6 +80,11 @@ function validateInputs() {
   return valid;
 }
 
+/**
+ * Resets the invalid state of form elements.
+ * 
+ * This function removes the 'invalid' class from all input containers and the category dropdown.
+ */
 function resetInvalidStates() {
   document.querySelectorAll('.inputContainer').forEach(p => {
     p.classList.remove('invalid');
@@ -54,6 +92,11 @@ function resetInvalidStates() {
   document.getElementById('dropdownCategory').classList.remove('invalid');
 }
 
+/**
+ * Adds a timeout to remove the invalid state from form elements after a delay.
+ * 
+ * This function ensures that the invalid markers are removed after a set time (2000ms).
+ */
 function validateFormTimeout() {
   setTimeout(() => {
     document.querySelectorAll('.invalid').forEach(element => {
@@ -62,24 +105,39 @@ function validateFormTimeout() {
   }, 2000); 
 }
 
+/**
+ * Validates if a category has been selected.
+ * 
+ * This function checks if the `choosenCategory` variable is set to true. If not, it marks the category dropdown as invalid.
+ * 
+ * @returns {boolean} True if a category is selected, otherwise false.
+ */
 function validateFormCategory() {
-  let valid = false
+  let valid = false;
   if (!choosenCategory) {
     valid = false;
     document.getElementById('dropdownCategory').classList.add('invalid');
-  }else{
-    valid = true
+  } else {
+    valid = true;
   }
-  return valid
+  return valid;
 }
 
-function validateDateInput(input){
+/**
+ * Validates the date input field.
+ * 
+ * This function checks if the selected date is in the future or today. If not, it marks the date input as invalid.
+ * 
+ * @param {HTMLInputElement} input - The date input element to validate.
+ */
+function validateDateInput(input) {
   if (input.type === 'date') {
     const selectedDate = new Date(input.value);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (selectedDate < today) {
       valid = false;
+      const parentP = input.closest('.inputContainer');
       if (parentP) {
         parentP.classList.add('invalid');
       }
@@ -87,6 +145,11 @@ function validateDateInput(input){
   }
 }
 
+/**
+ * Shows the category dropdown when the user clicks on the category dropdown.
+ * 
+ * This function toggles the visibility of the category dropdown based on the click count.
+ */
 document.getElementById("dropdownCategory").addEventListener("click", function() {
   clickCount++;
   if (clickCount % 2 === 1) {
@@ -96,6 +159,11 @@ document.getElementById("dropdownCategory").addEventListener("click", function()
   }
 });
 
+/**
+ * Handles clicks outside the category dropdown to close it.
+ * 
+ * @param {Event} event - The click event.
+ */
 function handleClickOutside(event) {
   const container = document.getElementById('dropdownCategory');
   if (!container.contains(event.target)) {
@@ -105,6 +173,9 @@ function handleClickOutside(event) {
 
 document.addEventListener('click', handleClickOutside);
 
+/**
+ * Adds event listeners to input and textarea fields to remove the invalid state when the user starts typing.
+ */
 document.querySelectorAll('input, textarea').forEach(input => {
   input.addEventListener('input', function() {
     const parentP = input.closest('.inputContainer');
@@ -114,22 +185,35 @@ document.querySelectorAll('input, textarea').forEach(input => {
   });
 });
 
+/**
+ * Removes the invalid state from the category dropdown when a category is selected.
+ */
 document.getElementById('dropdownCategory').addEventListener('click', function() {
   if (choosenCategory) {
     document.getElementById('dropdownCategory').classList.remove('invalid');
   }
 });
 
+/**
+ * Handles clicks outside the contacts dropdown to close it.
+ * 
+ * @param {Event} event - The click event.
+ */
 document.addEventListener('click', function(event) {
   let contactsContainer = document.getElementById('contacts');
   let dropdownContacts = document.getElementById('dropdownContacts');
   if (!contactsContainer.classList.contains('d-none') && !dropdownContacts.contains(event.target) && !contactsContainer.contains(event.target)) {
     contactsContainer.classList.add('d-none');
     document.getElementById('dropDownContactsImg').classList.add('dropDownImg');
-  document.getElementById('dropDownContactsImg').classList.remove('dropUpImg')
+    document.getElementById('dropDownContactsImg').classList.remove('dropUpImg');
   }
 });
 
+/**
+ * Initiates the process for writing a new subtask.
+ * 
+ * This function displays the subtask input field and sets up event listeners for adding a subtask.
+ */
 function writeSubtask() {
   let subtaskArea = document.getElementById('subtaskContainer');
   subtaskArea.innerHTML = returnWriteSubtaskHtmlAddTask();
@@ -140,9 +224,7 @@ function writeSubtask() {
       });
   });
   inputField.addEventListener('focusout', function(event) {
-     
-          resetSubtask();
-      
+    resetSubtask();
   });
   inputField.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
@@ -153,7 +235,12 @@ function writeSubtask() {
   inputField.focus();
 }
 
-function addSubtask(){
+/**
+ * Adds a new subtask to the list.
+ * 
+ * This function validates the subtask input and adds it to the subtask list if valid.
+ */
+function addSubtask() {
   let subtaskInput = document.getElementById('subtaskInput');
   let subtaskInfo = subtaskInput.value;
   if (subtaskInfo.length < 3) {
@@ -170,10 +257,20 @@ function addSubtask(){
   resetSubtask();
 }
 
+/**
+ * Resets the subtask input field.
+ * 
+ * This function clears the subtask input area.
+ */
 function resetSubtask() {
-  document.getElementById('subtaskContainer').innerHTML = returnResetSubtaskHtml()
+  document.getElementById('subtaskContainer').innerHTML = returnResetSubtaskHtml();
 }
 
+/**
+ * Displays the list of subtasks in the task form.
+ * 
+ * This function renders each subtask in the subtask list.
+ */
 function showSubtasks() {
   let newSubtask = document.getElementById('newSubtasks');
   newSubtask.innerHTML = '';
@@ -182,6 +279,11 @@ function showSubtasks() {
   }
 }
 
+/**
+ * Shows the actions (edit, delete) for a subtask when the user hovers over it.
+ * 
+ * @param {HTMLElement} element - The subtask element being hovered over.
+ */
 function showActions(element) {
   let actions = element.querySelector('.subtask-icons');
   if (actions) {
@@ -189,6 +291,11 @@ function showActions(element) {
   }
 }
 
+/**
+ * Hides the actions (edit, delete) for a subtask when the user stops hovering over it.
+ * 
+ * @param {HTMLElement} element - The subtask element being hovered over.
+ */
 function hideActions(element) {
   let actions = element.querySelector('.subtask-icons');
   if (actions) {
@@ -196,6 +303,11 @@ function hideActions(element) {
   }
 }
 
+/**
+ * Updates the HTML for a specific subtask based on its index.
+ * 
+ * @param {number} index - The index of the subtask to be updated.
+ */
 function updateSubtaskHtml(index) {
   let newSubtask = document.getElementById('newSubtasks');
   if (index >= 0) {
@@ -205,6 +317,11 @@ function updateSubtaskHtml(index) {
   }
 }
 
+/**
+ * Edits a subtask by displaying an input field for editing.
+ * 
+ * @param {number} index - The index of the subtask to be edited.
+ */
 function editSubtask(index) {
   updateSubtaskHtml(index);
   let inputField = document.getElementById('editSubtaskInput');
@@ -219,6 +336,13 @@ function editSubtask(index) {
   }
 }
 
+/**
+ * Saves the edited subtask to the subtask list.
+ * 
+ * This function validates the edited subtask and updates the list.
+ * 
+ * @param {number} index - The index of the subtask to be saved.
+ */
 function saveSubtask(index) {
   let editInput = document.getElementById('editSubtaskInput');
   let editedSubtask = editInput.value;
@@ -235,28 +359,47 @@ function saveSubtask(index) {
   showSubtasks();
 }
 
+/**
+ * Deletes a subtask from the subtask list.
+ * 
+ * @param {number} index - The index of the subtask to be deleted.
+ */
 function deleteSubtask(index) {
   subtaskInfos.splice(index, 1);
   showSubtasks();
 }
 
+/**
+ * Handles the form submission when the create button is clicked.
+ * 
+ * This function validates the form, collects data, and sends it to Firebase. If successful, it shows a success message.
+ * 
+ * @param {Event} event - The click event.
+ */
 document.querySelector('.createButton').addEventListener('click', async function(event) {
   event.preventDefault(); 
   if (validateForm()) {
     collectData(); 
     try {
       await sendTaskDataToFirebase(); 
-      showSuccessMessage() 
+      showSuccessMessage(); 
     } catch (error) {
       console.error('Failed to send task data to Firebase:', error); 
     }
   } 
 });
 
+/**
+ * Handles the clear button click to reset the form fields and states.
+ * 
+ * This function resets all form fields, selections, and invalid states.
+ * 
+ * @param {Event} event - The click event.
+ */
 document.getElementById('clearButton').addEventListener('click', function(event) {
   const form = document.getElementById('taskForm');
   form.reset();
-  document.getElementById('dropdownCategory').innerHTML = returnAddTaskDropCategoryHtml()
+  document.getElementById('dropdownCategory').innerHTML = returnAddTaskDropCategoryHtml();
   document.getElementById('assignedContacts').innerHTML = ``;
   document.getElementById('newSubtasks').innerHTML = ``;
   choosenCategory = false;
@@ -270,10 +413,15 @@ document.getElementById('clearButton').addEventListener('click', function(event)
   document.getElementById('dropdownCategory').classList.remove('invalid');
 });
 
+/**
+ * Displays a success message after the task is successfully created.
+ * 
+ * This function shows a success message and redirects the user to the board page after a delay.
+ */
 function showSuccessMessage() {
   let successButton = document.getElementById('signedUpCont');
   successButton.classList.remove('d-none');
-  document.getElementById('signedUp').classList.add('animation')
+  document.getElementById('signedUp').classList.add('animation');
   setTimeout(() => {
     window.location.href = 'board.html';
   }, 3000);
