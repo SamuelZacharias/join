@@ -43,7 +43,6 @@ function updateGreeting() {
 
 
 function formatDate(date) {
-    // Format the date as needed, e.g., 'DD-MM-YYYY'
     const day = ('0' + date.getDate()).slice(-2);
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear();
@@ -120,13 +119,17 @@ window.onload = function () {
 
     setFutureDate();
     loadTasksFromLocalStorage();
+    generateTasks();
+};
+
+function generateTasks() {
     document.getElementById('doneCount').innerHTML = countCompletedTasks();
     document.getElementById('toDoCount').innerHTML = completedTaskstoDoCount();
     document.getElementById('inProgress').innerHTML = completedTasksInProgress();
     document.getElementById('awaitFeedback').innerHTML = completedTasksFeedback();
     document.getElementById('urgentCount').innerHTML = completedTasksUrgent();
     document.getElementById('board').innerHTML = tasks.length;
-};
+}
 
 function showGreetingMessage() {
     const greeting = getGreeting();
