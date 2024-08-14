@@ -249,12 +249,14 @@ function animationCheck() {
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
         if (overlay) {
             overlay.style.display = 'none';
+            hideElementsAnimationMobile()
         }
     } else {
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         overlay.style.display = 'flex';
         setTimeout(() => {
             overlay.style.display = 'none';
+            showElementsAnimationMobile()
         }, 3000);
     }
 }
@@ -274,6 +276,21 @@ function animateOverlayUnder1000px() {
     setTimeout(() => {
         overlay.classList.add('d-none')
     }, 2800);
+}
+
+
+function hideElementsAnimationMobile(){
+    document.getElementById('registerContainer').classList.add('d-none')
+    document.getElementById('signUpMobile').classList.add('d-none')
+    document.querySelector('.headSection').classList.add('d-none')
+    document.querySelector('.policy').classList.add('d-none')
+}
+
+function showElementsAnimationMobile(){
+    document.getElementById('registerContainer').classList.remove('d-none')
+    document.getElementById('signUpMobile').classList.remove('d-none')
+    document.querySelector('.headSection').classList.remove('d-none')
+    document.querySelector('.policy').classList.remove('d-none')
 }
 
 /**
