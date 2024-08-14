@@ -239,6 +239,12 @@ function clearInvalidMessages() {
     document.getElementById('invalidPassword').classList.remove('invalid');
 }
 
+/**
+ * This function handles the overlay animation display logic. It checks if the sessionStorage
+ * has a flag indicating whether the animation has already been played. If true, it hides the 
+ * overlay and shows the main elements. If false, it checks the window width to apply specific 
+ * animations, sets the sessionStorage flag, and then triggers the animation with a timeout.
+ */
 function animationCheck() {
     const overlay = document.querySelector('.overlay');
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
@@ -247,11 +253,7 @@ function animationCheck() {
             showElementsAnimationMobile();
         }
     } else {
-        if (window.innerWidth < 1000) {
-            animateOverlayUnder1000px();
-        }if (window.innerWidth < 600) {
-            animateLogoUnder600px();
-        }
+        checkWindowWidth()
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         overlay.style.display = 'flex';
         hideElementsAnimationMobile();
@@ -260,9 +262,26 @@ function animationCheck() {
             showElementsAnimationMobile();
         }, 2800);
     }
-
 }
 
+/**
+ * This function checks the current window width and triggers specific animations 
+ * based on different screen size breakpoints (1000px and 600px).
+ */
+
+function checkWindowWidth(){
+    if (window.innerWidth < 1000) {
+        animateOverlayUnder1000px();
+    }if (window.innerWidth < 600) {
+        animateLogoUnder600px();
+    }
+}
+
+/**
+ * This function animates the overlay for screen widths under 1000px. It changes the overlay's 
+ * background color, applies appropriate CSS classes for the animation, and eventually hides 
+ * the overlay after a delay.
+ */
 function animateOverlayUnder1000px() {
     let overlay = document.querySelector('.overlay');
     overlay.style.backgroundColor = 'transparent';
@@ -277,6 +296,10 @@ function animateOverlayUnder1000px() {
     }, 2800);
 }
 
+/**
+ * This function handles the animation specifically for screen widths under 600px. 
+ * It modifies the overlay and logo's styles, and triggers a sequence of animations.
+ */
 function animateLogoUnder600px() {
     let overlay = document.querySelector('.overlay');
     overlay.style.backgroundColor = 'var(--gray)';
@@ -287,6 +310,15 @@ function animateLogoUnder600px() {
         animatedIcon.classList.remove('animationLogoDekstop');
         animatedIcon.classList.add('animationLogoUnder600px');
     }
+    setTimeOutsUnder600px()
+}
+
+/**
+ * This function sets up the timeout logic for the animation sequence when the screen 
+ * width is under 600px, including changing the overlay's background color and hiding it.
+ */
+function setTimeOutsUnder600px(){
+    let overlay = document.querySelector('.overlay');
     setTimeout(() => {
         overlay.style.backgroundColor = 'transparent';
     }, 1600);
@@ -296,11 +328,9 @@ function animateLogoUnder600px() {
     }, 2800);
 }
 
-window.onload = function () {
-    animationCheck()
-};
-
-
+/**
+ * This function hides specific elements on the mobile screen by adding the 'd-none' class, which presumably sets their display to none.
+ */
 function hideElementsAnimationMobile(){
     document.getElementById('registerContainer').classList.add('d-none')
     document.getElementById('signUpMobile').classList.add('d-none')
@@ -308,6 +338,9 @@ function hideElementsAnimationMobile(){
     document.querySelector('.policy').classList.add('d-none')
 }
 
+/**
+ * This function shows the elements on the mobile screen by removing the 'd-none' class, making them visible again.
+ */
 function showElementsAnimationMobile(){
     document.getElementById('registerContainer').classList.remove('d-none')
     document.getElementById('signUpMobile').classList.remove('d-none')
@@ -315,3 +348,10 @@ function showElementsAnimationMobile(){
     document.querySelector('.policy').classList.remove('d-none')
 }
 
+/**
+ * The window.onload event triggers the animationCheck function once the window has fully loaded, 
+ * ensuring the animations and element visibility logic are handled correctly.
+ */
+window.onload = function () {
+    animationCheck()
+};
