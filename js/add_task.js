@@ -7,11 +7,22 @@ let selectedContacts = [];
 let contacts = localStorage.getItem('contacts');
 let subtaskInfos = [];
 
+/**
+ * Checks if the 'contacts' data is available in its stringified form.
+ * 
+ * If the 'contacts' data exists (i.e., is not null or undefined), it parses the JSON string 
+ * to convert it into a JavaScript object or array. If the 'contacts' data does not exist, 
+ * it initializes 'contacts' as an empty array.
+ * 
+ * @type {string|null} contacts - The stringified JSON data from storage.
+ * @returns {Array|Object} contacts - The parsed contacts data, or an empty array if no data is found.
+ */
 if (contacts) {
   contacts = JSON.parse(contacts);
 } else {
   contacts = [];
 }
+
 
 /**
  * Handles the form submission event.
