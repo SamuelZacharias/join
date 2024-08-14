@@ -48,9 +48,9 @@ function returnWriteSubtaskHtmlAddTask() {
 function returnShowAddTaskSubtaskHTML(subtaskText, s) {
   return `
     <li onmouseenter="showActions(this)" onmouseleave="hideActions(this)">
-      <div class="subtask-item" onclick="editSubtask(${s})">
-        <div class="subtask-content">
-          <span class="custom-bullet">•</span>
+      <div class="subtask-item" >
+        <div class="subtask-content" onclick="editSubtask(${s})">
+          <span class="custom-bullet" >•</span>
           ${subtaskText}
         </div>
         <div class="subtask-icons d-none">
@@ -101,7 +101,7 @@ function returnEditSubtaskAddTaskElseHtml(index) {
       </div>
       <div class="d-flex">
         <img src="assets/img/png/subtaskDone.png" onclick="showSubtasks()" alt="" />
-        <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index})" alt="" />
+        <img src="assets/img/png/delete.png" onclick="deleteSubtask(${index}) preventDefault()" alt="" />
       </div>
     </div>
   `;
