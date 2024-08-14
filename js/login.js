@@ -239,44 +239,66 @@ function clearInvalidMessages() {
     document.getElementById('invalidPassword').classList.remove('invalid');
 }
 
-/**
- * Checks if the overlay animation has already been shown, and skips it if so.
- * 
- * This function checks sessionStorage to determine if the overlay animation should be displayed. If it has already been shown, it hides the overlay.
- */
 function animationCheck() {
     const overlay = document.querySelector('.overlay');
     if (sessionStorage.getItem('sessionStorageAnimation') === 'true') {
         if (overlay) {
             overlay.style.display = 'none';
-            hideElementsAnimationMobile()
+            showElementsAnimationMobile();
         }
     } else {
+        if (window.innerWidth < 1000) {
+            animateOverlayUnder1000px();
+        }if (window.innerWidth < 600) {
+            animateLogoUnder600px();
+        }
         sessionStorage.setItem('sessionStorageAnimation', 'true');
         overlay.style.display = 'flex';
+        hideElementsAnimationMobile();
         setTimeout(() => {
             overlay.style.display = 'none';
-            showElementsAnimationMobile()
-        }, 3000);
+            showElementsAnimationMobile();
+        }, 2800);
     }
+
 }
 
-/**
- * Animates the overlay for screens with a width under 1000px.
- * 
- * This function adjusts the overlay's appearance and animates it specifically for smaller screens.
- */
 function animateOverlayUnder1000px() {
-    let overlay = document.querySelector('.overlay')
-    overlay.style.backgroundColor = 'transparent'
+    let overlay = document.querySelector('.overlay');
+    overlay.style.backgroundColor = 'transparent';
     if (window.innerWidth < 1000) {
-        overlay.classList.remove('animationOverlayDekstop')
-        overlay.classList.add('animationOverlayDekstopUnder1000px')
+        overlay.classList.remove('animationOverlayDekstop');
+        overlay.classList.add('animationOverlayDekstopUnder1000px');
+        hideElementsAnimationMobile();
     }
     setTimeout(() => {
-        overlay.classList.add('d-none')
+        showElementsAnimationMobile();
+        overlay.classList.add('d-none');
     }, 2800);
 }
+
+function animateLogoUnder600px() {
+    let overlay = document.querySelector('.overlay');
+    overlay.style.backgroundColor = 'var(--gray)';
+    let animatedIcon = document.querySelector('.animated-icon');
+    animatedIcon.src = "./assets/img/png/Join logo vector.png";
+    if (window.innerWidth < 600) {
+        overlay.classList.remove('animationOverlayDekstopUnder1000px');
+        animatedIcon.classList.remove('animationLogoDekstop');
+        animatedIcon.classList.add('animationLogoUnder600px');
+    }
+    setTimeout(() => {
+        overlay.style.backgroundColor = 'transparent';
+    }, 1600);
+    setTimeout(() => {
+        overlay.classList.add('d-none');
+        showElementsAnimationMobile();
+    }, 2800);
+}
+
+window.onload = function () {
+    animationCheck()
+};
 
 
 function hideElementsAnimationMobile(){
@@ -293,39 +315,3 @@ function showElementsAnimationMobile(){
     document.querySelector('.policy').classList.remove('d-none')
 }
 
-/**
- * Executes functions when the window loads.
- * 
- * This function is triggered when the window loads. It runs the overlay animation check, adjusts the overlay for smaller screens, 
- * and handles the logo animation for screens under 600px.
- */
-window.onload = function () {
-    animationCheck()
-    animateOverlayUnder1000px()
-    if (window.innerWidth < 600) {
-        animateLogoUnder600px()
-    }
-};
-
-/**
- * Animates the logo and overlay for screens under 600px.
- * 
- * This function adjusts the logo and overlay animations specifically for very small screens.
- */
-function animateLogoUnder600px() {
-    let overlay = document.querySelector('.overlay')
-    overlay.style.backgroundColor = 'var(--gray)';
-    let animatedIcon = document.querySelector('.animated-icon')
-    animatedIcon.src = "./assets/img/png/Join logo vector.png";
-    if (window.innerWidth < 600) {
-        overlay.classList.remove('animationOverlayDekstopUnder1000px')
-        animatedIcon.classList.remove('animationLogoDekstop')
-        animatedIcon.classList.add('animationLogoUnder600px')
-    }
-    setTimeout(() => {
-        overlay.style.backgroundColor = 'transparent'
-    }, 1600);
-    setTimeout(() => {
-        overlay.classList.add('d-none')
-    }, 2800);
-}

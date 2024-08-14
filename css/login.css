@@ -364,15 +364,18 @@ input {
   }
 }
 
+
+
 .animationLogoDekstop{
   animation: changeHeight  2s 1s ease-out ;
 }
 .animationLogoUnder600px{
-  animation: changeHeightUnder600px  2s 1s ease-out ;
+  animation: changeHeightUnder600px  2s 1s ease-out;
 }
 .animationOverlayDekstop{
   animation: moveToTop  2s  1s ease-out ;
 }
+
 .animationOverlayDekstopUnder1000px{
   animation: moveToTopUnder1000px  2s 1s ease-out ;
 }
