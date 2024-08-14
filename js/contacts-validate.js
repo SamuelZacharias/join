@@ -6,15 +6,19 @@
  */
 function validateForm() {
     let isValid = true;
+
     if (!validateNameContact()) {
         isValid = false;
     }
+
     if (!validateEmailContact()) {
         isValid = false;
     }
+
     if (!validatePhoneContact()) {
         isValid = false;
     }
+
     if (isValid) {
         addContact();
         closeDialog();
@@ -56,18 +60,33 @@ function clearError(inputElement) {
  */
 function validateNameContact() {
     const nameInput = document.getElementById('name');
-    nameInput.addEventListener('input', function() {
-        clearError(nameInput);
-    });
+    
+    // Sicherstellen, dass der Event Listener nur einmal hinzugefügt wird
+    nameInput.removeEventListener('input', clearErrorOnInput);
+    nameInput.addEventListener('input', clearErrorOnInput);
+    
     if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 20) {
         setError(nameInput, 'John Doe 20 Letters');
-        nameInput.value = '';
         return false;
     } else {
         clearError(nameInput);
         return true;
     }
 }
+
+/**
+ * Event handler that clears the error state from an input field when the user modifies its content.
+ * 
+ * This function is triggered by an `input` event on an input field. It calls the `clearError` 
+ * function, which removes any error messages or styling from the targeted input field.
+ * 
+ * @param {Event} event - The input event object, which contains information about the event 
+ *                        that triggered the handler, including the target input element.
+ */
+function clearErrorOnInput(event) {
+    clearError(event.target);
+}
+
 
 /**
  * Validates the contact's email field.
