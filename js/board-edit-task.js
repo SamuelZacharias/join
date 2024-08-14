@@ -1,13 +1,4 @@
-/**
- * Array storing information about subtasks.
- * @type {Array<Object>}
- */
 let subtaskInfos = [];
-
-/**
- * Flag indicating whether the subtask edit mode is active.
- * @type {boolean}
- */
 let isSubtaskEditMode = false; 
 
 document.addEventListener('click', handleClickOutsideEdit);

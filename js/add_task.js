@@ -1,14 +1,4 @@
-/**
- * Global variables used to manage the state of the task form and selections.
- * 
- * @type {number} clickCount - Tracks the number of times the category dropdown is clicked.
- * @type {boolean} choosenCategory - Indicates whether a category has been selected.
- * @type {Array<string>} category - The list of available task categories.
- * @type {number} activeButton - Tracks the currently active priority button.
- * @type {Array<Object>} selectedContacts - The list of contacts selected for the task.
- * @type {Array<Object>} contacts - The list of all contacts stored in local storage.
- * @type {Array<Object>} subtaskInfos - The list of subtasks associated with the task.
- */
+
 let clickCount = 0;
 let choosenCategory = false;
 let category = ["User Story", "Technical task"];

@@ -1,7 +1,3 @@
-/**
- * Global variables used to store tasks, contacts, selected contacts, etc.
- * @type {Array}
- */
 const tasks = [];
 const contacts = [];
 let selectedContacts = [];

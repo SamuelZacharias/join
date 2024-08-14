@@ -1,7 +1,3 @@
-/**
- * An array to hold task objects.
- * @type {Array<Object>}
- */
 const tasks = [];
 
 /**

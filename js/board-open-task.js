@@ -1,7 +1,3 @@
-/**
- * The ID of the currently opened task.
- * @type {number|null}
- */
 let currentTaskId = null;
 
 /**

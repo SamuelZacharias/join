@@ -1,31 +1,7 @@
-/**
- * Array to store the list of contacts.
- * @type {Array<Object>}
- */
 let contacts = [];
-
-/**
- * Array to store the initials of the contacts.
- * @type {Array<string>}
- */
 let initials = [];
-
-/**
- * Index for cycling through colors.
- * @type {number}
- */
 let colorIndex = 0;
-
-/**
- * Index of the currently highlighted contact.
- * @type {number}
- */
 let highlightedContactIndex = -1;
-
-/**
- * Array of color codes used for contact avatars.
- * @type {Array<string>}
- */
 const colors = ['#FF7A00','#FF5EB3','#9747FF','#9327FF','#00BEE8','#1FD7C1','#FF745E',
   '#FFA35E','#FC71FF','#FFC701','#0038FF','#C3FF2B','#FFE62B','#FF4646','#FFBB2B'
 ];
