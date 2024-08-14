@@ -274,6 +274,8 @@ textarea {
 
 #newSubtasks {
     border-radius: 10px;
+    max-height: 110px;
+    overflow: auto;
 }
 
 .editSubtask {
