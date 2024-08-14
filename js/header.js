@@ -195,5 +195,4 @@ function checkForHeaderLogo() {
   }
 }
 
-// Initialize HTML inclusion and element hiding
 includeHTML(hideElements);

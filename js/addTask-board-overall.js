@@ -106,7 +106,7 @@ function showAssignedContacts() {
  * This function ensures that users cannot select a date earlier than today.
  */
 function setMinDate() {
-  const dateInputs = ['dateInputAddTask', 'dateInput']; // Array of IDs
+  const dateInputs = ['dateInputAddTask', 'dateInput']; 
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -114,7 +114,7 @@ function setMinDate() {
   const todayDate = `${yyyy}-${mm}-${dd}`;
   dateInputs.forEach(id => {
     const dateInput = document.getElementById(id);
-    if (dateInput) { // Check if the element exists
+    if (dateInput) { 
       dateInput.min = todayDate;
     }
   });
