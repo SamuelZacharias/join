@@ -1,7 +1,15 @@
 let subtaskInfos = [];
 let isSubtaskEditMode = false; 
 
+/**
+ * Event listener that triggers when the user clicks anywhere on the document.
+ * 
+ * This listener calls the `handleClickOutsideEdit` function, which is responsible for handling 
+ * cases where the user clicks outside of a specific element (typically an edit field or dropdown),
+ * and potentially triggers an action such as closing or saving changes.
+ */
 document.addEventListener('click', handleClickOutsideEdit);
+
 
 /**
  * Opens the task editing interface for the specified task.

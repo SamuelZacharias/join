@@ -1,4 +1,12 @@
+/**
+ * Event listener that triggers when the DOM content is fully loaded and parsed.
+ * 
+ * This listener calls the `onDOMContentLoaded` function, which initializes the application by 
+ * setting up event listeners and handling any necessary startup logic. This is typically where
+ * you would perform tasks that require the DOM to be fully constructed.
+ */
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+
 
 /**
  * Handler for the DOMContentLoaded event.
