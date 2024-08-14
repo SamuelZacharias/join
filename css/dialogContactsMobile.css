@@ -48,7 +48,7 @@
   #dialog-contacts, #dialog-edit{
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     overflow-y: scroll;
     scrollbar-width: none;
     align-items: center;
@@ -84,7 +84,7 @@
 }
 .unknown-user , #bigLetterCircle{
   position: absolute;
-  margin-top: -60vh;
+  margin-top: -55vh;
 }
 .dialog-content-right .close-cross{
   content: url('../assets/img/png/add.png');
@@ -188,4 +188,6 @@
     height: fit-content;
   }
 }
+
+
 
