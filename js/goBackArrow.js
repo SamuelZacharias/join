@@ -9,7 +9,7 @@
 function goBack() {
   var loggedInUserName = localStorage.getItem("loggedInUserName");
   if (loggedInUserName === null || loggedInUserName === "") {
-    window.location.href = "index.html";
+    window.history.back();
   } else {
     window.location.href = "summary.html";
   }
