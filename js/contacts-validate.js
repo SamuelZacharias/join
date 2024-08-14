@@ -61,12 +61,12 @@ function clearError(inputElement) {
 function validateNameContact() {
     const nameInput = document.getElementById('name');
     
-    // Sicherstellen, dass der Event Listener nur einmal hinzugefügt wird
     nameInput.removeEventListener('input', clearErrorOnInput);
     nameInput.addEventListener('input', clearErrorOnInput);
     
     if (!nameInput.value.match(/^[A-Za-zÄäÖöÜüß]+\s+[A-Za-zÄäÖöÜüß]+$/) || nameInput.value.length > 20) {
         setError(nameInput, 'John Doe 20 Letters');
+        nameInput.value = '';
         return false;
     } else {
         clearError(nameInput);
