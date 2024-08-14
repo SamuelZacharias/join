@@ -35,6 +35,8 @@ async function openDialog() {
  */
 async function closeDialog() {
   const dialogContainer = document.getElementById("dialog-contacts");
+  const inputs = dialogContainer.querySelectorAll('input, textarea');
+  inputs.forEach(input => input.value = '');
   dialogContainer.classList.remove("dialog-open");
   document.getElementById("grey-background").classList.add("hidden");
   await sleep(300);
@@ -135,6 +137,10 @@ function openDialogEditUpdateBigLetterCircle(contact, initials) {
  */
 async function closeDialogEdit() {
   const dialogContainer = document.getElementById("dialog-edit");
+
+  const inputs = dialogContainer.querySelectorAll('input, textarea');
+  inputs.forEach(input => input.classList.remove('error'));
+
   dialogContainer.classList.remove("dialog-open");
   document.getElementById("grey-background").classList.add("hidden");
   await sleep(300);
