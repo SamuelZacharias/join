@@ -1,99 +1,103 @@
+document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+
 /**
- * Event listener that triggers when the DOM content is fully loaded.
+ * Handler for the DOMContentLoaded event.
  * 
- * This listener sets up handling for the 'includesLoaded' event and manages the 
- * user's profile display, including showing initials and handling logout visibility.
+ * Sets up event listeners and initializes the user profile display.
  */
-document.addEventListener('DOMContentLoaded', () => {
+function onDOMContentLoaded() {
   let includesLoadedHandled = false;
 
-  document.addEventListener('includesLoaded', handleIncludesLoaded);
+  document.addEventListener('includesLoaded', () => handleIncludesLoaded(includesLoadedHandled));
+  handleIncludesLoaded(includesLoadedHandled);
 
-  /**
-   * Handles the 'includesLoaded' event.
-   * 
-   * Ensures that the user profile is only handled once, even if the event is triggered multiple times.
-   * Calls the function to handle user profile information.
-   */
-  function handleIncludesLoaded() {
-    if (!includesLoadedHandled) {
-      includesLoadedHandled = true;
-      handleUserProfile();
-    }
-  }
-
-  /**
-   * Handles the display of the user's profile initials.
-   * 
-   * Retrieves the logged-in user's name from localStorage, generates initials, 
-   * and updates the relevant DOM element.
-   */
-  function handleUserProfile() {
-    let loggedInUserName = localStorage.getItem('loggedInUserName');
-    if (loggedInUserName) {
-      let initials = getInitials(loggedInUserName);
-      updateInitialsElement(initials);
-    }
-  }
-
-  /**
-   * Generates the initials from the user's name.
-   * 
-   * @param {string} userName - The full name of the user.
-   * @returns {string} The initials generated from the user's name.
-   */
-  function getInitials(userName) {
-    let nameParts = userName.split(' ');
-    return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
-  }
-
-  /**
-   * Updates the DOM element displaying the user's initials.
-   * 
-   * Also adds a click event listener to toggle the visibility of the logout button.
-   * 
-   * @param {string} initials - The initials of the logged-in user.
-   */
-  function updateInitialsElement(initials) {
-    let initialsElement = document.getElementById('user-profile-initials');
-    if (initialsElement) {
-      initialsElement.innerHTML = `${initials}`;
-      initialsElement.addEventListener('click', toggleLogOutVisibility);
-    }
-  }
-
-  /**
-   * Toggles the visibility of the logout element.
-   * 
-   * This function hides or shows the logout button when the user clicks on their initials.
-   */
-  function toggleLogOutVisibility() {
-    let logOutElement = document.getElementById('logOut');
-    if (logOutElement) {
-      logOutElement.classList.toggle('d-none');
-    }
-  }
-
-  /**
-   * Event listener that handles clicks on the document.
-   * 
-   * If the user clicks outside the logout button and their initials, the logout button is hidden.
-   * 
-   * @param {Event} event - The click event.
-   */
   document.addEventListener('click', handleDocumentClick);
+}
 
-  function handleDocumentClick(event) {
-    let logOutElement = document.getElementById('logOut');
-    let initialsElement = document.getElementById('user-profile-initials');
-
-    if (logOutElement && !logOutElement.contains(event.target) &&
-      !initialsElement.contains(event.target) &&
-      !event.target.closest('#logOut')) {
-      logOutElement.classList.add('d-none');
-    }
+/**
+ * Handles the 'includesLoaded' event.
+ * 
+ * Ensures that the user profile is only handled once, even if the event is triggered multiple times.
+ * 
+ * @param {boolean} includesLoadedHandled - A flag to ensure the profile is handled only once.
+ */
+function handleIncludesLoaded(includesLoadedHandled) {
+  if (!includesLoadedHandled) {
+    includesLoadedHandled = true;
+    handleUserProfile();
   }
-});
+}
+
+/**
+ * Handles the display of the user's profile initials.
+ * 
+ * Retrieves the logged-in user's name from localStorage, generates initials, 
+ * and updates the relevant DOM element.
+ */
+function handleUserProfile() {
+  let loggedInUserName = localStorage.getItem('loggedInUserName');
+  if (loggedInUserName) {
+    let initials = getInitials(loggedInUserName);
+    updateInitialsElement(initials);
+  }
+}
+
+/**
+ * Generates the initials from the user's name.
+ * 
+ * @param {string} userName - The full name of the user.
+ * @returns {string} The initials generated from the user's name.
+ */
+function getInitials(userName) {
+  let nameParts = userName.split(' ');
+  return nameParts.map(part => part.charAt(0).toUpperCase()).join('');
+}
+
+/**
+ * Updates the DOM element displaying the user's initials.
+ * 
+ * Also adds a click event listener to toggle the visibility of the logout button.
+ * 
+ * @param {string} initials - The initials of the logged-in user.
+ */
+function updateInitialsElement(initials) {
+  let initialsElement = document.getElementById('user-profile-initials');
+  if (initialsElement) {
+    initialsElement.innerHTML = `${initials}`;
+    initialsElement.addEventListener('click', toggleLogOutVisibility);
+  }
+}
+
+/**
+ * Toggles the visibility of the logout element.
+ * 
+ * This function hides or shows the logout button when the user clicks on their initials.
+ */
+function toggleLogOutVisibility() {
+  let logOutElement = document.getElementById('logOut');
+  if (logOutElement) {
+    logOutElement.classList.toggle('d-none');
+  }
+}
+
+/**
+ * Event listener that handles clicks on the document.
+ * 
+ * If the user clicks outside the logout button and their initials, the logout button is hidden.
+ * 
+ * @param {Event} event - The click event.
+ */
+function handleDocumentClick(event) {
+  let logOutElement = document.getElementById('logOut');
+  let initialsElement = document.getElementById('user-profile-initials');
+
+  if (logOutElement && !logOutElement.contains(event.target) &&
+    !initialsElement.contains(event.target) &&
+    !event.target.closest('#logOut')) {
+    logOutElement.classList.add('d-none');
+  }
+}
+
 
 /**
  * Logs the user out by clearing relevant data from localStorage and sessionStorage.
@@ -161,7 +165,7 @@ function hideElements() {
  * 
  * This listener initializes the checking of the header logo and its responsiveness.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   checkForHeaderLogo();
 });
 
@@ -174,8 +178,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function checkForWidthHeader() {
   let logoContainer = document.getElementById('headerLogo');
   if (logoContainer) {
-    logoContainer.innerHTML = window.innerWidth < 600 
-      ? `<img src="assets/img/png/Capa 2.png">` 
+    logoContainer.innerHTML = window.innerWidth < 600
+      ? `<img src="assets/img/png/Capa 2.png">`
       : `<span>Kanban Project Management Tool</span>`;
   }
 }
