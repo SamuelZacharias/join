@@ -308,6 +308,7 @@ li:hover .d-none {
     scrollbar-width: none;
     align-items: center;
     padding-left: 0px;
+    margin-left: 2vw;
   }
   #newSubtasks, #contacts {
     position: relative !important;
@@ -318,7 +319,7 @@ li:hover .d-none {
     top: 80px;
   }
   .formLeft, #newSubtasks, #contacts, #categories{
-    width: 99vw !important; 
+    width: 80vw !important; 
   }
   form{
     flex-direction: column;

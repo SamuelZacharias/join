@@ -10,7 +10,7 @@ const colors = ['#FF7A00','#FF5EB3','#9747FF','#9327FF','#00BEE8','#1FD7C1','#FF
  * Base URL for the contacts data in Firebase.
  * @constant {string}
  */
-const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
+const BASE_TASKS_URL = 'https://join-2fb8d-default-rtdb.europe-west1.firebasedatabase.app/contacts/';
 
 /**
  * Renders the list of contacts by fetching data from the server and displaying it.

@@ -107,18 +107,29 @@ function showAssignedContacts() {
  */
 function setMinDate() {
   const dateInputs = ['dateInputAddTask', 'dateInput']; 
+
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
   const todayDate = `${yyyy}-${mm}-${dd}`;
+
   dateInputs.forEach(id => {
     const dateInput = document.getElementById(id);
-    if (dateInput) { 
+    if (dateInput) {
       dateInput.min = todayDate;
+      dateInput.addEventListener('input', () => {
+        const parts = dateInput.value.split('-');
+
+        if (parts[0] && parts[0].length > 4) {
+          parts[0] = parts[0].slice(0, 4);
+          dateInput.value = parts.join('-');
+        }
+      });
     }
   });
 }
+
 
 /**
  * Resets the previously active priority button to its default state.
@@ -337,7 +348,7 @@ async function initializeTasksNode() {
  * @throws {Error} If the network request fails.
  */
 async function fetchTasks() {
-  const response = await fetch(`https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/.json`);
+  const response = await fetch(`https://join-2fb8d-default-rtdb.europe-west1.firebasedatabase.app/.json`);
   if (!response.ok) {
     throw new Error(`HTTP error during initialize tasks node! Status: ${response.status}`);
   }

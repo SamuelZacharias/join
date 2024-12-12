@@ -3,7 +3,7 @@
  * 
  * @constant {string}
  */
-const BASE_URL = "https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-2fb8d-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Fetches the contacts from the Firebase database.

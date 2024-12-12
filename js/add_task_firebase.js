@@ -3,7 +3,7 @@
  * 
  * @constant {string}
  */
-const BASE_TASKS_URL = 'https://join-40dd0-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
+const BASE_TASKS_URL = 'https://join-2fb8d-default-rtdb.europe-west1.firebasedatabase.app/tasks/';
 
 /**
  * Fetches the existing tasks from the Firebase database.
